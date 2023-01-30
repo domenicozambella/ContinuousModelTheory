@@ -199,6 +199,7 @@ For later reference we remark the following which is an immediate consequence of
 
 \begin{remark}\label{rk_terms}
   Each component of the tuple $t(x\,;y)$ in the definition above is either of sort $M^{|x|}\to R$ or of sort $R^{|y|}\to R$.
+  In other words, either $x$ or $y$ is redundant.
 \end{remark}
 
 \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
@@ -216,7 +217,7 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
   \ceq{\hfill\forall x\ \big[t(x)\dotminus\tau\in\{0\}\big]}
   {\wedge}{\forall^R\varepsilon \Big[\varepsilon\in\{0\}\ \vee\ \exists x\ \big[\tau\dotminus (t(x)+\varepsilon)\in\{0\}\big]\Big]}
 
-  which, in a human readible form, becomes
+  which, in a more readible form, becomes
 
   \ceq{\hfill\forall x\ \big[t(x)\le\tau\big]}{\wedge}{\forall\varepsilon>0\ \exists x\ \big[\tau\le t(x)+ \varepsilon\big].}
 \end{example}
@@ -230,12 +231,17 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
 
 Let $R\preceq{}^*\!R$.
 Let $\alpha,\alpha'\in{}^*\! R$.
-For $\beta\in R$ we write $\alpha\approx\beta$ if $^*\!R\models\alpha\in D$ for every compact neighborhood $D$ of $\beta$.
-We write \emph{$\alpha\approx\alpha'$\/} if $\alpha\approx\beta\approx\alpha'$ for some $\beta\in R$.
-From the following fact it follows that $\,\approx\,$ is an equivalence relation on ${}^*\!R$.
+For each $\beta\in R$ we define the type
+
+\ceq{\hfill{\rm m}_\beta(x)}{=}{\{x\in D\ :\  D \textrm{ compact neighborhood of }\beta.\}}
+
+The set its realizations is known to nonstandard analysts as the monad of $\beta$. 
+% We write \emph{$\alpha\approx\alpha'$\/} if $\alpha\approx\beta\approx\alpha'$ for some $\beta\in R$.
+% From the following fact it follows that $\,\approx\,$ is an equivalence relation on ${}^*\!R$.
+The following fact is well-known.
 
 \begin{fact}\label{fact_uniqueness_st}
-  For every $\alpha\in{}^*\!R$ there is a unique $\beta\in R$ such that $\alpha\approx\beta$.
+  For every $\alpha\in{}^*\!R$ there is a unique $\beta\in R$ such that $\alpha\models{\rm m}_\beta(x)$.
 \end{fact}
 
 \begin{proof}
@@ -247,7 +253,8 @@ From the following fact it follows that $\,\approx\,$ is an equivalence relation
   The uniqueness of $\beta$ follows from normality.
 \end{proof}
 
-We will denote by \emph{${\rm st}(\alpha)$\/} the unique $\beta\in R$ such that $\alpha\approx\beta$.
+We denote by \emph{${\rm st}(\alpha)$\/} the unique $\beta\in R$ such that $\alpha\models{\rm m}_\beta(x)$.
+We write \emph{$\alpha\approx\alpha'$\/} if ${\rm st}(\alpha)={\rm st}(\alpha')$.
 
 \begin{fact}\label{fact_st1}
   For every $\alpha\in{}^*\! R$ and every compact $C$
@@ -269,13 +276,13 @@ We will denote by \emph{${\rm st}(\alpha)$\/} the unique $\beta\in R$ such that 
 
 \begin{proof}
   We assume that $t$ is a function symbol, say $f$, for some continuous function $f:R^{|x|}\to R$.
-  The result for general term $t$ follows easily.
-  By Fact~\ref{fact_uniqueness_st} and the definition of st(-) it suffices to prove that ${}^*\!R\models f(\alpha)\in C$ for every compact neighborhood $C$ of $f\big({\rm st}(\alpha)\big)$.
+  The result for general terms $t$ follows.
+  By Fact~\ref{fact_uniqueness_st} and the definition of st(-) it suffices to prove that ${}^*\!R\models f(\alpha)\in D$ for every compact neighborhood $D$ of $f\big({\rm st}(\alpha)\big)$.
   
-  Fix one such $C$.
-  Then ${\rm st}(\alpha)\in f^{-1}[C]$ .
-  By continuity $f^{-1}[C]$ is a compact neighborhood of ${\rm st}(\alpha)$.
-  Therefore ${}^*\!R\models \alpha\in f^{-1}[C]$ and, as $R\preceq{}^*\!R$ we obtain ${}^*\!R\models f(\alpha)\in C$.
+  Fix one such $D$.
+  Then ${\rm st}(\alpha)\in f^{-1}[D]$ .
+  By continuity $f^{-1}[D]$ is a compact neighborhood of ${\rm st}(\alpha)$.
+  Therefore ${}^*\!R\models \alpha\in f^{-1}[D]$ and, as $R\preceq{}^*\!R$ we obtain ${}^*\!R\models f(\alpha)\in D$.
 \end{proof}
 
 Let ${}^*{\!\EuScript M}=\langle M,{}^*\!R\rangle$ be an ${\EuScript L}$-structure such that $R\preceq{}^*\!R$.
@@ -315,12 +322,12 @@ Symbols in $L$ mantain the same interpretation.
   The general case is left to the reader as it easily follows from this special case. 
   By Remark~\ref{rk_terms}, we consider two cases.
 
-  Case $t(x\,;y)=t(x)$.  
+  Case $t(x\,;y)$ is $t(x)$.  
   If ${}^*{\!\EuScript M}\models t(a)\in C$ then ${\rm st}\big(t^{{}^*{\!\EuScript M}}(a)\big)\in C$ follows from Fact~\ref{fact_st1}.
   Then $t^{\EuScript M}(a)\in C$ follows from Fact~\ref{fact_terms_st2}.
   Therefore ${\EuScript M}\models t(a)\in C$.
 
-  Case $t(x\,;y)=t(y)$.  
+  Case $t(x\,;y)$ is $t(y)$.  
   If ${}^*{\!\EuScript M}\models t(\alpha)\in C$ then ${}^*\!R\models t(\alpha)\in C$.
   By Fact~\ref{fact_st1} we obtain ${}^*\!R\models {\rm st}\big(t(\alpha)\big)\in C$.
   Finally ${}^*\!R\models t\big({\rm st}(\alpha)\big)\in C$ follows from Fact~\ref{fact_terms_st}.
@@ -354,12 +361,12 @@ We say that $f:M\to N$, a partial map, is an \emph{$\mathds{L}$-elementary map\/
 \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(fa).}
 
 An $\mathds{L}$-elementary map is in particular $L$-elementary and therefore it is injective.
-An $\mathds{L}$-elementary map that is total is called an \emph{$\mathds{L}$-(elementary) embedding.} 
+An $\mathds{L}$-elementary map that is total is called an \emph{$\mathds{L}$-elementary embedding.} 
 When the map ${\rm id}_M:M\hookrightarrow N$ is an $\mathds{L}$-embedding, that is, if for every  $\varphi(x)\in\mathds{L}$ and every $a\in M^{|x|}$
 
 \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(a)},
 
-we write \emph{${\EuScript M}\preceq^\mathds{L}{\EuScript N}$\/} and say that ${\EuScript M}$ is an \emph{$\mathds{L}$-(elementary) submodel\/} of ${\EuScript N}$. 
+we write \emph{${\EuScript M}\preceq^\mathds{L}{\EuScript N}$\/} and say that ${\EuScript M}$ is an \emph{$\mathds{L}$-elementary submodel\/} of ${\EuScript N}$. 
 
 The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel are similar.
 
@@ -731,9 +738,14 @@ We can now, as promised, strengthen Corollary~\ref{corol_Hcomplete2}.
 
 \begin{proof}
   If $b\models p(x)=\mathds{H}\mbox{-tp}(a/A)$ then there is $\mathds{H}$-elementary map $f\supseteq{\rm id}_A$ such that $fa=b$.
-  As $f$ exends to an automorphism, $a\equiv^{\EuScript L}_Ab$ and the corollary follows.
+  As $f$ exends to an automorphism, and the corollary follows.
 \end{proof}
 
+For $a,b\in U^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the same ${\EuScript L}$-formulas over $A$, bearing in mind that formulas in $\mathds{H}(A)$ suffices to test the equivalence.
+
+Classically, from equivalence between types one infers equivalence between formulas.
+Without negation, this is not possible.
+Still, we can infer some approximated equivalences.
 The next two propositions show that formulas in $\mathds{L}(A)$ are approximated by formulas in $\mathds{H}(A)$.
 
 \begin{proposition}\label{prop_LHapprox1}
@@ -897,7 +909,7 @@ For $a,b\in U$ we write \emph{$a\sim b$\/} if $t(a,y)=t(b,y)$ holds (universal q
 
 
 Let $a\in U$. 
-Let $p(x)=\mathds{L}\mbox{-tp}(a/M)$.
+Let $p(x)=\mathds{H}\mbox{-tp}(a/M)$.
 We say that $a$ is \emph{definable in the limit\/} over $M$ if $p(x)\rightarrow a\sim x$
 
 \begin{fact}
@@ -911,17 +923,18 @@ We say that $a$ is \emph{definable in the limit\/} over $M$ if $p(x)\rightarrow 
 \end{fact}
 
 \begin{proof}
-  First note that, the continuity of the terms with respect to the metric, implies that $a\sim b$ is equivalent to $d(a,b)=0$.
+  First note that, by the continuity of the terms with respect to the metric, $a\sim b$ is equivalent to $d(a,b)=0$.
 
   ($2\Rightarrow1$) Let  $\langle \varepsilon_i: i\in\omega\rangle$ be a sequence in $[0,1]$ that converges to $0$ and such that $d(a_i,a)\le\varepsilon_i$ for every $i\in\omega$.
-  Then $d(a_i,b)\le\varepsilon_i$ for every $b\equiv^\mathds{L}_Ma$.
+  Then $d(a_i,b)\le\varepsilon_i$ for every $b\equiv_Ma$.
   By the uniqueness of the limit $d(a,b)=0$.
 
-  ($1\Rightarrow2$) Assume that $a\equiv^\mathds{L}_M x\rightarrow a\sim x$.
-  Then $a\equiv^\mathds{L}_M x\rightarrow d(a,x)<1/n$ for every $n>0$.
-  By compactness there is a formula $\varphi_n(x)\in{\rm tp}_\mathds{L}(a/M)$ such that $\varphi_n(x)\rightarrow d(a,x)<1/n$.
-  By $\mathds{L}$-elementarity there is an $a_n\in M$ such that $\varphi(a_n)$.
-  As $d(a,a_n)<1/n$, the sequence $\langle a_n: n\in\omega\rangle$ converges to $a$.
+  ($1\Rightarrow2$) Let $p(x)=\mathds{H}\mbox{-tp}(a/M)$.
+  Assume that $p(x)\rightarrow a\sim x$.
+  Then $p'(x)\rightarrow d(a,x)<1/n$ for every $n>0$.
+  By compactness there is a formula $\varphi_n(x)\in p$ such that $\varphi'_n(x)\rightarrow d(a,x)<1/n$ for some $\varphi'_n>\varphi_n$.
+  By $\mathds{H}$-elementarity there is an $a_n\in M$ such that $\varphi'(a_n)$.
+  As $d(a,a_n)<1/n$ for all $n$, the sequence $\langle a_n: n\in\omega\rangle$ converges to $a$.
 \end{proof}
 
 \end{document}
