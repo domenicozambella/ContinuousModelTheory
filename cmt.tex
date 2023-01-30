@@ -1,0 +1,2079 @@
+\documentclass[11pt,oneside]{amsart}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{comment}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{datetime2} 
+\usepackage{hyperref}
+
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{stackengine}
+\usepackage{scalerel}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{calc}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[mathcal]{euscript}
+\usepackage{fourier-orns}
+\usepackage{palatino}
+\usepackage[sc]{mathpazo} % add possibly `sc` and `osf` options
+%\usepackage{eulervm}
+%\usepackage{bbm}
+%\usepackage{latexsym}
+% \usepackage{mathrsfs}
+%\usepackage{stmaryrd}
+\usepackage{stix}
+\usepackage{dsfont}
+% \newcommand*{\TakeFourierOrnament}[1]{{%
+% \fontencoding{U}\fontfamily{futs}\selectfont\char#1}}
+% \renewcommand*{\danger}{\TakeFourierOrnament{66}}
+\parindent0ex
+\parskip1.2ex
+
+\newcommand{\mylabel}[1]{{#1}\hfill}
+\renewenvironment{itemize}
+  {\begin{list}{$\cdot$}{%
+  \setlength{\parskip}{0mm}
+  \setlength{\topsep}{.2\baselineskip}
+  \setlength{\rightmargin}{0mm}
+  \setlength{\listparindent}{0mm}
+  \setlength{\itemindent}{0mm}
+  \setlength{\labelwidth}{3ex}
+  \setlength{\itemsep}{.2\baselineskip}
+  \setlength{\parsep}{.2\baselineskip}
+  \setlength{\partopsep}{0mm}
+  \setlength{\labelsep}{1ex}
+  \setlength{\leftmargin}{\labelwidth+\labelsep}
+  \let\makelabel\mylabel}}{%
+\end{list}}
+
+\declaretheoremstyle[
+  headfont=\normalfont\bfseries,
+  notefont=\bfseries,
+  notebraces={(}{)},
+  bodyfont=\normalfont,
+  postheadspace=1em,
+  mdframed={
+  outerlinewidth=1pt,
+  linecolor=gray!25,
+  roundcorner = 1ex,    
+  backgroundcolor=gray!15, 
+  innerleftmargin=1ex,
+  leftmargin=-1ex,
+  innerrightmargin=1ex,
+  rightmargin=-1ex,
+  innertopmargin=1.5ex, 
+  innerbottommargin=1ex, 
+  skipabove=2ex,
+  skipbelow=1ex}, 
+]{mystyle}
+
+\declaretheorem[style=mystyle]%
+{theorem}
+\declaretheorem[style=mystyle,sibling=theorem]%
+{lemma,proposition,fact,corollary,definition,remark,example,claim}
+
+\let\proof\relax
+\declaretheoremstyle[
+  spaceabove=6pt, 
+  spacebelow=6pt, 
+  headfont=\normalfont\itshape, 
+  bodyfont = \normalfont,
+  postheadspace=1em, 
+  qed=\qedsymbol, 
+  headpunct={.}]
+{myproof} 
+\declaretheorem[style=myproof, unnumbered]{proof}
+
+\renewcommand*{\emph}[1]{%
+   \smash{\tikz[baseline]\node[rectangle, fill=teal!25, rounded corners, inner xsep=0.5ex, inner ysep=0.2ex, anchor=base, minimum height = 2.7ex]{#1};}}
+
+\linespread{1.1}
+\author{C. L. C. L. Polymath}
+\begin{document}
+\title{Continuous logic for the classical logician}
+\hfill\texttt{Branch:\ semplificazione\ \DTMnow}\bigskip
+\maketitle
+\raggedbottom
+
+
+\newcommand\dangersign[1][2ex]{%
+  \renewcommand\stacktype{L}%
+  \scaleto{\stackon[-.6pt]{\color{red}$\triangle$}{\color{red}\bfseries\small ?}}{#1}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduzione}\label{intro}
+
+
+
+\def\ceq#1#2#3{\parbox[t]{23ex}{$\displaystyle #1$}\parbox{6ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+As a minimal motivating example, consider real vector spaces.
+These are among the most simple strucures considered in model theory.
+Now, expand them by adding a norm.
+A norm is a function that, given vector, outputs a real number.
+We may formalize this in a natural way by using a two-sorted structure.
+Now, we have two conflicting aspirations
+\begin{itemize}
+  \item[i.] we would like to apply the basic tools of model theory (such as elementarity and saturation);
+  \item[ii.] we want to stay in the realm of normed spaces (and insist that 
+  $\mathds{R}$ should remain $\mathds{R}$ throughout).
+\end{itemize}
+
+These two requests are blatantly incompatible, something has to give.
+Different people have attemped different paths.
+\begin{itemize}
+  \item[1.] Nonstandard analysts happily embrace norms that take values in some ${}^*\mathds{R}\succeq\mathds{R}$.
+  These normed spaces are nonstandard, but there are tricks to transfer results from nonstandard to standard normed spaces and vice versa.
+  Model theorists, when confronted with similar problems, have used similar approaches (in more generality and with different notation).
+  \item[2.] Henson and Iovino propose to stick to the standard notion of norm but restrict the notion of elementarity and saturation to a smaller class of formulas (which here is denoted by $\mathds{H}$).
+  They demostrate that many standard tools of model theory apply in their setting. 
+  The work of Henson and Iovino is focussed on Banach spaces and has hardly been applied to broader contexts.
+  \item[3.] Real valued logicians have the most radical approach.
+  They abandon classical true/false valued logic altogether in favour of a logic valued in the interval $[0,1]$.
+  Unfortunately, this adds unnecessary notational burden and restricts the class of structures that can be considered.
+\end{itemize}
+
+We elaborate on the ideas of Henson and Iovino and generalize them to a larger class of structures.
+Following Henson and Iovino, we restrict the notions of elementarity and saturation.
+But we use a class of formulas $\mathds{L}$ which is larger than their $\mathds{H}$.
+Though we prove that $\mathds{L}$ has, in a sense, approximatively the same expressive power as $\mathds{H}$ (cf. Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}), it is evident that $\mathds{L}$ is more convinent to use.
+We also borrow a few intuitions and results from approach (1).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A class of structures}\label{uno}
+
+
+
+Let $R$ be some fixed first-order structure which is endowed with a Hausdorff compact topology (in particular, a normal topology).
+The language $L_R$ contains relation symbols for the compact subsets $C\subseteq R^n$ and a function symbol for each continuous functions $f:R^n\to R$.
+According to the context, $C$ and $f$ denote either the symbols of $L_R$ or their interpretation in $R$.
+% Our choice is a compromise to avoid eccessive complications.
+% It would be interesting to drop the restriction on the sort of the function symbols.
+
+
+\begin{definition}\label{def_0}
+  Let \emph{$L$\/} be a one-sorted (first-order) language.
+  By \emph{model\/} we intend an ${\EuScript L}$-structure of the form ${\EuScript M}=\langle  M,R\rangle$, where $M$ ranges over $L$-structures, while $R$ is the structure above.
+  The language \emph{${\EuScript L}$\/} is an expansion of both $L$ and $L_R$.
+  The new symbols allowed in ${\EuScript L}$ are function symbols of sort $M^n\to R$. 
+\end{definition}
+
+The scope of the notion of model will be (inessentially) restricted once the monster model is introduced, in Section~\ref{monster}.
+
+Clearly, saturated ${\EuScript L}$-structures exist but, with the exception of trivial cases (i.e.\@ when $R$ is finite) they are not models.
+As a remedy, below we carve out a set $\mathds{L}$ of formulas, $L\subseteq\mathds{L}\subseteq {\EuScript L}$, such that every model has an $\mathds{L}$-elementary, $\mathds{L}$-saturated extension that is a model.
+
+Warning: as usual $L$ and ${\EuScript L}$ denote both first-order languages and the corresponding set of formulas.
+The symbols $\mathds{L}$ and $\mathds{H}$ defined below denote only sets of ${\EuScript L}$-formulas.
+
+\begin{definition}\label{def_LL}
+  Formulas in \emph{$\mathds{L}$\/} are defined inductively from two sorts of \emph{$\mathds{L}$-atomic\/} formulas
+  \begin{itemize}
+  \item[i.] formulas of the form $t(x;y)\in C$, where $C\subseteq R^n$ is compact (in the product topology) and $t(x,y)$ is a $n$-tuple of terms of sort $M^{|x|}\times R^{|y|}\to R$; 
+  \item[ii.] all formulas in $L$.
+  \end{itemize}
+  We require that $\mathds{L}$ is closed under the Boolean connectives $\wedge$, $\vee$; the quantifiers $\forall$, $\exists$ of sort $M$; and the quantifiers of sort $R$ which are denoted by $\forall^R$, $\exists^R$.
+
+  We write \emph{$\mathds{H}$ \/} for the set of formulas in $\mathds{L}$ without quantifiers of sort $R$.
+\end{definition}
+
+For later reference we remark the following which is an immediate consequence of the restrictions imposed by Definition~\ref{def_0} on the sorts of the function symbols in ${\EuScript L}$.
+
+\begin{remark}\label{rk_terms}
+  Each component of the tuple $t(x\,;y)$ in the definition above is either of sort $M^{|x|}\to R$ or of sort $R^{|y|}\to R$.
+\end{remark}
+
+\noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
+Formulas in $\mathds{H}$ are a generalization of the positive bounded formulas of Henson and Iovino.
+Here we also introduce the larger class $\mathds{L}$ because it offers some advantages. 
+For instance, it is easy to see (cf.\@ Example~\ref{ex_Rvlogic} for a hint) that $\mathds{L}$ has at least the same expressive power as real valued logic (in fact, it is way more expressive).
+Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}) that the formulas in $\mathds{L}$ can be very well approximated by formulas in $\mathds{H}$.
+
+\begin{example}\label{ex_Rvlogic}
+  Let $R=[0,1]$, the unit interval in $\mathds{R}$.
+  Let $t(x)$ be a term of sort $M^{|x|}\to R$.
+  Then there is a formula in $\mathds{L}$ that says $\sup_{x} t(x)=\tau$.
+  Indeed, consider the formula
+
+  \ceq{\hfill\forall x\ \big[t(x)\dotminus\tau\in\{0\}\big]}
+  {\wedge}{\forall^R\varepsilon \Big[\varepsilon\in\{0\}\ \vee\ \exists x\ \big[\tau\dotminus (t(x)+\varepsilon)\in\{0\}\big]\Big]}
+
+  which, in a human readible form, becomes
+
+  \ceq{\hfill\forall x\ \big[t(x)\le\tau\big]}{\wedge}{\forall\varepsilon>0\ \exists x\ \big[\tau\le t(x)+ \varepsilon\big].}
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The standard part}
+
+Let $R\preceq{}^*\!R$.
+Let $\alpha,\alpha'\in{}^*\! R$.
+For $\beta\in R$ we write $\alpha\approx\beta$ if $^*\!R\models\alpha\in D$ for every compact neighborhood $D$ of $\beta$.
+We write \emph{$\alpha\approx\alpha'$\/} if $\alpha\approx\beta\approx\alpha'$ for some $\beta\in R$.
+From the following fact it follows that $\,\approx\,$ is an equivalence relation on ${}^*\!R$.
+
+\begin{fact}\label{fact_uniqueness_st}
+  For every $\alpha\in{}^*\!R$ there is a unique $\beta\in R$ such that $\alpha\approx\beta$.
+\end{fact}
+
+\begin{proof}
+  Negate the existence of $\beta$.
+  For every $\gamma\in R$ pick some $D_\gamma$, compact neighborhood of $\gamma$, such that ${}^*\!R\ \models\ \alpha\notin D_\gamma$.
+  By compactess there is some finite $\Gamma\subseteq R$ such that $D_\gamma$, with $\gamma\in\Gamma$, cover $R$.
+  By elementarity these $D_{\gamma}$ also cover ${}^*\!R$.
+  A contradiction.
+  The uniqueness of $\beta$ follows from normality.
+\end{proof}
+
+We will denote by \emph{${\rm st}(\alpha)$\/} the unique $\beta\in R$ such that $\alpha\approx\beta$.
+
+\begin{fact}\label{fact_st1}
+  For every $\alpha\in{}^*\! R$ and every compact $C$
+
+\ceq{\hfill{}^*\!R}{\models}{\alpha\in C\ \rightarrow\ {\rm st}(\alpha)\in C.}
+\end{fact}
+
+\begin{proof}
+  Assume ${\rm st}(\alpha)\notin C$.
+  By normality there is a set $D$, a compact neighborhood of ${\rm st}(\alpha)$, disjoint from $C$.
+  Then  ${}^*\!R\models\alpha\in D\subseteq\neg C$.
+\end{proof}
+
+\begin{fact}\label{fact_terms_st}
+  For every $\alpha\in({}^*\! R)^{|x|}$ and every term $t(x)$
+
+\ceq{\hfill{}^*\!R}{\models}{{\rm st}\big(t(\alpha)\big)=t\big({\rm st}(\alpha)\big).}
+\end{fact}
+
+\begin{proof}
+  We assume that $t$ is a function symbol, say $f$, for some continuous function $f:R^{|x|}\to R$.
+  The result for general term $t$ follows easily.
+  By Fact~\ref{fact_uniqueness_st} and the definition of st(-) it suffices to prove that ${}^*\!R\models f(\alpha)\in C$ for every compact neighborhood $C$ of $f\big({\rm st}(\alpha)\big)$.
+  
+  Fix one such $C$.
+  Then ${\rm st}(\alpha)\in f^{-1}[C]$ .
+  By continuity $f^{-1}[C]$ is a compact neighborhood of ${\rm st}(\alpha)$.
+  Therefore ${}^*\!R\models \alpha\in f^{-1}[C]$ and, as $R\preceq{}^*\!R$ we obtain ${}^*\!R\models f(\alpha)\in C$.
+\end{proof}
+
+Let ${}^*{\!\EuScript M}=\langle M,{}^*\!R\rangle$ be an ${\EuScript L}$-structure such that $R\preceq{}^*\!R$.
+The \emph{standard part of ${}^*{\!\EuScript M}$\/} is the model ${\EuScript M}=\langle M,R\rangle$ that interpretes the symbols $f$ of sort $M^n\to R$ as the functions
+
+\ceq{\hfill f^{\EuScript M}(a)}{=}{{\rm st}\big(f^{{}^*\!\EuScript M}(a)\big)}\hfill for all $a\in M^n$.
+
+Symbols in $L$ mantain the same interpretation.
+
+\begin{fact}\label{fact_terms_st2}
+  Let ${}^*{\!\EuScript M}$ and ${\EuScript M}$ be as above.
+  For every $a\in M^{|x|}$ and every term $t(x)$ of sort $M^{|x|}\to R$
+
+  \ceq{\hfill t^{\EuScript M}(a)}{=}{{\rm st}\big(t^{{}^*{\!\EuScript M}}(a)\big)}
+\end{fact}
+\begin{proof}
+  When a $t$ is function symbol $f$, the fact holds by definition.
+  For all other terms, it follows from Fact~\ref{fact_terms_st} 
+\end{proof}
+
+% Symbols in $L_R$ have the interpretation they have in models.
+
+\begin{lemma}\label{lem_st}
+  Let ${}^*{\!\EuScript M}$ and ${\EuScript M}$ be as above.
+  Then for every $\varphi(x\,;y)\in\mathds{L}$, \  $a\in M^{|x|}$ and $\alpha\in({}^*\!R)^{|y|}$ 
+  
+  \ceq{\hfill{}^*{\!\EuScript M}\models\varphi(a\,;\alpha)}
+  {\Rightarrow}
+  {{\EuScript M}\models\varphi\big(a\,;{\rm st}(\alpha)\big)}
+\end{lemma}
+
+\begin{proof}
+  Suppose $\varphi(x\,;y)$ is $\mathds{L}$-atomic.
+  If $\varphi(x\,;y)$ is a formula of $L$ the claim is trivial. 
+  Otherwise $\varphi(x\,;y)$ has the form $t(x\,;y)\in C$.
+  Assume that the tuple $t(x\,;y)$ consists of a single term.
+  The general case is left to the reader as it easily follows from this special case. 
+  By Remark~\ref{rk_terms}, we consider two cases.
+
+  Case $t(x\,;y)=t(x)$.  
+  If ${}^*{\!\EuScript M}\models t(a)\in C$ then ${\rm st}\big(t^{{}^*{\!\EuScript M}}(a)\big)\in C$ follows from Fact~\ref{fact_st1}.
+  Then $t^{\EuScript M}(a)\in C$ follows from Fact~\ref{fact_terms_st2}.
+  Therefore ${\EuScript M}\models t(a)\in C$.
+
+  Case $t(x\,;y)=t(y)$.  
+  If ${}^*{\!\EuScript M}\models t(\alpha)\in C$ then ${}^*\!R\models t(\alpha)\in C$.
+  By Fact~\ref{fact_st1} we obtain ${}^*\!R\models {\rm st}\big(t(\alpha)\big)\in C$.
+  Finally ${}^*\!R\models t\big({\rm st}(\alpha)\big)\in C$ follows from Fact~\ref{fact_terms_st}.
+
+  % If $t$ is a longer tuple of length longer then one.
+  % We claim that for every compact set $C_i\subseteq R$ such that $C\subseteq C_1\times\dots\times C_{|y|}$
+
+  % \ceq{\hfill{\EuScript M}}
+  % {\models}
+  % {t_i(a\,;{\rm st}(\alpha))\in C_i.}
+
+  % By the definition of product topology, $C$ is the intersection of products as those above.
+  % Therefore ${\EuScript M}\models t(a\,;{\rm st}(\alpha))\in C$ follows from the claim.
+  
+  This proves the lemma for $\mathds{L}$-atomic formulas.
+  Induction is immediate. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$\mathds{L}$-elementarity}
+
+\def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+Let ${\EuScript M}=\langle M,R\rangle$ and ${\EuScript N}=\langle N,R\rangle$ be two models.
+We say that $f:M\to N$, a partial map, is an \emph{$\mathds{L}$-elementary map\/} if for every $\varphi(x)\in\mathds{L}$ and every $a\in({\rm dom }f)^{|x|}$
+
+\ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(fa).}
+
+An $\mathds{L}$-elementary map is in particular $L$-elementary and therefore it is injective.
+An $\mathds{L}$-elementary map that is total is called an \emph{$\mathds{L}$-(elementary) embedding.} 
+When the map ${\rm id}_M:M\hookrightarrow N$ is an $\mathds{L}$-embedding, that is, if for every  $\varphi(x)\in\mathds{L}$ and every $a\in M^{|x|}$
+
+\ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(a)},
+
+we write \emph{${\EuScript M}\preceq^\mathds{L}{\EuScript N}$\/} and say that ${\EuScript M}$ is an \emph{$\mathds{L}$-(elementary) submodel\/} of ${\EuScript N}$. 
+
+The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel are similar.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$\mathds{L}$-compactness}
+
+It is convinient to distinguish between consistency with respect to models and consistency with respect to ${\EuScript L}$-structures.
+We say that a theory $T$ is \emph{${\EuScript L}$-consistent\/} when ${\EuScript M}\models T$ for some ${\EuScript L}$-structure ${\EuScript M}$.
+We say that $T$ is \emph{consistent\/} when ${\EuScript M}$  is required to be a model.
+
+\begin{theorem}[$\mathds{L}$-compactness]\label{thm_compattezza}
+  Let $T\subseteq\mathds{L}$ be finitely consistent.
+  Then $T$ is consistent.
+\end{theorem}
+
+\begin{proof}
+  Suppose $T$ is finitely consistent (or finitely ${\EuScript L}$-consistent, for that matter).
+  By the classical compactness theorem ${}^*{\!\EuScript M}\models T$ for some ${\EuScript L}$-structure ${}^*{\!\EuScript M}=\langle M,{}^*\!R\rangle$.
+  Let ${\EuScript M}$ be the model $\langle M,R\rangle$.
+  Then ${\EuScript M}\models T$ by Lemma~\ref{lem_st}.
+\end{proof}
+
+% \begin{corollary}\label{prop_tipi_compattezza}
+%   Let $p(x\,;y)\subseteq\mathds{L}(M)$ be finitely consistent in ${\EuScript M}$, a model.
+%   Then ${\EuScript N}\models\exists x\,\exists^R y\,p(x\,;y)$ for some model ${\EuScript N}$ such that ${\EuScript M}\preceq^\mathds{L}{\EuScript N}$.
+% \end{corollary}
+
+% \noindent\llap{\dangersign\kern2ex}%
+
+
+% \begin{definition}
+%   We say that ${\EuScript M}$ is \emph{$\mathds{L}$-saturated\/} if for every $p(x)$ as in 1 and 2 below, ${\EuScript M}\models\exists x\, p(a)$.
+%   \begin{itemize}
+%     \item[1.] $p(x)\subseteq\mathds{L}(A)$ for some $A\subseteq  M$ of cardinality $<|M|$ and $|x|=1$;
+%     \item[2.] $p(x)$ is finitely satisfied in ${\EuScript M}$.
+%   \end{itemize}
+% \end{definition}
+A model ${\EuScript N}$ is \emph{$\mathds{L}$-saturated\/} if it realizes all types with fewer than $|{\EuScript N}|$ parameters that are finitely consistent in ${\EuScript N}$.
+The existence of $\mathds{L}$-saturated models is obtained from the classical case just as for theorem above.
+
+\begin{proposition}
+  Every model has an $\mathds{L}$-elementary extension to a saturated model (possibly of inaccessible cardinality).
+\end{proposition}
+
+% Homogeneity follows from saturation by the usual back-and-forth contruction.
+
+% \begin{proposition}(Homogeneity)
+%   Let ${\EuScript N}$ be saturated and of cardinality larger than $|\mathds{L}|$.
+%   Then for every $ab\in M^\alpha$, where $\alpha<|N|$, such that $a\equiv b$, there is an $\mathds{L}$-automorphism of ${\EuScript N}$ that maps $a$ to $b$.
+% \end{proposition}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Henson-Iovino approximations}\label{ultrapws}
+
+
+For $\varphi,\varphi'\in\mathds{L}(M)$ (free variables are hidden) we write \emph{$\varphi'>\varphi$\/} if $\varphi'$ is obtained replacing each atomic formula of the form $t\in C$ occurring in $\varphi$ with $t\in C'$ where $C'$ is some compact neighborhood of $C$.
+If such atomic formulas do not occur in $\varphi$, then $\varphi>\varphi$.
+We also have $\varphi>\varphi$ when $\varphi=(t\in C)$ for some clopen set $C$.
+
+Note that $>$ is a dense (pre)order of $\mathds{L}(M)$.
+
+Formulas in as in (i) of Definition~\ref{def_LL} do not occur under the scope of a negation, therefore we always have that $\varphi\to\varphi'$.
+
+We write \emph{$\tilde{\varphi}\perp\varphi$\/} when $\tilde{\varphi}$ is obtained by replacing each atomic formula $t\in C$ occurring in $\varphi$ with $t\in\tilde{C}$ where $\tilde{C}$ is some compact set disjoint from $C$. 
+Moreover the $\mathds{L}$-atomic formulas in $L$ are replaced with their negation and every connective is replaced with its dual.
+I.e., $\vee, \wedge, \exists, \forall, \exists^R, \forall^R$ are replaced with $\wedge,\vee,\forall,\exists,\forall^R,\exists^R$ respectively.
+
+It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
+We say that  $\tilde{\varphi}$ is a \emph{strong negation} of $\varphi$.
+
+\begin{lemma}\label{lem_interpolation}\ 
+  \begin{itemize}
+    \item[1.]For every $\varphi'>\varphi$ there is a formula $\tilde{\varphi}\perp\varphi$ such that $\varphi\rightarrow\neg \tilde{\varphi}\rightarrow\varphi'$.
+    \item[2.] For every\, $\tilde{\varphi}\perp\varphi$ there is a formula $\varphi'>\varphi$ such that  $\varphi\rightarrow\varphi'\rightarrow\neg \tilde{\varphi}$.
+  \end{itemize}
+\end{lemma}
+
+\begin{proof}
+  If $\varphi\in L$ the claims are obvious.
+  Suppose $\varphi$ is of the form $t\in C$.
+  Let $\varphi'$ be $t\in C'$, for some compact neighborhood of $C$.
+  Let $O$ be an open set such that $C\subseteq O\subseteq C'$.
+  Then $\tilde{\varphi}=(t\in R\smallsetminus O)$ is as required by the lemma.
+  
+  Suppose instead that $\tilde{\varphi}$ is of the form $t\in\tilde{C}$ for some compact $\tilde{C}$ disjoint from $C$.
+  By the normality of $R$, there is  $C'$, a compact neighborhood of $C$ disjoint from $\tilde{C}$.
+  Then  $\varphi'=t\in C'$ is as required.
+
+  The lemma follows easily by induction.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The monster model}\label{monster}
+
+We denote by \emph{${\EuScript U}=\langle U,R\rangle$\/} some large $\mathds{L}$-saturated structure which we call the \emph{monster model.}
+For convenience we assume that the cardinality of ${\EuScript U}$ is an inaccessible cardinal which we denote by \emph{$\kappa$.}
+Below we say \emph{model\/} for $\mathds{L}$-elementary submodel of ${\EuScript U}$.
+
+Let $A\subseteq U$ be a small set.
+We define a topology on $U^{|x|}\times R^{|y|}$ which we call the \emph{$\mathds{L}(A)$-topology.}
+The closed sets of this topology are the sets defined by the types $p(x\,;y)\subseteq\mathds{L}(A)$.
+This is a compact topology by the $\mathds{L}$-compactness Theorem~\ref{thm_compattezza}.
+
+% \begin{lemma}
+%   For every $\varphi(x\,;y)\in\mathds{L}(A)$ the set $\varphi(U\,;R)$ is a compact subset of $U^{|x|}\times R^{|y|}$.
+% \end{lemma}
+
+% \begin{proof}
+%   We prove that every finitely intersecting family of closed subsets of $\varphi(U\,;R)$ has nonempty intersection.
+%   Without loss of generality we can assume that the sets in this family have the form $\psi(U)\times C_1\times\dots\times C_{|y|}$ for some compact sets $C_i\subseteq R$ and some $\psi(x)\in\mathds{L}$.
+%   Then by $\mathds{L}$-compactness the intersection of the family is nonempty.
+% \end{proof}
+
+\begin{fact}\label{fact_compactness_imp}
+  Let $p(x)\subseteq\mathds{L}(U)$ be a type of small cardinality.
+  Then for every  $\varphi(x)\in\mathds{L}(U)$
+  \begin{itemize}
+    \item[1.] if $p(x)\rightarrow\neg\varphi(x)$ then $\psi(x)\rightarrow\varphi(x)$ for some $\psi(x)$ conjunction of formulas in $p(x)$;
+    \item[2.] if $p(x)\rightarrow\varphi(x)$ and $\varphi'>\varphi$ then $\psi(x)\rightarrow\varphi'(x)$ for some conjunction of formulas in $p(x)$.
+  \end{itemize} 
+\end{fact}
+
+\begin{proof}
+  Claim (1) is immediate by saturation.
+  Claim (2) follows from the first by Lemma~\ref{lem_interpolation}.
+\end{proof}
+
+\begin{proposition}\label{prop_approx}
+  For every $\varphi(x)\in\mathds{L}(U)$ 
+
+  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x\,;y)}
+  {\leftrightarrow}
+  {\varphi(x\,;y)}
+
+\end{proposition}
+
+\begin{proof}
+  We prove $\rightarrow$, the non trivial implication.
+  The claim is clear for atomic formulas.
+  Induction for conjunction, disjunction and the universal quantifier is immediate.
+ % 
+  % Consider disjunction.
+  % Let $\varphi=\varphi_i\vee\varphi_1$.
+  % Assume inductively
+ % 
+  % \ceq{\hfill\varphi_i(x)}
+  % {\leftrightarrow}
+  % {\bigwedge_{\varphi_i'>\varphi_i}\varphi_i'(x)}
+%
+  % Then
+%
+  % \ceq{\hfill\varphi(x)}
+  % {\leftrightarrow}
+  % {\bigwedge_{\varphi_1'>\varphi_1}\varphi_1'(x) \ \vee \bigwedge_{\varphi_2'>\varphi_2}\varphi_2'(x)}
+%
+  % \ceq{}
+  % {\leftrightarrow}
+  % {\bigwedge_{\substack{\varphi_1'>\varphi_1\\ \varphi_2'>\varphi_2}}\varphi_1'(x) \vee\varphi_2'(x)}
+%
+  % \ceq{}
+  % {\leftrightarrow}
+  % {\bigwedge_{\varphi'>\varphi}\varphi'(x)}
+%
+  We consider case of the existential quantifiers of sort $M$.
+  The case of existential quantifiers of sort $R$ is identical.
+  Assume inductively
+  
+  \ceq{\textrm{ih.}\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
+  {\rightarrow}
+  {\varphi(x,z\,;y)}
+
+  We need to prove
+
+  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\exists z\,\varphi'(x,z\,;y)}
+  {\rightarrow}
+  {\exists z\,\varphi(x,z\,;y)}
+
+  From (ih) we have
+
+  \ceq{\hfill\exists z\,\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
+  {\rightarrow}
+  {\exists z\,\varphi(x,z\,;y)}
+
+  Therefore it suffices to prove
+
+  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\exists z\,\varphi'(x,z\,;y)}
+  {\rightarrow}
+  {\exists z\,\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
+
+Replace $x,y$ with some fix but arbitrary parameters, say $a,\alpha$ and assume the antecedent, that is, the truth of the theory $\{\exists z\,\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
+We need to prove the consistency of the type $\{\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
+By the saturation of ${\EuScript U}$, finite concistency suffices.
+This is clear if we show that the antecedent is closed under conjunction.
+Indeed it is easy to verify that if $\varphi_1,\varphi_2>\varphi$ then $\varphi_1\wedge\varphi_2>\varphi'$ for some $\varphi'>\varphi$.
+In words, the set of approximations of $\varphi$ is a directed set.
+%
+% \noindent\llap{\textcolor{red}{\Large\danger}\kern1ex}\ignorespaces
+% Consider the existential quantifiers of sort $R$
+% Assume inductively
+%
+% \ceq{\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x;y)}
+% {\rightarrow}
+% {\varphi(x;y)}
+%
+% As above, it suffices to prove
+%
+% \ceq{\#\hfill\bigwedge_{\varphi'>\varphi}\exists^C\! y\,\varphi'(x;y)}
+% {\rightarrow}
+% {\exists^C\! y\,\bigwedge_{\varphi'>\varphi}\varphi'(x;y)}
+%
+\end{proof}
+
+
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+% \begin{example}
+%   The equivalence in the proposition above does not extend to all formulas in $\mathds{L}$.
+%   For a counter example, let both $M$ and $R$ are the real interval $[0,1]$.
+%   The language has a function symbol ${\rm d}$ of sort $M^2\to R$.
+%   Its interpretation is ${\rm d}^{\EuScript M}(x,y)=|x-y|$.
+%   The formula 
+  
+%   \ceq{\hfill\varphi}{=}{\exists\varepsilon\big[\varepsilon\in\{0\}\ \wedge\ \exists x,y\ \ {\rm d}(x,y)\cdot\varepsilon\in\{1\}\big]}
+
+%   is false, though every $\varphi'>\varphi$ is true (in ${\EuScript M}$ and any $\mathds{L}$-extension of ${\EuScript M}$).\hfill\qedsymbol
+% \end{example}
+
+
+% The following fact is an immediate consequence.
+
+
+
+% \begin{corollary}
+%   If $\varphi(x),\psi(x)\in\mathds{L}(U)$ are mutually inconsistent then there are $\varphi'>\varphi$ and $\psi'>\psi$ that are mutually inconsistent.
+% \end{corollary}
+
+
+
+
+
+% \begin{fact}
+%   Let $a\in M^{|x|}$ be such that ${\EuScript M}\not\models\varphi(a)$
+%   Then, ${\EuScript M}\not\models\varphi'(a)$ for some $\varphi'>\varphi$.\hfill\qedsymbol
+% \end{fact}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \begin{fact}
+%   Let $\varphi(x)\in\mathds{L}(A)$, where $A\subseteq M$.
+%   Then for every $a\in M^{|x|}$ such that ${\EuScript M}\not\models\varphi(a)$ there is a formula $\tilde\varphi(x)\in\mathds{L}(A)$ such that ${\EuScript M}\models\tilde\varphi(a)$ and ${\EuScript M}\models\neg\exists x\,[\tilde\varphi(x)\wedge\varphi(x)]$.
+% \end{fact}
+
+
+% \begin{fact}
+%   For every $\varphi(x),\psi(x)\in\mathds{L}(U)$ such that $\neg\exists x\,[\varphi(x)\wedge\psi(x)]$ there are $\varphi'>\varphi$ and $\psi'>\psi$ such that $\neg\exists x\,[\varphi'(x)\wedge\psi'(x)]$.
+% \end{fact}
+
+% \begin{proof}
+%   By Proposition~\ref{prop_approx} and saturation.
+% \end{proof}
+
+% The following are immediate consequences of the proposition above and Lemma~\ref{lem_interpolation}.
+
+% \begin{corollary}\label{corol_Hcomplete1}
+%   For every $a\in U^{|x|}$ and $\varphi(x)\in\mathds{H}(U)$, if $\neg\varphi(a)$ then $\tilde\varphi(a)$ for some $\tilde\varphi\perp\varphi$.\hfill\qedsymbol
+% \end{corollary}
+
+
+When $A\subseteq U$, we write \emph{$S_\mathds{H}(A)$\/} for the set of types 
+
+\ceq{\hfill\mathds{H}\mbox{-tp}(a/A)}{=}{\big\{\varphi(x)\ :\ \varphi(x)\in\mathds{H}(A)\textrm{ such that }\varphi(a)\big\}}
+
+ as $a$ ranges over the tuples of elements of $U$.
+ We write  \emph{$S_{\mathds{H},x}(A)$\/} when the tuple of variables $x$ is fixed.
+%  Similarly we define \emph{$S_\mathds{L}(A)$\/} and \emph{$S_{\mathds{L},x}(A)$.}
+ The following corollary will be strengthen by Corollary~\ref{corol_Lcomplete} below.
+
+ \begin{corollary}\label{corol_Hcomplete2}
+   The types $p(x)\in S_\mathds{H}(A)$ are maximally consistent subsets of $\mathds{H}_x(A)$.
+   That is, for every $\varphi(x)\in\mathds{H}(A)$, either $\varphi(x)\in p$ or $p(x)\rightarrow\neg\varphi(x)$.
+ \end{corollary}
+
+ \begin{proof}
+  Let $p(x)=\mathds{H}\mbox{-tp}(a/A)$ and suppose $\varphi(x)\notin p$.
+  Then $\neg\varphi(a)$.
+  From Lemma~\ref{lem_interpolation} and Proposition~\ref{prop_approx} we obtain
+
+  \ceq{\hfill\neg\varphi(x)}
+  {\rightarrow}
+  {\bigvee_{\tilde{\varphi}\perp\varphi}\tilde{\varphi}(x).}
+
+  Hence $\tilde{\varphi}(a)$ holds for some $\tilde{\varphi}\perp\varphi$ and $p(x)\rightarrow\neg\varphi(x)$ follows.
+ \end{proof}
+
+ The following will be useful below
+
+ \begin{remark}\label{lem_p'p}
+  For $p(x)\subseteq\mathds{L}(U)$, we write \emph{$p'(x)$\/} for the type
+
+  \ceq{\hfill p'(x)}{=}{\big\{\varphi'(x):\varphi'>\varphi\textrm{ for some }\varphi(x)\in p\big\}.}
+
+  Note that $p'(x)$ is equivalent to $p(x)$ by Proposition~\ref{prop_approx}.
+ \end{remark}
+
+% \begin{corollary}\label{corol_Hcomplete3}
+%   The inverse of an $\mathds{H}$-elementary map $f:{\EuScript U}\to{\EuScript U}$ is $\mathds{H}$-elementary.
+% \end{corollary}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Homogeneity}
+
+A model ${\EuScript M}$ is \emph{$\mathds{H}$-homogeneous\/} if every $\mathds{H}$-elementary map $f:{\EuScript M}\to{\EuScript M}$ of cardinality $<|{\EuScript M}|$ extends to an automorphism.
+Clearly, every automorphism is ${\EuScript L}$-elementary.
+
+\begin{proposition}
+  ${\EuScript U}$ is $\mathds{H}$-homogeneous.
+\end{proposition}
+
+\begin{proof}
+  By Corollary~\ref{corol_Hcomplete2}, the inverse of an $\mathds{H}$-elementary map $f:{\EuScript U}\to{\EuScript U}$ is $\mathds{H}$-elementary.
+  Then the usual proof by back-and-forth applies.
+\end{proof}
+
+We can now, as promised, strengthen Corollary~\ref{corol_Hcomplete2}.
+
+\begin{corollary}\label{corol_Lcomplete}
+  Let $p(x)\in S_\mathds{H}(A)$.
+  Then $p(x)$ is complete for formulas in ${\EuScript L}_x(A)$.
+  That is, for every $\varphi(x)\in{\EuScript L}(A)$, either $p(x)\rightarrow\varphi(x)$ or $p(x)\rightarrow\neg\varphi(x)$.
+  Clearly, the same holds for $p'(x)$.
+\end{corollary}
+
+\begin{proof}
+  If $b\models p(x)=\mathds{H}\mbox{-tp}(a/A)$ then there is $\mathds{H}$-elementary map $f\supseteq{\rm id}_A$ such that $fa=b$.
+  As $f$ exends to an automorphism, $a\equiv^{\EuScript L}_Ab$ and the corollary follows.
+\end{proof}
+
+The next two propositions show that formulas in $\mathds{L}(A)$ are approximated by formulas in $\mathds{H}(A)$.
+
+\begin{proposition}\label{prop_LHapprox1}
+  Let $\varphi(x)\in\mathds{L}(A)$.
+  For every given $\varphi'>\varphi$ there is some formula $\psi(x)\in\mathds{H}(A)$ such that $\varphi(x)\rightarrow\psi(x)\rightarrow\varphi'(x)$.
+\end{proposition}
+
+\begin{proof}
+  By Corollary~\ref{corol_Lcomplete} and Remark~\ref{lem_p'p}
+
+  \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{p'(x)\rightarrow\neg\varphi(x)}p'(x)}
+
+  where $p(x)$ ranges over $S_{\mathds{H},x}(A)$.
+  By Fact~\ref{fact_compactness_imp} and Lemma~\ref{lem_interpolation}
+
+  \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{\neg\tilde{\psi}(x)\rightarrow\neg\varphi(x)}\neg\tilde{\psi}(x),}
+
+  where $\tilde{\psi}(x)\in\mathds{H}(A)$.
+  Equivalently,
+
+  \ceq{\hfill\varphi(x)}{\leftarrow}{\bigwedge_{\tilde{\psi}(x)\leftarrow\varphi(x)}\tilde{\psi}(x).}
+
+  By compactness, see Fact~\ref{fact_compactness_imp}, for every $\varphi'>\varphi$ there are some finitely many $\tilde{\psi}_i(x)\in\mathds{H}(A)$ such that
+
+  \ceq{\hfill\varphi'(x)}{\leftarrow}{\bigwedge_{i=1,\dots,n}\tilde{\psi}_i(x)\ \ \leftarrow\ \ \varphi(x)}
+
+  which yields the interpolant required by the proposition.
+\end{proof}
+
+\begin{proposition}\label{prop_LHapprox2}
+  Let $\varphi(x)\in\mathds{L}(A)$ be such that $\neg\varphi(x)$ is consistent.
+  Then  $\psi'(x)\rightarrow\neg\varphi(x)$ for some consistent $\psi(x)\in\mathds{H}(A)$ and some $\psi'>\psi$.
+\end{proposition}
+
+
+% \begin{proposition}\label{prop_LHapprox2}
+%   Let $\varphi(x)\in\mathds{L}(A)$. For every given $\tilde{\varphi}\perp\varphi$ there is some $\psi(x)\in\mathds{H}(A)$ such that $\varphi(x)\rightarrow\psi(x)\rightarrow\neg\tilde{\varphi}(x)$.
+% \end{proposition}
+
+\begin{proof}
+  Let $a\in U^{|x|}$ be such that $\neg\varphi(a)$.
+  Let $p(x)=\mathds{H}\mbox{-tp}(a/A)$.
+  By Corollary~\ref{corol_Lcomplete}, $p'(x)\rightarrow\neg\varphi(x)$. 
+  By compactness  $\psi'(x)\rightarrow\neg\varphi(x)$ for some $\psi'>\psi\in p(x)$. 
+\end{proof}
+
+\begin{proposition}[Tarski-Vaught Test] 
+  Let $M$ be a subset of $U$.
+  Then the following are equivalent
+  \begin{itemize}
+    \item[1.] $M$ is the domain of a model;
+    \item[2.] for every formula $\varphi(x)\in\mathds{H}(M)$
+    
+    \noindent\kern-\leftmargin
+    \ceq{\hfill\exists x\,\varphi(x)}{\Rightarrow}
+    {\textrm{ for every }\varphi'>\varphi\textrm{ there is an }a\in M\textrm{ such that }\varphi'(a);}
+    \item[3.] for every formula $\varphi(x)\in\mathds{L}(M)$
+    
+    \noindent\kern-\leftmargin
+    \ceq{\hfill\exists x\,\neg\varphi(x)}{\Rightarrow}
+    {\textrm{ there is an }a\in M\textrm{ such that }\neg\varphi(a).}
+    
+  \end{itemize}
+\end{proposition}
+
+\begin{proof}
+  (1$\Rightarrow$2) Assume $\exists x\,\varphi(x)$ and let $\varphi'>\varphi$ be given.
+  By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi$ such that  $\varphi(x)\rightarrow\neg\tilde{\varphi}(x)\rightarrow\varphi'(x)$.
+  Then $\neg\forall x\,\tilde{\varphi}(x)$ hence, by (1), ${\EuScript M}\models\neg\forall x\,\varphi(x)$.
+  Then ${\EuScript M}\models\neg\tilde{\varphi}(a)$ for some $a\in M$. Hence ${\EuScript M}\models\varphi'(a)$ and $\varphi'(a)$ follows from (1).
+
+  (2$\Rightarrow$3)
+  Assume (2) and let $\varphi(x)\in\mathds{L}(M)$ be such that $\exists x\,\neg\varphi(x)$.
+  By Corollary~\ref{prop_LHapprox2}, there are a consistent $\psi(x)\in\mathds{H}(M)$ and some $\psi'>\psi$ such that $\psi'(x)\rightarrow\neg\varphi(x)$.
+  Then (3) follows.
+
+  (3$\Rightarrow$1)
+  Assume (3).
+  By the classical Tarski-Vaught test $M\preceq U$.
+  It is clear that  ${\EuScript M}$ is an ${\EuScript L}$-sub\-structure of ${\EuScript U}$.
+  Therefore  $\varphi(a)\ \Leftrightarrow\ {\EuScript M}\models\varphi(a)$ holds for every $a\in M^{|x|}$ and for every $\mathds{L}$-atomic formula $\varphi(x)$.
+  Now, assume inductively
+  
+  \ceq{\hfill{\EuScript M}\models\varphi(a,b)}{\Rightarrow}{\varphi(a,b)}
+
+  Using (3) and the induction hypothesis we prove by contrapposition that
+
+  \ceq{\hfill{\EuScript M}\models\forall y\,\varphi(a,y)}{\Rightarrow}{\forall y\,\varphi(a,y)}.
+
+  Indeed,
+
+  \ceq{\hfill\neg\forall y\,\varphi(a,y)}
+  {\Rightarrow}{\exists y\,\neg\varphi(a,y)}
+  
+  \ceq{}
+  {\Rightarrow}
+  {\neg\varphi(a,b)}\hfill for some $b\in M^{|y|}$\kern30ex
+
+  \ceq{}
+  {\Rightarrow}
+  {{\EuScript M}\models\neg\varphi(a,b)}\hfill for some $b\in M^{|y|}$\kern30ex
+
+  \ceq{}
+  {\Rightarrow}
+  {{\EuScript M}\not\models\forall y\,\varphi(a,y)}
+
+  Induction for the connectives $\vee$, $\wedge$, $\exists$, $\exists^R$, and $\forall^R$ is straightforward.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Completeness}
+
+Needs full rewriting
+
+For $a,b\in U$ we write \emph{$a\sim b$\/} if $\forall y\, [t(a,y)=t(b,y)]$ for every parameter free term $t(x,y)$ of sort $M^{1+|y|}\to R$. 
+
+\begin{fact}[obsoleto]
+  If $\bar a=\langle a_i:i<\lambda\rangle$ and $\bar b=\langle b_i:i<\lambda\rangle$ are such that $a_i\sim b_i$ for every $i<\lambda$ then $t(\bar a)=t(\bar b)$ for every term $t(x)$ with parameters in $U$ of sort $M^\lambda\to R$.
+\end{fact}
+
+\begin{proof}
+  By induction on $\lambda$. Assume the fact and let $a_\lambda\sim b_\lambda$.
+  Then $t(\bar a,a_\lambda)=t(\bar a,b_\lambda)=t(\bar b,b_\lambda)$.
+  Then the fact holds with $\lambda+1$ for $\lambda$.
+  For limit ordinals induction is immediate.
+\end{proof}
+
+% \begin{example}
+%   Let $L$ be the language of $\mathds{R}$-algebras expanded with the function symbols $\wedge$, $\vee$.
+%   Let $\langle\Omega,{\EuScript B},\Pr\rangle$ be a probability space.
+%   Let $M$ be the set the simple, real valued, random variables with the natural interpretation of the symbols in $L$.
+%   The symbols $\wedge$ and $\vee$ are interpreted as the pointwise minimum, respectively maximum, of two functions.
+%   Let $R=[0,1]$.
+%   Assume ${\EuScript L}$ contains a symbol for the functions ${\rm E}_1$ that gives the expected value of $(a\wedge 1)\vee -1$.
+%   Let $a,b$ are two random variables such that $-1\le a,b\le 1$.
+%   The relation $a\sim b$ holds exactly when $a(\omega)=b(\omega)$ for almost every $\omega\in\Omega$.
+% \end{example}
+
+
+
+Let $a\in U$. 
+Let $p(x)=\mathds{L}\mbox{-tp}(a/M)$.
+We say that $a$ is \emph{definable in the limit\/} over $M$ if $p(x)\rightarrow a\sim x$
+
+\begin{fact}
+  Assume that $R=[0,1]$ and that ${\EuScript L}$ contains a function $d$ of sort $M^2\to R$ which is interpreted in a pseudometric.
+  Assume that all terms of sort $M^n\to R$ are continuous with rispect to this pseudometric.
+  Then the following are equivalent
+  \begin{itemize}
+    \item[1.] $a\in U$ is definable in the limit over $M$, a model;
+    \item[2.] there is a sequence $\langle a_i: i\in\omega\rangle$ of elements of $M$ that converges to $a$.
+  \end{itemize} 
+\end{fact}
+
+\begin{proof}
+  First note that, the continuity of the terms ithrespect to the metric, $a\sim b$ if and only if $d(a,b)=0$.
+
+  ($2\Rightarrow1$) Let  $\langle \varepsilon_i: i\in\omega\rangle$ be a sequence in $[0,1]$ that converges to $0$ and such that $d(a_i,a)\le\varepsilon_i$ for every $i\in\omega$.
+  Then $d(a_i,b)\le\varepsilon_i$ for every $b\equiv^\mathds{L}_Ma$.
+  By the uniqueness of the limit $d(a,b)=0$.
+
+  ($1\Rightarrow2$) Assume that $a\equiv^\mathds{L}_M x\rightarrow a\sim x$.
+  Then $a\equiv^\mathds{L}_M x\rightarrow d(a,x)<1/n$ for every $n>0$.
+  By compactness there is a formula $\varphi_n(x)\in{\rm tp}_\mathds{L}(a/M)$ such that $\varphi_n(x)\rightarrow d(a,x)<1/n$.
+  By $\mathds{L}$-elementarity there is an $a_n\in M$ such that $\varphi(a_n)$.
+  As $d(a,a_n)<1/n$, the sequence $\langle a_n: n\in\omega\rangle$ converges to $a$.
+\end{proof}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equivalences}
+
+
+We define an equivalence relation \emph{$(\sim_{\EuScript U})$\/} on $ U$ as follows
+
+\ceq{1.\hfill a\,\sim_{\EuScript U}b}
+{\Leftrightarrow}
+{\Big({\EuScript U}\models t(a)= t(b)}
+\ \ for every $t(x)\in\mathds{T}(U)\Big)$,
+
+where $|x|=|a|=|b|=1$.
+
+Hence $a\,\sim_{\EuScript U}b$ if and only if ${\rm d}_t(a,b)=0$ for all the pseudometrics ${\rm d}_t(\mbox{-},\mbox{-})$ defined below. 
+
+\begin{definition}\label{def_uniformity}
+  Let $x$ be a single variable.
+  Let $t(x)\in\mathds{T}(U)^{<\omega}$ be a finte tuple of terms, say $t(x)=t_1(x),\dots,t_n(x)$.
+  We define a pseudometric ${\rm d}_t(\mbox{-},\mbox{-})$ on $U$ as follows
+
+  \ceq{\hfill\emph{${\rm d}_t(a,b)$}}{=}{\max_{i=1,\dots,n}\big\{|t_i^{\EuScript U}(a)-t_i^{\EuScript U}(b)|\big\}}
+
+\end{definition}
+
+We say that $a\in U$ is close to $M$ if 
+
+
+\ceq{\hfill a\,\equiv^\mathds{L}_{\EuScript M}x}
+{\rightarrow}
+{a\sim_{\EuScript U}x},
+
+
+\begin{proposition}
+  The following are equivalent for every $a\in U$
+  \begin{itemize}
+    \item[1.] $a$ is close to ${\EuScript M}$;
+    \item[2.] there is a net of elements of $M$ that converges to $a$. 
+  \end{itemize}
+\end{proposition}
+
+\begin{proof}
+  Let $p(x)={\rm tp}_\mathds{L}(a/U)$.
+
+  (1$\Rightarrow$2) \ 
+  The set of metrics ${\rm d}_t$ in Definion~\ref{def_uniformity} is a directed set under the relation of refinement.
+  For every such metric ${\rm d}_t$ we have that
+
+  \ceq{\hfill p_{\restriction M}(x)}{\rightarrow}{{\rm d}_t(x,a)\le0}
+
+  By Lemma~\ref{lem_compactness_implication}, for every $\varepsilon>0$ there some consistent $\varphi(x)\in p$ such that
+
+  \ceq{\hfill \varphi(x)}{\rightarrow}{{\rm d}_t(x,a)<\varepsilon}
+
+  As $\varphi(x)$ is consistent in ${\EuScript M}$, there is some $b_{t,\varepsilon}\in M$ such that ${\rm d}_t(b_{t,\varepsilon},a)<\varepsilon$.
+  This defines a net of elements of $M$ that converges to $a$.
+
+  (2$\Rightarrow$1) \ 
+  Let $I$ be a directed set.
+  Let $\langle b_i:i\in I\rangle$ be a net of elements of $M$ that converges to $a$.
+  Then, $c\sim_{\EuScript U} a$ for every $c\models p_{\restriction M}(x)$.
+  Hence $p_{\restriction M}(x)\rightarrow p(x)$.
+\end{proof}
+
+\end{document}
+
+
+\clearpage
+
+  The language $L$ and its interpretation are subject to the following conditions.
+  \begin{itemize}
+  \item[1.] Functions only have one of the following sorts (for any $m,n\in\omega$)
+  \begin{itemize}
+    \item[a.] $\mathds{R}^n\to\mathds{R}$
+    \item[b.] $ M^n\times{\breve M}^m\to\textrm{any of }  M,\ \breve M,\textrm{ or }\mathds{R}$
+    % \item[c.] $ M^n\times{\breve M}^m\to \breve M$
+    % \item[d.] $ M^n\times{\breve M}^m\to\mathds{R}$
+  \end{itemize}
+  \item[2.] There is a symbol for every (total) uniformly continuous function $\mathds{R}^n\to\mathds{R}$.
+  \item[3.] The interpretation of functions symbolsof sort $M^n\to\mathds{R}$ have \textit{bounded\/} range.
+  \item[4.] Every element of $\breve M$ is the image of some term of sort $ M^n\to \breve M$.  
+  \item[5.] There is only one unary predicate: $x\le0$, of sort $\mathds{R}$.
+  \end{itemize}
+  Below, when the sort $\breve M$ is not displaied in the definitions, we assume that $M=\breve M$ and that the language contains the identity map ${\rm id}: M\to \breve M$.
+  In other words, that $\breve M$ is redundant.
+
+
+We call $M$ the \emph{unit ball\/} of ${\EuScript M}$: there is where the action takes place.
+The auxiliary sort ${\breve M}$ can be ignored at a first reading.
+Is is introduced as it makes the description of many important examples less contrived, e.g.\@ Example~\ref{ex_banach} below.
+
+\begin{definition}
+  We write \emph{$\mathds{T}(A)$\/} for the set of terms of sort $ M^n\times\mathds{R}^m\to\mathds{R}$ with parameters in some $A\subseteq  M$.
+  Up to equivalence, these terms have the form $f(t(x),y)$, where $t(x)$ is a tuple of terms of sort $M^{|x|}\to\mathds{R}$, and $f$ is a function $\mathds{R}^{|t|+|y|}\to\mathds{R}$.
+  Note that the terms $\mathds{T}(A)$ have bounded range.
+\end{definition}
+
+Now define a subset of the set first order formulas with parameters in a set $A\subseteq M$.
+Note that we do not allow negation, nor quantification over $\breve M$.
+Also, equality among elements of $M$ is excluded.
+
+\begin{definition}
+  We define the set of formulas \emph{$\mathds{L}(A)$\/} inductively
+  \begin{itemize}
+  \item[i.] $\mathds{L}(A)$ contains the atomic formula $t\le0$ for every term $t\in\mathds{T}(A)$.
+  \item[ii.] It is closed under the Boolean connectives $\bot$, $\top$, $\wedge$, $\vee$, and the quantifiers $\forall$, $\exists$ of sort $ M$.
+  \item[iii.] It is closed under the quantifier $\forall$ of sort $\mathds{R}$ relativized to any definable subset of $\mathds{R}$.
+  \end{itemize}
+\end{definition}
+
+Note that in iii of the definition above, definability is intended with respect to $L(M)$, the full first order language of ${\EuScript M}$, which is strictly larger than $\mathds{L}(A)$.
+In particular, if $\varphi(x,\varepsilon)\in\mathds{L}(A)$, also $\forall\varepsilon{>}0\;\varphi(x,\varepsilon)\in\mathds{L}(A)$.
+
+\begin{example}[Banach spaces]\label{ex_banach}
+  Given a Banach space  $V$ we define a structure ${\EuScript M}=\langle  M,\breve M,\mathds{R}\rangle$ as follows.
+  Let $\breve M=V$ and let $M=\{a\in \breve M: \|a\|\le1\}$ be the closed unit ball of $V$.
+  Besides the symbols mentioned above, $\mathds{L}$ contains a function symbol for the natural embedding ${\rm id}: M\to \breve M$.
+  It also contains a symbol for the norm $\|\mbox-\|:\breve M\to\mathds{R}$.
+  Finally, $\mathds{L}$ contains the usual symbols of the language of vector spaces.
+  These have sort ${\breve M}^n\to \breve M$, for the appropiate $n\in\{0,1,2\}$.
+
+  Terms of sort $M^{|x|}\to\mathds{R}$ have the form $f(t(x))$ where $f$ is a uniformly continuous function and
+
+  \ceq{\hfill t(x)}{=}{\Big\|\sum_{i=1}^{|x|}\lambda_i x_i\,\Big\|.}
+
+  Therefore, as for all $a\in M^{|x|}$
+
+  \ceq{\hfill t^{{\EuScript M}}(a)}{\le}{\sum_{i=1}^{|x|}|\lambda_i|,}
+
+  condition 3 of Definition~\ref{def_LL} is  satisfied.
+  Conditions 4 is immediate.
+\end{example}
+
+
+\begin{example}[Metric spaces of finite diameter]\label{ex_metric}
+  Given a metric space $(M,{\rm d})$ of finite diameter we define a structure ${\EuScript M}=\langle  M,\mathds{R}\rangle$ as follows.
+  The only function symbols is ${\rm d}$.
+  Note that 3 is satisfied because ${\rm d}$ is bounded.
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\section{$\mathds{L}$-relations}\label{L-relations}
+
+Equality between elements in the unit ball is not among the formulas that Definition~\ref{def_LL} enumerates in $\mathds{L}$.
+Logic without equality is not uncommon in mathematics.
+For instance, in the theory of integration equality beween functions is not significative notion.
+Of course, there is a quick remedy to this.
+One can work with equivalence classes of functions that coincide almost everywhere.
+In this way, equality regains it meaning.
+But this has some drawbacks.
+In fact, this makes impossible to speak of the value that a function takes at a point and there are situations when this is inconvenient.
+
+In our general setting, for similar reasons, structures that contain irrelevat copies of equivalent objects may offer a better grasp than terse quotiented structures.
+
+Without equality, relations, rather than partial maps, are the natural tool to discuss elementarity. 
+
+Let ${\EuScript M}$ and ${\EuScript N}$ be models.
+We say that $R\subseteq M\times N$ is an \emph{$\mathds{L}$-(elementary) relation\/} between ${\EuScript M}$ and ${\EuScript N}$ (or on ${\EuScript M}$ if the two coicide) if for every $\varphi(x)\in\mathds{L}$
+
+\ceq{\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(b)} \hfill for every $a$ and $b$ such that $a\mathbin{R}b$.
+
+Recall that, when $a=a_1,\dots,a_n$ and $b=b_1,\dots,b_n$ are tuples, $a\mathbin{R}b$ stands for $a_i\mathbin{R}b_i$ for every $i\in\{1,\dots,n\}$.
+
+We define an equivalence relation \emph{$(\sim_{\EuScript M})$\/} on $ M$ as follows
+
+\ceq{1.\hfill a\,\sim_{\EuScript M\!}b}
+{\Leftrightarrow}
+{\Big({\EuScript M}\models\varphi(a)\leftrightarrow\varphi(b)}
+\ \ for every $\varphi(x)\in\mathds{L}( M)\Big)$,
+
+where $|x|=|a|=|b|=1$.
+Note that this relation would be trivial had we included  in $\mathds{L}(M)$ equality between elements of $M$.
+
+The following proposition is easily proved by induction on the syntax. 
+
+\begin{proposition}
+  The following are equivalent for every $a,b\in M$.
+  \begin{itemize}
+    \item[1.] $a\equiv_{\EuScript M}b$;
+    \item[2.] ${\EuScript M}\models t(a)=t(b)$ for every $t(x)\in\mathds{T}(M)$, with $|x|=1$.
+  \end{itemize}
+\end{proposition}
+
+\begin{lemma}
+  The relation $(\sim_{\EuScript M\!})\subseteq  M^2$ is an $\mathds{L}$-relation.
+  Moreover, it is maximal among the $\mathds{L}$-relations on ${\EuScript M}$, i.e.\@ no $\mathds{L}$-relation properly contains $(\sim_{\EuScript M\!})$.
+\end{lemma}
+
+\begin{proof}
+  Assume $a\sim_{\EuScript M\!}b$, where $a=a_1,\dots,a_n$ and $b=b_1,\dots,b_n$.
+  Recall that this means that $a_i\sim_{\EuScript M\!}b_i$ for all $i\in\{1,\dots,n\}$.
+  Let $\Delta$ denote the diagonal relation on $ M$.
+  Note that $a_i\sim_{\EuScript M\!}b_i$ is equivalent to saying that $\Delta\cup\{(a_i,b_i)\}$ is an $\mathds{L}$-relation.
+  As $\mathds{L}$-relations are closed under composition $\Delta\cup\big\{(a_1,b_1),\dots,(a_n,b_n)\big\}$ is $\mathds{L}$-elementary.
+  It follows that for every $\varphi(x)\in\mathds{L}$
+
+  \ceq{2.\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript M}\models\varphi(b).}
+  
+  This proves that $(\sim_{\EuScript M\!})$ is an $\mathds{L}$-relation.
+  Finally, maximality is immediate.
+  % Suppose $E$ and equivalence $\mathds{L}$-relation on ${\EuScript M\!}$ properly containing $(\sim_{\EuScript M\!})$.
+  % Pick $a,b\in M$ such that $a\mathbin{E}b$ and $a\not\sim_{\EuScript M\!}b$.
+\end{proof}
+
+
+\begin{lemma}
+  Let $R\subseteq  M\times N$ be total and surjective $\mathds{L}$-relation.
+  Then there is a unique maximal $\mathds{L}$-relation containing $R$.
+  This maximal $\mathds{L}$-relation is equal to both $(\sim_{\EuScript M\!})\,R$ and $R\,(\sim_{\EuScript N\!})$, where justapposition of relations stands for composition.
+\end{lemma}
+\begin{proof}
+  It is immediate to verify that $(\sim_{\EuScript M\!})\,R$ is an $\mathds{L}$-relation containing $R$.
+  Let $S$ be any maximal $\mathds{L}$-relation containing $R$.
+  By maximality, $(\sim_{\EuScript M\!})\,S=S$.
+  As $S$ is a total relation $(\sim_{\EuScript M\!})\subseteq SS^{-1}$.
+  Therefore, by the lemma above, $(\sim_{\EuScript M\!})=SS^{-1}$.
+  As $R$ is a surjective relation, $S\subseteq S\,S^{-1}R$.
+  Finally, by maximality, we conclude that $S=(\sim_{\EuScript M\!})\,R$.
+  A similar argument proves that $S=R\,(\sim_{\EuScript N\!})$.
+\end{proof}
+
+We write ${\rm Aut}({\EuScript M})$ for the set of maximal, total and surjective, $\mathds{L}$-relations $R\subseteq  M^2$.
+The choice of the symbol Aut is motivated by the lemma above.
+In fact any such relation $R$ induces a unique automorphism on the (properly defined) quotient structure ${\EuScript M}/{\sim_{\EuScript M\!}}$.
+
+% Thought in most situations one could dispense with ${\EuScript M}$ in favour of ${\EuScript M}/{\sim_{\EuScript M\!}}$, in concrete cases one has a better grip on the first than on the latter.
+% Therefore below we insist in working with $\mathds{L}$-relations in place of $\mathds{L}$-elementary maps.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Elementary substructures}
+
+An \emph{$\mathds{L}$-(elementary) embedding\/} is an $\mathds{L}$-relation that is functional, injective and total.
+
+When $\varnothing$ is an $\mathds{L}$-relation between ${\EuScript M}$ and ${\EuScript N}$ we say that ${\EuScript M}$ and ${\EuScript N}$ are \emph{$\mathds{L}$-(elementary) equivalent\/} and write \emph{${\EuScript M}\equiv^\mathds{L} {\EuScript N}$.}
+When $A\subseteq M\cap N$, we write \emph{${\EuScript M}\equiv_{\!A}{\EuScript N}$\/} if $\Delta_{\!A}$, the diagonal relation on $A$, is an $\mathds{L}$-relation.
+In words, we say that ${\EuScript M}$ and ${\EuScript N}$ are $\mathds{L}$-equivalent \emph{over $A$.}
+Finally, we write \emph{${\EuScript M}\preceq^\mathds{L}{\EuScript N}$\/} when ${\EuScript M}\subseteq{\EuScript N}$, i.e.\@ ${\EuScript M}$ is a substructure of ${\EuScript N}$, and ${\EuScript M}\equiv_M^\mathds{L}{\EuScript N}$.
+In words, we say that ${\EuScript M}$ is an \emph{$\mathds{L}$-(elementary) substructure\/} of ${\EuScript N}$.
+
+
+Let $A\subseteq  M$.
+The \emph{$\mathds{L}(A)$-topology\/} on $M^{|x|}$ is the topology that has, as a base of closed sets, the $\mathds{L}(A)$-definable sets.
+
+The $\mathds{L}(A)$-topology is not T$_0$.
+The following lemma asserts that to obtain a Hausdorff topology it suffices to quotient by $\equiv_A^\mathds{L}$.
+This is the so-called the Kolmogorov quotient.
+
+We need the following definitions that will be relevant in many of the proofs below.
+If $\varphi(x)\in L(A)$ and $\varepsilon>0$ we write \emph{${}^{\varepsilon\kern-2pt}\varphi(x)$\/} for the formula obtained by replacing every occurence in $\varphi$ of the atomic formula $t(x)\le0$ with $t(x)-\varepsilon\le0$ or, less pedantically, $t(x)\le\varepsilon$.
+We write \emph{${}^{\neg\varepsilon\kern-2pt}\varphi(x)$\/} for the formula obtained by replacing $t(x)\le0$ with $\varepsilon\le t(x)$.
+
+Note that, if $\varphi(x)\in\mathds{L}(A)$ then ${}^{\varepsilon\kern-2pt}\varphi(x),\ {}^{\neg\varepsilon\kern-2pt}\varphi(x)\in\mathds{L}(A)$.
+Moreover, the positivity of the formulas in $\mathds{L}(A)$ ensures that
+
+\ceq{\hfill\varphi(x)}{\to}{{}^{\varepsilon\kern-2pt}\varphi(x)}
+
+\ceq{\textrm{and}\hfill {}^{\neg\varepsilon\kern-2pt}\varphi(x)}{\to}{\neg\varphi(x)}
+
+The following fact is immediate.
+
+\begin{fact}\label{fact_immediate}
+  For every $a\in M^{|x|}$ and very $\varphi(x)\in\mathds{L}(A)$
+  
+  \ceq{\hfill{\EuScript M}\ \models\ \forall\varepsilon > 0\ {}^{\phantom{\neg}\varepsilon\kern-2pt}\varphi(a)}{\Leftrightarrow}{{\EuScript M}\ \models\ \varphi(a)}
+  
+  \ceq{\hfill{\EuScript M}\ \models\ \exists\varepsilon > 0\ {}^{\neg\varepsilon\kern-2pt}\varphi(a)}{\Leftrightarrow}{{\EuScript M}\ \models\ \neg\varphi(a)}\hfill\qedsymbol
+\end{fact}
+
+\begin{lemma}
+  If $a\nequiv_A^\mathds{L}b$ are two elements of $M^{|x|}$ then there are two formulas $\varphi(x), \psi(x)\in\mathds{L}(A)$ such that $\varphi(a)$ and $\psi(b)$ hold and $\varphi(M)\cap\psi(M)=\varnothing$.
+\end{lemma}
+
+\begin{proof}
+  Let $\varphi(x)\in\mathds{L}(A)$ be such that $\varphi(a)$ and $\neg\varphi(b)$.
+  By the fact above ${}^{\neg\varepsilon\kern-2pt}\varphi(b)$ holds for some $\varepsilon>0$.
+  Then let $\psi(x)={}^{\neg\varepsilon\kern-2pt}\varphi(x)$.
+\end{proof}
+
+\begin{proposition}[Tarski-Vaught test]\label{prop_Tarski-Vaught} Let ${\EuScript M}\subseteq{\EuScript N}$.
+  Let $x$ be a single variable.
+  Then the following are equivalent
+  \begin{itemize}
+    \item[1.] ${\EuScript M}\preceq^\mathds{L}{\EuScript N}$;
+    % \item[2.] $M$ is dense in $N$ w.r.t.\@ the $\mathds{L}(M)$-topology on $N$;
+    \item[2.] for every $\varphi(x)\in \mathds{L}(M)$, if $\varphi(N)\neq\varnothing$, then ${\EuScript N}\models\varphi(b)$ for some $b\in M$.
+  \end{itemize}
+\end{proposition}
+\begin{proof}
+  % Equivalence 2$\Leftrightarrow$3 is tautological.
+
+  
+
+  Implication 1$\Rightarrow$2 is clear.
+  As for 2$\Rightarrow$1, we prove by induction on the syntax of $\varphi(z)$, where $z$ is a finite tuple, that
+
+  \ceq{3.\hfill {\EuScript N}\models\varphi(a)}{\Leftrightarrow}{{\EuScript M}\models\varphi(a)} \hfill for every $a\in  M^{|z|}$
+
+  For $\varphi(z)$ atomic 3 follows from ${\EuScript M}\subseteq{\EuScript N}$.
+  Induction for the connectives $\wedge$ and $\vee$ is straightforward.
+  Induction for the existential quantifier is as in the classical case.
+  We prove the case of the universal quantifier over the unit ball.
+  Assume that 3 holds for the formula $\psi(z,y)$ and prove that it holds for the formula $\forall y\,\psi(z,y)$.
+  The the implication $\Rightarrow$ is immediate.
+  To prove $\Leftarrow$, note that
+
+  \ceq{\hfill{\EuScript N}\models\neg\forall y\ \psi(a,y)}{\Rightarrow}{{\EuScript N}\models\forall y\,{}^{\neg\varepsilon}\psi(a,y)} \hfill for some $\varepsilon>0$
+
+  \ceq{}{\Rightarrow}{{\EuScript M}\models\forall y\,{}^{\neg\varepsilon\kern-.2pt}\psi(a,y)}\hfill for some $\varepsilon>0$
+
+  \ceq{}{\Rightarrow}{{\EuScript M}\models\neg\forall y\ \psi(a,y)}.
+
+  Induction for the universal quantifier of sort $\mathds{R}$ is immediate.
+\end{proof}
+
+% \begin{theorem}[Downward L\"owenheim-Skolem] For every $A\subseteq \breve N$ there is a model $A\subseteq  M\preceq \breve N$ of cardinality $\le |L(A)|$.
+% \end{theorem}
+% \begin{proof} (Needs some checking.)
+%   For every set $A$ there is a base for the $A\mbox{-}$topology that has cardinality $\le |L(A)|$. A set $ M$ of the required cardinality that is dense in the  $ M\mbox{-}$topology is obtained as in the classical downward L\"owenheim-Skolem theorem.
+% \end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ultraproducts}\label{ultrapws}
+
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+
+We recall some standard definitions about limits.
+Let $I$ be a non-empty set.
+Let $F$ be a filter on $I$.
+If $f:I\to{\mathds R}$ and $\lambda\in{\mathds R}\cup\{\pm\infty\}$ we write
+
+\hfil$\displaystyle \lim_{i\to F}f(i)=\lambda$
+
+if $f^{-1}[A]\in F$ for every $A\subseteq{\mathds R}\cup\{\pm\infty\}$ that is a neighborhood of $\lambda$.
+Such a $\lambda$ is unique and, when $F$ is an ultrafilter, it always exists.
+When $f$ is bounded, $\lambda\in\mathds{R}$.
+
+Let $I$ be an infinite set.
+Let $\langle {\EuScript M}_i:i\in I\rangle$ be a sequence of structures, say  ${\EuScript M}_i=\langle  M_i,\breve M_i,\mathds{R}\rangle$, that are \emph{uniformly bounded,} that is, the bounds in 3 of Definition~\ref{def_LL} are the same for all ${\EuScript M}_i$.
+
+Let $F$ be an ultrafilter on $I$.
+
+\begin{definition}\label{def_ultraproduct}
+  We define a structure \emph{${\EuScript N}=\langle  N,\breve N,\mathds{R}\rangle$\/} that we call the \emph{ultraproduct\/} of the models $\langle{\EuScript M}_i:i\in I\rangle$.
+  \begin{itemize}
+    \item[1.] $N$ comprise the sequences $\hat a: I\to\bigcup_{i\in I} M_i$ such that $\hat a\,i\in  M_i$.
+    \item[2.] $\breve N$ comprise the sequences $t^{\EuScript N}(\hat a)$ of the form $t^{{\EuScript M}_i}(\hat ai)$, where $t(x)$ is a term of sort $ M^n\to \breve M$.
+    \item[3.] If $f$ is a function of sort $ M^n\times{\breve M}^m\to  M$ then $f^{\EuScript N}(\hat a,t^{{\EuScript N}}\big(\hat c)\big)$ is the sequence 
+    $f^{{\EuScript M}_i}\big(\hat ai,t^{{\EuScript M}_i}(\hat ci)\big)$.
+    \item[4.] Similarly when $f$ is of sort $ M^n\times{\breve M}^m\to \breve M$.
+    \item[5.] If $f$ is a function of sort $ M^n\times{\breve M}^m\to\mathds{R}$ then 
+    $$
+    f^{\EuScript N}\big(\hat a,t^{\EuScript N}(\hat c)\big)\ =\ \lim_{i\to F}f^{{\EuScript M}_i}\big(\hat ai,t^{{\EuScript M}_i}(\hat ci)\big).
+    $$ 
+  \end{itemize}
+  As usual, if ${\EuScript M}_i={\EuScript M}$ for all $i\in I$, we say that ${\EuScript N}$ is an \emph{ultrapower\/} of ${\EuScript M}$.
+\end{definition}
+
+The limit in 5 of the definition above always exists because $F$ is an ultrafilter.
+It is finite because all models ${\EuScript M}_i$ have the same bounds.
+
+The following fact is easily proved by induction on the syntax.
+
+\begin{fact}
+  For every term $t(x)$ of sort $ M^n\to\mathds{R}$  
+  
+  \ceq{\hfill t^{\EuScript N}\big(\hat a\big)}{=}{\lim_{i\to F}t^{{\EuScript M}_i}\big(\hat ai\big).}\hfill\qedsymbol
+\end{fact}
+
+Finally, we prove 
+
+\begin{proposition}[\L\v{o}\'s Theorem]\label{thm_Los}
+  Let ${\EuScript N}$ be as above and let $\varphi(x,y)\in\mathds{L}(A)$.
+  Let $\hat a\in N^{|x|}$.
+  Then there is a function $u_{-}:\mathds{R}^+\to F$ such that for every $\lambda\in\mathds{R}^{|y|}$
+
+  \ceq{1.\hfill {\EuScript N}\models\varphi(\hat a, \lambda)}
+  {\Rightarrow}
+  {u_\varepsilon\subseteq\big\{ i\in I\ :\ {\EuScript M}_i\models{}^{\varepsilon\kern-2pt}\varphi(\hat ai,\lambda)\big\} \ \textrm{for every }\varepsilon>0.}
+
+  \ceq{2.\hfill {\EuScript N}\not\models\varphi(\hat a, \lambda)}
+  {\Rightarrow}
+  {u_\varepsilon\subseteq\big\{ i\in I\ :\ {\EuScript M}_i\not\models{}^{\varepsilon\kern-2pt}\varphi(\hat ai,\lambda)\big\} \ \textrm{for some }\varepsilon>0.}
+
+\end{proposition}
+\begin{proof}
+  Suppose that $\varphi(x,y)$ is atomic, say
+
+  \ceq{\hfill\varphi(x,y)}
+  {=}
+  {f(t(x),\,y)\le0,} 
+  
+  where $t$ is a tuple of terms of sort  $ M^{|x|}\to\mathds{R}$ and $f$ is a uniformly continuous function $\mathds{R}^{|t|+|y|}\to\mathds{R}$. 
+
+
+  Let $\beta'\in\mathds{R}^{|t|}$ be such that
+  $\displaystyle\lim_{i\to F}\ t(\hat ai)=\beta'$.
+
+  Given $\varepsilon>0$, let $B_\varepsilon$ be a neighborhood of $\beta'$ such that 
+  
+  \ceq{}{\ }{\big|f(\beta,\,\lambda)-f(\beta',\lambda)\big|<\varepsilon}\hfill for every $\beta\in B_\varepsilon$ and every $\lambda\in\mathds{R}^{|y|}$.
+  
+  Such a neighborhood exists by the uniform continuity of $f$.
+  Finally, to obtain 1 and 2 above it suffices to define 
+
+  \ceq{\hfill u_\varepsilon}{=}{\big\{i\ :\  t(\hat a i)\in B_\varepsilon\big\}.}
+
+  The rest of the inductive proof is straightforward and is left to the reader.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Saturation}
+
+
+Let $p(x)\subseteq\mathds{L}(M)$, where $x$ has the sort of the unit ball.
+We say that $p(x)$ is \emph{finitely satisfied in ${\EuScript M}$\/} if for every conjunction of formulas in $p(x)$, say $\varphi(x)$, and for every $\varepsilon>0$, there is an $a\in  M^{|x|}$ such that ${\EuScript M}\models{}^{\varepsilon\kern-2pt}\varphi(a)$.
+
+The following definition is completely standard
+
+\begin{definition}
+  We say that ${\EuScript M}$ is \emph{$\mathds{L}$-saturated\/} if for every $p(x)$ as in 1 and 2 below, there is an $a\in  M^{|x|}$ such that ${\EuScript M}\models p(a)$
+  \begin{itemize}
+    \item[1.] $p(x)\subseteq\mathds{L}(A)$ for some $A\subseteq  M$ of cardinality $<|M|$ and $|x|=1$;
+    \item[2.] $p(x)$ is finitely satisfied in ${\EuScript M}$.
+  \end{itemize}
+\end{definition}
+
+Now we prove that every model embeds $\mathds{L}$-elementarily in an $\mathds{L}$-saturated one.
+First we prove the following lemma.
+
+\begin{lemma}\label{lem_compattezza}
+  Every model ${\EuScript M}$ embeds $\mathds{L}$-elementarily in a model ${\EuScript N}$ that realizes all types as in the definition above.
+\end{lemma}
+
+\begin{proof}
+  Consider the collection of types such that 1 and 2 above.
+  Assume that each type has a distinct variable and let $x$ be the concatenation of all these variables.
+  We denote by $p(x)$ the union of all these types.
+  Let $I$ be the set of formulas $\xi(x)$ that are satisfied in ${\EuScript M}$.
+  For every formula $\varphi(x)$ and every $\varepsilon>0$ define $X_{\varphi,\varepsilon}\subseteq I$ as follows
+
+  \ceq{\hfill X_{\varphi,\varepsilon}}{=}{\Big\{\xi(x)\in I\ :\ \xi(M)\ \subseteq\ {}^{\varepsilon\kern-2pt}\varphi(M)\Big\}}
+
+  Note that ${}^{\varepsilon\kern-2pt}\varphi(x)$ is satisfied in ${\EuScript M}$ if and only if $X_\varphi\neq\varnothing$ if and only if ${}^{\varepsilon\kern-2pt}\varphi(x)\in X_{\varphi,\varepsilon}$.
+  Moreover 
+  
+  \ceq{\hfill X_{\varphi\wedge\psi,\ \min\{\varepsilon,\delta\}}}{\subseteq}{X_{\varphi,\varepsilon}\cap X_{\psi,\delta}.}
+  
+  Then, as $p(x)$ is finitely consistent, the set 
+  
+  \ceq{\hfill B}{=}{\big\{X_{\varphi,\varepsilon}\,:\,\varphi(x)\in p\textrm{ and }\varepsilon>0\big\}}
+  
+  has the finite intersection property.
+  Extend $B$ to an ultrafilter $F$ on $I$.
+  Let ${\EuScript N}$ be the ultrapower of ${\EuScript M}$ over $F$.
+  That is, the model with unit ball $N=M^I$ obtained as in Definition~\ref{def_ultraproduct}.
+  By \L\v o\'s Theorem, ${\EuScript M}$ embeds elementariy into ${\EuScript N}$.
+  It remains to prove that ${\EuScript N}$ realizes $p(x)$.
+
+  For every formula $\xi(x)\in I$ choose some $a_\xi\in  M^{|x|}$ such that $\xi(a_\xi)$.
+  %For legibility we conflate $(M^I)^{|x|}$ with $(M^{|x|})^I$.
+  Let $\hat a\in (M^{|x|})^I$ be the function that maps $\xi(x)\mapsto a_\xi$.
+  We claim that ${\EuScript N}\models\varphi(\hat a)$ for every $\varphi(x)\in p$.
+  By Fact~\ref{fact_immediate}, it suffices to prove that ${\EuScript N}\models{}^{\varepsilon\kern-2pt}\varphi(\hat a)$ for every $\varepsilon>0$.
+  Suppose not, then by \L\v o\'s Theorem (Proposition~\ref{thm_Los} with $\varepsilon$ for $\lambda$), for some $\varepsilon'>0$ the set 
+
+  \ceq{\hfill Y_{\varphi,\varepsilon+\varepsilon'}}{=}{\Big\{\xi(x)\in I\ :\ {\EuScript M}\not\models{}^{\varepsilon+\varepsilon'\kern-2pt}\varphi(a_\xi)\Big\}}
+
+  belongs to $F$.
+  This is a contradiction because $B\subseteq F$ contains the set $X_{\varphi,\varepsilon+\varepsilon'}\subseteq Y_{\varphi,\varepsilon+\varepsilon'}$. 
+\end{proof}
+
+\begin{corollary}\label{thm_compattezza}
+  Every model ${\EuScript M}$ is an $\mathds{L}$-elementary subtructure of some saturated model ${\EuScript N}$ (possibly of inaccessible cardinality).
+\end{corollary}
+
+We denote by \emph{${\EuScript U}$\/} some large $\mathds{L}$-saturated structure which we call the \emph{monster model.}
+The unit ball of ${\EuScript U}$ is denoted by \emph{$U$.}
+The cardinality of ${\EuScript U}$ is an inaccessible cardinal that we denote by \emph{$\kappa$.}
+Below we say \emph{model\/} for $\mathds{L}$-elementariy substructure of ${\EuScript U}$.
+
+
+\begin{lemma}\label{lem_compactness_implication}
+  Let $p(x)\subseteq\mathds{L}(A)$, where $A\subseteq U$ has small cardinality.
+  Let $\varphi(x)\in\mathds{L}(U)$ be such that $p(x)\rightarrow\varphi(x)$.
+  Then for every $\varepsilon>0$ there is a formula $\psi(x)$, conjunction of formulas in $p(x)$, such that $\psi(x)\rightarrow\neg{}^{\neg\varepsilon\kern-2pt}\varphi(x)$.
+\end{lemma}
+
+\begin{proof}
+  Let $\varepsilon>0$ be given.
+  Suppose that $\psi(x)\wedge{}^{\neg\varepsilon\kern-2pt}\varphi(x)$ is consistent for every $\psi(x)$ that is conjunction of formulas in $p(x)$.
+  By saturation there is a realization of $p(x)\cup{}^{\neg\varepsilon\kern-2pt}\varphi(x)$.
+  By Fact~\ref{fact_immediate}, $p(x)\wedge\neg\varphi(x)$ is also consistent.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Complete models}
+
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+Let ${\EuScript M}$ be a model.
+Let $a\in U^{|x|}$.
+We say that ${\EuScript M}$ \emph{defines $a$ in the limit\/} if 
+
+\ceq{\hfill p_{\restriction M}(x)}{\rightarrow}{p(x):={\rm tp}_\mathds{L}(a/U)}
+
+or, in other words, if $a'\equiv^\mathds{L}_Ma$ implies $a'\sim_{\EuScript U}a$.
+
+Note that the definability of a tuple in the limit is equivalent to the definability of its components.
+This follows from the following obvious identity
+
+\ceq{\hfill {\rm tp}_\mathds{L}(a,b/U)}
+{=}
+{{\rm tp}_\mathds{L}(a/U)\ \cup\ {\rm tp}_\mathds{L}(b/U).}
+
+Now we characterize definability in the limit in topological terms.
+
+
+\begin{definition}
+  A model ${\EuScript M}$ is complete if it contains, up to $(\sim_{\EuScript U})$-equivalence, all points it defines in the limit.
+\end{definition}
+
+Let \emph{$\bar M$\/} be the set points that are defined in the limit by ${\EuScript M}$.
+We denote by \emph{$\bar{\EuScript M}$\/} the (unique) substructure of ${\EuScript U}$ with unit ball $\bar M$.
+We call  $\bar{\EuScript M}$ the \emph{completion\/} of ${\EuScript M}$.
+
+We say that a model ${\EuScript N}$ is $M$-$\mathds{L}$-saturated if it realizes all constistent types $p(x)\subseteq\mathds{L}(M)$.
+The following proposition is easy to prove.
+
+\begin{proposition}
+  $\bar{\EuScript M}$ is the intersection of all $M$-$\mathds{L}$-saturated models.
+\end{proposition}
+
+\begin{proposition}
+  $\bar{\EuScript M}$ is complete.
+\end{proposition}
+
+\begin{proof}
+  Suppose $a\in U$ is defined in the limit by $\bar{\EuScript M}$, that is
+
+  \ceq{\hfill p'(x,b)}{\rightarrow}{p(x):={\rm tp}_\mathds{L}(a/U)}
+  
+  for some $b\in\bar M^{|z|}$ and $p'(x,z)\subseteq\mathds{L}(M)$ such that $p_{\restriction\bar M}(x)=p'(x,b)$.  
+  Let $q(z)={\rm tp}_\mathds{L}(b/U)$, then
+
+  \ceq{\hfill q_{\restriction M}(z)\ \cup\ p'(x,z)}{\rightarrow}{p(x)}
+  
+  Finally, $a\in\bar M$ follows because
+
+  \ceq{\hfill p_{\restriction M}(x)}{\rightarrow}{\exists z\ \big[q_{\restriction M}(z)\ \cup\ p'(x,z)\big].}
+\end{proof}
+
+\begin{question}
+  $\bar{\EuScript M}\preceq_\mathds{L}{\EuScript U}$ \ ?
+\end{question}
+% %%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Let ${\EuScript M}$ be a substructure of ${\EuScript U}$.
+% Let $a\in U^{|x|}$.
+% We say that ${\EuScript M}$ \emph{defines $a$ in the limit\/} if there is a formula $\varphi(x)\in\mathds{L}(M)$ and some infinite sets $B_1,\dots,B_n\subseteq M$ such that
+
+% \ceq{\hfill\big\{\varphi(x)\big\}\ \cup\ p_{\restriction C}(x)}{\rightarrow}{p(x):={\rm tp}_\mathds{L}(a/U)}
+
+% for every $C$ that has infinite intersection with all $B_1,\dots,B_n$.
+
+
+
+% The following proposition is an immediate consequence of the definition of the relation $(\sim_{\EuScript U})$ in Section~\ref{L-relations}.
+
+% \begin{proposition}
+%   Suppose that $a'\equiv^\mathds{L}_Ma$ are both defined in the limit by ${\EuScript M}$.
+%   Then $a'\sim_{\EuScript U}a$.
+% \end{proposition}
+
+% Finally we define completeness as a weak form of saturation.
+% It is easy to verify that if ${\EuScript M}$ is the metric space in Example~\ref{ex_metric}, then the completeness of ${\EuScript M}$ is equivalent to the Cauchy-completeness of $(M,{\rm d})$.
+
+% The proof of the following proposition is tedious but straightforward.
+
+% \begin{proposition}
+%   $\bar{\EuScript M}$ is complete.
+% \end{proposition}
+
+% \begin{proof}
+%   Let $a\in U$ be defined in the limit by $\bar{\EuScript M}$.
+%   For some formula $\varphi(x)\in\mathds{L}(\bar M)$ and some infinite set $B\subseteq\bar M$ we have that for every infinite $C\subseteq B$
+
+%   \ceq{\hfill\big\{\varphi(x)\big\}\ \cup\ p_{\restriction C}(x)}{\rightarrow}{p(x):={\rm tp}_\mathds{L}(a/U)}
+
+%   Let $b$ be a tuple that enumerates $B$ and the parameters of  $\varphi(x)$.
+%   We rewrite the condition above with the dependence from $b$ displaied
+
+%   \ceq{\hfill\big\{\varphi(x,b)\big\}\ \cup\ p_{\restriction C}(x,b)}{\rightarrow}{p(x,b).}
+
+%   where $p(x,z)={\rm tp}_\mathds{L}(a,b/U)$.
+%   As $b$ is defined in the limit by ${\EuScript M}$, there is a 
+
+%   \ceq{\hfill\big\{\psi(z)\big\}\ \cup\ q_{\restriction C}(z)}{\rightarrow}{q(z)={\rm tp}_\mathds{L}(b/U)}
+% \end{proof}
+
+% Without additional hypothesis we cannot guarantee that $\bar{\EuScript M}$ is a model.
+
+% \begin{theorem}
+%   $\bar{\EuScript M}$ is an existentially closed substructure of ${\EuScript U}$.
+% \end{theorem}
+
+% \begin{proposition}
+%   $\bar{\EuScript M}\preceq^\mathds{L}{\EuScript U}$.
+% \end{proposition}
+
+% \begin{proof}
+%   Apply the Tarski-Vaught Test~\ref{prop_Tarski-Vaught}.
+%   Let $\psi(x,z)\in\mathds{L}$ and $a\in\bar M^{|z|}$ be such that $\psi(x,a)$ is consistent.
+% Let $p(z)={\rm tp}_\mathds{L}(a/U)$.
+% For some $B\subseteq M$ and some formula $\varphi(z)\in\mathds{L}(M)$ 
+
+%   \ceq{\hfill\big\{\varphi(z)\big\}\ \cup\ p_{\restriction C}(z)}{\rightarrow}{\exists x\ \psi(x, z)}
+% \end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Homogeneity}
+Recall that $\kappa$,  the cardinality of ${\EuScript U}$, is an inaccessible cardinal.
+
+\begin{fact}
+  Let $R\subseteq{\EuScript U}^2$ be an $\mathds{L}$-relation of cardinality $<\kappa$.
+  Then there is a total and surjective $\mathds{L}$-relation $S\subseteq{\EuScript U}^2$ containing $R$.
+\end{fact}
+
+\begin{proof}
+  We apply the usual back-and-forth construction with a pinch of extra caution.
+  Let $a$ be an enumeration of the domain of $R$.
+  Let $\bar a=\langle a_i:i<\lambda\rangle$ be an enumeration of all tuples of length $|a|$ such that $aRa_i$.
+  As $\kappa$ is inaccessible, $\lambda<\kappa$.
+  Let $b\in U$.
+  It suffices to prove that there is a $c$ such that $R\cup\{\langle b,c\rangle\}$ is an $\mathds{L}$-relation.
+  Let $p(x,z)={\rm tp}(b,a)$ and let
+  
+  \ceq{\hfill q(x,\bar z)}{=}{\bigcup_{i<\lambda}p(x,z_i).}
+
+  We claim that $q(x,\bar a)$ is a finitely consistent type.
+  A finite conjunction of formulas in $q(x,\bar a)$ has the form $\psi(x,a_{i_1})\wedge\dots\wedge\psi(x,a_{i_n})$.
+  As $\psi(b,a)$ and $a_{i_1},\dots,a_{i_n}\,R\;a,\dots,a$, we conclude that the condition $\psi(x,a_{i_1})\wedge\dots\wedge\psi(x,a_{i_n})$ is satisfied.
+  The existence of the required element $c$ follows by saturation.
+\end{proof}
+
+\begin{corollary}
+  Let $A\subseteq{\EuScript U}$ have cardinality $<\kappa$.
+  Let $p(x)={\rm tp}_\mathds{L}(a/A)$, where $a\in{\EuScript U}^{|x|}$ is a tuple of length $|x|<\kappa$.
+  Then
+
+  \ceq{\hfill p({\EuScript U})}{=}{\big\{b : bRa,\ R\in{\rm Aut}({\EuScript U}/A)\big\}}
+\end{corollary}
+
+
+% The following corollary of \L\v{o}\'s Theorem is identical to its classical counterpart.
+
+% \begin{corollary}
+%   For every model ${\EuScript M}$ and every ultrafilter $F$ on $I$, an infinite set, let ${\EuScript N}$ be corresponding ultrapower of ${\EuScript M}$.
+%   Then there is an $\mathds{L}$-elementary embedding of ${\EuScript M}$ in ${\EuScript N}$.\qed
+% \end{corollary}
+
+% Note also that, unlike the classical ultraproduct, here we do not quotient the structure obtained in Definition~\ref{def_ultraproduct}.
+% However, we note the following fact which is an easy consequence of \L\v o\'s Theorem.
+
+% \begin{fact}
+%   Let $R\subseteq N^2$ be the set of those pairs $(\hat a, \hat b)$ such that $\{i\in I:\hat ai=\hat bi\}\in F$.
+%   Then $R$ is an $\mathds{L}$-relation.\qed
+% \end{fact}
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+\section{Examples}
+
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+\begin{itemize}
+  \item [1.] Firstly, we leave to the reader to check that classical first-order models are a (trivial) special cases of the models introduced above.
+        Classical relations take values in $\{0,1\}$ where $0$ is interpreted as ``true''.
+        The unit ball is the whole of ${\EuScript M}$.
+        The function $n_{\mbox-}$ is constantly $1$.
+        To obtain the full strength of first-order logic one has to add equality as a predicate as it is absent from our logic.
+
+  \item [2.] Secondly, any {\sc bbhu}-premodel is also a model as those in Section~\ref{uno} if we let the unit ball coincide with ${\EuScript M}$.
+        The language $L$ contains a relation symbol $d(x,y)$ for a metric and, possibly, symbols for all other functions and relations of ${\EuScript M}$.
+        As all relations of ${\EuScript M}$ (including the metric) take values in the interval $[0,1]$, the function $n_{\mbox-}$ can be set to be the constant $1$.
+
+  \item [3.] \breve Now we consider an example that is non trivial and distant both from classical models and from {\sc bbhu}-models: weighted graphs.
+        The set $L_{\rm fun}$ is empty and $L_{\rm rel}$ contains only a binary relation $r$.
+        We require that $r^{\EuScript M}(a,b)=r^{\EuScript M}(b,a)\in[0,1]$.
+        As unit ball take, again,the whole of ${\EuScript M}$.
+        The function $n_{\mbox-}$ is constant $1$.
+
+
+  \item [4.] Finally, and example where the unit ball is non trivial.
+        Let $L$ be the language of Banach spaces.
+        Here we have only one symbol in $L_{\rm rel}$, the symbol $\|\mbox-\|$ for the norm.
+        The set $L_{\rm fun}$ is the same as for real vector spaces in classical logic.
+        Let ${\EuScript M}$ be a Banach space and define a uniformly continuous model as follows.
+        The interpretation of the symbols in $L_{\rm rel}\cup L_{\rm fun}$ is the natural one.
+        The unit ball of is $ M=\{a\in  M: \|a\|\le1\}$.
+        
+
+        % Let $\varphi(x)$ be an atomic formula.
+        % This has form $\|t(x)\|$ for some $t(x)\in L_{\rm trm}$.  
+        % Note that $\sup\{\|t(a)\|: a\in U^{|x|}\}$ does not depend on $ M$.
+        % Therefore we can set it to be $n_{\varphi(x)}$
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+\section{Conditions and types}
+
+For $\varphi, \psi\in L( M)$ some closed formulas, we write \emph{${\EuScript M}\models\ \varphi\le\psi$} for $\varphi^{\EuScript M}\le\psi^{\EuScript M}$.
+The meaning of \emph{${\EuScript M}\models\ \varphi=\psi$\/} and of \emph{${\EuScript M}\,\models\ \varphi<\psi$\/} is similar.
+
+Expressions of the form $\varphi(x)\le0$ are called \emph{conditions}.
+We write ${\EuScript M}\models\exists x\,\varphi(x)\le0$ if there is an $a\in  M^{|x|}$ such that ${\EuScript M}\models\varphi(a)\le0$.
+Observe that $\varphi(x)=0$ is equivalent to $|\varphi(x)|\le0$ and that $\varphi(x)\le0$ is equivalent to $\big(\varphi(x)\vee0\big)=0$.
+So, when convenient, we may use equalities to denote conditions.
+
+The negation of a condition is called a \emph{co-conditions}.
+So, $\varphi(x)\neq0$, $\varphi(x)<0$ or $\varphi(x)>0$ are co-conditions.
+
+It is easy to see that conditions are cosed under logical disjunction and logical conjunction.
+
+\ceq{\hfill {\EuScript M}\models\varphi\vee\psi\le0}
+{\Leftrightarrow}
+{{\EuScript M}\models\varphi\le0 \textrm{ and }{\EuScript M}\models\psi\le0}
+
+\ceq{\hfill {\EuScript M}\models\varphi\wedge\psi\le0}{\Leftrightarrow}{{\EuScript M}\models\varphi\le0 \textrm{ \ or \ }{\EuScript M}\models\psi\le0}
+
+Condition are also closed under universal quanfication (over the unit ball).
+
+\ceq{\hfill {\EuScript M}\models\bigvee_x\varphi(x)\le0}{\Leftrightarrow}{{\EuScript M}\models\forall x\ \varphi(x)\le0}
+
+Closure under existential quanfication is a more subtle point.
+It is not true in general but it can be ensured by a small amount of saturation (cf.~Fact~\ref{fact_existential}).
+
+A set of conditions is called a \emph{type\/} or, when $x$ is the empty tuple, a \emph{theory.}
+For $p(x)\subseteq L( M)$, we define
+
+\hfil\emph{$p(x)\le0$}\ \ =\ \ $\big\{\varphi(x)\le0 \ \  :\ \  \varphi(x)\in p\big\}.$
+
+Up to equivalence, all types have the form above.
+
+Beware that $p(x)$ denotes just a set of formulas, the expression $p(x)\le0$ denotes a type.
+
+We write \emph{${\EuScript M}\models p(a)\le0$} if ${\EuScript M}\models\varphi(a)\le0$ for every $\varphi(x)\in p$.
+We write \emph{${\EuScript M}\models \exists x\ p(x)\le0$} if ${\EuScript M}\models p(a)\le0$ for some $a\in  M^{|x|}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Saturation}\label{saturation}
+
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+From this section on, we assume the existence of unboundedly many inaccessible cardinals as this simplifies the exposition.
+We prove directly the existence of saturated extension (monster models), skipping the proof of the compactness theorem as this is not required in the following.
+(The compactness theorem could be proved along the same lines.)
+
+Let $p(x)\subseteq L( M)$.
+We say that $p(x)\le 0$ is \emph{finitely satisfied in ${\EuScript M}$\/} if for every disjunction of formulas in $p(x)$, say $\psi(x)$, there is an $a\in  M^{|x|}$ such that ${\EuScript M}\models\psi(a)\le0$.
+
+\begin{definition}
+  We say that ${\EuScript M}$ is \emph{saturated\/} if for every $p(x)$ as in 1 and 2 below, there is an $a\in  M^{|x|}$ such that ${\EuScript M}\models p(a)\le0$
+  \begin{itemize}
+    \item[1.] $p(x)\subseteq L(A)$ for some $A\subseteq  M$ of cardinality $<| M|$ and $|x|=1$;
+    \item[2.] $p(x)\le0$ is finitely satisfied in $ M$.
+  \end{itemize}
+\end{definition}
+
+From \L\v{o}\'s Theorem we obtain that every model embeds $\mathds{L}$-elementarily in a saturated one.
+First we prove the following lemma.
+
+\begin{lemma}\label{thm_compattezza}
+  Every model ${\EuScript M}$ embeds $\mathds{L}$-elementarily in a model ${\EuScript N}$ that realizes all types as in 1 and 2.
+\end{lemma}
+
+\begin{proof}
+  Consider the collection of types such that 1 and 2 above.
+  Assume that each type has its own set of variables and let $x$ be the concatenation of all these variables.
+  We denote by $p(x)$ the union of all these types.
+  Let $I$ be the set of formulas $\xi(x)$ such that $\xi(x)\le0$ is satisfied in $ M$.
+  For every condition $\varphi(x)\le0$ define $X_\varphi\subseteq I$ as follows
+
+  \ceq{\hfill X_\varphi}{=}{\Big\{\xi(x)\in I\ :\ \xi( M)\le0\ \subseteq\ \varphi( M)\le0\Big\}}
+
+  Note that $\varphi(x)\le0$ is consistent if and only if $X_\varphi\neq\varnothing$ if and only if $\varphi(x)\in X_{\varphi}$.
+  \breve Moreover $X_{\varphi\vee\psi}\ =\ X_\varphi\cap X_\psi$. Then, as $p(x)$  is finitely consistent, the set $B=\big\{X_\varphi\,:\,\varphi(x)\in p\big\}$ has the finite intersection property.
+  Extend $B$ to an ultrafilter $F$ on $I$.
+  Let ${\EuScript N}$ be the ultrapower of ${\EuScript M}$ over $F$.
+  That is the model with unit ball $\breve N= M^I$ obtained as in Definition~\ref{def_ultraproduct}.
+
+  For every formula $\xi(x)\in I$ choose some $a_\xi\in  M^{|x|}$ such that $\xi(a_\xi)\le0$.
+  We may confuse $( M^I)^{|x|}$ with $( M^{|x|})^I$ as it simplifies notation.
+  Let $\hat a\in ( M^{|x|})^I$ be the function that maps $\xi(x)\mapsto a_\xi$.
+  By \L\v o\'s Theorem, for every formula $\varphi(x)$
+
+  \ceq{\hfill \varphi^{\EuScript N}\big(\hat a\big)}{=}{\lim_{\xi\to F}\varphi^{ M}\big(a_\xi\big).}
+
+  Therefore $\hat a$ realizes $p(x)\le0$ in ${\EuScript N}$.
+\end{proof}
+
+\begin{theorem}
+  Every model ${\EuScript M}$ embeds $\mathds{L}$-elementarily in a saturated model.
+\end{theorem}
+
+\begin{proof}
+  As usual, iterate the lemma to construct a chain of length $\lambda$, a sufficiently large inaccessible cardinal.
+\end{proof}
+
+We conclude with a convenient property of saturated models.
+
+\begin{fact}\label{fact_existential}
+  Let $ M$ is saturated.
+  Then for every $\varphi(x)\in L( M)$ the following are equivalent
+  \begin{itemize}
+    \item[1.] $ M\models\exists x\ \big(\varphi(x)\le0\big)$;
+    \item[2.] \smash{$ M\models\displaystyle \bigwedge_x \varphi(x)\;\le\;0$}
+  \end{itemize}
+\end{fact}
+\begin{proof}
+  Only 2$\Rightarrow$1 requires a proof.
+  Let $p(x)=\{\varphi(x)-\alpha: \alpha\in{\mathds R}^+\}$.
+  If 2, then $p(x)\le0$ is finitely satisfied in $ M$.
+  Hence 1 follows by saturation.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Homogeneity}
+
+Throughout the following we fix a saturated model \emph{$\EuScript U$\/} of cardinality $\kappa$, an inaccessible cardinal larger than $|L|$, where $|L|$ stands for $\max\big\{|L_{\rm fun}|,|L_{\rm rel}|,2^\omega\big\}$.
+
+Let $a\in{\EuScript U}^{|x|}$.
+We write $p(x)={\rm tp}(a/A)$ for $p(x)=\big\{\psi(x)\in L(A):{\EuScript U}\models \psi(a)\le0\big\}$.
+We write ${\rm tp}(a)$ when $A=\varnothing$.
+
+\begin{fact}
+  Let $R\subseteq{\EuScript U}^2$ be an $\mathds{L}$-relation of cardinality $<\kappa$.
+  Then there is a total and surjective $\mathds{L}$-relation $S\subseteq{\EuScript U}^2$ containing $R$.
+\end{fact}
+
+\begin{proof}
+  We apply the usual back-and-forth construction with a pinch of extra caution.
+  Below we will make free use of Fact~\ref{fact_existential}.
+  Let $a$ be an enumeration of the domain of $R$.
+  Let $\bar a=\langle a_i:i<\lambda\rangle$ be an enumeration of all tuples of length $|a|$ such that $aRa_i$.
+  As $\kappa$ is inaccessible, $\lambda<\kappa$.
+  Let $b\in{\EuScript U}$.
+  It suffices to prove that there is a $c$ such that $R\cup\{\langle b,c\rangle\}$ is an $\mathds{L}$-relation.
+  Let $p(x,z)={\rm tp}(b,a/A)$ and let
+  
+  \ceq{\hfill q(x,\bar z)}{=}{\bigcup_{i<\lambda}p(x,z_i).}
+
+  We claim that $q(x,\bar a)\le0$ is finitely consistent.
+  A finite conjunction of formulas in $q(x,\bar a)$ has the form $\psi(x,a_{i_1})\wedge\dots\wedge\psi(x,a_{i_n})$.
+  As $\psi(b,a)\le0$ and $a_{i_1},\dots,a_{i_n}\,R\;a,\dots,a$, we conclude that the condition $\psi(x,a_{i_1})\wedge\dots\wedge\psi(x,a_{i_n})\le0$ is satisfied.
+  The existence of the required element $c$ follows from saturation.
+\end{proof}
+
+\begin{corollary}
+  Let $a\in{\EuScript U}^{|x|}$, where $|x|<\kappa$.
+  Let $A\subseteq{\EuScript U}$ have cardinality $<\kappa$.
+  Then
+
+  \ceq{\hfill p({\EuScript U})\le0}{=}{\big\{b : bRa,\ R\in{\rm Aut}({\EuScript U}/A)\big\}}
+\end{corollary}
+
+
+\hrulefill
+
+Di qui in poi solo esperimenti selvaggi.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Random variables}
+
+Let ${\EuScript A}$ be a $\sigma$-algebra of subsets of $\Omega$.
+Let ${\EuScript M}$ be the set of bounded $\sigma$-additive measures on ${\EuScript A}$.
+Let ${\EuScript R}$ be the set of functions $f:\Omega\to{\mathds R}$ that are measurable w.r.t.\@ all measures in ${\EuScript M}$.
+
+We define a $3$-sorted structure $\langle{\EuScript A},{}^{\circ\!}{\EuScript R},{}^{\circ\!}{\EuScript M}\rangle$.
+
+The domain of the first sort is ${\EuScript A}$.
+The language contains functions for the Boolean operations.
+
+% On $\Omega$ we define the equivalence relation $\sim_{\EuScript A}$ as follows: $a\sim_{\EuScript A} b$ if $a\in A\leftrightarrow b\in A$ for every $A\in{\EuScript A}$.
+% We make use of $\Omega$ and  $\sim_{\EuScript A}$ in the definitions of $\langle{\EuScript A},{}^{\circ\!}{\EuScript R},{}^{\circ\!}{\EuScript M}\rangle$ but they will not directly appear in the structure.
+
+% We now define ${}^{\circ\!}{\EuScript R}$ and ${}^{\circ\!}{\EuScript M}$.
+% We warn the reader that, at a deeper level these two domain contains the same elements, the difference being only in the syntax.
+
+The domain of the second sort ${}^{\circ\!}{\EuScript R}$ contains the functions $f\in{\mathds R}$ that are linear combinations of indicator functions of sets in ${\EuScript A}$.
+In the language we include the functions that make ${}^{\circ\!}{\EuScript R}$ an ${\mathds R}$-algebra (sum and and multiplications are defined pointwise).
+We also include operations for the pointwise maximum and minimum of two functions.
+% The unit ball, $S$, contains functions that are $\le1$ in absolute value.
+
+The domain of the third sort, ${}^{\circ\!}{\EuScript M}$, contains signed measures $\mu:{\EuScript A}\to{\mathds R}$ that are linear combinations of measures of the form $\delta_a$, for $a\in\Omega$.
+These are defined as follows: $\delta_a(A)$ is $1$ if $a\in A$ and $0$ otherwise.
+The language is that of lattice vector spaces.
+% The unit ball, $ M$, contains the measures in ${}^{\circ\!}{\EuScript M}$ that are $\le1$ in absolute value.
+
+There is a function of sort ${}^{\circ\!}{\EuScript R}\times{}^{\circ\!}{\EuScript M}\to{}^{\circ\!}{\EuScript M}$ that maps $(f,\mu)$ to the measure $f\mu$ obtained multiplying in the natural way $f$ and $\mu$.
+
+Finally, there is a predicate $I$ of sort ${\EuScript A}\times{}^{\circ\!}{\EuScript M}$ such that $I(A,\mu)=\mu(A)$.
+
+The unit ball of $\langle{\EuScript A},{}^{\circ\!}{\EuScript R},{}^{\circ\!}{\EuScript M}\rangle$ is $\langle{\EuScript A},{}^{\circ\!\!}R, M\rangle$ where ${}^{\circ\!\!}R$ and ${}^{\circ\!\!} M$ are the set of functions, respectively measures, that are $\le1$ in absolute value.
+
+The readers can easily convince themselfs that a bounding function exist.
+Its explicit definition is not required in the sequel.
+
+\hfil ***
+
+The following discrete version of the Radon-\breve Nikodym theorem is completely trivial.
+For simplicity we state it for (nonnegative) measures.
+As the Hahn decomposition theorem holds (trivially) in ${}^{\circ\!}{\EuScript M}$, this is no loss of generality.
+
+\begin{fact}\label{thm_fR\breve N}
+  [Discrete Radon-\breve Nikodym]
+  Let $\mu,\nu\in{}^{\circ\!\!} M$, where ${}^{\circ\!\!} M$ is the unit ball of ${}^{\circ\!}{\EuScript M}$, be non negative.
+  For every $\varepsilon > 0$ there are $E\in{\EuScript A}$ and $f\in {}^{\circ\!\!}R$, where ${}^{\circ\!\!}R$ is the unit ball of ${}^{\circ\!}{\EuScript R}$, such that
+  \begin{itemize}
+    \item[1.] $I(E,|\nu-\varepsilon^{-1}f\mu|)\ =\ 0$
+    \item[2.] $|I(\neg E, \mu)|\le\varepsilon$.
+  \end{itemize}
+\end{fact}
+
+We will use the following version of the fact above.
+
+% \begin{fact}\label{thm_fR\breve N2}
+%   [Iterated discrete Radon-\breve Nikodym]
+%   Let $\mu,\nu\in{}^{\circ\!\!} M$, where ${}^{\circ\!\!} M$ is the unit ball of ${}^{\circ\!}{\EuScript M}$.
+%   For every $n>0$ there are $E_1,\dots,E_n\in{\EuScript A}$ and $f\in{}^{\circ\!\!}R$, such that
+%   \begin{itemize}
+%     \item[0.] $E_n\subseteq E_{n-1}\subseteq {\dots\dots} \subseteq E_1\subseteq E_0=\Omega$
+%     \item[1.] $I\big(E_i\smallsetminus E_{i+1},\ |\nu-2^{-(i+1)}f\mu|\big)\ =\ 0$
+%     \item[2.] $|I(E_{i+1},\ \mu)|\le2^{-(i+1)}$;
+%     \item[3.] $f_{i+1}\big[E_i\smallsetminus E_{i+1}\big]=\{0\}$.
+%   \end{itemize}
+% \end{fact}
+
+% \begin{proof}
+%   Apply inductively the theorem above, with $E_i$ for $\Omega$, to find $E_{i+1}$ and $f_{i+1}$ such that
+%   \begin{itemize}
+%     \item[1$_i$.] $I\big(E_i\smallsetminus E_{i+1},\ |\nu-2^{-(i+1)}f_{i+1}\mu|\big)\ =\ 0$;
+%     \item[2$_i$.] $|I(E_{i+1},\ \mu)|\le2^{-(i+1)}$;
+%     \item[3$_i$.] $f_{i+1}\big[E_i\smallsetminus E_{i+1}\big]=\{0\}$.
+%   \end{itemize}
+%   Finally, let $f=f_1+\dots+f_n$.
+% \end{proof}
+
+
+\begin{fact}\label{thm_fR\breve N2}
+  [Iterated discrete Radon-\breve Nikodym]
+  Let $\mu,\nu\in{}^{\circ\!\!} M$ be non negative.
+  For every $n>0$ there are $E_1,\dots,E_n\in{\EuScript A}$ and $f\in{}^{\circ\!\!}R$ such that
+  \begin{itemize}
+    \item[0.] the $E_i$ are pairwise disjoint;
+    \item[1.] $I\big(E_i,\ |\nu-2^if\mu|\big)\ =\ 0$
+    \item[2.] $|I(X,\ \mu)|\le2^{-i}$, where $X=\neg(E_1\cup\dots\cup E_i)$;
+  \end{itemize}
+\end{fact}
+
+
+\begin{proof}
+  Apply inductively the theorem above, with $E_i$ for $\Omega$, to find $E_{i+1}$ and $f_{i+1}$ such that
+  \begin{itemize}
+    \item[1$_i$.] $I\big(E_i,\ |\nu-2^if_i\mu|\big)\ =\ 0$;
+    \item[2$_i$.] $|I(X,\ \mu)|\le2^{-i}$, where $X=\neg(E_1\cup\dots\cup E_i)$;
+    \item[3$_i$.] $f_i\big[\neg E_i]=\{0\}$.
+  \end{itemize}
+  Finally, let $f=f_1+\dots+f_n$.
+  The third condition above (which is immediate to obtain) ensures that $f\in{}^{\circ\!\!}R$.
+\end{proof}
+
+% Write $\nu\ll\mu$ if for every $\varepsilon>0$ there is a $\delta>0$ such that $I(X,\mu)\le\delta\Rightarrow I(X,\nu)\le\varepsilon$ for all $X\in$.
+
+
+% \begin{corollary}\label{cor_fR\breve N}
+%   Let $\mu,\nu\in{}^{\circ\!\!} M$ be such that $\nu\ll\mu$.
+%   For every $\varepsilon > 0$ there exist an exceptional set $E\in{\EuScript A}$ and an $f\in S$, the unit ball of ${}^{\circ\!}{\EuScript R}$, such that
+%   \begin{itemize}
+%     \item[1.] $I(X,1,\nu)\ =\ I(X,f/\varepsilon,\mu)$ for evey $X\subseteq\neg E$;
+%     \item[2.] $\displaystyle\sup_{X\subseteq E}|I(X, \mu)|\le\varepsilon$.
+%   \end{itemize}
+% \end{corollary}
+
+% We note that 1 \& 2 of Theorem~\ref{thm_fR\breve N} can be expressed by a condition.
+% Infact, if $\varphi(X)$ is a formula, where $X$ is a variable of sort ${\EuScript A}$, then $\sup_{Y\subseteq X}\varphi(Y)$ is a formula --~as it is equivalent to $\sup_Y\varphi(Y\cap X)$.
+% Also, recall that conditions are closed under the Boolean operations of conjunction and disjunction.
+% They are also closed under universal quantification.
+
+We now consider a saturated extension of $\langle{\EuScript A},{}^{\circ\!}{\EuScript R},{}^{\circ\!}{\EuScript M}\rangle$ that we denote by $\langle{}^{*\!\!\!}{\EuScript A},{}^{*\!}{\EuScript R},{}^{*\!}{\EuScript M}\rangle$.
+The following fact is a direct consequence of saturation.
+
+\begin{fact}
+  Let $\mu\in{\EuScript M}$.
+  Then there is ${}^{*\!\!}\mu\in{}^{*\!}{\EuScript M}$ such that $\mu_{\restriction{\EuScript A}}={}^{*\!\!}\mu_{\restriction{\EuScript A}}$.
+\end{fact}
+
+\begin{proof}
+  It suffices to check that the following type is finitely consistent in ${\EuScript A}$ (read $\nu$ as a variable and $\mu(X)$ as a real number)
+  $$
+  \big\{\nu(X)=\mu(X) \ :\ X\in{\EuScript A}\big\},
+  $$
+  which immediate.
+\end{proof}
+
+We can improve on the fact above.
+In fact, we can also control the value of ${}^{*\!\!}\mu(A)$ for any $A\in{\EuScript A}$.
+
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+\begin{fact}
+  Let $\mu$ be a bounded measure on ${\EuScript A}$, not necessarily in ${}^{\circ\!}{\EuScript M}$.
+  Let $A\in{}^{*\!\!\!}{\EuScript A}$.
+  Define 
+  
+  \ceq{\hfill m_{\rm in\,}}{=}{\sup\{\mu(X): X\in{\EuScript A},\ X\subseteq A\}}
+
+  \ceq{\hfill m_{\rm ex}}{=}{\,\inf\{\mu(X): X\in{\EuScript A}, \  A\subseteq X \}}
+
+  Then for every $m_{\rm in\,}\le r\le m_{\rm ex}$ there is a measure ${}^{*\!\!}\mu\in{}^{*\!}{\EuScript M}$ such that ${}^{*\!\!}\mu_{\restriction{\EuScript A}}=\mu_{\restriction{\EuScript A}}$ and  ${}^{*\!\!}\mu(A)=r$.
+\end{fact}
+
+\begin{proof}[Proof (sketch)]
+Assume for simplicity that $\mu$ is bounded by $1$.
+It suffices to check that the following type is finitely consistent (read $\nu$ as a variable and $\mu(X)$ as a real number).
+$$
+\big\{\nu(X)=\mu(X) \ :\ X\in{\EuScript A}\big\}
+\ \ \cup\ \ \
+\big\{\nu(A)=r\big\}.
+$$
+In fact, any ${}^{*\!\!}\mu$ realizing this type is as required by the lemma.
+
+Let ${\EuScript A}'\subseteq{\EuScript A}$ be a finite Boolean algebra.
+We define a measure $\nu$ on the Boolean algebra generated by $A,X_1,\dots,X_n$ that satisfies the type above restrected to ${\EuScript A}'\cup\{A\}$.
+Let $X_1,\dots,X_n$ be the atoms of ${\EuScript A}'$.
+Assume $A\notin{\EuScript A}$, to avoid trivialities.
+Then there are some sets $X_i$ such that both $X_i\cap A$ and $X_i\smallsetminus A$ are nonempty.
+Suppose these sets are $X_1,\dots,X_m$.
+For $i\le m$ we define $\nu(X_i\cap A)=\varepsilon\,\mu(X)$ and $\nu(X_i\smallsetminus A)=(1-\varepsilon)\mu(X_i)$, where $0\le\varepsilon\le1$ is specified below.
+For $i>m$ let $\nu(X_i)=\mu(X_i)$.
+Note that $\mu(X_1\cup\dots\cup X_m)\ge m_{\rm ex}-m_{\rm in}$.
+Therefore with a suitable $\varepsilon$, we can obtain $\nu(A)=r$.
+\end{proof}
+
+If ${\EuScript A}$ is a $\sigma$-algebra and $\mu$ is a $\sigma$-additive measure then the supremum and the infimum in the fact above are attained.
+We will use the following.
+
+\begin{corollary}
+  Let $\mu\in{\EuScript M}$.
+  Then for every $A\in{}^{*\!\!\!}{\EuScript A}$ there are $A_{\rm in},A_{\rm ex}\in{\EuScript A}$ such that $A_{\rm in}\subseteq A\subseteq A_{\rm ex}$ and a measures ${}^{*\!\!}\mu$ such that 
+  ${}^{*\!\!}\mu_{\restriction{\EuScript A}}=\mu_{\restriction{\EuScript A}}$ and ${}^{*\!\!}\mu(A)=\mu(A_{\rm ex})$.  
+  A similar claim holds for $A_{\rm in}$.
+  %We can also require it holds simultaneously for any family of sets $\{A_i:i<\lambda\}\subseteq{}^{*\!\!\!}{\EuScript A}$ of small cardinality (???).
+\end{corollary}
+\end{document}
+
+\begin{question}
+  Let $\mu\in{\EuScript M}$.
+  Let ${}^{*\!\!}\mu\in{}^{*\!}{\EuScript M}$ be as above.
+  Let $f\in{}^{*\!\!}R$, the unit ball of ${}^{*\!}{\EuScript R}$, be given and assume $f$ is non negative.
+  We define the function ${}^{\mu\!\!}f:\Omega\to{\mathds R}$ as follows (tentative)
+  $$
+  {}^{\mu\!\!}f(a)\ =\ \inf\big\{\alpha : I(A, f\,{}^{*\!\!}\mu)\le \alpha \mu(A) \ :\ A\in{\EuScript A},\ a\in A\big\}
+  $$
+  Is it true that for every $A\in{\EuScript A}$ 
+  $$
+  \int_A{}^{\mu\!\!}f{\rm d}\mu\ =\ I(A,f\,{}^{*\!\!}\mu)\ \ ?
+  $$
+\end{question}
+
+\begin{theorem}[Radon-\breve Nikodym] 
+  Let $\nu,\mu\in{\EuScript M}$ be such that $\nu\ll\mu$.
+  Then there is an $f\in{\EuScript R}$ such that 
+  $$
+  \int_X f{\rm d}\mu = \int_X {\rm d}\nu
+  $$
+  for every $X\in{\EuScript A}$.
+\end{theorem}
+
+\begin{proof}
+  ???????????????????
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Completeness vs.\@ saturation\quad !` please expand !}
+
+% The $A$-limit uniformity on $ M^{|x|}$ is the uniformity that has the following entourages 
+
+% \ceq{\hfill V_{\varphi(x),\, \varepsilon}}{=}{\Big\{(a,b)\in  M^{|x|}\times  M^{|x|}\quad :\quad \big|\varphi^{\EuScript M}(a)-\varphi^{\EuScript M}(b)\big|<\varepsilon\Big\}}
+
+% for $\varphi(x)\in L(A)$ and $\varepsilon\in{\mathds R}^+$. It is the coarsest uniformity that makes all formulas in $L(A)$ uniformly continuous.
+
+% Let $p(x)\subseteq L( M)$ be a type.
+% We say that $p(x)\le0$ is \emph{Cauchy\/} (in the $A$-limit uniformity) if for every $\varphi(x)\in L(A)$ and every $\varepsilon\in{\mathds R}^+$ there is a disjunction of formulas in $p(x)$, say $\psi(x)$, such that $\varnothing\neq\big(\psi( M)\le0\big)^2\subseteq V_{\varphi(x),\, \varepsilon}$.
+
+% \begin{fact}
+%   Let $\lambda=L(A)$.
+%   If ${}^{\circ\!\!} M$ is $\lambda$-saturated then and $p(x)\subseteq L( M)$ is Cauchy, then $p(x)$ is realized in ${}^{\circ\!\!} M$.
+% \end{fact}
+
+
+% For every $\varphi(x)\in\ L(A)$ and $n\in{\mathds \breve N}$ let 
+
+
+% Suppose ${\EuScript N}\models p(a)\le0$ and let $\big(\psi( M)\le0\big)^2\subseteq V_{\varphi(x),\, \varepsilon}$
+
+
+\end{document}
