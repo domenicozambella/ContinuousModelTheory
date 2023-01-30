@@ -70,7 +70,7 @@
   rightmargin=-1ex,
   innertopmargin=1.5ex, 
   innerbottommargin=1ex, 
-  skipabove=2ex,
+  skipabove=3ex,
   skipbelow=1ex}, 
 ]{mystyle}
 
@@ -98,7 +98,7 @@
 \author{C. L. C. L. Polymath}
 \begin{document}
 \title{Continuous logic for the classical logician}
-\hfill\texttt{Branch:\ semplificazione\ \DTMnow}\bigskip
+\hfill\texttt{Branch:\ main\ \DTMnow}\bigskip
 \maketitle
 \raggedbottom
 
@@ -162,8 +162,8 @@ We also borrow a few intuitions and results from approach (1).
 
 
 
-Let $R$ be some fixed first-order structure which is endowed with a Hausdorff compact topology (in particular, a normal topology).
-The language $L_R$ contains relation symbols for the compact subsets $C\subseteq R^n$ and a function symbol for each continuous functions $f:R^n\to R$.
+Let \emph{$R$\/} be some fixed first-order structure which is endowed with a Hausdorff compact topology (in particular, a normal topology).
+The language \emph{$L_R$\/} contains relation symbols for the compact subsets $C\subseteq R^n$ and a function symbol for each continuous functions $f:R^n\to R$.
 According to the context, $C$ and $f$ denote either the symbols of $L_R$ or their interpretation in $R$.
 % Our choice is a compromise to avoid eccessive complications.
 % It would be interesting to drop the restriction on the sort of the function symbols.
@@ -850,19 +850,37 @@ The next two propositions show that formulas in $\mathds{L}(A)$ are approximated
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{Completeness}
 
-Needs full rewriting
+Needs some rethinking
 
-For $a,b\in U$ we write \emph{$a\sim b$\/} if $\forall y\, [t(a,y)=t(b,y)]$ for every parameter free term $t(x,y)$ of sort $M^{1+|y|}\to R$. 
+For $a,b\in U$ we write \emph{$a\sim b$\/} if $t(a,y)=t(b,y)$ holds (universal quantification on the free variables is hidden) for every parameter free term $t(x,y)$ of sort $M^{1+|y|}\to R$. 
 
-\begin{fact}[obsoleto]
-  If $\bar a=\langle a_i:i<\lambda\rangle$ and $\bar b=\langle b_i:i<\lambda\rangle$ are such that $a_i\sim b_i$ for every $i<\lambda$ then $t(\bar a)=t(\bar b)$ for every term $t(x)$ with parameters in $U$ of sort $M^\lambda\to R$.
+\begin{fact}
+  If $\bar a=\langle a_i:i<\lambda\rangle$ and $\bar b=\langle b_i:i<\lambda\rangle$ are such that $a_i\sim b_i$ for every $i<\lambda$ then $t(\bar a,y)=t(\bar b,y)$ holds for every parameter free term $t(x,y)$ of sort $M^{\lambda+|y|}\to R$.
 \end{fact}
 
 \begin{proof}
-  By induction on $\lambda$. Assume the fact and let $a_\lambda\sim b_\lambda$.
-  Then $t(\bar a,a_\lambda)=t(\bar a,b_\lambda)=t(\bar b,b_\lambda)$.
-  Then the fact holds with $\lambda+1$ for $\lambda$.
-  For limit ordinals induction is immediate.
+  By induction on $\lambda$. Assume that
+  
+  \ceq{\hfill t(\bar a,z,y)}{=}{t(\bar b,z,y)}
+
+  holds for every term $t(\bar x,z,y)$.   
+  In particular for any $a_\lambda$
+
+  \ceq{1.\hfill t(\bar a,a_\lambda,y)}{=}{t(\bar b,a_\lambda,y).}
+
+  If $a_\lambda\sim b_\lambda$ then
+
+  \ceq{\hfill t(\bar x,a_\lambda,y)}{=}{t(\bar x,b_\lambda,y)}
+
+  and in particular 
+
+  \ceq{2.\hfill t(\bar b,a_\lambda,y)}{=}{t(\bar b,b_\lambda,y).}
+
+  From (1) and (2) we obtain
+
+  \ceq{\hfill t(\bar a,a_\lambda,y)}{=}{t(\bar b,b_\lambda,y).}
+
+  For limit ordinals induction is trivial.
 \end{proof}
 
 % \begin{example}
@@ -893,7 +911,7 @@ We say that $a$ is \emph{definable in the limit\/} over $M$ if $p(x)\rightarrow 
 \end{fact}
 
 \begin{proof}
-  First note that, the continuity of the terms ithrespect to the metric, $a\sim b$ if and only if $d(a,b)=0$.
+  First note that, the continuity of the terms with respect to the metric, implies that $a\sim b$ is equivalent to $d(a,b)=0$.
 
   ($2\Rightarrow1$) Let  $\langle \varepsilon_i: i\in\omega\rangle$ be a sequence in $[0,1]$ that converges to $0$ and such that $d(a_i,a)\le\varepsilon_i$ for every $i\in\omega$.
   Then $d(a_i,b)\le\varepsilon_i$ for every $b\equiv^\mathds{L}_Ma$.
