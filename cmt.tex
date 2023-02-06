@@ -20,9 +20,9 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage[mathcal]{euscript}
-\usepackage{fourier-orns}
-\usepackage{palatino}
-\usepackage[sc]{mathpazo} % add possibly `sc` and `osf` options
+% \usepackage{fourier-orns}
+% \usepackage{palatino}
+\usepackage{mathpazo} % add possibly `sc` and `osf` options
 %\usepackage{eulervm}
 %\usepackage{bbm}
 %\usepackage{latexsym}
@@ -171,7 +171,7 @@ According to the context, $C$ and $f$ denote either the symbols of $L_{\!R}$ or 
 
 \begin{definition}\label{def_0}
   Let \emph{$L$\/} be a one-sorted (first-order) language.
-  By \emph{model\/} we intend an ${\EuScript L}$-structure of the form ${\EuScript M}=\langle  M,R\rangle$, where $M$ ranges over $L$-structures, while $R$ is the structure above.
+  By \emph{model\/} we mean an ${\EuScript L}$-structure of the form ${\EuScript M}=\langle  M,R\rangle$, where $M$ ranges over $L$-structures, while $R$ is the structure above.
   % The two sorts are denoted by ${\sf M}$ and ${\sf R}$.
   The language \emph{${\EuScript L}$\/} is an expansion of both $L$ and $L_{\!R}$.
   The new symbols allowed in ${\EuScript L}$ are function symbols of sort ${\sf\kern.1em M}^n\to {\sf R}$. 
@@ -206,7 +206,9 @@ For later reference we remark the following which is an immediate consequence of
 \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
 Formulas in $\mathds{H}$ are a generalization of the positive bounded formulas of Henson and Iovino.
 Here we also introduce the larger class $\mathds{I}$ because it offers some advantages. 
-For instance, it is easy to see (cf.\@ Example~\ref{ex_Rvlogic} for a hint) that $\mathds{I}$ has at least the same expressive power as real valued logic (in fact, it is way more expressive).
+For instance, it is easy to see (cf.\@ Example~\ref{ex_Rvlogic} for a hint) that $\mathds{I}$ has at least the same expressive power as real valued logic (in fact, it is way more expressive%
+\footnote{This unsubstatited claim should be read as a concjecture.
+A thoughout technical comparison with real valued logic is not in the scope of this indroductory paper.}).
 Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}) that the formulas in $\mathds{I}$ can be very well approximated by formulas in $\mathds{H}$.
 
 \begin{example}\label{ex_Rvlogic}
@@ -235,7 +237,7 @@ For each $\beta\in R$ we define the type
 
 \ceq{\hfill{\rm m}_\beta(x)}{=}{\{x\in D\ :\  D \textrm{ compact neighborhood of }\beta\}.}
 
-The set of the realizations ${\rm m}_\beta(x)$ is known to nonstandard analysts as the monad of $\beta$. 
+The set of the realizations of ${\rm m}_\beta(x)$ is known to nonstandard analysts as the monad of $\beta$. 
 % We write \emph{$\alpha\approx\alpha'$\/} if $\alpha\approx\beta\approx\alpha'$ for some $\beta\in R$.
 % From the following fact it follows that $\,\approx\,$ is an equivalence relation on ${}^*\!R$.
 The following fact is well-known.
@@ -264,7 +266,7 @@ We write \emph{$\alpha\approx\alpha'$\/} if ${\rm st}(\alpha)={\rm st}(\alpha')$
 
 \begin{proof}
   Assume ${\rm st}(\alpha)\notin C$.
-  By normality there is a set $D$, a compact neighborhood of ${\rm st}(\alpha)$, disjoint from $C$.
+  By normality there is a compact set $D$ disjoint from $C$ that is a neighborhood of ${\rm st}(\alpha)$.
   Then  ${}^*\!R\models\alpha\in D\subseteq\neg C$.
 \end{proof}
 
@@ -356,7 +358,7 @@ Symbols in $L$ maintain the same interpretation.
 \def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 Let ${\EuScript M}=\langle M,R\rangle$ and ${\EuScript N}=\langle N,R\rangle$ be two models.
-We say that $f:M\to N$, a partial map, is an \emph{$\mathds{I}$-elementary map\/} if for every $\varphi(x)\in\mathds{I}$ and every $a\in({\rm dom }f)^{|x|}$
+We say that $f:M\to N$, a partial map, is \emph{$\mathds{I}$-elementary\/} if for every $\varphi(x)\in\mathds{I}$ and every $a\in({\rm dom }f)^{|x|}$
 
 \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(fa).}
 
@@ -368,7 +370,7 @@ When the map ${\rm id}_M:M\hookrightarrow N$ is an $\mathds{I}$-embedding, that 
 
 we write \emph{${\EuScript M}\preceq^\mathds{I}{\EuScript N}$\/} and say that ${\EuScript M}$ is an \emph{$\mathds{I}$-elementary submodel\/} of ${\EuScript N}$. 
 
-The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel are similar.
+The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel is obtained replacing $\mathds{I}$ by $\mathds{H}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -381,7 +383,7 @@ It is convenient to distinguish between consistency with respect to models and c
 We say that a theory $T$ is \emph{${\EuScript L}$-consistent\/} when ${\EuScript M}\models T$ for some ${\EuScript L}$-structure ${\EuScript M}$.
 We say that $T$ is \emph{consistent\/} when ${\EuScript M}$  is required to be a model.
 
-\begin{theorem}[$\mathds{I}$-compactness]\label{thm_compattezza}
+\begin{theorem}\label{thm_compattezza}
   Let $T\subseteq\mathds{I}$ be finitely consistent.
   Then $T$ is consistent.
 \end{theorem}
@@ -408,7 +410,8 @@ We say that $T$ is \emph{consistent\/} when ${\EuScript M}$  is required to be a
 %     \item[2.] $p(x)$ is finitely satisfied in ${\EuScript M}$.
 %   \end{itemize}
 % \end{definition}
-A model ${\EuScript N}$ is \emph{$\mathds{I}$-saturated\/} if it realizes all types with fewer than $|{\EuScript N}|$ parameters that are finitely consistent in ${\EuScript N}$.
+A model ${\EuScript N}$ is \emph{$\lambda$-$\mathds{I}$-saturated\/} if it realizes all types with fewer than $\lambda$ parameters that are finitely consistent in ${\EuScript N}$.
+When $\lambda=|{\EuScript N}|$ we simply say  \emph{$\mathds{I}$-saturated.}
 The existence of $\mathds{I}$-saturated models is obtained from the classical case just as for Theorem~\ref{thm_compattezza}.
 
 \begin{theorem}
@@ -481,7 +484,7 @@ We denote by \emph{${\EuScript U}=\langle U,R\rangle$\/} some large $\mathds{I}$
 For convenience we assume that the cardinality of ${\EuScript U}$ is an inaccessible cardinal which we denote by \emph{$\kappa$.}
 Below we say \emph{model\/} for $\mathds{I}$-elementary submodel of ${\EuScript U}$.
 
-Let $A\subseteq U$ be a small set.
+Let $A\subseteq U$ be a small set throughout this section.
 We define a topology on $U^{|x|}\times R^{|y|}$ which we call the \emph{$\mathds{I}(A)$-topology.}
 The closed sets of this topology are the sets defined by the types $p(x\,;y)\subseteq\mathds{I}(A)$.
 This is a compact topology by the $\mathds{I}$-compactness Theorem~\ref{thm_compattezza}.
@@ -662,22 +665,25 @@ In words, the set of approximations of $\varphi$ is a directed set.
 % \end{corollary}
 
 
-When $A\subseteq U$, we write \emph{$S_\mathds{H}(A)$\/} for the set of types 
+When $A\subseteq U$, we write \emph{$S_\mathds{I}(A)$\/} for the set of types 
 
-\ceq{\hfill\mathds{H}\mbox{-tp}(a/A)}{=}{\big\{\varphi(x)\ :\ \varphi(x)\in\mathds{H}(A)\textrm{ such that }\varphi(a)\big\}}
+\ceq{\hfill\mathds{I}\mbox{-tp}(a/A)}{=}{\big\{\varphi(x)\ :\ \varphi(x)\in\mathds{I}(A)\textrm{ such that }\varphi(a)\big\}}
 
- as $a$ ranges over the tuples of elements of $U$.
- We write  \emph{$S_{\mathds{H},x}(A)$\/} when the tuple of variables $x$ is fixed.
+as $a$ ranges over the tuples of elements of $U$.
+We write  \emph{$S_{\mathds{I},x}(A)$\/} when the tuple of variables $x$ is fixed.
+The same notation applies also with $\mathds{H}$ for $\mathds{I}$.
+
 %  Similarly we define \emph{$S_\mathds{I}(A)$\/} and \emph{$S_{\mathds{I},x}(A)$.}
  The following corollary will be strengthen by Corollary~\ref{corol_Lcomplete} below.
 
  \begin{corollary}\label{corol_Hcomplete2}
-   The types $p(x)\in S_\mathds{H}(A)$ are maximally consistent subsets of $\mathds{H}_x(A)$.
-   That is, for every $\varphi(x)\in\mathds{H}(A)$, either $\varphi(x)\in p$ or $p(x)\rightarrow\neg\varphi(x)$.
+   The types $p(x)\in S_\mathds{I}(A)$ are maximally consistent subsets of $\mathds{I}_x(A)$.
+   That is, for every $\varphi(x)\in\mathds{I}(A)$, either $\varphi(x)\in p$ or $p(x)\rightarrow\neg\varphi(x)$.
+   The same holds with $\mathds{H}$ for $\mathds{I}$.
  \end{corollary}
 
  \begin{proof}
-  Let $p(x)=\mathds{H}\mbox{-tp}(a/A)$ and suppose $\varphi(x)\notin p$.
+  Let $p(x)=\mathds{I}\mbox{-tp}(a/A)$ and suppose $\varphi(x)\notin p$.
   Then $\neg\varphi(a)$.
   From Lemma~\ref{lem_interpolation} and Proposition~\ref{prop_approx} we obtain
 
@@ -712,13 +718,12 @@ When $A\subseteq U$, we write \emph{$S_\mathds{H}(A)$\/} for the set of types
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Homogeneity}
+\section{Elimination of quantifiers}
 
-A model ${\EuScript M}$ is \emph{$\mathds{H}$-homogeneous\/} if every $\mathds{H}$-elementary map $f:M\to M$ of cardinality $<|M|$ extends to an automorphism.
-Clearly, every automorphism is ${\EuScript L}$-elementary.
+We show that, if we allow some approximation, the quantifiers $\forall^{\sf R}$ and $\exists^{\sf R}$ can be eliminated.
 
 \begin{proposition}
-  ${\EuScript U}$ is $\mathds{H}$-homogeneous.
+  The monster model (or any saturated model, for that matter) is $\mathds{H}$-homogeneous, that is, every $\mathds{H}$-elementary map $f:U\to U$ of cardinality $<\kappa$ extends to an automorphism.
 \end{proposition}
 
 \begin{proof}
@@ -726,7 +731,8 @@ Clearly, every automorphism is ${\EuScript L}$-elementary.
   Then the usual proof by back-and-forth applies.
 \end{proof}
 
-We can now, as promised, strengthen Corollary~\ref{corol_Hcomplete2}.
+Now, as promised, we strengthen Corollary~\ref{corol_Hcomplete2}.
+Let $A\subseteq U$ be a small set throughout this section.
 
 \begin{corollary}\label{corol_Lcomplete}
   Let $p(x)\in S_\mathds{H}(A)$.
@@ -736,15 +742,15 @@ We can now, as promised, strengthen Corollary~\ref{corol_Hcomplete2}.
 \end{corollary}
 
 \begin{proof}
-  If $b\models p(x)=\mathds{H}\mbox{-tp}(a/A)$ then there is $\mathds{H}$-elementary map $f\supseteq{\rm id}_A$ such that $fa=b$.
-  As $f$ exends to an automorphism, and the corollary follows.
+  If $b\models p(x)=\mathds{H}\mbox{-tp}(a/A)$ then there is an $\mathds{H}$-elementary map $f\supseteq{\rm id}_A$ such that $fa=b$.
+  As $f$ exends to an automorphism and every automorphism is ${\EuScript L}$-elementary, the corollary follows.
 \end{proof}
 
-For $a,b\in U^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the same ${\EuScript L}$-formulas over $A$, bearing in mind that formulas in $\mathds{H}(A)$ suffices to test the equivalence.
+For $a,b\in U^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the same ${\EuScript L}$-formulas over $A$, bearing in mind that formulas in $\mathds{H}(A)$ or $\mathds{I}(A)$ suffices to test the equivalence.
 
-Classically, from equivalence between types one infers equivalence between formulas.
-Without negation, this is not possible.
-Still, we can infer an approximate equivalence.
+In the classical setting, from equivalence of types one can derive equivalence of formulas.
+Without negation, this is not true.
+Still, we can infer an approximate form of equivalence.
 Indeed, the next two propositions show that formulas in $\mathds{I}(A)$ are approximated by formulas in $\mathds{H}(A)$.
 
 \begin{proposition}\label{prop_LHapprox1}
@@ -791,7 +797,18 @@ Indeed, the next two propositions show that formulas in $\mathds{I}(A)$ are appr
   By compactness  $\psi'(x)\rightarrow\neg\varphi(x)$ for some $\psi'>\psi\in p(x)$. 
 \end{proof}
 
-\begin{proposition}[Tarski-Vaught Test] 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Tarski-Vaught test}
+
+The following proposition is not literally the Tarski-Vaught test.
+Infact, it only applies when the larger structure is the moster model.
+
+\begin{proposition}
   Let $M$ be a subset of $U$.
   Then the following are equivalent
   \begin{itemize}
@@ -863,7 +880,7 @@ Indeed, the next two propositions show that formulas in $\mathds{I}(A)$ are appr
 
 Needs some deeper thinking
 
-For $a,b\in U$ we write \emph{$a\sim_{\!R} b$\/} if $t(a,y)=t(b,y)$ holds (universal quantification over the free variables is understood) for every parameter free term $t(x,y)$ of sort ${\sf\kern.1em M}^{1+|y|}\to {\sf R}$. 
+For $a,b\in U$ we write \emph{$a\sim_{\!R} b$\/} if for every parameter free term $t(x,y)$ of sort ${\sf\kern.1em M}^{1+|y|}\to {\sf R}$ it holds $t(a,y)=t(b,y)$. Note that universal quantification over the free variables is understood. 
 We write $[a]_{\!R}$ for the class of equivalence of $a$.
 
 \begin{fact}
@@ -908,16 +925,16 @@ We write $[a]_{\!R}$ for the class of equivalence of $a$.
 %   The relation $a\sim_{\!R} b$ holds exactly when $a(\omega)=b(\omega)$ for almost every $\omega\in\Omega$.
 % \end{example}
 
-For $a\in U$ and $A\subseteq U$, let $p(x)=\mathds{H}\mbox{-tp}(a/A)$.
+For $a\in U$ and $A\subseteq U$, let $p(x)=\mathds{I}\mbox{-tp}(a/A)$.
 We say that $a$ is a \emph{limit point\/} of $A$ if $p(x)\rightarrow a\sim_{\!R} x$.
 
 \begin{fact}
-  Let ${\EuScript M}$ be $\lambda$-saturated for $\lambda>|{\EuScript L}|$.
+  Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda>|{\EuScript L}|$.
   Then $M\cap[a]_{\!R}\neq\varnothing$ for every limit point $a$ of $M$.
 \end{fact}
 
 \begin{proof}
-  Let $p(x)=\mathds{H}\mbox{-tp}(a/A)$.
+  Let $p(x)=\mathds{I}\mbox{-tp}(a/A)$.
   For every formula $\varphi(x)$ in the type $a\sim x$ and every $\varphi'>\varphi$ pick some $\psi(x)\in p$ such that $\psi(x)\rightarrow\varphi'(x)$.
   There are are at most $|{\EuScript L}|$ such formulas $\psi(x)$.
   By saturation they have a common solution $b$ in $M$.
@@ -927,9 +944,9 @@ We say that $a$ is a \emph{limit point\/} of $A$ if $p(x)\rightarrow a\sim_{\!R}
 \begin{fact}
   Assume that $R=[0,1]$ and that ${\EuScript L}$ contains a function $d$ of sort ${\sf\kern.1em M}^2\to {\sf R}$ which is interpreted in a pseudometric.
   Assume that all terms of sort ${\sf\kern.1em M}^n\to {\sf R}$ are continuous with rispect to this pseudometric.
-  Then the following are equivalent
+  Then for every model ${\EuScript M}=\langle M,R\rangle$ the following are equivalent 
   \begin{itemize}
-    \item[1.] $a\in U$ is definable in the limit over $M$, for some model ${\EuScript M}=\langle M,R\rangle$;
+    \item[1.] $a\in U$ is definable in the limit over $M$;
     \item[2.] there is a sequence $\langle a_i: i\in\omega\rangle$ of elements of $M$ that converges to $a$.
   \end{itemize} 
 \end{fact}
@@ -949,7 +966,7 @@ We say that $a$ is a \emph{limit point\/} of $A$ if $p(x)\rightarrow a\sim_{\!R}
   As $d(a,a_n)<1/n$ for all $n$, the sequence $\langle a_n: n\in\omega\rangle$ converges to $a$.
 \end{proof}
 
-The relation $x\sim_{\!R} y$ is defined by an $\mathds{H}$-type (over $\varnothing$).
+The relation $x\sim_{\!R} y$ is defined by a parameter-free $\mathds{H}$-type.
 We say that a formula $\varphi(x)$ is $\sim_{\!R}$-invariant if $x\sim_{\!R} y\rightarrow[\varphi(x)\leftrightarrow\varphi(y)]$.
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%
