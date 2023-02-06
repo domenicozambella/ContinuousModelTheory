@@ -77,7 +77,7 @@
 \declaretheorem[style=mystyle]%
 {theorem}
 \declaretheorem[style=mystyle,sibling=theorem]%
-{lemma,proposition,fact,corollary,definition,remark,example,claim}
+{lemma,proposition,fact,corollary,definition,remark,example,claim,question}
 
 \let\proof\relax
 \declaretheoremstyle[
@@ -125,10 +125,10 @@ These are among the most simple strucures considered in model theory.
 Now, expand them by adding a norm.
 A norm is a function that, given vector, outputs a real number.
 We may formalize this in a natural way by using a two-sorted structure.
-Now, we have two conflicting aspirations
+Now, we have two conflicting aspirations: we would like to
 \begin{itemize}
-  \item[i.] we would like to apply the basic tools of model theory (such as elementarity and saturation);
-  \item[ii.] we want to stay in the realm of normed spaces (and insist that 
+  \item[i.] apply the basic tools of model theory (such as elementarity and saturation);
+  \item[ii.] stay within the realm of normed spaces (hence insist that 
   $\mathds{R}$ should remain $\mathds{R}$ throughout).
 \end{itemize}
 
@@ -159,7 +159,6 @@ We also borrow a few intuitions and results from approach (1).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A class of structures}\label{uno}
-
 
 
 Let \emph{$R$\/} be some fixed first-order structure which is endowed with a Hausdorff compact topology (in particular, a normal topology).
@@ -207,8 +206,8 @@ For later reference we remark the following which is an immediate consequence of
 Formulas in $\mathds{H}$ are a generalization of the positive bounded formulas of Henson and Iovino.
 Here we also introduce the larger class $\mathds{I}$ because it offers some advantages. 
 For instance, it is easy to see (cf.\@ Example~\ref{ex_Rvlogic} for a hint) that $\mathds{I}$ has at least the same expressive power as real valued logic (in fact, it is way more expressive%
-\footnote{This unsubstatited claim should be read as a concjecture.
-A thoughout technical comparison with real valued logic is not in the scope of this indroductory paper.}).
+\footnote{This unsubstatited claim should be interpreted as a concjecture.
+A painstaking technical comparison with real valued logic is not in the scope of this indroductory exploratory paper.}).
 Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}) that the formulas in $\mathds{I}$ can be very well approximated by formulas in $\mathds{H}$.
 
 \begin{example}\label{ex_Rvlogic}
@@ -941,13 +940,23 @@ We say that $a$ is a \emph{limit point\/} of $A$ if $p(x)\rightarrow a\sim_{\!R}
   Clearly $b\sim_{\!R}a$. 
 \end{proof}
 
+Let $M,d$ is a metric space.
+Let $L$ contain symbols for all continuous functions $M^n\to M$.
+The language ${\EuScript L}$ has also a symbol $d$ for a function of sort ${\sf\kern.1em M}^2\to {\sf R}$.
+Let $R=\mathds{R}\cup\{\pm\infty\}$ be the compactification of $\mathds{R}$.
+The structure ${\EuScript M}=\langle M,R\rangle$ we interpret the symbols in ${\EuScript L}$ as natural.
+
+Let ${\EuScript U}$ be a monster model that contains ${\EuScript M}$ as a model.
+We call the interpretation of $d$ in ${\EuScript U}$ a ${\EuScript U}$-metric.
+Clearly this is not a metric, there are distict elements at ${\EuScript U}$-distance $0$, others at infinite distance.
+Still, the definition of Cauchy sequence makes perfectly sense for ${\EuScript U}$-metric and therefore of also the notion of a Cauchy complete set.
+
 \begin{fact}
-  Assume that $R=[0,1]$ and that ${\EuScript L}$ contains a function $d$ of sort ${\sf\kern.1em M}^2\to {\sf R}$ which is interpreted in a pseudometric.
-  Assume that all terms of sort ${\sf\kern.1em M}^n\to {\sf R}$ are continuous with rispect to this pseudometric.
-  Then for every model ${\EuScript M}=\langle M,R\rangle$ the following are equivalent 
+  Let $ {\EuScript U}$ be as above.
+  Then for every model ${\EuScript N}=\langle N,R\rangle$ the following are equivalent 
   \begin{itemize}
-    \item[1.] $a\in U$ is definable in the limit over $M$;
-    \item[2.] there is a sequence $\langle a_i: i\in\omega\rangle$ of elements of $M$ that converges to $a$.
+    \item[1.] $a\in U$ is definable in the limit over $N$
+    \item[2.] there is a sequence $\langle a_i: i\in\omega\rangle$ of elements of $N$ that converges to $a$.
   \end{itemize} 
 \end{fact}
 
@@ -955,19 +964,246 @@ We say that $a$ is a \emph{limit point\/} of $A$ if $p(x)\rightarrow a\sim_{\!R}
   First note that, by the continuity of the terms with respect to the metric, $a\sim_{\!R} b$ is equivalent to $d(a,b)=0$.
 
   ($2\Rightarrow1$) Let  $\langle \varepsilon_i: i\in\omega\rangle$ be a sequence in $[0,1]$ that converges to $0$ and such that $d(a_i,a)\le\varepsilon_i$ for every $i\in\omega$.
-  Then $d(a_i,b)\le\varepsilon_i$ for every $b\equiv_Ma$.
+  Then $d(a_i,b)\le\varepsilon_i$ for every $b\equiv_Na$.
   By the uniqueness of the limit $d(a,b)=0$.
 
-  ($1\Rightarrow2$) Let $p(x)=\mathds{H}\mbox{-tp}(a/M)$.
+  ($1\Rightarrow2$) Let $p(x)=\mathds{I}\mbox{-tp}(a/N)$.
   Assume that $p(x)\rightarrow a\sim_{\!R} x$.
-  Then $p'(x)\rightarrow d(a,x)<1/n$ for every $n>0$.
-  By compactness (see Fact~\ref{fact_compactness_imp}) there is a formula $\varphi_n(x)\in p$ such that $\varphi'_n(x)\rightarrow d(a,x)<1/n$ for some $\varphi'_n>\varphi_n$.
-  By $\mathds{H}$-elementarity there is an $a_n\in M$ such that $\varphi'(a_n)$.
-  As $d(a,a_n)<1/n$ for all $n$, the sequence $\langle a_n: n\in\omega\rangle$ converges to $a$.
+  Then $p'(x)\rightarrow d(a,x)<2^{-i}$ for all $i$.
+  By compactness (see Fact~\ref{fact_compactness_imp}) there is a formula $\varphi_i(x)\in p$ such that $\varphi'_i(x)\rightarrow d(a,x)<2^{-i}$ for some $\varphi'_i>\varphi_i$.
+  By $\mathds{I}$-elementarity there is an $a_i\in N$ such that $\varphi'(a_i)$.
+  As $d(a,a_i)<2^{-i}$ for all $i$, the sequence $\langle a_i: i\in\omega\rangle$ converges to $a$.
 \end{proof}
 
 The relation $x\sim_{\!R} y$ is defined by a parameter-free $\mathds{H}$-type.
 We say that a formula $\varphi(x)$ is $\sim_{\!R}$-invariant if $x\sim_{\!R} y\rightarrow[\varphi(x)\leftrightarrow\varphi(y)]$.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Random variables}
+
+Let ${\EuScript B}$ be a $\sigma$-algebra of subsets of $\Omega$.
+Let $F$ be the set of ${\EuScript B}$-simple functions i.e.\@ linear combinations of indicator functions of sets in ${\EuScript B}$.
+Let $M$ be the set of $\mathds{R}$-valued measures concentrated on finitely many points of $\Omega$.
+
+
+Let $M$ be the set of bounded $\sigma$-additive measures on ${\EuScript A}$.
+Let ${\EuScript R}$ be the set of functions $f:\Omega\to{\mathds R}$ that are measurable w.r.t.\@ all measures in ${\EuScript M}$.
+
+We define a $3$-sorted structure $\langle{\EuScript A},{}^{\circ\!}{\EuScript R},{}^{\circ\!}{\EuScript M}\rangle$.
+
+The domain of the first sort is ${\EuScript A}$.
+The language contains functions for the Boolean operations.
+
+% On $\Omega$ we define the equivalence relation $\sim_{\EuScript A}$ as follows: $a\sim_{\EuScript A} b$ if $a\in A\leftrightarrow b\in A$ for every $A\in{\EuScript A}$.
+% We make use of $\Omega$ and  $\sim_{\EuScript A}$ in the definitions of $\langle{\EuScript A},{}^{\circ\!}{\EuScript R},{}^{\circ\!}{\EuScript M}\rangle$ but they will not directly appear in the structure.
+
+% We now define ${}^{\circ\!}{\EuScript R}$ and ${}^{\circ\!}{\EuScript M}$.
+% We warn the reader that, at a deeper level these two domain contains the same elements, the difference being only in the syntax.
+
+The domain of the second sort ${}^{\circ\!}{\EuScript R}$ contains the functions $f\in{\mathds R}$ that are linear combinations of indicator functions of sets in ${\EuScript A}$.
+In the language we include the functions that make ${}^{\circ\!}{\EuScript R}$ an ${\mathds R}$-algebra (sum and and multiplications are defined pointwise).
+We also include operations for the pointwise maximum and minimum of two functions.
+% The unit ball, $S$, contains functions that are $\le1$ in absolute value.
+
+The domain of the third sort, ${}^{\circ\!}{\EuScript M}$, contains signed measures $\mu:{\EuScript A}\to{\mathds R}$ that are linear combinations of measures of the form $\delta_a$, for $a\in\Omega$.
+These are defined as follows: $\delta_a(A)$ is $1$ if $a\in A$ and $0$ otherwise.
+The language is that of lattice vector spaces.
+% The unit ball, $ M$, contains the measures in ${}^{\circ\!}{\EuScript M}$ that are $\le1$ in absolute value.
+
+There is a function of sort ${}^{\circ\!}{\EuScript R}\times{}^{\circ\!}{\EuScript M}\to{}^{\circ\!}{\EuScript M}$ that maps $(f,\mu)$ to the measure $f\mu$ obtained multiplying in the natural way $f$ and $\mu$.
+
+Finally, there is a predicate $I$ of sort ${\EuScript A}\times{}^{\circ\!}{\EuScript M}$ such that $I(A,\mu)=\mu(A)$.
+
+The unit ball of $\langle{\EuScript A},{}^{\circ\!}{\EuScript R},{}^{\circ\!}{\EuScript M}\rangle$ is $\langle{\EuScript A},{}^{\circ\!\!}R, M\rangle$ where ${}^{\circ\!\!}R$ and ${}^{\circ\!\!} M$ are the set of functions, respectively measures, that are $\le1$ in absolute value.
+
+The readers can easily convince themselfs that a bounding function exist.
+Its explicit definition is not required in the sequel.
+
+\hfil ***
+
+The following discrete version of the Radon-Nikodym theorem is completely trivial.
+For simplicity we state it for (nonnegative) measures.
+As the Hahn decomposition theorem holds (trivially) in ${}^{\circ\!}{\EuScript M}$, this is no loss of generality.
+
+\begin{fact}\label{thm_fRN}
+  [Discrete Radon-Nikodym]
+  Let $\mu,\nu\in{}^{\circ\!\!} M$, where ${}^{\circ\!\!} M$ is the unit ball of ${}^{\circ\!}{\EuScript M}$, be non negative.
+  For every $\varepsilon > 0$ there are $E\in{\EuScript A}$ and $f\in {}^{\circ\!\!}R$, where ${}^{\circ\!\!}R$ is the unit ball of ${}^{\circ\!}{\EuScript R}$, such that
+  \begin{itemize}
+    \item[1.] $I(E,|\nu-\varepsilon^{-1}f\mu|)\ =\ 0$
+    \item[2.] $|I(\neg E, \mu)|\le\varepsilon$.
+  \end{itemize}
+\end{fact}
+
+We will use the following version of the fact above.
+
+% \begin{fact}\label{thm_fRN2}
+%   [Iterated discrete Radon-Nikodym]
+%   Let $\mu,\nu\in{}^{\circ\!\!} M$, where ${}^{\circ\!\!} M$ is the unit ball of ${}^{\circ\!}{\EuScript M}$.
+%   For every $n>0$ there are $E_1,\dots,E_n\in{\EuScript A}$ and $f\in{}^{\circ\!\!}R$, such that
+%   \begin{itemize}
+%     \item[0.] $E_n\subseteq E_{n-1}\subseteq {\dots\dots} \subseteq E_1\subseteq E_0=\Omega$
+%     \item[1.] $I\big(E_i\smallsetminus E_{i+1},\ |\nu-2^{-(i+1)}f\mu|\big)\ =\ 0$
+%     \item[2.] $|I(E_{i+1},\ \mu)|\le2^{-(i+1)}$;
+%     \item[3.] $f_{i+1}\big[E_i\smallsetminus E_{i+1}\big]=\{0\}$.
+%   \end{itemize}
+% \end{fact}
+
+% \begin{proof}
+%   Apply inductively the theorem above, with $E_i$ for $\Omega$, to find $E_{i+1}$ and $f_{i+1}$ such that
+%   \begin{itemize}
+%     \item[1$_i$.] $I\big(E_i\smallsetminus E_{i+1},\ |\nu-2^{-(i+1)}f_{i+1}\mu|\big)\ =\ 0$;
+%     \item[2$_i$.] $|I(E_{i+1},\ \mu)|\le2^{-(i+1)}$;
+%     \item[3$_i$.] $f_{i+1}\big[E_i\smallsetminus E_{i+1}\big]=\{0\}$.
+%   \end{itemize}
+%   Finally, let $f=f_1+\dots+f_n$.
+% \end{proof}
+
+
+\begin{fact}\label{thm_fRN2}
+  [Iterated discrete Radon-Nikodym]
+  Let $\mu,\nu\in{}^{\circ\!\!} M$ be non negative.
+  For every $n>0$ there are $E_1,\dots,E_n\in{\EuScript A}$ and $f\in{}^{\circ\!\!}R$ such that
+  \begin{itemize}
+    \item[0.] the $E_i$ are pairwise disjoint;
+    \item[1.] $I\big(E_i,\ |\nu-2^if\mu|\big)\ =\ 0$
+    \item[2.] $|I(X,\ \mu)|\le2^{-i}$, where $X=\neg(E_1\cup\dots\cup E_i)$;
+  \end{itemize}
+\end{fact}
+
+
+\begin{proof}
+  Apply inductively the theorem above, with $E_i$ for $\Omega$, to find $E_{i+1}$ and $f_{i+1}$ such that
+  \begin{itemize}
+    \item[1$_i$.] $I\big(E_i,\ |\nu-2^if_i\mu|\big)\ =\ 0$;
+    \item[2$_i$.] $|I(X,\ \mu)|\le2^{-i}$, where $X=\neg(E_1\cup\dots\cup E_i)$;
+    \item[3$_i$.] $f_i\big[\neg E_i]=\{0\}$.
+  \end{itemize}
+  Finally, let $f=f_1+\dots+f_n$.
+  The third condition above (which is immediate to obtain) ensures that $f\in{}^{\circ\!\!}R$.
+\end{proof}
+
+% Write $\nu\ll\mu$ if for every $\varepsilon>0$ there is a $\delta>0$ such that $I(X,\mu)\le\delta\Rightarrow I(X,\nu)\le\varepsilon$ for all $X\in$.
+
+
+% \begin{corollary}\label{cor_fRN}
+%   Let $\mu,\nu\in{}^{\circ\!\!} M$ be such that $\nu\ll\mu$.
+%   For every $\varepsilon > 0$ there exist an exceptional set $E\in{\EuScript A}$ and an $f\in S$, the unit ball of ${}^{\circ\!}{\EuScript R}$, such that
+%   \begin{itemize}
+%     \item[1.] $I(X,1,\nu)\ =\ I(X,f/\varepsilon,\mu)$ for evey $X\subseteq\neg E$;
+%     \item[2.] $\displaystyle\sup_{X\subseteq E}|I(X, \mu)|\le\varepsilon$.
+%   \end{itemize}
+% \end{corollary}
+
+% We note that 1 \& 2 of Theorem~\ref{thm_fRN} can be expressed by a condition.
+% Infact, if $\varphi(X)$ is a formula, where $X$ is a variable of sort ${\EuScript A}$, then $\sup_{Y\subseteq X}\varphi(Y)$ is a formula --~as it is equivalent to $\sup_Y\varphi(Y\cap X)$.
+% Also, recall that conditions are closed under the Boolean operations of conjunction and disjunction.
+% They are also closed under universal quantification.
+
+We now consider a saturated extension of $\langle{\EuScript A},{}^{\circ\!}{\EuScript R},{}^{\circ\!}{\EuScript M}\rangle$ that we denote by $\langle{}^{*\!\!\!}{\EuScript A},{}^{*\!}{\EuScript R},{}^{*\!}{\EuScript M}\rangle$.
+The following fact is a direct consequence of saturation.
+
+\begin{fact}
+  Let $\mu\in{\EuScript M}$.
+  Then there is ${}^{*\!\!}\mu\in{}^{*\!}{\EuScript M}$ such that $\mu_{\restriction{\EuScript A}}={}^{*\!\!}\mu_{\restriction{\EuScript A}}$.
+\end{fact}
+
+\begin{proof}
+  It suffices to check that the following type is finitely consistent in ${\EuScript A}$ (read $\nu$ as a variable and $\mu(X)$ as a real number)
+  $$
+  \big\{\nu(X)=\mu(X) \ :\ X\in{\EuScript A}\big\},
+  $$
+  which immediate.
+\end{proof}
+
+We can improve on the fact above.
+In fact, we can also control the value of ${}^{*\!\!}\mu(A)$ for any $A\in{\EuScript A}$.
+
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+\begin{fact}
+  Let $\mu$ be a bounded measure on ${\EuScript A}$, not necessarily in ${}^{\circ\!}{\EuScript M}$.
+  Let $A\in{}^{*\!\!\!}{\EuScript A}$.
+  Define 
+  
+  \ceq{\hfill m_{\rm in\,}}{=}{\sup\{\mu(X): X\in{\EuScript A},\ X\subseteq A\}}
+
+  \ceq{\hfill m_{\rm ex}}{=}{\,\inf\{\mu(X): X\in{\EuScript A}, \  A\subseteq X \}}
+
+  Then for every $m_{\rm in\,}\le r\le m_{\rm ex}$ there is a measure ${}^{*\!\!}\mu\in{}^{*\!}{\EuScript M}$ such that ${}^{*\!\!}\mu_{\restriction{\EuScript A}}=\mu_{\restriction{\EuScript A}}$ and  ${}^{*\!\!}\mu(A)=r$.
+\end{fact}
+
+\begin{proof}[Proof (sketch)]
+Assume for simplicity that $\mu$ is bounded by $1$.
+It suffices to check that the following type is finitely consistent (read $\nu$ as a variable and $\mu(X)$ as a real number).
+$$
+\big\{\nu(X)=\mu(X) \ :\ X\in{\EuScript A}\big\}
+\ \ \cup\ \ \
+\big\{\nu(A)=r\big\}.
+$$
+In fact, any ${}^{*\!\!}\mu$ realizing this type is as required by the lemma.
+
+Let ${\EuScript A}'\subseteq{\EuScript A}$ be a finite Boolean algebra.
+We define a measure $\nu$ on the Boolean algebra generated by $A,X_1,\dots,X_n$ that satisfies the type above restrected to ${\EuScript A}'\cup\{A\}$.
+Let $X_1,\dots,X_n$ be the atoms of ${\EuScript A}'$.
+Assume $A\notin{\EuScript A}$, to avoid trivialities.
+Then there are some sets $X_i$ such that both $X_i\cap A$ and $X_i\smallsetminus A$ are nonempty.
+Suppose these sets are $X_1,\dots,X_m$.
+For $i\le m$ we define $\nu(X_i\cap A)=\varepsilon\,\mu(X)$ and $\nu(X_i\smallsetminus A)=(1-\varepsilon)\mu(X_i)$, where $0\le\varepsilon\le1$ is specified below.
+For $i>m$ let $\nu(X_i)=\mu(X_i)$.
+Note that $\mu(X_1\cup\dots\cup X_m)\ge m_{\rm ex}-m_{\rm in}$.
+Therefore with a suitable $\varepsilon$, we can obtain $\nu(A)=r$.
+\end{proof}
+
+If ${\EuScript A}$ is a $\sigma$-algebra and $\mu$ is a $\sigma$-additive measure then the supremum and the infimum in the fact above are attained.
+We will use the following.
+
+\begin{corollary}
+  Let $\mu\in{\EuScript M}$.
+  Then for every $A\in{}^{*\!\!\!}{\EuScript A}$ there are $A_{\rm in},A_{\rm ex}\in{\EuScript A}$ such that $A_{\rm in}\subseteq A\subseteq A_{\rm ex}$ and a measures ${}^{*\!\!}\mu$ such that 
+  ${}^{*\!\!}\mu_{\restriction{\EuScript A}}=\mu_{\restriction{\EuScript A}}$ and ${}^{*\!\!}\mu(A)=\mu(A_{\rm ex})$.  
+  A similar claim holds for $A_{\rm in}$.
+  %We can also require it holds simultaneously for any family of sets $\{A_i:i<\lambda\}\subseteq{}^{*\!\!\!}{\EuScript A}$ of small cardinality (???).
+\end{corollary}
+
+\begin{question}
+  Let $\mu\in{\EuScript M}$.
+  Let ${}^{*\!\!}\mu\in{}^{*\!}{\EuScript M}$ be as above.
+  Let $f\in{}^{*\!\!}R$, the unit ball of ${}^{*\!}{\EuScript R}$, be given and assume $f$ is non negative.
+  We define the function ${}^{\mu\!\!}f:\Omega\to{\mathds R}$ as follows (tentative)
+  $$
+  {}^{\mu\!\!}f(a)\ =\ \inf\big\{\alpha : I(A, f\,{}^{*\!\!}\mu)\le \alpha \mu(A) \ :\ A\in{\EuScript A},\ a\in A\big\}
+  $$
+  Is it true that for every $A\in{\EuScript A}$ 
+  $$
+  \int_A{}^{\mu\!\!}f{\rm d}\mu\ =\ I(A,f\,{}^{*\!\!}\mu)\ \ ?
+  $$
+\end{question}
+
+\begin{theorem}[Radon-Nikodym] 
+  Let $\nu,\mu\in{\EuScript M}$ be such that $\nu\ll\mu$.
+  Then there is an $f\in{\EuScript R}$ such that 
+  $$
+  \int_X f{\rm d}\mu = \int_X {\rm d}\nu
+  $$
+  for every $X\in{\EuScript A}$.
+\end{theorem}
+
+\begin{proof}
+  ???????????????????
+\end{proof}
+
+
+
+
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -1046,21 +1282,21 @@ We say that $a\in U$ is close to $M$ if
   \item[1.] Functions only have one of the following sorts (for any $m,n\in\omega$)
   \begin{itemize}
     \item[a.] $\mathds{R}^n\to\mathds{R}$
-    \item[b.] $ M^n\times{\breve M}^m\to\textrm{any of }  M,\ \breve M,\textrm{ or }\mathds{R}$
-    % \item[c.] $ M^n\times{\breve M}^m\to \breve M$
-    % \item[d.] $ M^n\times{\breve M}^m\to\mathds{R}$
+    \item[b.] $ M^n\times{M}^m\to\textrm{any of }  M,\ M,\textrm{ or }\mathds{R}$
+    % \item[c.] $ M^n\times{M}^m\to M$
+    % \item[d.] $ M^n\times{M}^m\to\mathds{R}$
   \end{itemize}
   \item[2.] There is a symbol for every (total) uniformly continuous function $\mathds{R}^n\to\mathds{R}$.
   \item[3.] The interpretation of functions symbolsof sort $M^n\to\mathds{R}$ have \textit{bounded\/} range.
-  \item[4.] Every element of $\breve M$ is the image of some term of sort $ M^n\to \breve M$.  
+  \item[4.] Every element of $M$ is the image of some term of sort $ M^n\to M$.  
   \item[5.] There is only one unary predicate: $x\le0$, of sort $\mathds{R}$.
   \end{itemize}
-  Below, when the sort $\breve M$ is not displaied in the definitions, we assume that $M=\breve M$ and that the language contains the identity map ${\rm id}: M\to \breve M$.
-  In other words, that $\breve M$ is redundant.
+  Below, when the sort $M$ is not displaied in the definitions, we assume that $M=M$ and that the language contains the identity map ${\rm id}: M\to M$.
+  In other words, that $M$ is redundant.
 
 
 We call $M$ the \emph{unit ball\/} of ${\EuScript M}$: there is where the action takes place.
-The auxiliary sort ${\breve M}$ can be ignored at a first reading.
+The auxiliary sort ${M}$ can be ignored at a first reading.
 Is is introduced as it makes the description of many important examples less contrived, e.g.\@ Example~\ref{ex_banach} below.
 
 \begin{definition}
@@ -1070,7 +1306,7 @@ Is is introduced as it makes the description of many important examples less con
 \end{definition}
 
 Now define a subset of the set first order formulas with parameters in a set $A\subseteq M$.
-Note that we do not allow negation, nor quantification over $\breve M$.
+Note that we do not allow negation, nor quantification over $M$.
 Also, equality among elements of $M$ is excluded.
 
 \begin{definition}
@@ -1086,12 +1322,12 @@ Note that in iii of the definition above, definability is intended with respect 
 In particular, if $\varphi(x,\varepsilon)\in\mathds{I}(A)$, also $\forall\varepsilon{>}0\;\varphi(x,\varepsilon)\in\mathds{I}(A)$.
 
 \begin{example}[Banach spaces]\label{ex_banach}
-  Given a Banach space  $V$ we define a structure ${\EuScript M}=\langle  M,\breve M,\mathds{R}\rangle$ as follows.
-  Let $\breve M=V$ and let $M=\{a\in \breve M: \|a\|\le1\}$ be the closed unit ball of $V$.
-  Besides the symbols mentioned above, $\mathds{I}$ contains a function symbol for the natural embedding ${\rm id}: M\to \breve M$.
-  It also contains a symbol for the norm $\|\mbox-\|:\breve M\to\mathds{R}$.
+  Given a Banach space  $V$ we define a structure ${\EuScript M}=\langle  M,M,\mathds{R}\rangle$ as follows.
+  Let $M=V$ and let $M=\{a\in M: \|a\|\le1\}$ be the closed unit ball of $V$.
+  Besides the symbols mentioned above, $\mathds{I}$ contains a function symbol for the natural embedding ${\rm id}: M\to M$.
+  It also contains a symbol for the norm $\|\mbox-\|:M\to\mathds{R}$.
   Finally, $\mathds{I}$ contains the usual symbols of the language of vector spaces.
-  These have sort ${\breve M}^n\to \breve M$, for the appropiate $n\in\{0,1,2\}$.
+  These have sort ${M}^n\to M$, for the appropiate $n\in\{0,1,2\}$.
 
   Terms of sort $M^{|x|}\to\mathds{R}$ have the form $f(t(x))$ where $f$ is a uniformly continuous function and
 
@@ -1294,7 +1530,7 @@ The following fact is immediate.
   Induction for the universal quantifier of sort $\mathds{R}$ is immediate.
 \end{proof}
 
-% \begin{theorem}[Downward L\"owenheim-Skolem] For every $A\subseteq \breve N$ there is a model $A\subseteq  M\preceq \breve N$ of cardinality $\le |L(A)|$.
+% \begin{theorem}[Downward L\"owenheim-Skolem] For every $A\subseteq N$ there is a model $A\subseteq  M\preceq N$ of cardinality $\le |L(A)|$.
 % \end{theorem}
 % \begin{proof} (Needs some checking.)
 %   For every set $A$ there is a base for the $A\mbox{-}$topology that has cardinality $\le |L(A)|$. A set $ M$ of the required cardinality that is dense in the  $ M\mbox{-}$topology is obtained as in the classical downward L\"owenheim-Skolem theorem.
@@ -1324,19 +1560,19 @@ Such a $\lambda$ is unique and, when $F$ is an ultrafilter, it always exists.
 When $f$ is bounded, $\lambda\in\mathds{R}$.
 
 Let $I$ be an infinite set.
-Let $\langle {\EuScript M}_i:i\in I\rangle$ be a sequence of structures, say  ${\EuScript M}_i=\langle  M_i,\breve M_i,\mathds{R}\rangle$, that are \emph{uniformly bounded,} that is, the bounds in 3 of Definition~\ref{def_LL} are the same for all ${\EuScript M}_i$.
+Let $\langle {\EuScript M}_i:i\in I\rangle$ be a sequence of structures, say  ${\EuScript M}_i=\langle  M_i,M_i,\mathds{R}\rangle$, that are \emph{uniformly bounded,} that is, the bounds in 3 of Definition~\ref{def_LL} are the same for all ${\EuScript M}_i$.
 
 Let $F$ be an ultrafilter on $I$.
 
 \begin{definition}\label{def_ultraproduct}
-  We define a structure \emph{${\EuScript N}=\langle  N,\breve N,\mathds{R}\rangle$\/} that we call the \emph{ultraproduct\/} of the models $\langle{\EuScript M}_i:i\in I\rangle$.
+  We define a structure \emph{${\EuScript N}=\langle  N,N,\mathds{R}\rangle$\/} that we call the \emph{ultraproduct\/} of the models $\langle{\EuScript M}_i:i\in I\rangle$.
   \begin{itemize}
     \item[1.] $N$ comprise the sequences $\hat a: I\to\bigcup_{i\in I} M_i$ such that $\hat a\,i\in  M_i$.
-    \item[2.] $\breve N$ comprise the sequences $t^{\EuScript N}(\hat a)$ of the form $t^{{\EuScript M}_i}(\hat ai)$, where $t(x)$ is a term of sort $ M^n\to \breve M$.
-    \item[3.] If $f$ is a function of sort $ M^n\times{\breve M}^m\to  M$ then $f^{\EuScript N}(\hat a,t^{{\EuScript N}}\big(\hat c)\big)$ is the sequence 
+    \item[2.] $N$ comprise the sequences $t^{\EuScript N}(\hat a)$ of the form $t^{{\EuScript M}_i}(\hat ai)$, where $t(x)$ is a term of sort $ M^n\to M$.
+    \item[3.] If $f$ is a function of sort $ M^n\times{M}^m\to  M$ then $f^{\EuScript N}(\hat a,t^{{\EuScript N}}\big(\hat c)\big)$ is the sequence 
     $f^{{\EuScript M}_i}\big(\hat ai,t^{{\EuScript M}_i}(\hat ci)\big)$.
-    \item[4.] Similarly when $f$ is of sort $ M^n\times{\breve M}^m\to \breve M$.
-    \item[5.] If $f$ is a function of sort $ M^n\times{\breve M}^m\to\mathds{R}$ then 
+    \item[4.] Similarly when $f$ is of sort $ M^n\times{M}^m\to M$.
+    \item[5.] If $f$ is a function of sort $ M^n\times{M}^m\to\mathds{R}$ then 
     $$
     f^{\EuScript N}\big(\hat a,t^{\EuScript N}(\hat c)\big)\ =\ \lim_{i\to F}f^{{\EuScript M}_i}\big(\hat ai,t^{{\EuScript M}_i}(\hat ci)\big).
     $$ 
@@ -1698,7 +1934,7 @@ Recall that $\kappa$,  the cardinality of ${\EuScript U}$, is an inaccessible ca
         The language $L$ contains a relation symbol $d(x,y)$ for a metric and, possibly, symbols for all other functions and relations of ${\EuScript M}$.
         As all relations of ${\EuScript M}$ (including the metric) take values in the interval $[0,1]$, the function $n_{\mbox-}$ can be set to be the constant $1$.
 
-  \item [3.] \breve Now we consider an example that is non trivial and distant both from classical models and from {\sc bbhu}-models: weighted graphs.
+  \item [3.] Now we consider an example that is non trivial and distant both from classical models and from {\sc bbhu}-models: weighted graphs.
         The set $L_{\rm fun}$ is empty and $L_{\rm rel}$ contains only a binary relation $r$.
         We require that $r^{\EuScript M}(a,b)=r^{\EuScript M}(b,a)\in[0,1]$.
         As unit ball take, again,the whole of ${\EuScript M}$.
@@ -1807,10 +2043,10 @@ First we prove the following lemma.
   \ceq{\hfill X_\varphi}{=}{\Big\{\xi(x)\in I\ :\ \xi( M)\le0\ \subseteq\ \varphi( M)\le0\Big\}}
 
   Note that $\varphi(x)\le0$ is consistent if and only if $X_\varphi\neq\varnothing$ if and only if $\varphi(x)\in X_{\varphi}$.
-  \breve Moreover $X_{\varphi\vee\psi}\ =\ X_\varphi\cap X_\psi$. Then, as $p(x)$  is finitely consistent, the set $B=\big\{X_\varphi\,:\,\varphi(x)\in p\big\}$ has the finite intersection property.
+  Moreover $X_{\varphi\vee\psi}\ =\ X_\varphi\cap X_\psi$. Then, as $p(x)$  is finitely consistent, the set $B=\big\{X_\varphi\,:\,\varphi(x)\in p\big\}$ has the finite intersection property.
   Extend $B$ to an ultrafilter $F$ on $I$.
   Let ${\EuScript N}$ be the ultrapower of ${\EuScript M}$ over $F$.
-  That is the model with unit ball $\breve N= M^I$ obtained as in Definition~\ref{def_ultraproduct}.
+  That is the model with unit ball $N= M^I$ obtained as in Definition~\ref{def_ultraproduct}.
 
   For every formula $\xi(x)\in I$ choose some $a_\xi\in  M^{|x|}$ such that $\xi(a_\xi)\le0$.
   We may confuse $( M^I)^{|x|}$ with $( M^{|x|})^I$ as it simplifies notation.
@@ -1938,12 +2174,12 @@ Its explicit definition is not required in the sequel.
 
 \hfil ***
 
-The following discrete version of the Radon-\breve Nikodym theorem is completely trivial.
+The following discrete version of the Radon-Nikodym theorem is completely trivial.
 For simplicity we state it for (nonnegative) measures.
 As the Hahn decomposition theorem holds (trivially) in ${}^{\circ\!}{\EuScript M}$, this is no loss of generality.
 
-\begin{fact}\label{thm_fR\breve N}
-  [Discrete Radon-\breve Nikodym]
+\begin{fact}\label{thm_fRN}
+  [Discrete Radon-Nikodym]
   Let $\mu,\nu\in{}^{\circ\!\!} M$, where ${}^{\circ\!\!} M$ is the unit ball of ${}^{\circ\!}{\EuScript M}$, be non negative.
   For every $\varepsilon > 0$ there are $E\in{\EuScript A}$ and $f\in {}^{\circ\!\!}R$, where ${}^{\circ\!\!}R$ is the unit ball of ${}^{\circ\!}{\EuScript R}$, such that
   \begin{itemize}
@@ -1954,8 +2190,8 @@ As the Hahn decomposition theorem holds (trivially) in ${}^{\circ\!}{\EuScript M
 
 We will use the following version of the fact above.
 
-% \begin{fact}\label{thm_fR\breve N2}
-%   [Iterated discrete Radon-\breve Nikodym]
+% \begin{fact}\label{thm_fRN2}
+%   [Iterated discrete Radon-Nikodym]
 %   Let $\mu,\nu\in{}^{\circ\!\!} M$, where ${}^{\circ\!\!} M$ is the unit ball of ${}^{\circ\!}{\EuScript M}$.
 %   For every $n>0$ there are $E_1,\dots,E_n\in{\EuScript A}$ and $f\in{}^{\circ\!\!}R$, such that
 %   \begin{itemize}
@@ -1977,8 +2213,8 @@ We will use the following version of the fact above.
 % \end{proof}
 
 
-\begin{fact}\label{thm_fR\breve N2}
-  [Iterated discrete Radon-\breve Nikodym]
+\begin{fact}\label{thm_fRN2}
+  [Iterated discrete Radon-Nikodym]
   Let $\mu,\nu\in{}^{\circ\!\!} M$ be non negative.
   For every $n>0$ there are $E_1,\dots,E_n\in{\EuScript A}$ and $f\in{}^{\circ\!\!}R$ such that
   \begin{itemize}
@@ -2003,7 +2239,7 @@ We will use the following version of the fact above.
 % Write $\nu\ll\mu$ if for every $\varepsilon>0$ there is a $\delta>0$ such that $I(X,\mu)\le\delta\Rightarrow I(X,\nu)\le\varepsilon$ for all $X\in$.
 
 
-% \begin{corollary}\label{cor_fR\breve N}
+% \begin{corollary}\label{cor_fRN}
 %   Let $\mu,\nu\in{}^{\circ\!\!} M$ be such that $\nu\ll\mu$.
 %   For every $\varepsilon > 0$ there exist an exceptional set $E\in{\EuScript A}$ and an $f\in S$, the unit ball of ${}^{\circ\!}{\EuScript R}$, such that
 %   \begin{itemize}
@@ -2012,7 +2248,7 @@ We will use the following version of the fact above.
 %   \end{itemize}
 % \end{corollary}
 
-% We note that 1 \& 2 of Theorem~\ref{thm_fR\breve N} can be expressed by a condition.
+% We note that 1 \& 2 of Theorem~\ref{thm_fRN} can be expressed by a condition.
 % Infact, if $\varphi(X)$ is a formula, where $X$ is a variable of sort ${\EuScript A}$, then $\sup_{Y\subseteq X}\varphi(Y)$ is a formula --~as it is equivalent to $\sup_Y\varphi(Y\cap X)$.
 % Also, recall that conditions are closed under the Boolean operations of conjunction and disjunction.
 % They are also closed under universal quantification.
@@ -2098,7 +2334,7 @@ We will use the following.
   $$
 \end{question}
 
-\begin{theorem}[Radon-\breve Nikodym] 
+\begin{theorem}[Radon-Nikodym] 
   Let $\nu,\mu\in{\EuScript M}$ be such that $\nu\ll\mu$.
   Then there is an $f\in{\EuScript R}$ such that 
   $$
@@ -2132,7 +2368,7 @@ We will use the following.
 % \end{fact}
 
 
-% For every $\varphi(x)\in\ L(A)$ and $n\in{\mathds \breve N}$ let 
+% For every $\varphi(x)\in\ L(A)$ and $n\in{\mathds N}$ let 
 
 
 % Suppose ${\EuScript N}\models p(a)\le0$ and let $\big(\psi( M)\le0\big)^2\subseteq V_{\varphi(x),\, \varepsilon}$
