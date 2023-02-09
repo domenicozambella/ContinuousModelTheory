@@ -214,8 +214,6 @@ The symbols $\mathds{I}$ and $\mathds{H}$ defined below denote only sets of ${\E
   We write \emph{$\mathds{H}$ \/} for the set of formulas in $\mathds{I}$ without quantifiers of sort ${\sf R}$.
 \end{definition}
 
-For later reference we remark the following which is an immediate consequence of the restrictions imposed by Definition~\ref{def_0} on the sorts of the function symbols in ${\EuScript L}$.
-
 % \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
 Formulas in $\mathds{H}$ are a generalization of the positive bounded formulas of Henson and Iovino.
 Here we also introduce the larger class $\mathds{I}$ because it offers some advantages. 
@@ -351,30 +349,105 @@ Symbols in $L$ maintain the same interpretation.
   Induction is immediate. 
 \end{proof}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{$\mathds{I}$-elementarity}
+\section{Henson-Iovino approximations}\label{ultrapws}
+
+
+For $\varphi,\varphi'\in\mathds{I}(M)$ (free variables are hidden) we write \emph{$\varphi'>\varphi$\/} if $\varphi'$ is obtained by replacing each atomic formula of the form $t\in C$ occurring in $\varphi$ with $t\in C'$ where $C'$ is some compact neighborhood of $C$.
+If no such atomic formulas occur in $\varphi$, then $\varphi>\varphi$.
+We also have $\varphi>\varphi$ when $\varphi=(t\in C)$ for some clopen set $C$.
+Note that $>$ is a dense (pre)order of $\mathds{I}(M)$.
+Formulas in (i) of Definition~\ref{def_LL} do not occur under the scope of a negation, therefore we always have that $\varphi\to\varphi'$.
+
+We write \emph{$\tilde{\varphi}\perp\varphi$\/} when $\tilde{\varphi}$ is obtained by replacing each atomic formula $t\in C$ occurring in $\varphi$ with $t\in\tilde{C}$ where $\tilde{C}$ is some compact set disjoint from $C$.
+Moreover the $\mathds{I}$-atomic formulas in $L$ are replaced with their negation and each connective is replaced with its dual i.e., $\vee, \wedge, \exists, \forall, \exists^{\sf R}, \forall^{\sf R}$ are replaced with $\wedge,\vee,\forall,\exists,\forall^{\sf R},\exists^{\sf R}$ respectively.
+We say that  $\tilde{\varphi}$ is a \emph{strong negation} of $\varphi$.
+It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
+
+\begin{lemma}\label{lem_interpolation}\ 
+  \begin{itemize}
+    \item[1.]For every $\varphi'>\varphi$ there is a formula $\tilde{\varphi}\perp\varphi$ such that $\varphi\rightarrow\neg \tilde{\varphi}\rightarrow\varphi'$.
+    \item[2.] For every\, $\tilde{\varphi}\perp\varphi$ there is a formula $\varphi'>\varphi$ such that  $\varphi\rightarrow\varphi'\rightarrow\neg \tilde{\varphi}$.
+  \end{itemize}
+\end{lemma}
+
+\begin{proof}
+  If $\varphi\in L$ the claims are obvious.
+  Suppose $\varphi$ is of the form $t\in C$.
+  Let $\varphi'$ be $t\in C'$, for some compact neighborhood of $C$.
+  Let $O$ be an open set such that $C\subseteq O\subseteq C'$.
+  Then $\tilde{\varphi}=(t\in R\smallsetminus O)$ is as required by the lemma.
+  Suppose instead that $\tilde{\varphi}$ is of the form $t\in\tilde{C}$ for some compact $\tilde{C}$ disjoint from $C$.
+  By the normality of $R$, there is  $C'$, a compact neighborhood of $C$ disjoint from $\tilde{C}$.
+  Then  $\varphi'=t\in C'$ is as required.
+  The lemma follows easily by induction.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Elementarity}
 
 \def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 Let ${\EuScript M}=\langle M,R\rangle$ and ${\EuScript N}=\langle N,R\rangle$ be two models.
-We say that $f:M\to N$, a partial map, is \emph{$\mathds{I}$-elementary\/} if for every $\varphi(x)\in\mathds{I}$ and every $a\in({\rm dom }f)^{|x|}$
+We say that a partial map $f:M\to N$ is \emph{$\mathds{I}$-elementary\/} if for every $\varphi(x)\in\mathds{I}$ and every $a\in({\rm dom }f)^{|x|}$
 
-\ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(fa).}
+\ceq{1.\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(fa).}
 
-An $\mathds{I}$-elementary map is in particular $L$-elementary and therefore it is injective.
 An $\mathds{I}$-elementary map that is total is called an \emph{$\mathds{I}$-elementary embedding.} 
-When the map ${\rm id}_M:M\hookrightarrow N$ is an $\mathds{I}$-embedding, that is, if for every  $\varphi(x)\in\mathds{I}$ and every $a\in M^{|x|}$
-
-\ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(a)},
-
+% When the map ${\rm id}_M:M\hookrightarrow N$ is an $\mathds{I}$-embedding, that is, if for every  $\varphi(x)\in\mathds{I}$ and every $a\in M^{|x|}$
+%
+% \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(a)},
+%
 we write \emph{${\EuScript M}\preceq^\mathds{I}{\EuScript N}$\/} and say that ${\EuScript M}$ is an \emph{$\mathds{I}$-elementary submodel\/} of ${\EuScript N}$. 
 
 The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel is obtained replacing $\mathds{I}$ by $\mathds{H}$.
 
+As $\mathds{I}$ and $\mathds{H}$-elementary maps are in particular $L$-elementary, they are injective.
+However their inverse need not be $\mathds{I}$, respectively $\mathds{H}$-elementary.
+In other words the converse of (1) may not hold.
+We will see that $\mathds{I}$ and $\mathds{H}$-elementary are between saturated models they coincide ${\EuScript L}$-elementary, hence the converse of (1) holds trivially.
+
+Now we introduce a two of weak notions of elementarity that are invertible in all models.
+We say that $f:M\to N$ is an \emph{$\mathds{I}$-partial embedding\/} if (1) holds when $\varphi(x)$ is $\mathds{I}$-atomic.
+
+\begin{fact}
+  If $f:M\to N$ is a partial embedding then 
+
+  \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(fa)}
+
+  for every $\mathds{I}$-atomic formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$
+\end{fact}
+
+We say that $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for every formula $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$
+
+\ceq{\hfill{\EuScript M}\models\varphi'(a)\ \textrm{ for all }\varphi'>\varphi}{\Rightarrow}{{\EuScript N}\models\varphi'(fa)\ \textrm{ for all }\varphi'>\varphi.}
+
+
+
+We define \emph{approximately $\mathds{H}$-elementary\/} maps in the same manner.
+We will prove that between saturated model approximately $\mathds{I}$ and $\mathds{H}$-elementary maps are both ${\EuScript L}$-elementary.
+In general we have the follwing.
+
+\begin{fact}
+  If $f:M\to N$ is approximately $\mathds{I}$-elementary then
+
+
+  \ceq{\hfill{\EuScript M}\models\varphi'(a)\textrm{ for all }\varphi'>\varphi}{\Leftrightarrow}{{\EuScript N}\models\varphi'(fa)\textrm{ for all }\varphi'>\varphi.}
+
+  for every $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$.
+  The same holds for approximately $\mathds{H}$-elementary maps.
+\end{fact}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -431,49 +504,6 @@ The existence of $\mathds{I}$-saturated models is obtained from the classical ca
 
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Henson-Iovino approximations}\label{ultrapws}
-
-
-For $\varphi,\varphi'\in\mathds{I}(M)$ (free variables are hidden) we write \emph{$\varphi'>\varphi$\/} if $\varphi'$ is obtained by replacing each atomic formula of the form $t\in C$ occurring in $\varphi$ with $t\in C'$ where $C'$ is some compact neighborhood of $C$.
-If no such atomic formulas occur in $\varphi$, then $\varphi>\varphi$.
-We also have $\varphi>\varphi$ when $\varphi=(t\in C)$ for some clopen set $C$.
-
-Note that $>$ is a dense (pre)order of $\mathds{I}(M)$.
-
-Formulas in (i) of Definition~\ref{def_LL} do not occur under the scope of a negation, therefore we always have that $\varphi\to\varphi'$.
-
-We write \emph{$\tilde{\varphi}\perp\varphi$\/} when $\tilde{\varphi}$ is obtained by replacing each atomic formula $t\in C$ occurring in $\varphi$ with $t\in\tilde{C}$ where $\tilde{C}$ is some compact set disjoint from $C$. 
-Moreover the $\mathds{I}$-atomic formulas in $L$ are replaced with their negation and every connective is replaced with its dual i.e., $\vee, \wedge, \exists, \forall, \exists^{\sf R}, \forall^{\sf R}$ are replaced with $\wedge,\vee,\forall,\exists,\forall^{\sf R},\exists^{\sf R}$ respectively.
-
-It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
-We say that  $\tilde{\varphi}$ is a \emph{strong negation} of $\varphi$.
-
-\begin{lemma}\label{lem_interpolation}\ 
-  \begin{itemize}
-    \item[1.]For every $\varphi'>\varphi$ there is a formula $\tilde{\varphi}\perp\varphi$ such that $\varphi\rightarrow\neg \tilde{\varphi}\rightarrow\varphi'$.
-    \item[2.] For every\, $\tilde{\varphi}\perp\varphi$ there is a formula $\varphi'>\varphi$ such that  $\varphi\rightarrow\varphi'\rightarrow\neg \tilde{\varphi}$.
-  \end{itemize}
-\end{lemma}
-
-\begin{proof}
-  If $\varphi\in L$ the claims are obvious.
-  Suppose $\varphi$ is of the form $t\in C$.
-  Let $\varphi'$ be $t\in C'$, for some compact neighborhood of $C$.
-  Let $O$ be an open set such that $C\subseteq O\subseteq C'$.
-  Then $\tilde{\varphi}=(t\in R\smallsetminus O)$ is as required by the lemma.
-  
-  Suppose instead that $\tilde{\varphi}$ is of the form $t\in\tilde{C}$ for some compact $\tilde{C}$ disjoint from $C$.
-  By the normality of $R$, there is  $C'$, a compact neighborhood of $C$ disjoint from $\tilde{C}$.
-  Then  $\varphi'=t\in C'$ is as required.
-
-  The lemma follows easily by induction.
-\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1052,13 +1082,22 @@ Let ${\EuScript U}=\langle {}^*\!M,{}^*\!F,R\rangle$ be a monster model such tha
 
 \def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
+Let $\mu$ be a $\mathds{R}$-valued ${\EuScript B}$-measure.
+By saturation, there is some ${}^*\!\mu\in{}^*\!M$ such that $g\,{\cdot}{}^*\!\mu=\int_\Omega g\,{\rm d}\mu$ for every $g\in F$.
+
+ Let $\gamma:\Omega\to\mathds{R}$. 
+ By saturation, there is some ${}^*\!\gamma\in{}^*\!F$ such that ${}^*\!\gamma\mathbin\cdot m=\gamma\mathbin\cdot m$ for every $m\in M$. 
+ Note that as $m$ has finite support $\gamma\mathbin\cdot m$ is well-defined for all $\gamma$.
+
+ For $X\in{\EuScript B}$ we write ${\rm I}_X(\,\mbox{-}\,)$ for ${\rm I}(1_X\cdot\,\mbox{-}\,)$.
+
 \begin{lemma}
-  Let $\mu$ be a $R$-valued ${\EuScript B}$-measure.
-  Then there is ${}^*\!\mu\in{}^*\!F$ such that 
+  Assume $\gamma$ is measurable.
+  Then for every $X\in{\EuScript B}$
+
+  \ceq{\hfill {\rm I}_X\big({}^*\!\gamma\cdot{}^*\!\mu\big)}{=}{\int_X f\,{\rm d}\mu}
   
-  \ceq{\hfill {\rm I}\big( f{\cdot}{}^*\!\mu\big)}{=}{\int_\Omega f\,{\rm d}\mu}
   
-  for every ${\EuScript B}$-measurable $R$-valued functions $f$.
 \end{lemma}
 
 \begin{proof}
@@ -1088,10 +1127,10 @@ Let ${\EuScript U}=\langle {}^*\!M,{}^*\!F,R\rangle$ be a monster model such tha
 
 
 In $M$ and $F$ we use the functions $\,\mbox{-}^+$, $\,\mbox{-}^-$, $\,|\mbox{-}|$, and the relation $\le$ as usually defined in lattice vector spaces.
+We use the symbol $0$ to denote the zeros of $M$, $F$, and $R$.
 We denote by $1\in F$ the function that is identically $1\in R$.
-The context will suggest if symbol $0$ denotes the zero of $M$, $F$ or $R$.
 
-The $\mathds{I}$-formula $\forall^{\sf F}\!f\ge0\ {\rm I}(f{\cdot}\mu^+)\ge0$ is obviously true in ${\EuScript M}$ and so is the same formula for $\mu^-$.
+The $\mathds{I}$-formula $\forall^{\sf F}\!f\ge0\,\ {\rm I}\big(f{\cdot}\mu^+\big)\ge0$ is obviously true in ${\EuScript M}$ and so is the same formula for $\mu^-$.
 As the action of $F$ on $M$ distributes with the algebraic operations of $M$ and $F$, properties such as the Hahn decomposition are immediate in ${\EuScript M}$ and are inherited by $\EuScript U$.
 
 Note that the $L$-formula $\forall^{\sf F}\!f\!\in[0,1]\,\ f^2{=}\,f$ defines the indicator functions. 
