@@ -110,6 +110,10 @@
 \maketitle
 \raggedbottom
 
+\def\forallM{\forall\raisebox{1.1ex}{\scaleto{\sf M}{.8ex}\kern-.2ex}}
+\def\existsM{\exists\raisebox{1.1ex}{\scaleto{\sf M}{.8ex}\kern-.2ex}}
+\def\forallR{\forall\raisebox{1.1ex}{\scaleto{\sf R}{.8ex}\kern-.2ex}}
+\def\existsR{\exists\raisebox{1.1ex}{\scaleto{\sf R}{.8ex}\kern-.2ex}}
 
 \newcommand\questionsign[1][2ex]{%
   \renewcommand\stacktype{L}%
@@ -128,7 +132,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduzione}\label{intro}
-
 
 
 \def\ceq#1#2#3{\parbox[t]{23ex}{$\displaystyle #1$}\parbox{6ex}{\hfil $#2$}{$\displaystyle #3$}}
@@ -162,7 +165,7 @@ Different people have attemped different paths.
 We elaborate on the ideas of Henson and Iovino and generalize them to a larger class of structures.
 Following Henson and Iovino, we restrict the notions of elementarity and saturation.
 But we use a class of formulas $\mathds{I}$ which is larger than $\mathds{H}$.
-Though we prove that $\mathds{I}$ has, in a sense, approximatively the same expressive power as $\mathds{H}$ (cf. Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}), it is evident that $\mathds{I}$ is more convinent to use.
+Though $\mathds{I}$ has approximatively the same expressive power as $\mathds{H}$ (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}), it is evident (cf.\@ Example~\ref{ex_Rvlogic}) that $\mathds{I}$ is more convinent to use.
 
 We also borrow intuitions and results from nonstandard analisys to an extent that we could claim the title: nonstandard analysis for the finite logician.
 
@@ -185,6 +188,7 @@ According to the context, $C$ and $f$ denote either the symbols of $L_{\!R}$ or 
 \begin{definition}\label{def_0}
   Let \emph{$L$\/} be a one-sorted (first-order) language.
   By \emph{model\/} we mean an ${\EuScript L}$-structure of the form ${\EuScript M}=\langle  M,R\rangle$, where $M$ ranges over $L$-structures, while $R$ is the structure above.
+  We use ${\sf M}$ and ${\sf R}$ to denote the two sorts of ${\EuScript L}$.
   % The two sorts are denoted by ${\sf M}$ and ${\sf R}$.
   The language \emph{${\EuScript L}$\/} is an expansion of both $L$ and $L_{\!R}$.
   The new symbols allowed in ${\EuScript L}$ are function symbols of sort ${\sf M}^n\to {\sf R}$. 
@@ -209,7 +213,7 @@ The symbols $\mathds{I}$ and $\mathds{H}$ defined below denote only sets of ${\E
   \item[i.] formulas of the form $t(x;y)\in C$, where $C\subseteq R^n$ is compact (in the product topology) and $t(x,y)$ is a $n$-tuple of terms of sort ${\sf M}^{|x|}\times {\sf R}^{|y|}\to {\sf R}$; 
   \item[ii.] all formulas in $L$.
   \end{itemize}
-  We require that $\mathds{I}$ is closed under the Boolean connectives $\wedge$, $\vee$; the quantifiers $\forall^{\sf M}$, $\exists^{\sf M}$ of sort ${\sf M}$; and the quantifiers of sort ${\sf R}$ which are denoted by $\forall^{\sf R}$, $\exists^{\sf R}$.
+  We require that $\mathds{I}$ is closed under the Boolean connectives $\wedge$, $\vee$; the quantifiers $\forallM$, $\existsM $ of sort ${\sf M}$; and the quantifiers of sort ${\sf R}$ which are denoted by $\forallR $, $\existsR$.
 
   We write \emph{$\mathds{H}$ \/} for the set of formulas in $\mathds{I}$ without quantifiers of sort ${\sf R}$.
 \end{definition}
@@ -228,12 +232,12 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
   Then there is a formula in $\mathds{I}$ that says $\sup_{x} t(x)=\tau$.
   Indeed, consider the formula
 
-  \ceq{\hfill\forall^{\sf M}\!x\ \big[t(x)\dotminus\tau\in\{0\}\big]}
-  {\wedge}{\forall^{\sf R}\!\varepsilon \Big[\varepsilon\in\{0\}\ \vee\ \exists^{\sf M}\!x\ \big[\tau\dotminus (t(x)+\varepsilon)\in\{0\}\big]\Big]}
+  \ceq{\hfill\forallM x\ \big[t(x)\dotminus\tau\in\{0\}\big]}
+  {\wedge}{\forallR \varepsilon \Big[\varepsilon\in\{0\}\ \vee\ \existsM x\ \big[\tau\dotminus (t(x)+\varepsilon)\in\{0\}\big]\Big]}
 
   which, in a more legible form, becomes
 
-  \ceq{\hfill\forall^{\sf M}\!x\ \big[t(x)\le\tau\big]}{\wedge}{\forall^{\sf R}\!\varepsilon>0\ \exists^{\sf M}\!x\ \big[\tau\le t(x)+ \varepsilon\big].}
+  \ceq{\hfill\forallM x\ \big[t(x)\le\tau\big]}{\wedge}{\forallR \varepsilon>0\ \existsM x\ \big[\tau\le t(x)+ \varepsilon\big].}
 \end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -243,8 +247,10 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The standard part}
 
-This a standard introduction to the sandard part of elements of the nonstandard extension of a compact topological space.
-Our goal is to prove Lemma~\ref{lem_st}.
+In this section we recall the notion of the sandard part of an element in an elementary extension of a compact Hausdorff topological space.
+Our goal is to prove Lemma~\ref{lem_st} which in turn is required for the proof of the Compactness Theorem (the reader that is willing to accept the Compactness Theorem without proof may skip this section).
+
+
 Let $R\preceq{}^*\!R$.
 For each $\beta\in R$ we define the type
 
@@ -339,12 +345,10 @@ Symbols in $L$ maintain the same interpretation.
   If $\varphi(x\,;y)$ is a formula of $L$ the claim is trivial. 
   Otherwise $\varphi(x\,;y)$ has the form $t(x\,;y)\in C$.
   Assume that the tuple $t(x\,;y)$ consists of a single term.
-  The general case is left to the reader as it follows easily from this special case.
-
-  Assume ${}^*{\!\EuScript M}\models t(a\,;\alpha)\in C$.
+  The general case follows easily from this special case. 
+  Assume that ${}^*{\!\EuScript M}\models t(a\,;\alpha)\in C$.
   Then ${\rm st}\big(t^{{}^*{\!\EuScript M}}(a\,;\alpha\big)\in C$ by Fact~\ref{fact_st1}.
   Therefore $t^{{\EuScript M}}(a\,;{\rm st}(\alpha)\in C$ follows from Fact~\ref{fact_st2}.
-  
   This proves the lemma for $\mathds{I}$-atomic formulas.
   Induction is immediate. 
 \end{proof}
@@ -366,7 +370,7 @@ Note that $>$ is a dense (pre)order of $\mathds{I}(M)$.
 Formulas in (i) of Definition~\ref{def_LL} do not occur under the scope of a negation, therefore we always have that $\varphi\to\varphi'$.
 
 We write \emph{$\tilde{\varphi}\perp\varphi$\/} when $\tilde{\varphi}$ is obtained by replacing each atomic formula $t\in C$ occurring in $\varphi$ with $t\in\tilde{C}$ where $\tilde{C}$ is some compact set disjoint from $C$.
-Moreover the $\mathds{I}$-atomic formulas in $L$ are replaced with their negation and each connective is replaced with its dual i.e., $\vee, \wedge, \exists, \forall, \exists^{\sf R}, \forall^{\sf R}$ are replaced with $\wedge,\vee,\forall,\exists,\forall^{\sf R},\exists^{\sf R}$ respectively.
+Moreover the $\mathds{I}$-atomic formulas in $L$ are replaced with their negation and each connective is replaced with its dual i.e., $\vee, \wedge, \exists, \forall, \existsR , \forallR $ are replaced with $\wedge,\vee,\forall,\exists,\forallR ,\existsR $ respectively.
 We say that  $\tilde{\varphi}$ is a \emph{strong negation} of $\varphi$.
 It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
 
@@ -429,6 +433,10 @@ We say that $f:M\to N$ is an \emph{$\mathds{I}$-partial embedding\/} if (1) hold
   for every $\mathds{I}$-atomic formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$
 \end{fact}
 
+\begin{proof}
+  
+\end{proof}
+
 We say that $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for every formula $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$
 
 \ceq{\hfill{\EuScript M}\models\varphi'(a)\ \textrm{ for all }\varphi'>\varphi}{\Rightarrow}{{\EuScript N}\models\varphi'(fa)\ \textrm{ for all }\varphi'>\varphi.}
@@ -448,12 +456,16 @@ In general we have the follwing.
   for every $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$.
   The same holds for approximately $\mathds{H}$-elementary maps.
 \end{fact}
+
+\begin{proof}
+  
+\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{$\mathds{I}$-compactness}
+\section{Compactness}
 
 It is convenient to distinguish between consistency with respect to models and consistency with respect to ${\EuScript L}$-structures.
 We say that a theory $T$ is \emph{${\EuScript L}$-consistent\/} when ${\EuScript M}\models T$ for some ${\EuScript L}$-structure ${\EuScript M}$.
@@ -473,14 +485,14 @@ We say that $T$ is \emph{consistent\/} when ${\EuScript M}$  is required to be a
 
 % \begin{corollary}\label{prop_tipi_compattezza}
 %   Let $p(x\,;y)\subseteq\mathds{I}(M)$ be finitely consistent in ${\EuScript M}$, a model.
-%   Then ${\EuScript N}\models\exists^{\sf M}\!x\,\exists^R y\,p(x\,;y)$ for some model ${\EuScript N}$ such that ${\EuScript M}\preceq^\mathds{I}{\EuScript N}$.
+%   Then ${\EuScript N}\models\existsM x\,\exists^R y\,p(x\,;y)$ for some model ${\EuScript N}$ such that ${\EuScript M}\preceq^\mathds{I}{\EuScript N}$.
 % \end{corollary}
 
 % \noindent\llap{\dangersign\kern2ex}%
 
 
 % \begin{definition}
-%   We say that ${\EuScript M}$ is \emph{$\mathds{I}$-saturated\/} if for every $p(x)$ as in 1 and 2 below, ${\EuScript M}\models\exists^{\sf M}\!x\, p(a)$.
+%   We say that ${\EuScript M}$ is \emph{$\mathds{I}$-saturated\/} if for every $p(x)$ as in 1 and 2 below, ${\EuScript M}\models\existsM x\, p(a)$.
 %   \begin{itemize}
 %     \item[1.] $p(x)\subseteq\mathds{I}(A)$ for some $A\subseteq  M$ of cardinality $<|M|$ and $|x|=1$;
 %     \item[2.] $p(x)$ is finitely satisfied in ${\EuScript M}$.
@@ -501,7 +513,107 @@ The existence of $\mathds{I}$-saturated models is obtained from the classical ca
 %   Then for every $ab\in M^\alpha$, where $\alpha<|N|$, such that $a\equiv b$, there is an $\mathds{I}$-automorphism of ${\EuScript N}$ that maps $a$ to $b$.
 % \end{proposition}
 
+The following proposition shows that a slight amount of saturation tames the $\mathds{I}$-formulas.
 
+
+\begin{proposition}\label{prop_approx}
+  Let ${\EuScript N}$ be an $\omega$-$\mathds{I}$-saturated model.
+  Then the following holds in ${\EuScript N}$ for every formula $\varphi(x)\in\mathds{I}(N)$
+
+  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x\,;y)}
+  {\leftrightarrow}
+  {\varphi(x\,;y)}
+\end{proposition}
+
+\begin{proof}
+  We prove $\rightarrow$, the non trivial implication.
+  The claim is clear for atomic formulas.
+  Induction for conjunction, disjunction and the universal quantifier is immediate.
+ % 
+  % Consider disjunction.
+  % Let $\varphi=\varphi_i\vee\varphi_1$.
+  % Assume inductively
+ % 
+  % \ceq{\hfill\varphi_i(x)}
+  % {\leftrightarrow}
+  % {\bigwedge_{\varphi_i'>\varphi_i}\varphi_i'(x)}
+%
+  % Then
+%
+  % \ceq{\hfill\varphi(x)}
+  % {\leftrightarrow}
+  % {\bigwedge_{\varphi_1'>\varphi_1}\varphi_1'(x) \ \vee \bigwedge_{\varphi_2'>\varphi_2}\varphi_2'(x)}
+%
+  % \ceq{}
+  % {\leftrightarrow}
+  % {\bigwedge_{\substack{\varphi_1'>\varphi_1\\ \varphi_2'>\varphi_2}}\varphi_1'(x) \vee\varphi_2'(x)}
+%
+  % \ceq{}
+  % {\leftrightarrow}
+  % {\bigwedge_{\varphi'>\varphi}\varphi'(x)}
+%
+  We consider case of the existential quantifiers of sort ${\sf M}$.
+  The case of existential quantifiers of sort ${\sf R}$ is identical.
+  Assume inductively
+  
+  \ceq{\textrm{ih.}\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
+  {\rightarrow}
+  {\varphi(x,z\,;y)}
+
+  We need to prove
+
+  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\existsM z\,\varphi'(x,z\,;y)}
+  {\rightarrow}
+  {\existsM z\,\varphi(x,z\,;y)}
+
+  From (ih) we have
+
+  \ceq{\hfill\existsM z\,\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
+  {\rightarrow}
+  {\existsM z\,\varphi(x,z\,;y)}
+
+  Therefore it suffices to prove
+
+  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\existsM z\,\varphi'(x,z\,;y)}
+  {\rightarrow}
+  {\existsM z\,\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
+
+Replace $x,y$ with some fix but arbitrary parameters, say $a,\alpha$ and assume the antecedent, that is, the truth of the theory $\{\existsM z\,\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
+We need to prove the consistency of the type $\{\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
+By the saturation of ${\EuScript U}$, finite concistency suffices.
+This is clear if we show that the antecedent is closed under conjunction.
+Indeed it is easy to verify that if $\varphi_1,\varphi_2>\varphi$ then $\varphi_1\wedge\varphi_2>\varphi'$ for some $\varphi'>\varphi$.
+In words, the set of approximations of $\varphi$ is a directed set.
+%
+% \noindent\llap{\textcolor{red}{\Large\danger}\kern1ex}\ignorespaces
+% Consider the existential quantifiers of sort $R$
+% Assume inductively
+%
+% \ceq{\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x;y)}
+% {\rightarrow}
+% {\varphi(x;y)}
+%
+% As above, it suffices to prove
+%
+% \ceq{\#\hfill\bigwedge_{\varphi'>\varphi}\exists^C\! y\,\varphi'(x;y)}
+% {\rightarrow}
+% {\exists^C\! y\,\bigwedge_{\varphi'>\varphi}\varphi'(x;y)}
+%
+\end{proof}
+
+
+The following consequence will be useful below
+
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+\begin{definition}[and remark]\label{remk_p'p}
+  Let ${\EuScript N}$ be model.
+  For $p(x)\subseteq\mathds{I}(N)$, we write \emph{$p'(x)$\/} for the type
+
+  \ceq{\hfill p'(x)}{=}{\big\{\varphi'(x):\varphi'>\varphi\textrm{ for some }\varphi(x)\in p\big\}.}
+
+  By the proposition above, if  ${\EuScript N}$ is $\omega$-$\mathds{I}$-saturated, then $p'(x)$ is equivalent to $p(x)$.
+\end{definition}
 
 
 
@@ -548,93 +660,7 @@ There are some subtle differences from the classical setting.
   Claim (2) follows from the first by Lemma~\ref{lem_interpolation}.
 \end{proof}
 
-\begin{proposition}\label{prop_approx}
-  For every $\varphi(x)\in\mathds{I}(U)$ 
 
-  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x\,;y)}
-  {\leftrightarrow}
-  {\varphi(x\,;y)}
-
-\end{proposition}
-
-\begin{proof}
-  We prove $\rightarrow$, the non trivial implication.
-  The claim is clear for atomic formulas.
-  Induction for conjunction, disjunction and the universal quantifier is immediate.
- % 
-  % Consider disjunction.
-  % Let $\varphi=\varphi_i\vee\varphi_1$.
-  % Assume inductively
- % 
-  % \ceq{\hfill\varphi_i(x)}
-  % {\leftrightarrow}
-  % {\bigwedge_{\varphi_i'>\varphi_i}\varphi_i'(x)}
-%
-  % Then
-%
-  % \ceq{\hfill\varphi(x)}
-  % {\leftrightarrow}
-  % {\bigwedge_{\varphi_1'>\varphi_1}\varphi_1'(x) \ \vee \bigwedge_{\varphi_2'>\varphi_2}\varphi_2'(x)}
-%
-  % \ceq{}
-  % {\leftrightarrow}
-  % {\bigwedge_{\substack{\varphi_1'>\varphi_1\\ \varphi_2'>\varphi_2}}\varphi_1'(x) \vee\varphi_2'(x)}
-%
-  % \ceq{}
-  % {\leftrightarrow}
-  % {\bigwedge_{\varphi'>\varphi}\varphi'(x)}
-%
-  We consider case of the existential quantifiers of sort ${\sf M}$.
-  The case of existential quantifiers of sort ${\sf R}$ is identical.
-  Assume inductively
-  
-  \ceq{\textrm{ih.}\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
-  {\rightarrow}
-  {\varphi(x,z\,;y)}
-
-  We need to prove
-
-  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\exists^{\sf M}\!z\,\varphi'(x,z\,;y)}
-  {\rightarrow}
-  {\exists^{\sf M}\!z\,\varphi(x,z\,;y)}
-
-  From (ih) we have
-
-  \ceq{\hfill\exists^{\sf M}\!z\,\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
-  {\rightarrow}
-  {\exists^{\sf M}\!z\,\varphi(x,z\,;y)}
-
-  Therefore it suffices to prove
-
-  \ceq{\hfill\bigwedge_{\varphi'>\varphi}\exists^{\sf M}\!z\,\varphi'(x,z\,;y)}
-  {\rightarrow}
-  {\exists^{\sf M}\!z\,\bigwedge_{\varphi'>\varphi}\varphi'(x,z\,;y)}
-
-Replace $x,y$ with some fix but arbitrary parameters, say $a,\alpha$ and assume the antecedent, that is, the truth of the theory $\{\exists^{\sf M}\!z\,\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
-We need to prove the consistency of the type $\{\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
-By the saturation of ${\EuScript U}$, finite concistency suffices.
-This is clear if we show that the antecedent is closed under conjunction.
-Indeed it is easy to verify that if $\varphi_1,\varphi_2>\varphi$ then $\varphi_1\wedge\varphi_2>\varphi'$ for some $\varphi'>\varphi$.
-In words, the set of approximations of $\varphi$ is a directed set.
-%
-% \noindent\llap{\textcolor{red}{\Large\danger}\kern1ex}\ignorespaces
-% Consider the existential quantifiers of sort $R$
-% Assume inductively
-%
-% \ceq{\hfill\bigwedge_{\varphi'>\varphi}\varphi'(x;y)}
-% {\rightarrow}
-% {\varphi(x;y)}
-%
-% As above, it suffices to prove
-%
-% \ceq{\#\hfill\bigwedge_{\varphi'>\varphi}\exists^C\! y\,\varphi'(x;y)}
-% {\rightarrow}
-% {\exists^C\! y\,\bigwedge_{\varphi'>\varphi}\varphi'(x;y)}
-%
-\end{proof}
-
-
-\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 % \begin{example}
 %   The equivalence in the proposition above does not extend to all formulas in $\mathds{I}$.
@@ -643,7 +669,7 @@ In words, the set of approximations of $\varphi$ is a directed set.
 %   Its interpretation is ${\rm d}^{\EuScript M}(x,y)=|x-y|$.
 %   The formula 
   
-%   \ceq{\hfill\varphi}{=}{\exists\varepsilon\big[\varepsilon\in\{0\}\ \wedge\ \exists^{\sf M}\!x,y\ \ {\rm d}(x,y)\cdot\varepsilon\in\{1\}\big]}
+%   \ceq{\hfill\varphi}{=}{\exists\varepsilon\big[\varepsilon\in\{0\}\ \wedge\ \existsM x,y\ \ {\rm d}(x,y)\cdot\varepsilon\in\{1\}\big]}
 
 %   is false, though every $\varphi'>\varphi$ is true (in ${\EuScript M}$ and any $\mathds{I}$-extension of ${\EuScript M}$).\hfill\qedsymbol
 % \end{example}
@@ -681,12 +707,12 @@ In words, the set of approximations of $\varphi$ is a directed set.
 
 % \begin{fact}
 %   Let $\varphi(x)\in\mathds{I}(A)$, where $A\subseteq M$.
-%   Then for every $a\in M^{|x|}$ such that ${\EuScript M}\not\models\varphi(a)$ there is a formula $\tilde\varphi(x)\in\mathds{I}(A)$ such that ${\EuScript M}\models\tilde\varphi(a)$ and ${\EuScript M}\models\neg\exists^{\sf M}\!x\,[\tilde\varphi(x)\wedge\varphi(x)]$.
+%   Then for every $a\in M^{|x|}$ such that ${\EuScript M}\not\models\varphi(a)$ there is a formula $\tilde\varphi(x)\in\mathds{I}(A)$ such that ${\EuScript M}\models\tilde\varphi(a)$ and ${\EuScript M}\models\neg\existsM x\,[\tilde\varphi(x)\wedge\varphi(x)]$.
 % \end{fact}
 
 
 % \begin{fact}
-%   For every $\varphi(x),\psi(x)\in\mathds{I}(U)$ such that $\neg\exists^{\sf M}\!x\,[\varphi(x)\wedge\psi(x)]$ there are $\varphi'>\varphi$ and $\psi'>\psi$ such that $\neg\exists^{\sf M}\!x\,[\varphi'(x)\wedge\psi'(x)]$.
+%   For every $\varphi(x),\psi(x)\in\mathds{I}(U)$ such that $\neg\existsM x\,[\varphi(x)\wedge\psi(x)]$ there are $\varphi'>\varphi$ and $\psi'>\psi$ such that $\neg\existsM x\,[\varphi'(x)\wedge\psi'(x)]$.
 % \end{fact}
 
 % \begin{proof}
@@ -729,15 +755,6 @@ The same notation applies also with $\mathds{H}$ for $\mathds{I}$.
   Hence $\tilde{\varphi}(a)$ holds for some $\tilde{\varphi}\perp\varphi$ and $p(x)\rightarrow\neg\varphi(x)$ follows.
  \end{proof}
 
- The following will be useful below
-
- \begin{remark}\label{lem_p'p}
-  For $p(x)\subseteq\mathds{I}(U)$, we write \emph{$p'(x)$\/} for the type
-
-  \ceq{\hfill p'(x)}{=}{\big\{\varphi'(x):\varphi'>\varphi\textrm{ for some }\varphi(x)\in p\big\}.}
-
-  Note that $p'(x)$ is equivalent to $p(x)$ by Proposition~\ref{prop_approx}.
- \end{remark}
 
 % \begin{corollary}\label{corol_Hcomplete3}
 %   The inverse of an $\mathds{H}$-elementary map $f:{\EuScript U}\to{\EuScript U}$ is $\mathds{H}$-elementary.
@@ -755,7 +772,7 @@ The same notation applies also with $\mathds{H}$ for $\mathds{I}$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Elimination of quantifiers}
 
-We show that the quantifiers $\forall^{\sf R}$ and $\exists^{\sf R}$ can be eliminated up to some approximation.
+We show that the quantifiers $\forallR $ and $\existsR $ can be eliminated up to some approximation.
 
 \begin{proposition}
   The monster model (or any saturated model, for that matter) is $\mathds{H}$-homogeneous, that is, every $\mathds{H}$-elementary map $f:U\to U$ of cardinality $<\kappa$ extends to an automorphism.
@@ -794,7 +811,7 @@ Indeed, the next two propositions show that formulas in $\mathds{I}(A)$ are appr
 \end{proposition}
 
 \begin{proof}
-  By Corollary~\ref{corol_Lcomplete} and Remark~\ref{lem_p'p}
+  By Corollary~\ref{corol_Lcomplete} and Remark~\ref{remk_p'p}
 
   \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{p'(x)\rightarrow\neg\varphi(x)}p'(x)}
 
@@ -851,25 +868,25 @@ Infact, it only applies when the larger structure is the moster model.
     \item[2.] for every formula $\varphi(x)\in\mathds{H}(M)$
     
     \noindent\kern-\leftmargin
-    \ceq{\hfill\exists^{\sf M}\!x\,\varphi(x)}{\Rightarrow}
+    \ceq{\hfill\existsM x\,\varphi(x)}{\Rightarrow}
     {\textrm{ for every }\varphi'>\varphi\textrm{ there is an }a\in M\textrm{ such that }\varphi'(a);}
     \item[3.] for every formula $\varphi(x)\in\mathds{I}(M)$
     
     \noindent\kern-\leftmargin
-    \ceq{\hfill\exists^{\sf M}\!x\,\neg\varphi(x)}{\Rightarrow}
+    \ceq{\hfill\existsM x\,\neg\varphi(x)}{\Rightarrow}
     {\textrm{ there is an }a\in M\textrm{ such that }\neg\varphi(a).}
     
   \end{itemize}
 \end{proposition}
 
 \begin{proof}
-  (1$\Rightarrow$2) Assume $\exists^{\sf M}\!x\,\varphi(x)$ and let $\varphi'>\varphi$ be given.
+  (1$\Rightarrow$2) Assume $\existsM x\,\varphi(x)$ and let $\varphi'>\varphi$ be given.
   By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi$ such that  $\varphi(x)\rightarrow\neg\tilde{\varphi}(x)\rightarrow\varphi'(x)$.
-  Then $\neg\forall^{\sf M}\!x\,\tilde{\varphi}(x)$ hence, by (1), ${\EuScript M}\models\neg\forall^{\sf M}\!x\,\varphi(x)$.
+  Then $\neg\forallM x\,\tilde{\varphi}(x)$ hence, by (1), ${\EuScript M}\models\neg\forallM x\,\varphi(x)$.
   Then ${\EuScript M}\models\neg\tilde{\varphi}(a)$ for some $a\in M$. Hence ${\EuScript M}\models\varphi'(a)$ and $\varphi'(a)$ follows from (1).
 
   (2$\Rightarrow$3)
-  Assume (2) and let $\varphi(x)\in\mathds{I}(M)$ be such that $\exists^{\sf M}\!x\,\neg\varphi(x)$.
+  Assume (2) and let $\varphi(x)\in\mathds{I}(M)$ be such that $\existsM x\,\neg\varphi(x)$.
   By Corollary~\ref{prop_LHapprox2}, there are a consistent $\psi(x)\in\mathds{H}(M)$ and some $\psi'>\psi$ such that $\psi'(x)\rightarrow\neg\varphi(x)$.
   Then (3) follows.
 
@@ -884,12 +901,12 @@ Infact, it only applies when the larger structure is the moster model.
 
   Using (3) and the induction hypothesis we prove by contrapposition that
 
-  \ceq{\hfill{\EuScript M}\models\forall^{\sf M}\!y\,\varphi(a,y)}{\Rightarrow}{\forall^{\sf M}\!y\,\varphi(a,y)}.
+  \ceq{\hfill{\EuScript M}\models\forallM y\,\varphi(a,y)}{\Rightarrow}{\forallM y\,\varphi(a,y)}.
 
   Indeed,
 
-  \ceq{\hfill\neg\forall^{\sf M}\!y\,\varphi(a,y)}
-  {\Rightarrow}{\exists^{\sf M}\!y\,\neg\varphi(a,y)}
+  \ceq{\hfill\neg\forallM y\,\varphi(a,y)}
+  {\Rightarrow}{\existsM y\,\neg\varphi(a,y)}
   
   \ceq{}
   {\Rightarrow}
@@ -901,9 +918,9 @@ Infact, it only applies when the larger structure is the moster model.
 
   \ceq{}
   {\Rightarrow}
-  {{\EuScript M}\not\models\forall^{\sf M}\!y\,\varphi(a,y).}
+  {{\EuScript M}\not\models\forallM y\,\varphi(a,y).}
 
-  Induction for the connectives $\vee$, $\wedge$, $\exists^{\sf M}$, $\exists^{\sf R}$, and $\forall^{\sf R}$ is straightforward.
+  Induction for the connectives $\vee$, $\wedge$, $\existsM $, $\existsR $, and $\forallR $ is straightforward.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -960,6 +977,48 @@ We write $[a]_{\!R}$ for the class of equivalence of $a$.
 %   The relation $a\sim_{\!R} b$ holds exactly when $a(\omega)=b(\omega)$ for almost every $\omega\in\Omega$.
 % \end{example}
 
+
+The relation $\sim_R$ is defined by a parameter free $\mathds{I}$-type.
+Namely, for $C\subseteq R^2$ a compact set, write $\tau_{t,C}(x,z)$ for the  formula $\forallM y\ \langle t(x,y),t(x,y)\rangle\in C$.
+Let $\Delta\subseteq R^2$ be the diagonal of $R$.
+
+\ceq{\hfill x\sim_Rz}{=}{\Big\{\tau_{t,\Delta}(x,z)\ :\ t(x,y)\textrm{ an } {\EuScript L}\textrm{-terms}\Big\}}
+
+By Remark~\ref{remk_p'p} this is equivalent to
+
+\ceq{ }{\leftrightarrow}{\Big\{\tau_{t,C}(x,z)\ :\ t(z,y)\textrm{ an }{\EuScript L}\textrm{-terms, } C\supseteq\Delta \textrm{ a compact neigborhood}\Big\}}
+
+% \ceq{ }{\leftrightarrow}{\Big\{neg\tau_{t,C}(x,z)\ :\ t(z,y)\textrm{ an }{\EuScript L}\textrm{-terms, } C\supseteq\Delta \textrm{ a compact neigborhood}\Big\}}
+
+We say that a formula $\varphi(x)$ is \emph{$\sim_{\!R}$-invariant\/} if $x\sim_{\!R} y\rightarrow[\varphi(x)\leftrightarrow\varphi(y)]$.
+The proof of the following proposition uses the same compactness argument as Proposition~\ref{prop_LHapprox1}.
+
+\begin{proposition}\label{prop_sim_approx}
+  Let $\varphi(x)\in\mathds{I}(U)$ be $\sim_{\!R}$-invariant.
+  For every given $\varphi'>\varphi$ there are some $a_i\models\varphi(x)$, some ${\EuScript L}$-terms $t_i(x,y)$, and some compact $C\subseteq R^2\smallsetminus\Delta$ such that 
+
+  \ceq{\hfill\varphi(x)}{\rightarrow}{\bigwedge_{i=1,\dots,n}\tau_{t_i,C_i}(a,x)\ \ \rightarrow\ \ \varphi'(x)}
+\end{proposition}
+
+\begin{proof}
+  As $\neg\varphi(x)$ is $\sim_{\!R}$-invariant 
+
+  \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{a\,\models\neg\varphi(x)}\big\{\tau_{t,C}(a,x)\ :\ t(z,y)\textrm{ term, } C\supseteq\Delta \textrm{ compact neigborhood}\big\}.}
+
+  By Fact~\ref{fact_compactness_imp} and Lemma~\ref{lem_interpolation}
+
+  \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{a\,\models\neg\varphi(x)}\neg\tau_{t,C}(a,x),}
+
+  where $C$ ranges over the compact sets $C\subseteq R^2\smallsetminus\Delta$.
+  Equivalently,
+
+  \ceq{\hfill\varphi(x)}{\leftarrow}{\bigwedge_{a\,\models\neg\varphi(x)}\tau_{t,C}(a,x).}
+
+  The proposition follows by compactness, see Fact~\ref{fact_compactness_imp}.
+\end{proof}
+
+
+
 For $a\in U$ and $A\subseteq U$, let $p(x)=\mathds{I}\mbox{-tp}(a/A)$.
 We say that $a$ is a \emph{limit point\/} of $A$ if $p(x)\rightarrow a\sim_{\!R} x$.
 
@@ -976,39 +1035,6 @@ We say that $a$ is a \emph{limit point\/} of $A$ if $p(x)\rightarrow a\sim_{\!R}
   Clearly $b\sim_{\!R}a$. 
 \end{proof}
 
-We say that a formula $\varphi(x)$ is \emph{$\sim_{\!R}$-invariant\/} if $x\sim_{\!R} y\rightarrow[\varphi(x)\leftrightarrow\varphi(y)]$.
-The relation $x\sim_{\!R} y$ is defined by a parameter-free $\mathds{I}$-type.
-
-  \begin{comment}
-\begin{proposition}\label{prop_LHapprox1}
-  Let $\varphi(x)\in\mathds{I}(A)$ be $\sim_{\!R}$-invariant.
-  For every given $\varphi'>\varphi$ there are some $a_i\models\varphi(x)$ and some terms $t_i(x,y)$ such that 
-
-  \ceq{\hfill\varphi(x)}{\rightarrow}{\bigwedge_{i=1,\dots,n}\forall^{\sf M}\!y\ [t_i(a_i,y)=t_i(x,y)]\ \ \rightarrow\ \ \varphi'(x)}
-\end{proposition}
-
-\begin{proof}
-  We write $n_a(x)$ for the $\mathds{I}$-type $\big\{\forall^{\sf M}\!y\ [t_i(a,y)=t_i(x,y)]\big\}$
-  By Remark~\ref{lem_p'p}
-
-  \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{a\models\varphi(x)}n'_a(x)}
-
-  By Fact~\ref{fact_compactness_imp} and Lemma~\ref{lem_interpolation}
-
-  \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{\neg\tilde{\psi}(x)\rightarrow\neg\varphi(x)}\neg\tilde{\psi}(x),}
-
-  where $\tilde{\psi}(x)\in\mathds{H}(A)$.
-  Equivalently,
-
-  \ceq{\hfill\varphi(x)}{\leftarrow}{\bigwedge_{\tilde{\psi}(x)\leftarrow\varphi(x)}\tilde{\psi}(x).}
-
-  By compactness, see Fact~\ref{fact_compactness_imp}, for every $\varphi'>\varphi$ there are some finitely many $\tilde{\psi}_i(x)\in\mathds{H}(A)$ such that
-
-  \ceq{\hfill\varphi'(x)}{\leftarrow}{\bigwedge_{i=1,\dots,n}\tilde{\psi}_i(x)\ \ \leftarrow\ \ \varphi(x)}
-
-  which yields the interpolant required by the proposition.
-\end{proof}
-\end{comment}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1137,7 +1163,7 @@ Note that the $L$-formula $\forall^{\sf F}\!f\!\in[0,1]\,\ f^2{=}\,f$ defines th
 
 For $\nu,\mu\in{}^*\!M$ we write $\nu\ll\mu$ for the ${\EuScript L}$-formula 
 
-\hfil$\forall^{\sf R}\!\varepsilon\ \exists^{\sf R}\!\delta\ \forall^{\sf F}\!f\ \big[{\rm I}\big(|f{\cdot}\mu|\big)<\delta\rightarrow {\rm I}\big(|f{\cdot}\nu|\big)<\varepsilon\big]$.
+\hfil$\forallR \varepsilon\ \existsR \delta\ \forall^{\sf F}\!f\ \big[{\rm I}\big(|f{\cdot}\mu|\big)<\delta\rightarrow {\rm I}\big(|f{\cdot}\nu|\big)<\varepsilon\big]$.
 
 \begin{proposition} 
   Let $\nu,\mu\in{}^*\!M$ be bounded and non-negative such that  $\nu\ll\mu$.
@@ -1270,8 +1296,8 @@ Also, equality among elements of $M$ is excluded.
   We define the set of formulas \emph{$\mathds{I}(A)$\/} inductively
   \begin{itemize}
   \item[i.] $\mathds{I}(A)$ contains the atomic formula $t\le0$ for every term $t\in\mathds{T}(A)$.
-  \item[ii.] It is closed under the Boolean connectives $\bot$, $\top$, $\wedge$, $\vee$, and the quantifiers $\forall^{\sf M}$, $\exists^{\sf M}$ of sort $ M$.
-  \item[iii.] It is closed under the quantifier $\forall^{\sf M}$ of sort $\mathds{R}$ relativized to any definable subset of $\mathds{R}$.
+  \item[ii.] It is closed under the Boolean connectives $\bot$, $\top$, $\wedge$, $\vee$, and the quantifiers $\forallM$, $\existsM $ of sort $ M$.
+  \item[iii.] It is closed under the quantifier $\forallM$ of sort $\mathds{R}$ relativized to any definable subset of $\mathds{R}$.
   \end{itemize}
 \end{definition}
 
@@ -1474,15 +1500,15 @@ The following fact is immediate.
   Induction for the connectives $\wedge$ and $\vee$ is straightforward.
   Induction for the existential quantifier is as in the classical case.
   We prove the case of the universal quantifier over the unit ball.
-  Assume that 3 holds for the formula $\psi(z,y)$ and prove that it holds for the formula $\forall^{\sf M}\!y\,\psi(z,y)$.
+  Assume that 3 holds for the formula $\psi(z,y)$ and prove that it holds for the formula $\forallM y\,\psi(z,y)$.
   The the implication $\Rightarrow$ is immediate.
   To prove $\Leftarrow$, note that
 
-  \ceq{\hfill{\EuScript N}\models\neg\forall^{\sf M}\!y\ \psi(a,y)}{\Rightarrow}{{\EuScript N}\models\forall^{\sf M}\!y\,{}^{\neg\varepsilon}\psi(a,y)} \hfill for some $\varepsilon>0$
+  \ceq{\hfill{\EuScript N}\models\neg\forallM y\ \psi(a,y)}{\Rightarrow}{{\EuScript N}\models\forallM y\,{}^{\neg\varepsilon}\psi(a,y)} \hfill for some $\varepsilon>0$
 
-  \ceq{}{\Rightarrow}{{\EuScript M}\models\forall^{\sf M}\!y\,{}^{\neg\varepsilon\kern-.2pt}\psi(a,y)}\hfill for some $\varepsilon>0$
+  \ceq{}{\Rightarrow}{{\EuScript M}\models\forallM y\,{}^{\neg\varepsilon\kern-.2pt}\psi(a,y)}\hfill for some $\varepsilon>0$
 
-  \ceq{}{\Rightarrow}{{\EuScript M}\models\neg\forall^{\sf M}\!y\ \psi(a,y)}.
+  \ceq{}{\Rightarrow}{{\EuScript M}\models\neg\forallM y\ \psi(a,y)}.
 
   Induction for the universal quantifier of sort $\mathds{R}$ is immediate.
 \end{proof}
@@ -1738,7 +1764,7 @@ The following proposition is easy to prove.
   
   Finally, $a\in\bar M$ follows because
 
-  \ceq{\hfill p_{\restriction M}(x)}{\rightarrow}{\exists^{\sf M}\!z\ \big[q_{\restriction M}(z)\ \cup\ p'(x,z)\big].}
+  \ceq{\hfill p_{\restriction M}(x)}{\rightarrow}{\existsM z\ \big[q_{\restriction M}(z)\ \cup\ p'(x,z)\big].}
 \end{proof}
 
 \begin{question}
@@ -1809,7 +1835,7 @@ The following proposition is easy to prove.
 % Let $p(z)={\rm tp}_\mathds{I}(a/U)$.
 % For some $B\subseteq M$ and some formula $\varphi(z)\in\mathds{I}(M)$ 
 
-%   \ceq{\hfill\big\{\varphi(z)\big\}\ \cup\ p_{\restriction C}(z)}{\rightarrow}{\exists^{\sf M}\!x\ \psi(x, z)}
+%   \ceq{\hfill\big\{\varphi(z)\big\}\ \cup\ p_{\restriction C}(z)}{\rightarrow}{\existsM x\ \psi(x, z)}
 % \end{proof}
 
 
@@ -1925,7 +1951,7 @@ For $\varphi, \psi\in L( M)$ some closed formulas, we write \emph{${\EuScript M}
 The meaning of \emph{${\EuScript M}\models\ \varphi=\psi$\/} and of \emph{${\EuScript M}\,\models\ \varphi<\psi$\/} is similar.
 
 Expressions of the form $\varphi(x)\le0$ are called \emph{conditions}.
-We write ${\EuScript M}\models\exists^{\sf M}\!x\,\varphi(x)\le0$ if there is an $a\in  M^{|x|}$ such that ${\EuScript M}\models\varphi(a)\le0$.
+We write ${\EuScript M}\models\existsM x\,\varphi(x)\le0$ if there is an $a\in  M^{|x|}$ such that ${\EuScript M}\models\varphi(a)\le0$.
 Observe that $\varphi(x)=0$ is equivalent to $|\varphi(x)|\le0$ and that $\varphi(x)\le0$ is equivalent to $\big(\varphi(x)\vee0\big)=0$.
 So, when convenient, we may use equalities to denote conditions.
 
@@ -1942,7 +1968,7 @@ It is easy to see that conditions are cosed under logical disjunction and logica
 
 Condition are also closed under universal quanfication (over the unit ball).
 
-\ceq{\hfill {\EuScript M}\models\bigvee_x\varphi(x)\le0}{\Leftrightarrow}{{\EuScript M}\models\forall^{\sf M}\!x\ \varphi(x)\le0}
+\ceq{\hfill {\EuScript M}\models\bigvee_x\varphi(x)\le0}{\Leftrightarrow}{{\EuScript M}\models\forallM x\ \varphi(x)\le0}
 
 Closure under existential quanfication is a more subtle point.
 It is not true in general but it can be ensured by a small amount of saturation (cf.~Fact~\ref{fact_existential}).
@@ -1957,7 +1983,7 @@ Up to equivalence, all types have the form above.
 Beware that $p(x)$ denotes just a set of formulas, the expression $p(x)\le0$ denotes a type.
 
 We write \emph{${\EuScript M}\models p(a)\le0$} if ${\EuScript M}\models\varphi(a)\le0$ for every $\varphi(x)\in p$.
-We write \emph{${\EuScript M}\models \exists^{\sf M}\!x\ p(x)\le0$} if ${\EuScript M}\models p(a)\le0$ for some $a\in  M^{|x|}$.
+We write \emph{${\EuScript M}\models \existsM x\ p(x)\le0$} if ${\EuScript M}\models p(a)\le0$ for some $a\in  M^{|x|}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2029,7 +2055,7 @@ We conclude with a convenient property of saturated models.
   Let $ M$ is saturated.
   Then for every $\varphi(x)\in L( M)$ the following are equivalent
   \begin{itemize}
-    \item[1.] $ M\models\exists^{\sf M}\!x\ \big(\varphi(x)\le0\big)$;
+    \item[1.] $ M\models\existsM x\ \big(\varphi(x)\le0\big)$;
     \item[2.] \smash{$ M\models\displaystyle \bigwedge_x \varphi(x)\;\le\;0$}
   \end{itemize}
 \end{fact}
