@@ -422,7 +422,8 @@ However their inverse need not be $\mathds{I}$, respectively $\mathds{H}$-elemen
 In other words the converse of (1) may not hold.
 We will see that $\mathds{I}$ and $\mathds{H}$-elementarity between saturated models coincide ${\EuScript L}$-elementarity, hence the converse of (1) holds trivially.
 
-Now we introduce a two of weak notions of elementarity that are invertible in all models.
+Now we introduce a two of weak notions of elementarity.
+It will be easy to see that they are invertible in all models.
 We say that $f:M\to N$ is an \emph{partial $\mathds{I}$-embedding\/} if (1) holds when $\varphi(x)$ is $\mathds{I}$-atomic.
 
 \begin{fact}
@@ -434,7 +435,11 @@ We say that $f:M\to N$ is an \emph{partial $\mathds{I}$-embedding\/} if (1) hold
 \end{fact}
 
 \begin{proof}
-  
+  The equivalence is trivial for formulas in $L_{\sf M}$ so we only consider $\mathds{I}$-atomic formulas as in (i) of Definion~\ref{def_0}.
+  Implication $\Rightarrow$ holds by definition. 
+  Vice versa, if ${\EuScript M}\models t(a)\notin C$ then, by normality,  ${\EuScript M}\models t(a)\in\tilde{C}$ for some compact $\tilde C$ disjoint of $C$.
+  By the definition of $\mathds{I}$-embedding, ${\EuScript N}\models t(a)\in\tilde{C}$.
+  Hence ${\EuScript N}\models t(a)\notin C$.
 \end{proof}
 
 We say that $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for every formula $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$
@@ -444,7 +449,7 @@ We say that $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for 
 
 
 We define \emph{approximately $\mathds{H}$-elementary\/} maps in the same manner.
-We will prove that between saturated model approximately $\mathds{I}$ and $\mathds{H}$-elementary maps are both ${\EuScript L}$-elementary.
+We will prove that within saturated models there is no difference between approximately $\mathds{I}$ and $\mathds{H}$-elementary maps -- they are are both ${\EuScript L}$-elementary.
 In general we have the follwing.
 
 \begin{fact}
@@ -458,7 +463,12 @@ In general we have the follwing.
 \end{fact}
 
 \begin{proof}
-  
+  Assume the r.h.s.\@ of the equivalence.
+  Fix $\varphi'>\varphi$ and prove ${\EuScript M}\models\varphi'(a)$.
+  Let  $\varphi'>\varphi''>\varphi$.
+  By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi''$ such that $\varphi''\rightarrow\neg\tilde{\varphi}\rightarrow\varphi'$.
+  Then ${\EuScript N}\models\neg\tilde{\varphi}(fa)$ and therefore  ${\EuScript M}\models\neg\tilde{\varphi}(a)$.
+  Then ${\EuScript M}\models\varphi'(a)$.
 \end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -480,7 +490,7 @@ We say that $T$ is \emph{consistent\/} when ${\EuScript M}$  is required to be a
   Suppose $T$ is finitely consistent (or finitely ${\EuScript L}$-consistent, for that matter).
   By the classical compactness theorem ${}^*{\!\EuScript M}\models T$ for some ${\EuScript L}$-structure ${}^*{\!\EuScript M}=\langle M,{}^*\!R\rangle$.
   Let ${\EuScript M}$ be the model $\langle M,R\rangle$.
-  Then ${\EuScript M}\models T$ by Lemma~\ref{lem_st}.
+  Then ${\EuScript N}\models T$ by Lemma~\ref{lem_st}.
 \end{proof}
 
 % \begin{corollary}\label{prop_tipi_compattezza}
@@ -935,9 +945,9 @@ We refer to the topology associated as the \emph{${\sf R}$-topology.}
 It is not difficult to verify that ${\sf R}$-topology on $U^{|x|}$ coincide with the product of the ${\sf R}$-topology on $U$.
 We define the type
 
-\ceq{\hfill\emph{$x\sim_{\sf R}y$}}{=}{\Big\{\tau_{t,C}(x,y)\ :\ t=t(x,z)\textrm{ a term, } C\textrm{ a compact neigborhood of }\Delta\Big\}.}
+\ceq{\hfill\emph{$x\sim_{\sf R}y$}}{=}{\Big\{\tau_{t,C}(x,y)\ :\ t(x,z)\textrm{ a term, } C\textrm{ a compact neigborhood of }\Delta\Big\}.}
 
-In other words, this type says that $\forallM z\ \big[t(x,z)=t(y,z)\big]$ holds for every term $t(x,z)$.
+In other words, the type above says that $\forallM z\ \big[t(x,z)=t(y,z)\big]$ holds for every term $t(x,z)$.
 Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf R}y$ then if and only if $x_i\sim_{\sf R}y_i$ for every $i<\lambda$.
 
 
@@ -997,17 +1007,17 @@ We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent, ${\sf R}$-inva
   For every formula $\varphi(x)$ in the type $a\sim_{\sf R} x$ and every $\varphi'>\varphi$ pick some $\psi(x)\in p$ such that $\psi(x)\rightarrow\varphi'(x)$.
   There are are at most $|{\EuScript L}|$ such formulas $\psi(x)$.
   By saturation they have a common solution $b$ in $M$.
-  Clearly $b\sim_{\sf R}a$.
-  By invariance, $b\models p(x)$. 
+  Then $b\sim_{\sf R}a$ and, by invariance, $b\models p(x)$. 
 \end{proof}
 
-The proof of the following proposition uses the same compactness argument as Proposition~\ref{prop_LHapprox1}.
+\begin{comment}
+The proof of the following proposition uses the same compactness argument used for Proposition~\ref{prop_LHapprox1}.
 
 \begin{proposition}\label{prop_sim_approx}
   Let $\varphi(x)\in\mathds{I}(U)$ be ${\sf R}$-invariant.
-  For every given $\varphi'>\varphi$ there are some $a_i\models\varphi(x)$, some terms $t_i=t_i(x,z)$, and some compact $C_i\subseteq R^2\smallsetminus\Delta$ such that 
+  For every given $\varphi'>\varphi$ there are some $a_i\models\varphi(x)$, some terms $t_i(x,z)$, and some compact $C_i\subseteq R^2\smallsetminus\Delta$ such that 
 
-  \ceq{\hfill\varphi(x)}{\rightarrow}{\bigwedge_{i=1,\dots,n}\tilde\tau_{t_i,C_i}(a_i,x)\ \ \rightarrow\ \ \varphi'(x),}
+  \ceq{\hfill\varphi(x)}{\rightarrow}{\bigwedge_{i=1,\dots,n}\tilde\tau_{t_i,C_i}(x,a_i)\ \ \rightarrow\ \ \varphi'(x),}
 
   where
 
@@ -1018,21 +1028,23 @@ The proof of the following proposition uses the same compactness argument as Pro
 \begin{proof}
   As $\neg\varphi(x)$ is ${\sf R}$-invariant 
 
-  \ceq{\hfill\neg\varphi(x)}{\leftrightarrow}{\bigvee_{a\,\models\neg\varphi(x)}\big\{\tau_{t,\Delta}(a,x)\ :\ t=t(z,z)\textrm{ a term}\big\}.}
+  \ceq{\hfill\neg\varphi(x)}{\leftrightarrow}{\bigvee_{a\,\models\neg\varphi(x)}\big\{\tau_{t,\Delta}(x,a)\ :\ t(x,z)\textrm{ a term}\big\}.}
 
   By Fact~\ref{fact_compactness_imp} and Lemma~\ref{lem_interpolation}
 
-    \ceq{\hfill\neg\varphi(x)}{\leftrightarrow}{\bigvee_{\neg\tilde\tau_{t,C}(a,x)\rightarrow\neg\varphi(x)}\neg\tilde\tau_{t,C}(a,x),}
+    \ceq{\hfill\neg\varphi(x)}{\leftrightarrow}{\bigvee_{\neg\tilde\tau_{t,C}(a,x)\rightarrow\neg\varphi(x)}\neg\tilde\tau_{t,C}(x,a),}
 
   where $C$ ranges over the compact subsetes of $R^2\smallsetminus\Delta$.
   Equivalently
 
-  \ceq{\hfill\varphi(x)}{\leftrightarrow}{\bigwedge_{\varphi(x)\rightarrow\tilde\tau_{t,C}(a,x)}\tilde\tau_{t,C}(a,x).}
+  \ceq{\hfill\varphi(x)}{\leftrightarrow}{\bigwedge_{\varphi(x)\rightarrow\tilde\tau_{t,C}(x,a)}\tilde\tau_{t,C}(x,a).}
 
   By compactness, see Fact~\ref{fact_compactness_imp}, there are some some $a_i,t_i,C_i$ as in the lemma such that 
 
-  \ceq{\hfill\varphi(x)}{\rightarrow}{\bigwedge_{i=1,\dots,n}\tilde\tau_{t_i,C_i}(a_i,x)\ \ \rightarrow\ \ \varphi'(x)}
+  \ceq{\hfill\varphi(x)}{\rightarrow}{\bigwedge_{i=1,\dots,n}\tilde\tau_{t_i,C_i}(x,a_i)\ \ \rightarrow\ \ \varphi'(x)}
 \end{proof}
+  
+\end{comment}
 
 
 
@@ -1052,9 +1064,9 @@ Let $R=\mathds{R}\cup\{\pm\infty\}$ be the compactification of $\mathds{R}$.
 Let ${\EuScript M}=\langle M,R\rangle$ be the structure that interprets the symbols in ${\EuScript L}$ as natural.
 
 Let ${\EuScript U}$ be a monster model such that ${\EuScript M}\preceq^\mathds{I}{\EuScript U}$.
-Clearly, $d$ does not define a metric on ${\EuScript U}$ as there are pairs of elements at infinite distance.
-However, when restricted to a ball of finite radius, $d$ defines a pseudometric on  ${\EuScript U}$.
-Therefore the definition of Cauchy sequence and the corresponding notion of completeness make perfectly sense in ${\EuScript U}$.
+Clearly, $d$ does not define a metric on $U$ as there are pairs of elements at infinite distance.
+However, when restricted to a ball of finite radius, $d$ defines a pseudometric on  $U$.
+Therefore the definition of Cauchy sequence, and the corresponding notion of completeness, makes perfectly sense in $U$.
 
 \begin{fact}
   Let $ {\EuScript U}$ be as above.
@@ -1136,8 +1148,8 @@ Let $M$ be the set of $\mathds{R}$-valued ${\EuScript B}$-measures concentrated 
 
 Let ${\EuScript M}=\langle M,F,R\rangle$, where $R=\mathds{R}\cup\{\pm\infty\}$ is the compactification of $\mathds{R}$.
 The sort ${\sf M}$ in the previous section is replaced here by two sorts which we call ${\sf M}$ and ${\sf F}$.
-Here $L_{\sf M}$ is the language of the structure $\langle M,F\rangle$.
-As both $F$ and $M$ are lattice $\mathds{R}$-algebras, we assume that $L_{\sf M}$ has symbols for these lattice algebras.
+Here $L_{\sf MF}$ is the language of the structure $\langle M,F\rangle$.
+As both $F$ and $M$ are lattice $\mathds{R}$-algebras, we assume that $L_{\sf MF}$ has symbols for these lattice algebras.
 There is also a function symbol of sort ${\sf F}\times{\sf M}\to{\sf M}$ that is interpreted as the natural action of functions on measures (via multiplication).
 Finally, in ${\EuScript L}$ there is a function symbol ${\rm I}$ of sort ${\sf M}\to{\sf R}$ that is interpreted as the integral over $\Omega$.
 
@@ -1170,9 +1182,9 @@ By saturation, there is some ${}^*\!\mu\in{}^*\!M$ such that $g\,{\cdot}{}^*\!\m
 
   \ceq{\hfill G}{=} {\bigg\{\int_X g\,{\rm d}\mu\ :\ 0\le g\le\gamma,\ g\in F\bigg\}.}
 
-  If $G$ is bounded, pick for every $\varepsilon\in\mathds{R}^+$ some $\alpha_{\varepsilon,f}\in G_f$ such that 
+  If $G$ is bounded, pick for every $\varepsilon\in\mathds{R}^+$ some $\alpha_{\varepsilon}\in G$ such that 
 
-  \ceq{\hfill\int_\Omega f\,{\rm d}\mu}{\le}{\alpha_{\varepsilon,f}+\varepsilon.}
+  \ceq{\hfill\int_X \gamma\,{\rm d}\mu}{\le}{\alpha_{\varepsilon,f}+\varepsilon.}
  
   If $G_f$ is unbounded, let $\alpha_{\varepsilon,f}=+\infty$ for all $\varepsilon$.
   Let $y$ be a variable of sort ${\sf M}$.
