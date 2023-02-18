@@ -6,7 +6,7 @@
 \usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{datetime2} 
-\usepackage{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue,]{hyperref}
 
 \usepackage[a4paper,margin=30mm]{geometry}
 \usepackage{stackengine}
@@ -136,14 +136,14 @@
 
 \def\ceq#1#2#3{\parbox[t]{23ex}{$\displaystyle #1$}\parbox{6ex}{\hfil $#2$}{$\displaystyle #3$}}
 
-As a minimal motivating example, consider real vector spaces.
-These are among the most simple strucures considered in model theory.
-Now, expand them by adding a norm.
+As a minimal motivating example, consider a real vector space $M$.
+This is are among the most simple strucures considered in model theory.
+Now, expand it by adding a norm.
 A norm is a function that, given vector, outputs a real number.
-We may formalize this in a natural way by using a two-sorted structure.
+We may formalize this in a natural way by using a two-sorted structure $\langle M,\mathds{R}\rangle$.
 Now, we have two conflicting aspirations
 \begin{itemize}
-  \item[i.] to apply the basic tools of model theory (such as elementarity and saturation);
+  \item[i.] to apply the basic tools of model theory (such as elementarity, compactness, and saturation);
   \item[ii.] to stay within the realm of normed spaces (hence insist that 
   $\mathds{R}$ should remain $\mathds{R}$ throughout).
 \end{itemize}
@@ -191,12 +191,13 @@ According to the context, $C$ and $f$ denote either the symbols of $L_{\sf R}$ o
   We use ${\sf M}$ and ${\sf R}$ to denote the two sorts of ${\EuScript L}$.
   % The two sorts are denoted by ${\sf M}$ and ${\sf R}$.
   The language \emph{${\EuScript L}$\/} is an expansion of both $L_{\sf M}$ and $L_{\sf R}$.
-  The new symbols allowed in ${\EuScript L}$ are function symbols of sort ${\sf M}^n\to {\sf R}$. 
+  The new symbols allowed in ${\EuScript L}$ are function symbols of sort ${\sf M}^n\to {\sf R}$.
+  See \cite[k]{K} for a survey. 
 \end{definition}
 
 In some examples we need to replace the sort ${\sf M}$ with many sorts ${\sf M}_1\dots,{\sf M}_k$.
-In this case the language $L_{\sf M}$ governs the structure $\langle{\sf M}_1\dots,{\sf M}_k\rangle$.
-Models have the form $\langle{\sf M}_1\dots,{\sf M}_k, R\rangle$.
+In this case the language $L_{\sf M}=L_{{\sf M}_1\dots,{\sf M}_k}$ governs the structure $\langle M_1\dots,M_k\rangle$.
+Models have the form $\langle M _1\dots,M_k, R\rangle$.
 The new symbols in the language ${\EuScript L}$ are of sort ${\sf M}_1^{n_1}\dots,{\sf M}_k^{n_k}\to {\sf R}$.
 
 The notion of model will be (inessentially) restricted once the monster model is introduced, in Section~\ref{monster}.
@@ -245,7 +246,7 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The standard part}
+\section{The standard part}\label{standard_part}
 
 In this section we recall the notion of the sandard part of an element in an elementary extension of a compact Hausdorff topological space.
 Our goal is to prove Lemma~\ref{lem_st} which in turn is required for the proof of the Compactness Theorem (the reader that is willing to accept the Compactness Theorem without proof may skip this section).
@@ -374,10 +375,11 @@ Moreover the $\mathds{I}$-atomic formulas in $L_{\sf M}$ are replaced with their
 We say that  $\tilde{\varphi}$ is a \emph{strong negation} of $\varphi$.
 It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
 
-\begin{lemma}\label{lem_interpolation}\ 
+\begin{lemma}\label{lem_interpolation}
+  For all  $\varphi\in\mathds{I}(M)$
   \begin{itemize}
-    \item[1.]For every $\varphi'>\varphi$ there is a formula $\tilde{\varphi}\perp\varphi$ such that $\varphi\rightarrow\neg \tilde{\varphi}\rightarrow\varphi'$.
-    \item[2.] For every\, $\tilde{\varphi}\perp\varphi$ there is a formula $\varphi'>\varphi$ such that  $\varphi\rightarrow\varphi'\rightarrow\neg \tilde{\varphi}$.
+    \item[1.]for every $\varphi'>\varphi$ there is a formula $\tilde{\varphi}\perp\varphi$ such that $\varphi\rightarrow\neg \tilde{\varphi}\rightarrow\varphi'$;
+    \item[2.] for every\, $\tilde{\varphi}\perp\varphi$ there is a formula $\varphi'>\varphi$ such that  $\varphi\rightarrow\varphi'\rightarrow\neg \tilde{\varphi}$.
   \end{itemize}
 \end{lemma}
 
@@ -389,7 +391,7 @@ It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
   Then $\tilde{\varphi}=(t\in R\smallsetminus O)$ is as required by the lemma.
   Suppose instead that $\tilde{\varphi}$ is of the form $t\in\tilde{C}$ for some compact $\tilde{C}$ disjoint from $C$.
   By the normality of $R$, there is  $C'$, a compact neighborhood of $C$ disjoint from $\tilde{C}$.
-  Then  $\varphi'=t\in C'$ is as required.
+  Then  $\varphi'=\big(t\in C'\big)$ is as required.
   The lemma follows easily by induction.
 \end{proof}
 
@@ -399,7 +401,7 @@ It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Elementarity}
+\section{Morphisms}
 
 \def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
@@ -420,11 +422,11 @@ The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel is ob
 As $\mathds{I}$ and $\mathds{H}$-elementary maps are in particular $L_{\sf M}$-elementary, they are injective.
 However their inverse need not be $\mathds{I}$, respectively $\mathds{H}$-elementary.
 In other words the converse of (1) may not hold.
-We will see that $\mathds{I}$ and $\mathds{H}$-elementarity between saturated models coincide ${\EuScript L}$-elementarity, hence the converse of (1) holds trivially.
+We will see that, between two saturated models, $\mathds{I}$ and $\mathds{H}$-elementarity coincide with ${\EuScript L}$-elementarity (in particular, they are invertible).
 
-Now we introduce a two of weak notions of elementarity.
-It will be easy to see that they are invertible in all models.
-We say that $f:M\to N$ is an \emph{partial $\mathds{I}$-embedding\/} if (1) holds when $\varphi(x)$ is $\mathds{I}$-atomic.
+Now we introduce two weaker notions of elementarity.
+It will be easy to see that these are invertible in all models.
+We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if (1) holds for all $\mathds{I}$-atomic formulas $\varphi(x)$.
 
 \begin{fact}
   If $f:M\to N$ is a partial $\mathds{I}$-embedding then 
@@ -446,15 +448,12 @@ We say that $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for 
 
 \ceq{\hfill{\EuScript M}\models\varphi'(a)\ \textrm{ for all }\varphi'>\varphi}{\Rightarrow}{{\EuScript N}\models\varphi'(fa)\ \textrm{ for all }\varphi'>\varphi.}
 
-
-
 We define \emph{approximately $\mathds{H}$-elementary\/} maps in the same manner.
-We will prove that within saturated models there is no difference between approximately $\mathds{I}$ and $\mathds{H}$-elementary maps -- they are are both ${\EuScript L}$-elementary.
-In general we have the follwing.
+We will see (Proposition~\ref{prop_approx}) that a slight amount of saturation sufficies to make these approximated versions of elementarity redundant.
+However, the following holds in general.
 
 \begin{fact}
   If $f:M\to N$ is approximately $\mathds{I}$-elementary then
-
 
   \ceq{\hfill{\EuScript M}\models\varphi'(a)\textrm{ for all }\varphi'>\varphi}{\Leftrightarrow}{{\EuScript N}\models\varphi'(fa)\textrm{ for all }\varphi'>\varphi.}
 
@@ -489,7 +488,7 @@ We say that $T$ is \emph{consistent\/} when ${\EuScript M}$  is required to be a
 \begin{proof}
   Suppose $T$ is finitely consistent (or finitely ${\EuScript L}$-consistent, for that matter).
   By the classical compactness theorem ${}^*{\!\EuScript M}\models T$ for some ${\EuScript L}$-structure ${}^*{\!\EuScript M}=\langle M,{}^*\!R\rangle$.
-  Let ${\EuScript M}$ be the model $\langle M,R\rangle$.
+  Let ${\EuScript M}=\langle M,R\rangle$ be the standard part of ${}^*{\!\EuScript M}$ as defined in Section~\ref{standard_part}.
   Then ${\EuScript N}\models T$ by Lemma~\ref{lem_st}.
 \end{proof}
 
@@ -809,7 +808,7 @@ For $a,b\in U^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the s
 In the classical setting, from equivalence of types one can derive equivalence of formulas.
 Without negation, this is not true.
 Still, we can infer an approximate form of equivalence.
-Indeed, the next two propositions show that formulas in $\mathds{I}(A)$ are approximated by formulas in $\mathds{H}(A)$.
+Indeed, next proposition show that formulas in $\mathds{I}(A)$ are approximated by formulas in $\mathds{H}(A)$.
 
 \begin{proposition}\label{prop_LHapprox1}
   Let $\varphi(x)\in\mathds{I}(A)$.
@@ -837,6 +836,8 @@ Indeed, the next two propositions show that formulas in $\mathds{I}(A)$ are appr
 
   which yields the interpolant required by the proposition.
 \end{proof}
+
+We also need an approximation restult for the complement of formulas in $\mathds{I}(A)$.
 
 \begin{proposition}\label{prop_LHapprox2}
   Let $\varphi(x)\in\mathds{I}(A)$ be such that $\neg\varphi(x)$ is consistent.
@@ -940,23 +941,23 @@ For $t(x,z)$ a term of sort ${\sf M}^{|x|+|z|}\to {\sf R}$ and $C\subseteq R^2$ 
 
 \ceq{\hfill\tau_{t,C}(x,y)}{=}{\forallM z\ \langle t(x,z),t(y,z)\rangle\in C.}
 
-As $C$ range over the compact neighborhoods of the diagonal $\Delta\subseteq R^2$ and $t(x,z)$ over the parameter-free terms, these formulas define a system of entougages on $U^{|x|}$.
+As $C$ ranges over the compact neighborhoods of the diagonal $\Delta\subseteq R^2$ and $t(x,z)$ over the parameter-free terms, the formulas $\tau_{t,C}(x,y)$ define a system of entougages on $U^{|x|}$.
 We refer to the topology associated as the \emph{${\sf R}$-topology.}
-It is not difficult to verify that ${\sf R}$-topology on $U^{|x|}$ coincide with the product of the ${\sf R}$-topology on $U$.
+It is not difficult to verify that the ${\sf R}$-topology on $U^{|x|}$ coincides with the product of the ${\sf R}$-topology on $U$.
 We define the type
 
 \ceq{\hfill\emph{$x\sim_{\sf R}y$}}{=}{\Big\{\tau_{t,C}(x,y)\ :\ t(x,z)\textrm{ a term, } C\textrm{ a compact neigborhood of }\Delta\Big\}.}
 
 In other words, the type above says that $\forallM z\ \big[t(x,z)=t(y,z)\big]$ holds for every term $t(x,z)$.
-Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf R}y$ then if and only if $x_i\sim_{\sf R}y_i$ for every $i<\lambda$.
+Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf R}y$ if and only if $x_i\sim_{\sf R}y_i$ for every $i<\lambda$.
 
 
 
 % We define the following equivalence relation on $U$
 
-% \ceq{\hfill\emph{$a\sim_{\sf R} b$}}{=}{\forallM y\ \big[t(a,y)=t(b,y)\big]}\hfill 
+% \ceq{\hfill\emph{$a\sim_{\sf R}\!b$}}{=}{\forallM y\ \big[t(a,y)=t(b,y)\big]}\hfill 
 
-% When two tuples of the same length $\bar a=\langle a_i:i<\lambda\rangle$ and $\bar b=\langle b_i:i<\lambda\rangle$ are such that $a_i\sim_{\sf R} b_i$ for every $i<\lambda$ we write \emph{$\bar a\sim_{\sf R}\bar b$.}
+% When two tuples of the same length $\bar a=\langle a_i:i<\lambda\rangle$ and $\bar b=\langle b_i:i<\lambda\rangle$ are such that $a_i\sim_{\sf R}\!b_i$ for every $i<\lambda$ we write \emph{$\bar a\sim_{\sf R}\bar b$.}
 
 
 % \begin{fact} For $\bar a,\bar b\in U^{|x|}$
@@ -975,7 +976,7 @@ Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf R}y$ then
 
 %   \ceq{1.\hfill t(\bar a,a_\lambda,y)}{=}{t(\bar b,a_\lambda,y).}
 
-%   If $a_\lambda\sim_{\sf R} b_\lambda$ then
+%   If $a_\lambda\sim_{\sf R}\!b_\lambda$ then
 
 %   \ceq{\hfill t(\bar x,a_\lambda,y)}{=}{t(\bar x,b_\lambda,y)}
 
@@ -990,28 +991,31 @@ Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf R}y$ then
 %   For limit ordinals induction is trivial.
 % \end{proof}
 
-
-
-
 Let $p(x)\subseteq\mathds{I}(A)$ for some small $A\subseteq U$.
-We say that $p(x)$ is \emph{${\sf R}$-invariant\/} if $x\sim_{\sf R} y\rightarrow[p(x)\leftrightarrow p(y)]$.
-We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent, ${\sf R}$-invariant, and $p(x)\cup p(y)\rightarrow x\sim_{\sf R} y$.
+We say that $p(x)$ is \emph{${\sf R}$-invariant\/} if $x\sim_{\sf R}\!y\rightarrow[p(x)\leftrightarrow p(y)]$.
+We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent 
+%${\sf R}$-invariant, 
+and $p(x)\cup p(y)\rightarrow x\sim_{\sf R}\!y$.
 
 \begin{fact}
   Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda>|{\EuScript L}|$.
-  Then every Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in $M$.
+  Then every ${\sf R}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in ${\EuScript M}$.
 \end{fact}
 
 \begin{proof}
-  Pick any $a\models p(x)$.
-  For every formula $\varphi(x)$ in the type $a\sim_{\sf R} x$ and every $\varphi'>\varphi$ pick some $\psi(x)\in p$ such that $\psi(x)\rightarrow\varphi'(x)$.
-  There are are at most $|{\EuScript L}|$ such formulas $\psi(x)$.
+  Pick any $a\models p(x)$
+  For every formula $\varphi(x)$ in the type $a\sim_{\sf R}\!x$ and every $\varphi'>\varphi$ pick some $\psi(x)\in p$ such that $\psi(x)\rightarrow\varphi'(x)$.
+  There are at most $|{\EuScript L}|$ such formulas $\psi(x)$.
   By saturation they have a common solution $b$ in $M$.
   Then $b\sim_{\sf R}a$ and, by invariance, $b\models p(x)$. 
 \end{proof}
 
+We say that a model ${\EuScript M}$ is \emph{Cauchy saturated\/} (or Cauchy complete) if every ${\sf R}$-invariant, Cauchy type over $M$ is realized in ${\EuScript M}$.
+Note that for any Cauchy type $p(x)\subseteq\mathds{I}(M)$ the type $\bar{p}(x)=\exists y{\sim_{\sf R}}x\ p(y)$ is an ${\sf R}$-invariant Cauchy type containing $p(x)$.
+Therefore ${\EuScript M}$ is Cauchy saturated if every Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized by some $a\sim_{\sf R}M$.
+
 \begin{comment}
-The proof of the following proposition uses the same compactness argument used for Proposition~\ref{prop_LHapprox1}.
+The pr ${\EuScript M}$oof of the following proposition uses the same compactness argument used for Proposition~\ref{prop_LHapprox1}.
 
 \begin{proposition}\label{prop_sim_approx}
   Let $\varphi(x)\in\mathds{I}(U)$ be ${\sf R}$-invariant.
@@ -1058,15 +1062,15 @@ The proof of the following proposition uses the same compactness argument used f
 
 We discuss a simple example.
 Let $M,d$ is a metric space.
-Let $L_{\sf M}$ contain symbols for all continuous functions $M^n\to M$.
+Let $L_{\sf M}$ contain symbols only for continuous functions $M^n\to M$.
 The language ${\EuScript L}$ has also a symbol $d$ for a function of sort ${\sf M}^2\to {\sf R}$.
 Let $R=\mathds{R}\cup\{\pm\infty\}$ be the compactification of $\mathds{R}$.
-Let ${\EuScript M}=\langle M,R\rangle$ be the structure that interprets the symbols in ${\EuScript L}$ as natural.
+Let ${\EuScript M}=\langle M,R\rangle$ be the structure that interprets the symbols of the language as natural.
 
-Let ${\EuScript U}$ be a monster model such that ${\EuScript M}\preceq^\mathds{I}{\EuScript U}$.
+Let ${\EuScript U}$ be a monster model, ${\EuScript M}\preceq^\mathds{I}{\EuScript U}$.
 Clearly, $d$ does not define a metric on $U$ as there are pairs of elements at infinite distance.
 However, when restricted to a ball of finite radius, $d$ defines a pseudometric on  $U$.
-Therefore the definition of Cauchy sequence, and the corresponding notion of completeness, makes perfectly sense in $U$.
+Therefore the notion of convergent sequence makes perfectly sense in $U$.
 
 \begin{fact}
   Let $ {\EuScript U}$ be as above.
@@ -1078,14 +1082,17 @@ Therefore the definition of Cauchy sequence, and the corresponding notion of com
 \end{fact}
 
 \begin{proof}
-  First note that, by the continuity of the terms with respect to the metric, $a\sim_{\sf R} b$ is equivalent to $d(a,b)=0$.
+  First note that, by the continuity of the terms with respect to the metric, $a\sim_{\sf R}\!b$ is equivalent to $d(a,b)=0$.
 
-  ($2\Rightarrow1$) Let  $\langle \varepsilon_i: i\in\omega\rangle$ be a sequence in $[0,1]$ that converges to $0$ and such that $d(a_i,a)\le\varepsilon_i$ for every $i\in\omega$.
-  Then $d(a_i,b)\le\varepsilon_i$ for every $b\equiv_Na$.
-  By the uniqueness of the limit $d(a,b)=0$.
+  (2$\Rightarrow$1) 
+  Let $\langle \varepsilon_i: i\in\omega\rangle$ be a sequence of reals that converges to $0$ and such that $d(a_i,a)\le\varepsilon_i$ for every $i\in\omega$.
+  Then the formulas $d(a_i,x)\le\varepsilon_i$ are in $p(x)$.
+  Then every element realizing $p(x)$ is at distance $0$ from $a$.
+  Therefore  $p(x)\rightarrow a\sim_{\sf R}\!x$.
 
-  ($1\Rightarrow2$) 
-  As $p(x)$ is Cauchy type, $p(x)\rightarrow a\sim_{\sf R} x$.
+
+  (1$\Rightarrow$2) 
+  As $p(x)$ is Cauchy type, $p(x)\rightarrow a\sim_{\sf R}\!x$.
   Then $p'(x)\rightarrow d(a,x)<2^{-i}$ for all $i$.
   By compactness (see Fact~\ref{fact_compactness_imp}) there are formulas $\varphi_i(x)\in p$ such that $\varphi'_i(x)\rightarrow d(a,x)<2^{-i}$ for some $\varphi'_i>\varphi_i$.
   By $\mathds{I}$-elementarity there is an $a_i\in N$ such that $\varphi'(a_i)$.
@@ -1162,7 +1169,7 @@ By saturation, there is some ${}^*\!\mu\in{}^*\!M$ such that $g\,{\cdot}{}^*\!\m
 
  Let $\gamma:\Omega\to\mathds{R}$. 
  By saturation, there is some ${}^*\!\gamma\in{}^*\!F$ such that ${}^*\!\gamma\mathbin\cdot m=\gamma\mathbin\cdot m$ for every $m\in M$. 
- Note that as $m$ has finite support $\gamma\mathbin\cdot m$ is well-defined for all $\gamma$.
+ Note that, as $m$ has finite support, $\gamma\mathbin\cdot m$ is a well-defined element of $M$ for all $\gamma$.
 
  For $X\in{\EuScript B}$ we write ${\rm I}_X(\,\mbox{-}\,)$ for ${\rm I}(1_X\cdot\,\mbox{-}\,)$.
 
