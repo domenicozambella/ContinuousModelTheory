@@ -1,8 +1,9 @@
-\documentclass[11pt,oneside]{amsart}
+\documentclass[11pt,oneside]{amsproc}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{comment}
+\usepackage{amsrefs}
 \usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{datetime2} 
@@ -131,7 +132,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduzione}\label{intro}
+\section{Introduction}\label{intro}
 
 
 \def\ceq#1#2#3{\parbox[t]{23ex}{$\displaystyle #1$}\parbox{6ex}{\hfil $#2$}{$\displaystyle #3$}}
@@ -156,10 +157,10 @@ Different people have attemped different paths.
   Model theorists, when confronted with similar problems, have used similar approaches (in more generality and with different notation).
   \item[2.] Henson and Iovino propose to stick to the standard notion of norm but restrict the notion of elementarity and saturation to a smaller class of formulas (which here is denoted by $\mathds{H}$).
   They demostrate that many standard tools of model theory apply in their setting. 
-  The work of Henson and Iovino is focussed on Banach spaces and has hardly been applied to broader contexts.
+  The work of Henson and Iovino is focussed on Banach spaces and has hardly been applied to broader contexts. See~\cite{HI} for a survey.
   \item[3.] Real valued logicians take the most radical approach.
   They abandon classical true/false valued logic in favour of a logic valued in the interval $[0,1]$.
-  Unfortunately, this adds notational burden and restricts the class of structures that can be considered.
+  Unfortunately, this adds notational burden and restricts the class of structures that can be considered. See~\cite{K} for a survey. 
 \end{itemize}
 
 We elaborate on the ideas of Henson and Iovino and generalize them to a larger class of structures.
@@ -192,7 +193,6 @@ According to the context, $C$ and $f$ denote either the symbols of $L_{\sf R}$ o
   % The two sorts are denoted by ${\sf M}$ and ${\sf R}$.
   The language \emph{${\EuScript L}$\/} is an expansion of both $L_{\sf M}$ and $L_{\sf R}$.
   The new symbols allowed in ${\EuScript L}$ are function symbols of sort ${\sf M}^n\to {\sf R}$.
-  See \cite[k]{K} for a survey. 
 \end{definition}
 
 In some examples we need to replace the sort ${\sf M}$ with many sorts ${\sf M}_1\dots,{\sf M}_k$.
@@ -202,7 +202,7 @@ The new symbols in the language ${\EuScript L}$ are of sort ${\sf M}_1^{n_1}\dot
 
 The notion of model will be (inessentially) restricted once the monster model is introduced, in Section~\ref{monster}.
 
-Clearly, saturated ${\EuScript L}$-structures exist but, with the exception of trivial cases (i.e.\@ when $R$ is finite) they are not models.
+Clearly, saturated ${\EuScript L}$-structures exist but, with the exception of trivial cases (i.e.\@ when $R$ is finite), they are not models.
 As a remedy, below we carve out a set of formulas $L\subseteq\mathds{I}\subseteq {\EuScript L}$, such that every model has an $\mathds{I}$-elementary, $\mathds{I}$-saturated extension that is a model.
 
 Warning: as usual $L_{\sf M}$ and ${\EuScript L}$ denote both first-order languages and the corresponding set of formulas.
@@ -240,6 +240,11 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
 
   \ceq{\hfill\forallM x\ \big[t(x)\le\tau\big]}{\wedge}{\forallR \varepsilon>0\ \existsM x\ \big[\tau\le t(x)+ \varepsilon\big].}
 \end{example}
+
+We conclude this introduction with a question.
+We do not know under what conditions it is possible to extends the theory exposed below to a larger ${\EuScript L}$.
+Some natural examples would require ${\EuScript L}$ to have function symbols of sort ${\sf M}^n\times {\sf R}^m\to {\sf R}$ with $m,n>0$.
+Also symbols of sort ${\sf M}^n\times {\sf R}^m\to {\sf M}$ have natural applications but are hard to control.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -415,17 +420,48 @@ An $\mathds{I}$-elementary map that is total is called an \emph{$\mathds{I}$-ele
 %
 % \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(a)},
 %
-we write \emph{${\EuScript M}\preceq^\mathds{I}{\EuScript N}$\/} and say that ${\EuScript M}$ is an \emph{$\mathds{I}$-elementary submodel\/} of ${\EuScript N}$. 
+We write \emph{${\EuScript M}\preceq^\mathds{I}{\EuScript N}$\/} and say that ${\EuScript M}$ is an \emph{$\mathds{I}$-elementary submodel\/} of ${\EuScript N}$. 
 
 The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel is obtained replacing $\mathds{I}$ by $\mathds{H}$.
 
 As $\mathds{I}$ and $\mathds{H}$-elementary maps are in particular $L_{\sf M}$-elementary, they are injective.
 However their inverse need not be $\mathds{I}$, respectively $\mathds{H}$-elementary.
-In other words the converse of (1) may not hold.
-We will see that, between two saturated models, $\mathds{I}$ and $\mathds{H}$-elementarity coincide with ${\EuScript L}$-elementarity (in particular, they are invertible).
+In other words the converse implication in (1) may not hold.
+We have choosen to work with the classical notion of truth at the cost of having this asymmetric notion of elementarity.
+This contrast with~\cite{HI} where Henson and Iovino introduce a notion of approximated satisfaction.
+This ensures that the corresponding morphisms (cf.\@ the approximated $\mathds{H}$-morphisms below) are invertible.
 
-Now we introduce two weaker notions of elementarity.
-It will be easy to see that these are invertible in all models.
+We say that the map $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for every formula $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$
+
+\ceq{\hfill{\EuScript M}\models\varphi'(a)\ \textrm{ for all }\varphi'>\varphi}{\Rightarrow}{{\EuScript N}\models\varphi'(fa)\ \textrm{ for all }\varphi'>\varphi.}
+
+We define \emph{approximately $\mathds{H}$-elementary\/} maps in the same manner.
+We will see (Proposition~\ref{prop_approx}) that a slight amount of saturation sufficies to make these approximated versions of elementarity equivalent to their unapproximated version.
+With full saturation, $\mathds{I}$ and $\mathds{H}$-elementarity coincide with ${\EuScript L}$-elementarity (Corollary~\ref{corol_Lcomplete}).
+
+However, the following holds in general.
+
+\begin{fact}
+  If $f:M\to N$ is approximately $\mathds{I}$-elementary then
+
+  \ceq{\hfill{\EuScript M}\models\varphi'(a)\textrm{ for all }\varphi'>\varphi}{\Leftrightarrow}{{\EuScript N}\models\varphi'(fa)\textrm{ for all }\varphi'>\varphi.}
+
+  for every $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$.
+  The same holds for approximately $\mathds{H}$-elementary maps.
+\end{fact}
+
+\begin{proof}
+  Implication $\Leftarrow$ requires a proof.
+  Assume the r.h.s.\@ of the equivalence.
+  Fix $\varphi'>\varphi$ and prove ${\EuScript M}\models\varphi'(a)$.
+  Let  $\varphi'>\varphi''>\varphi$.
+  By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi''$ such that $\varphi''\rightarrow\neg\tilde{\varphi}\rightarrow\varphi'$.
+  Then ${\EuScript N}\models\neg\tilde{\varphi}(fa)$ and therefore  ${\EuScript M}\models\neg\tilde{\varphi}(a)$.
+  Then ${\EuScript M}\models\varphi'(a)$.
+\end{proof}
+
+\begin{comment}
+Finally we introduce the morphisms that corrisponds to partial isomorphisms.
 We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if (1) holds for all $\mathds{I}$-atomic formulas $\varphi(x)$.
 
 \begin{fact}
@@ -444,31 +480,9 @@ We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if (1) holds
   Hence ${\EuScript N}\models t(a)\notin C$.
 \end{proof}
 
-We say that $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for every formula $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$
+\end{comment}
 
-\ceq{\hfill{\EuScript M}\models\varphi'(a)\ \textrm{ for all }\varphi'>\varphi}{\Rightarrow}{{\EuScript N}\models\varphi'(fa)\ \textrm{ for all }\varphi'>\varphi.}
 
-We define \emph{approximately $\mathds{H}$-elementary\/} maps in the same manner.
-We will see (Proposition~\ref{prop_approx}) that a slight amount of saturation sufficies to make these approximated versions of elementarity redundant.
-However, the following holds in general.
-
-\begin{fact}
-  If $f:M\to N$ is approximately $\mathds{I}$-elementary then
-
-  \ceq{\hfill{\EuScript M}\models\varphi'(a)\textrm{ for all }\varphi'>\varphi}{\Leftrightarrow}{{\EuScript N}\models\varphi'(fa)\textrm{ for all }\varphi'>\varphi.}
-
-  for every $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$.
-  The same holds for approximately $\mathds{H}$-elementary maps.
-\end{fact}
-
-\begin{proof}
-  Assume the r.h.s.\@ of the equivalence.
-  Fix $\varphi'>\varphi$ and prove ${\EuScript M}\models\varphi'(a)$.
-  Let  $\varphi'>\varphi''>\varphi$.
-  By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi''$ such that $\varphi''\rightarrow\neg\tilde{\varphi}\rightarrow\varphi'$.
-  Then ${\EuScript N}\models\neg\tilde{\varphi}(fa)$ and therefore  ${\EuScript M}\models\neg\tilde{\varphi}(a)$.
-  Then ${\EuScript M}\models\varphi'(a)$.
-\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -638,8 +652,7 @@ Let $A\subseteq U$ be a small set throughout this section.
 We define a topology on $U^{|x|}\times R^{|y|}$ which we call the \emph{$\mathds{I}(A)$-topology.}
 The closed sets of this topology are the sets defined by the types $p(x\,;y)\subseteq\mathds{I}(A)$.
 This is a compact topology by the $\mathds{I}$-compactness Theorem~\ref{thm_compattezza}.
-
-The following fact demostrate how $\mathds{I}$-compactness applies.
+The following fact demostrate how $\mathds{I}$-compactness applies in this context.
 There are some subtle differences from the classical setting.
 % \begin{lemma}
 %   For every $\varphi(x\,;y)\in\mathds{I}(A)$ the set $\varphi(U\,;R)$ is a compact subset of $U^{|x|}\times R^{|y|}$.
@@ -740,13 +753,13 @@ We write  \emph{$S_{\mathds{I},x}(A)$\/} when the tuple of variables $x$ is fixe
 The same notation applies also with $\mathds{H}$ for $\mathds{I}$.
 
 %  Similarly we define \emph{$S_\mathds{I}(A)$\/} and \emph{$S_{\mathds{I},x}(A)$.}
- The following corollary will be strengthen by Corollary~\ref{corol_Lcomplete} below.
+ The following proposition will be strengthen by Corollary~\ref{corol_Lcomplete} below.
 
- \begin{corollary}\label{corol_Hcomplete2}
+ \begin{proposition}\label{prop_Hcomplete2}
    The types $p(x)\in S_\mathds{I}(A)$ are maximally consistent subsets of $\mathds{I}_x(A)$.
    That is, for every $\varphi(x)\in\mathds{I}(A)$, either $\varphi(x)\in p$ or $p(x)\rightarrow\neg\varphi(x)$.
    The same holds with $\mathds{H}$ for $\mathds{I}$.
- \end{corollary}
+ \end{proposition}
 
  \begin{proof}
   Let $p(x)=\mathds{I}\mbox{-tp}(a/A)$ and suppose $\varphi(x)\notin p$.
@@ -775,7 +788,7 @@ The same notation applies also with $\mathds{H}$ for $\mathds{I}$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Elimination of quantifiers}
+\section{Elimination of the quantifiers of sort ${\sf R}$}
 
 We show that the quantifiers $\forallR $ and $\existsR $ can be eliminated up to some approximation.
 
@@ -784,11 +797,11 @@ We show that the quantifiers $\forallR $ and $\existsR $ can be eliminated up to
 \end{proposition}
 
 \begin{proof}
-  By Corollary~\ref{corol_Hcomplete2}, the inverse of an $\mathds{H}$-elementary map $f:U\to U$ is $\mathds{H}$-elementary.
+  By Proposition~\ref{prop_Hcomplete2}, the inverse of an $\mathds{H}$-elementary map $f:U\to U$ is $\mathds{H}$-elementary.
   Then the usual proof by back-and-forth applies.
 \end{proof}
 
-Now, as promised, we strengthen Corollary~\ref{corol_Hcomplete2}.
+As promised, we strengthen Proposition~\ref{prop_Hcomplete2}.
 Let $A\subseteq U$ be a small set throughout this section.
 
 \begin{corollary}\label{corol_Lcomplete}
@@ -993,9 +1006,9 @@ Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf R}y$ if a
 
 Let $p(x)\subseteq\mathds{I}(A)$ for some small $A\subseteq U$.
 We say that $p(x)$ is \emph{${\sf R}$-invariant\/} if $x\sim_{\sf R}\!y\rightarrow[p(x)\leftrightarrow p(y)]$.
-We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent 
-%${\sf R}$-invariant, 
-and $p(x)\cup p(y)\rightarrow x\sim_{\sf R}\!y$.
+It is immediate that $\mathds{I}$-formulas constructed without using (ii) of Definition~\ref{def_LL} are ${\sf R}$-invariant.
+
+We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent and $p(x)\cup p(y)\rightarrow x\sim_{\sf R}\!y$.
 
 \begin{fact}
   Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda>|{\EuScript L}|$.
@@ -1003,15 +1016,16 @@ and $p(x)\cup p(y)\rightarrow x\sim_{\sf R}\!y$.
 \end{fact}
 
 \begin{proof}
-  Pick any $a\models p(x)$
+  Pick any $a\models p(x)$.
   For every formula $\varphi(x)$ in the type $a\sim_{\sf R}\!x$ and every $\varphi'>\varphi$ pick some $\psi(x)\in p$ such that $\psi(x)\rightarrow\varphi'(x)$.
   There are at most $|{\EuScript L}|$ such formulas $\psi(x)$.
   By saturation they have a common solution $b$ in $M$.
   Then $b\sim_{\sf R}a$ and, by invariance, $b\models p(x)$. 
 \end{proof}
 
-We say that a model ${\EuScript M}$ is \emph{Cauchy saturated\/} (or Cauchy complete) if every ${\sf R}$-invariant, Cauchy type over $M$ is realized in ${\EuScript M}$.
-Note that for any Cauchy type $p(x)\subseteq\mathds{I}(M)$ the type $\bar{p}(x)=\exists y{\sim_{\sf R}}x\ p(y)$ is an ${\sf R}$-invariant Cauchy type containing $p(x)$.
+We say that a model ${\EuScript M}$ is \emph{Cauchy saturated\/} (or Cauchy complete) if every ${\sf R}$-invariant Cauchy type over $M$ is realized in ${\EuScript M}$.
+Note that for any type $p(x)\subseteq\mathds{I}(M)$ the type $\bar p(x)=\exists y{\sim_{\sf R}}x\ p(y)$ is an ${\sf R}$-invariant.
+If $p(x)$ is Cauchy also $\bar p(x)$ is Cauchy.
 Therefore ${\EuScript M}$ is Cauchy saturated if every Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized by some $a\sim_{\sf R}M$.
 
 \begin{comment}
@@ -1130,13 +1144,53 @@ Therefore the notion of convergent sequence makes perfectly sense in $U$.
 % There is a natural embedding of $G$ into ${\rm Aut}({\EuScript M})$.
 % Let $\gamma\in{\rm Aut}({\EuScript M})$ we claim that for every $a_1,\dots,a_n$ and every there is a $g\in G$ such that $\tau_{t,C}(\gamma(a),ga)$
 
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand\biburl[1]{\url{#1}}
+\BibSpec{arXiv}{%
+  +{}{\PrintAuthors}{author}
+  +{,}{ \textit}{title}
+  +{}{ \parenthesize}{date}
+  +{,}{ arXiv:}{eprint}
+}
+\begin{bibdiv}
+\begin{biblist}[]\normalsize
 
+\bib{HI}{article}{
+   author={Henson, C. Ward},
+   author={Iovino, Jos\'{e}},
+   title={Ultraproducts in analysis},
+   conference={
+      title={Analysis and logic},
+      address={Mons},
+      date={1997},
+   },
+   book={
+      series={London Math. Soc. Lecture Note Ser.},
+      volume={262},
+      publisher={Cambridge Univ. Press, Cambridge},
+   },
+   date={2002},
+   pages={1--110},
+  %  review={\MR{1967834}},
+}
 
-
-
-
-
-
+\bib{K}{arXiv}{
+  author = {Keisler, H. Jerome},
+  title = {Model Theory for Real-valued Structures},
+  eprint={2005.11851},
+  doi = {10.48550/ARXIV.2005.11851},
+  url = {https://arxiv.org/abs/2005.11851},
+  publisher = {arXiv},
+  date = {2020},
+}
+\end{biblist}
+\end{bibdiv}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1147,7 +1201,7 @@ Therefore the notion of convergent sequence makes perfectly sense in $U$.
 \section{Measure spaces}
 
 \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
-Garbage below this point
+Garbage after this point
 
 Let ${\EuScript B}$ be a $\sigma$-algebra of subsets of $\Omega$.
 Let $F$ be the set of $\mathds{R}$-valued ${\EuScript B}$-simple functions, i.e.\@ linear combinations of indicator functions of sets in ${\EuScript B}$.
@@ -1167,19 +1221,19 @@ Let ${\EuScript U}=\langle {}^*\!M,{}^*\!F,R\rangle$ be a monster model such tha
 Let $\mu$ be a $\mathds{R}$-valued ${\EuScript B}$-measure.
 By saturation, there is some ${}^*\!\mu\in{}^*\!M$ such that $g\,{\cdot}{}^*\!\mu=\int_\Omega g\,{\rm d}\mu$ for every $g\in F$.
 
- Let $\gamma:\Omega\to\mathds{R}$. 
- By saturation, there is some ${}^*\!\gamma\in{}^*\!F$ such that ${}^*\!\gamma\mathbin\cdot m=\gamma\mathbin\cdot m$ for every $m\in M$. 
- Note that, as $m$ has finite support, $\gamma\mathbin\cdot m$ is a well-defined element of $M$ for all $\gamma$.
+Let $\gamma:\Omega\to\mathds{R}$. 
+By saturation, there is some ${}^*\!\gamma\in{}^*\!F$ such that ${}^*\!\gamma\mathbin\cdot m=\gamma\mathbin\cdot m$ for every $m\in M$. 
+Note that, as $m$ has finite support, $\gamma\mathbin\cdot m$ is a well-defined element of $M$ for all $\gamma$.
 
- For $X\in{\EuScript B}$ we write ${\rm I}_X(\,\mbox{-}\,)$ for ${\rm I}(1_X\cdot\,\mbox{-}\,)$.
+For $X\in{\EuScript B}$ we write ${\rm I}_X(\,\mbox{-}\,)$ for ${\rm I}(1_X\cdot\,\mbox{-}\,)$.
 
 \begin{lemma}
-  Assume $\gamma$ is measurable.
-  Then for every $X\in{\EuScript B}$
+Assume $\gamma$ is measurable.
+Then for every $X\in{\EuScript B}$
 
-  \ceq{\hfill {\rm I}_X\big({}^*\!\gamma\cdot{}^*\!\mu\big)}{=}{\int_X \gamma\,{\rm d}\mu}
-  
-  
+\ceq{\hfill {\rm I}_X\big({}^*\!\gamma\cdot{}^*\!\mu\big)}{=}{\int_X \gamma\,{\rm d}\mu}
+
+
 \end{lemma}
 
 \begin{proof}
