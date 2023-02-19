@@ -1,4 +1,4 @@
-\documentclass[11pt,oneside]{amsproc}
+\documentclass[10pt,oneside]{amsproc}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -126,7 +126,12 @@
   \scaleto{\stackon[-.6pt]{\color{red}$\triangle$}{\color{red}\bfseries\small !}}{#1}%
 }
 
-
+\begin{abstract}
+  In general, very little model theory is possible if we restrict to a class of two-sorted structures $\langle M,R\rangle$ where $M$ is arbitrary and $R$ is fixed.
+  But not everything is lost when $R$ is a compact topological space.
+  Continuous logic deals with this case.
+  Rivisiting ideas of Henson and Iovino we present an approach to continuous logic that is simple and general.
+\end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -164,7 +169,7 @@ Different people have attemped different paths.
 \end{itemize}
 
 We elaborate on the ideas of Henson and Iovino and generalize them to a larger class of structures.
-Following Henson and Iovino, we restrict the notions of elementarity and saturation.
+We restrict the notions of elementarity and saturation.
 But we use a class of formulas $\mathds{I}$ which is larger than $\mathds{H}$.
 Though $\mathds{I}$ has approximatively the same expressive power as $\mathds{H}$ (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}), it is evident (cf.\@ Example~\ref{ex_Rvlogic}) that $\mathds{I}$ is more convinent to use.
 
@@ -196,16 +201,16 @@ According to the context, $C$ and $f$ denote either the symbols of $L_{\sf R}$ o
 \end{definition}
 
 In some examples we need to replace the sort ${\sf M}$ with many sorts ${\sf M}_1\dots,{\sf M}_k$.
-In this case the language $L_{\sf M}=L_{{\sf M}_1\dots,{\sf M}_k}$ governs the structure $\langle M_1\dots,M_k\rangle$.
+In this case the language $L_{\sf M}$ is replaced with $L_{{\sf M}_1\dots,{\sf M}_k}$, the language that governs the structure $\langle M_1\dots,M_k\rangle$.
 Models have the form $\langle M _1\dots,M_k, R\rangle$.
 The new symbols in the language ${\EuScript L}$ are of sort ${\sf M}_1^{n_1}\dots,{\sf M}_k^{n_k}\to {\sf R}$.
 
 The notion of model will be (inessentially) restricted once the monster model is introduced, in Section~\ref{monster}.
 
-Clearly, saturated ${\EuScript L}$-structures exist but, with the exception of trivial cases (i.e.\@ when $R$ is finite), they are not models.
-As a remedy, below we carve out a set of formulas $L\subseteq\mathds{I}\subseteq {\EuScript L}$, such that every model has an $\mathds{I}$-elementary, $\mathds{I}$-saturated extension that is a model.
+Clearly, saturated ${\EuScript L}$-structures exist but, with the exception of trivial cases (i.e.\@ when $R$ is finite), they are not models in the sense of Definion~\ref{def_0}.
+As a remedy, below we carve out a set of formulas $L\subseteq\mathds{I}\subseteq {\EuScript L}$, such that every model has an $\mathds{I}$-elementary, $\mathds{I}$-saturated extension that is also a model.
 
-Warning: as usual $L_{\sf M}$ and ${\EuScript L}$ denote both first-order languages and the corresponding set of formulas.
+Warning: as usual $L_{\sf R}$, $L_{\sf M}$, and ${\EuScript L}$ denote both first-order languages and the corresponding set of formulas.
 The symbols $\mathds{I}$ and $\mathds{H}$ defined below denote only sets of ${\EuScript L}$-formulas.
 
 \begin{definition}\label{def_LL}
@@ -242,9 +247,10 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
 \end{example}
 
 We conclude this introduction with a question.
-We do not know under what conditions it is possible to extends the theory exposed below to a larger ${\EuScript L}$.
-Some natural examples would require ${\EuScript L}$ to have function symbols of sort ${\sf M}^n\times {\sf R}^m\to {\sf R}$ with $m,n>0$.
-Also symbols of sort ${\sf M}^n\times {\sf R}^m\to {\sf M}$ have natural applications but are hard to control.
+Is it possible extend the theory exposed below to a larger ${\EuScript L}$?
+E.g.\@ can we allow in ${\EuScript L}$ function symbols of sort ${\sf M}^n\times {\sf R}^m\to {\sf R}$ with $m,n>0$.
+This would be a natural option when $M$ is a group acting on a compact set $R$.
+Also symbols of sort ${\sf M}^n\times {\sf R}^m\to {\sf M}$ have natural applications (e.g.\@ consider the action of the field of scalars in a vector space).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -425,11 +431,12 @@ We write \emph{${\EuScript M}\preceq^\mathds{I}{\EuScript N}$\/} and say that ${
 The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel is obtained replacing $\mathds{I}$ by $\mathds{H}$.
 
 As $\mathds{I}$ and $\mathds{H}$-elementary maps are in particular $L_{\sf M}$-elementary, they are injective.
-However their inverse need not be $\mathds{I}$, respectively $\mathds{H}$-elementary.
+However, their inverse need not be $\mathds{I}$, respectively $\mathds{H}$-elementary.
 In other words the converse implication in (1) may not hold.
-We have choosen to work with the classical notion of truth at the cost of having this asymmetric notion of elementarity.
+We have choosen to work with the classical notion of satisfaction at the cost of this asymmetric notion of elementarity.
 This contrast with~\cite{HI} where Henson and Iovino introduce a notion of approximated satisfaction.
-This ensures that the corresponding morphisms (cf.\@ the approximated $\mathds{H}$-morphisms below) are invertible.
+The approximated $\mathds{H}$-morphisms defined below are the maps that preserve approximated satisfaction.
+These morphisms are invertible, cf.\@ Fact~\ref{fact_HImorphisms}.
 
 We say that the map $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for every formula $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$
 
@@ -441,7 +448,7 @@ With full saturation, $\mathds{I}$ and $\mathds{H}$-elementarity coincide with $
 
 However, the following holds in general.
 
-\begin{fact}
+\begin{fact}\label{fact_HImorphisms}
   If $f:M\to N$ is approximately $\mathds{I}$-elementary then
 
   \ceq{\hfill{\EuScript M}\models\varphi'(a)\textrm{ for all }\varphi'>\varphi}{\Leftrightarrow}{{\EuScript N}\models\varphi'(fa)\textrm{ for all }\varphi'>\varphi.}
@@ -451,7 +458,7 @@ However, the following holds in general.
 \end{fact}
 
 \begin{proof}
-  Implication $\Leftarrow$ requires a proof.
+  Only implication $\Leftarrow$ requires a proof.
   Assume the r.h.s.\@ of the equivalence.
   Fix $\varphi'>\varphi$ and prove ${\EuScript M}\models\varphi'(a)$.
   Let  $\varphi'>\varphi''>\varphi$.
@@ -788,7 +795,7 @@ The same notation applies also with $\mathds{H}$ for $\mathds{I}$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Elimination of the quantifiers of sort ${\sf R}$}
+\section{Elimination of quantifiers of sort ${\sf R}$}
 
 We show that the quantifiers $\forallR $ and $\existsR $ can be eliminated up to some approximation.
 
@@ -818,10 +825,10 @@ Let $A\subseteq U$ be a small set throughout this section.
 
 For $a,b\in U^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the same ${\EuScript L}$-formulas over $A$, bearing in mind that formulas in $\mathds{H}(A)$ or $\mathds{I}(A)$ suffices to test the equivalence.
 
-In the classical setting, from equivalence of types one can derive equivalence of formulas.
+In the classical setting, from an equivalence between types one derives an  equivalence between formulas.
 Without negation, this is not true.
 Still, we can infer an approximate form of equivalence.
-Indeed, next proposition show that formulas in $\mathds{I}(A)$ are approximated by formulas in $\mathds{H}(A)$.
+Next proposition show that formulas in $\mathds{I}(A)$ are approximated by formulas in $\mathds{H}(A)$.
 
 \begin{proposition}\label{prop_LHapprox1}
   Let $\varphi(x)\in\mathds{I}(A)$.
@@ -850,7 +857,7 @@ Indeed, next proposition show that formulas in $\mathds{I}(A)$ are approximated 
   which yields the interpolant required by the proposition.
 \end{proof}
 
-We also need an approximation restult for the complement of formulas in $\mathds{I}(A)$.
+We also need an approximation restult for the negation of formulas in $\mathds{I}(A)$.
 
 \begin{proposition}\label{prop_LHapprox2}
   Let $\varphi(x)\in\mathds{I}(A)$ be such that $\neg\varphi(x)$ is consistent.
@@ -954,7 +961,7 @@ For $t(x,z)$ a term of sort ${\sf M}^{|x|+|z|}\to {\sf R}$ and $C\subseteq R^2$ 
 
 \ceq{\hfill\tau_{t,C}(x,y)}{=}{\forallM z\ \langle t(x,z),t(y,z)\rangle\in C.}
 
-As $C$ ranges over the compact neighborhoods of the diagonal $\Delta\subseteq R^2$ and $t(x,z)$ over the parameter-free terms, the formulas $\tau_{t,C}(x,y)$ define a system of entougages on $U^{|x|}$.
+As $C$ ranges over the compact neighborhoods of the diagonal $\Delta\subseteq R^2$ and $t(x,z)$ rangers over the parameter-free terms, the formulas $\tau_{t,C}(x,y)$ define a system of entougages on $U^{|x|}$.
 We refer to the topology associated as the \emph{${\sf R}$-topology.}
 It is not difficult to verify that the ${\sf R}$-topology on $U^{|x|}$ coincides with the product of the ${\sf R}$-topology on $U$.
 We define the type
