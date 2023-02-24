@@ -992,10 +992,10 @@ We refer to the topology associated as the \emph{${\sf R}$-topology.}
 It is not difficult to verify that the ${\sf R}$-topology on $U^{|x|}$ coincides with the product of the ${\sf R}$-topology on $U$.
 We define two equivalent types
 
-\ceq{\hfill\emph{$x\sim_{\sf R}y$}}{=}{\Big\{x\sim_{t,\Delta}y\ :\ t(x,z)\textrm{ parameter-free term}\Big\}.}
+\ceq{\hfill\emph{$x\sim_{\sf R}\!y$}}{=}{\Big\{x\sim_{t,\Delta}y\ :\ t(x,z)\textrm{ parameter-free term}\Big\}.}
 
 
-\ceq{\hfill\emph{$x\sim'_{\sf R}y$}}{=}{\Big\{x\sim_{t,D}y\ :\ t(x,z)\textrm{ parameter-free term, } D\textrm{ compact neigborhood of }\Delta\Big\}.}
+\ceq{\hfill\emph{$x\sim'_{\sf R}\!y$}}{=}{\Big\{x\sim_{t,D}y\ :\ t(x,z)\textrm{ parameter-free term, } D\textrm{ compact neigborhood of }\Delta\Big\}.}
 
 Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf R}y$ if and only if $x_i\sim_{\sf R}y_i$ for every $i<\lambda$.
 
@@ -1039,8 +1039,7 @@ Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf R}y$ if a
 %   For limit ordinals induction is trivial.
 % \end{proof}
 
-Let $p(x)\subseteq\mathds{I}(A)$ for some small $A\subseteq U$.
-We say that $p(x)$ is \emph{${\sf R}$-invariant\/} if $x\sim_{\sf R}\!y\rightarrow[p(x)\leftrightarrow p(y)]$.
+We say that $p(x)\subseteq\mathds{I}(U)$ is \emph{${\sf R}$-invariant\/} if $x\sim_{\sf R}\!y\rightarrow[p(x)\leftrightarrow p(y)]$.
 % It is immediate that $\mathds{I}$-formulas constructed without using (ii) of Definition~\ref{def_LL} are ${\sf R}$-invariant.
 We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent and $p(x)\wedge p(y)\rightarrow x\sim_{\sf R}\!y$.
 
@@ -1048,20 +1047,20 @@ We say that a type $q(x)$ is finitely satisfiable in $M$ if every conjunction of
 This definition is classical, but note that when $q(x)$ is over $M$ we can only infer that $q'(x)$ is finitely satisfiable.
 
 \begin{lemma}
-  Let  ${\EuScript M}$ be a small model. 
+  Let  ${\EuScript M}$ be a model. 
   Then the following are equivalent
   \begin{itemize}
     \item[1.]  $p(x)\subseteq\mathds{I}(M)$ is an ${\sf R}$-invariant Cauchy type;
-    \item[2.] $p(x)\leftrightarrow a\sim_{\sf R}x$ for some/any $a\models p(x)$.
-    \item[3.] $a\sim'_{\sf R}x$ is finitely satisfiable in $M$ for some/any $a\models p(x)$.
+    \item[2.] $p(x)\leftrightarrow a\sim_{\sf R}\!x$ for some/any $a\models p(x)$.
+    \item[3.] $a\sim'_{\sf R}\!x$ is finitely satisfiable in $M$ for some/any $a\models p(x)$.
   \end{itemize}
 \end{lemma}
 
 \begin{proof}
   (1$\Rightarrow$2)
   Let $a\models p(x)$.
-  Substituting $a$ for $y$ in the definition of Cauchy type we obtain $p(x)\rightarrow a\sim_{\sf R}x$
-  Similarly, from the definition of ${\sf R}$-invariance we obtain $a\sim_{\sf R}x\rightarrow p(x)$.
+  Substituting $a$ for $y$ in the definition of Cauchy type we obtain $p(x)\rightarrow a\sim_{\sf R}\!x$
+  Similarly, from the definition of ${\sf R}$-invariance we obtain $a\sim_{\sf R}\!x\rightarrow p(x)$.
 
   (2$\Rightarrow$3) 
   By compactness, as $p'(x)$ is finitely satisfiable in $M$.
@@ -1071,37 +1070,35 @@ This definition is classical, but note that when $q(x)$ is over $M$ we can only 
   Then, by the uniqueness of the limit, the type $p(x)$ cointaining the formulas $x\sim_{t,D}a_{t,D}$ is as required by the lemma.
 \end{proof}
 
-Let  ${\EuScript M}$ be a small model.
-We say that ${\EuScript M}$ is \emph{Cauchy complete\/} if every ${\sf R}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in ${\EuScript M}$.
+Let ${\EuScript M}$ be a model.
+We say that ${\EuScript M}$ is \emph{Cauchy complete (C.c)\/} if every ${\sf R}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in ${\EuScript M}$.
 We say that ${\EuScript M}$ is \emph{existentially closed (e.c.)\/} if every consistent conjunction of $\mathds{I}$-atomic formulas is satsfied in ${\EuScript M}$.
 
   
 \begin{theorem}
   \noindent\llap{\textcolor{red}{\Large\questionsign}\kern15.5ex}\ignorespaces
-  Let ${\EuScript M}$ be an e.c.\@ Cauchy complete model.
-  Then  every consistent formula $\varphi(x)\in\mathds{H}(M)$ is contained in a Cauchy type over $M$ of small cardinality.
+  Let ${\EuScript M}$ be an e.c.C.c\@ model.
+  Then  every consistent formula $\varphi(x)\in\mathds{H}(M)$ is contained in a Cauchy type over $M$.
 \end{theorem}
 
 \begin{proof}
-  If $\varphi(x)$ is $\mathds{I}$-atomic then, as ${\EuScript M}$ is e.c., it is realized by some $a\in M^{|x|}$ hence we can take the type $\{x{=}a,\, \varphi(x)\}$. 
-  Induction is immediate.
+  If $\varphi(x)$ is a conjunction of $\mathds{I}$-atomic formulas then, as ${\EuScript M}$ is e.c., it is realized by some $a\in M^{|x|}$ hence we can take the type $\{x{=}a,\, \varphi(x)\}$. 
+  Induction is immediate for the connectives $\vee,\forallM,\existsM$.
+  This suffices because, up to equivalence, we can assume that $\wedge$ only occurs in front of $\mathds{I}$-atomic formulas.
 \end{proof}
 
+The following corollary deals with the case $\varphi(x)$ does not depend on $x$.
 
 \begin{corollary}
   \noindent\llap{\textcolor{red}{\Large\questionsign}\kern16.5ex}\ignorespaces
-  Let ${\EuScript M}$ be an e.c.\@ Cauchy complete model.
+  Let ${\EuScript M}$ be an e.c.C.c.\@ model.
   Then ${\EuScript M}\models\varphi$ for every true $\varphi\in\mathds{H}(M)$.
 \end{corollary}
 
 
-\begin{proof}
-  Sentences are trivially ${\sf R}$-invariant.
-\end{proof}
-
 \begin{fact}
   Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda>|{\EuScript L}|$.
-  Then ${\EuScript M}$ is e.c.\@ and Cauchy complete.
+  Then ${\EuScript M}$ is e.c.C.c.
 \end{fact}
 
 \begin{proof}  
@@ -1110,7 +1107,7 @@ We say that ${\EuScript M}$ is \emph{existentially closed (e.c.)\/} if every con
   For every formula $\varphi(x)$ in the type $a\sim_{\sf R}\!x$ and every $\varphi'>\varphi$ pick some $\psi(x)\in p$ such that $\psi(x)\rightarrow\varphi'(x)$.
   There are at most $|{\EuScript L}|$ such formulas $\psi(x)$.
   By saturation they have a common solution $b$ in $M$.
-  Then $b\sim_{\sf R}a$ and, by invariance, $b\models p(x)$.
+  Then $b\sim_{\sf R}\!a$ and, by invariance, $b\models p(x)$.
 
   The existential closure of ${\EuScript M}$ follows from Fact~\ref{fact_saturation_invertible}.
 \end{proof}
