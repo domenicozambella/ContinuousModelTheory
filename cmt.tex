@@ -419,7 +419,7 @@ in particular  \emph{$\{\varphi(x)\}'$} = $\big\{\varphi'(x)\ :\ \varphi'>\varph
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Morphisms}
+\section{Morphisms}\label{morphisms}
 
 \def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
@@ -647,23 +647,37 @@ In words, the set of approximations of $\varphi$ is a directed set.
   If evaluated in an $\omega$-$\mathds{I}$-saturated model, $p'(x)$ is equivalent to $p(x)$.
 \end{remark}
 
-\begin{fact}\label{fact_saturation_invertible}
-  Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda\ge|{\EuScript L}|$.
+A consequence of the proposition above is that between $\omega$-$\mathds{I}$-saturated models the approximated morphisms defined in Section~\ref{morphisms} coincide with their unapproximated version.
+In particular, following follows from Fact~\ref{fact_HImorphisms}.
+
+\begin{corollary}\label{corol_omega_sat}
+  Let ${\EuScript M}$ be a model that is $\omega$-$\mathds{I}$-saturated for some $\lambda\ge|{\EuScript L}|$.
   Let $f:M\to N$ be an $\mathds{I}$-elementary map.
   Then
 
   \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(fa)}
 
-  for every $\mathds{I}$-atomic formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$
-\end{fact}
+  for every $\mathds{I}$-atomic formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$.
+\end{corollary}
 
-\begin{proof}
-  Assume ${\EuScript N}\models\varphi(fa)$.
-  It sufficies to prove the fact for $f$ of finite cardinality.
-  By the downward L\"owenheim-Skolem Theorem, there is a model ${\EuScript N_0}\preceq^{\EuScript L}{\EuScript N}$ of cardinality $|{\EuScript L}|$ containing $f(a)$.
-  By saturation there is a model ${\EuScript M_0}\preceq^\mathds{I}{\EuScript M}$ that is isomorphic to ${\EuScript N_0}$ over $f$.
-  By isomorphism ${\EuScript M_0}\models\varphi(a)$ and therefore ${\EuScript M}\models\varphi(a)$
-\end{proof}
+
+% \begin{fact}\label{fact_saturation_invertible}
+%   Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda\ge|{\EuScript L}|$.
+%   Let $f:M\to N$ be an $\mathds{I}$-elementary map.
+%   Then
+
+%   \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(fa)}
+
+%   for every $\mathds{I}$-atomic formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$
+% \end{fact}
+
+% \begin{proof}
+%   Assume ${\EuScript N}\models\varphi(fa)$.
+%   It sufficies to prove the fact for $f$ of finite cardinality.
+%   By the downward L\"owenheim-Skolem Theorem, there is a model ${\EuScript N_0}\preceq^{\EuScript L}{\EuScript N}$ of cardinality $|{\EuScript L}|$ containing $f(a)$.
+%   By saturation there is a model ${\EuScript M_0}\preceq^\mathds{I}{\EuScript M}$ that is isomorphic to ${\EuScript N_0}$ over $f$.
+%   By isomorphism ${\EuScript M_0}\models\varphi(a)$ and therefore ${\EuScript M}\models\varphi(a)$
+% \end{proof}
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -675,6 +689,13 @@ In words, the set of approximations of $\varphi$ is a directed set.
 We denote by \emph{${\EuScript U}=\langle U,R\rangle$\/} some large $\mathds{I}$-saturated structure which we call the \emph{monster model.}
 For convenience we assume that the cardinality of ${\EuScript U}$ is an inaccessible cardinal which we denote by \emph{$\kappa$.}
 Below we say \emph{model\/} for $\mathds{I}$-elementary submodel of ${\EuScript U}$.
+We stress once again that for a model ${\EuScript M}$ we (only) have that for every $\varphi\in\mathds{I}(M)$
+
+\ceq{\hfill{\EuScript M}\models\varphi}{\Rightarrow}{{\EuScript U}\models\varphi}
+
+If also the converse implication holds we say ${\EuScript M}$ a \emph{strong model.}
+By Corollary~\ref{corol_omega_sat} the $\omega$-$\mathds{I}$-saturated models are strong models. 
+We will see that so are Cauchy complete models. 
 
 Let $A\subseteq U$ be a small set throughout this section.
 We define a topology on $U^{|x|}\times R^{|y|}$ which we call the \emph{$\mathds{I}(A)$-topology.}
@@ -1071,34 +1092,46 @@ This definition is classical, but note that when $q(x)$ is over $M$ we can only 
 \end{proof}
 
 Let ${\EuScript M}$ be a model.
-We say that ${\EuScript M}$ is \emph{Cauchy complete (C.c)\/} if every ${\sf R}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in ${\EuScript M}$.
-We say that ${\EuScript M}$ is \emph{existentially closed (e.c.)\/} if every consistent conjunction of $\mathds{I}$-atomic formulas is satsfied in ${\EuScript M}$.
+We say that ${\EuScript M}$ is \emph{Cauchy complete\/} if every ${\sf R}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in ${\EuScript M}$.
+% We say that ${\EuScript M}$ is \emph{existentially closed (e.c.)\/} if every consistent conjunction of $\mathds{I}$-atomic formulas is satsfied in ${\EuScript M}$.
+Note that if $p(x)$ is Cauchy type then any consistent type $q(x)$ containing $p(x)$ is also Cauchy.
+In particular the type $p(x)\ \cup\ \mathds{I}\mbox{-Th}({\EuScript U}/M)$ is Cauchy.
+The following trivial consequence is worth to be noted
+
+\begin{remark}
+  Cauchy complete models are strong models. I.e., ${\EuScript M}\models\varphi$ for every true $\varphi\in\mathds{I}(M)$.
+\end{remark}
 
   
-\begin{theorem}
-  \noindent\llap{\textcolor{red}{\Large\questionsign}\kern15.5ex}\ignorespaces
-  Let ${\EuScript M}$ be an e.c.C.c\@ model.
-  Then  every consistent formula $\varphi(x)\in\mathds{H}(M)$ is contained in a Cauchy type over $M$.
-\end{theorem}
+% \begin{proposition}
+%   \noindent\llap{\textcolor{red}{\Large\questionsign}\kern18ex}\ignorespaces
+%   Let ${\EuScript M}$ be an e.c.C.c\@ model.
+%   Then for every consistent formula $\varphi(x)\in\mathds{H}(M)$ there is Cauchy type $p(x)\subseteq\mathds{H}(M)$ such that $p(x)\rightarrow\varphi(x)$.
+% \end{proposition}
 
-\begin{proof}
-  If $\varphi(x)$ is a conjunction of $\mathds{I}$-atomic formulas then, as ${\EuScript M}$ is e.c., it is realized by some $a\in M^{|x|}$ hence we can take the type $\{x{=}a,\, \varphi(x)\}$. 
-  Induction is immediate for the connectives $\vee,\forallM,\existsM$.
-  This suffices because, up to equivalence, we can assume that $\wedge$ only occurs in front of $\mathds{I}$-atomic formulas.
-\end{proof}
+% \begin{proof}
+%   If $\varphi(x)$ is a conjunction of $\mathds{I}$-atomic formulas then, as ${\EuScript M}$ is e.c., it is realized by some $a\in M^{|x|}$ hence we can take the type $\{x{=}a,\, \varphi(x)\}$. 
+%   Induction is immediate for the connectives $\vee,\forallM,\existsM$.
+%   This suffices because, up to equivalence, we can assume that $\wedge$ only occurs in front of $\mathds{I}$-atomic formulas.
+% \end{proof}
 
-The following corollary deals with the case $\varphi(x)$ does not depend on $x$.
+% \begin{corollary}
+%   \noindent\llap{\textcolor{red}{\Large\questionsign}\kern16.5ex}\ignorespaces
+%   Let ${\EuScript M}$ be an e.c.C.c.\@ model.
+%   Then ${\EuScript M}\models\varphi$ for every true $\varphi\in\mathds{H}(M)$.
+% \end{corollary}
 
-\begin{corollary}
-  \noindent\llap{\textcolor{red}{\Large\questionsign}\kern16.5ex}\ignorespaces
-  Let ${\EuScript M}$ be an e.c.C.c.\@ model.
-  Then ${\EuScript M}\models\varphi$ for every true $\varphi\in\mathds{H}(M)$.
-\end{corollary}
+% \begin{proof}
+%   Apply the proposition in the case when $\varphi(x)$ does not depend on $x$.
+%   Let $p(x)\subseteq\mathds{H}(M)$ be a Cauchy type such that $p(x)\rightarrow\varphi$.
+%   Then $\existsM y\sim_{\sf R}\! x\ p(y)$ is an ${\sf R}$-invariant Cauchy type that implies $\varphi$.
+%   Hence ${\EuScript M}\models\varphi$ by Cauchy completeness.
+% \end{proof}
 
 
 \begin{fact}
   Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda>|{\EuScript L}|$.
-  Then ${\EuScript M}$ is e.c.C.c.
+  Then ${\EuScript M}$ is Cauchy complete.
 \end{fact}
 
 \begin{proof}  
@@ -1108,8 +1141,6 @@ The following corollary deals with the case $\varphi(x)$ does not depend on $x$.
   There are at most $|{\EuScript L}|$ such formulas $\psi(x)$.
   By saturation they have a common solution $b$ in $M$.
   Then $b\sim_{\sf R}\!a$ and, by invariance, $b\models p(x)$.
-
-  The existential closure of ${\EuScript M}$ follows from Fact~\ref{fact_saturation_invertible}.
 \end{proof}
 
 
