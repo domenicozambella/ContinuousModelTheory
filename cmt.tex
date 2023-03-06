@@ -187,7 +187,8 @@ We also borrow intuitions and results from nonstandard analisys to an extent tha
 
 Let \emph{$R$\/} be some fixed first-order structure which is endowed with a Hausdorff compact topology (in particular, a normal topology).
 The language \emph{$L_{\sf R}$\/} contains relation symbols for the compact subsets $C\subseteq R^n$ and a function symbol for each continuous functions $f:R^n\to R$.
-According to the context, $C$ and $f$ denote either the symbols of $L_{\sf R}$ or their interpretation in $R$.
+In particular, there is a costant for each element of $R$.
+According to the context, $C$ and $f$ denote either the symbols of $L_{\sf R}$ or their interpretation in the stucture $R$.
 % Our choice is a compromise to avoid eccessive complications.
 % It would be interesting to drop the restriction on the sort of the function symbols.
 
@@ -477,15 +478,15 @@ However, the following holds in general.
 \end{proof}
 
 % \begin{comment}
-Finally we introduce the morphisms that corrisponds to the classical partial isomorphisms.
-We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if implication (1) holds for all $\mathds{I}$-atomic formulas $\varphi(x)$.
+Finally, we introduce the morphisms that corrisponds to the classical partial isomorphisms.
+We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if implication (1) holds for all $\mathds{I}$-atomic formulas $\varphi(x)$ 
 
 \begin{fact}
   If $f:M\to N$ is a partial $\mathds{I}$-embedding then 
 
   \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(fa)}
 
-  for every $\mathds{I}$-atomic formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$
+  for every $a\in({\rm dom }f)^{|x|}$ and every $\mathds{I}$-formulas $\varphi(x)$ without quantifiers of sort ${\sf M}$.
 \end{fact}
 
 \begin{proof}
@@ -494,10 +495,8 @@ We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if implicati
   Vice versa, if ${\EuScript M}\models t(a)\notin C$ then, by normality,  ${\EuScript M}\models t(a)\in\tilde{C}$ for some compact $\tilde C$ disjoint of $C$.
   By the definition of $\mathds{I}$-embedding, ${\EuScript N}\models t(a)\in\tilde{C}$.
   Hence ${\EuScript N}\models t(a)\notin C$.
+  Induction is immediate.
 \end{proof}
-
-% \end{comment}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -567,7 +566,7 @@ The following proposition shows that a slight amount of saturation tames the $\m
 \begin{proof}
   We prove $\rightarrow$, the non trivial implication.
   The claim is clear for atomic formulas.
-  Induction for conjunction, disjunction and the universal quantifier is immediate.
+  Induction for conjunction, disjunction and the universal quantifiers is immediate.
  % 
   % Consider disjunction.
   % Let $\varphi=\varphi_i\vee\varphi_1$.
@@ -617,9 +616,9 @@ The following proposition shows that a slight amount of saturation tames the $\m
   {\rightarrow}
   {\existsM z\,\{\varphi(x,z\,;y)\}'}
 
-Replace $x,y$ with some fix but arbitrary parameters, say $a,\alpha$ and assume the antecedent, that is, the truth of the theory $\{\existsM z\,\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
+Replace $x,y$ with some parameters, say $a,\alpha$ and assume the antecedent, that is, the truth of the theory $\{\existsM z\,\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
 We need to prove the consistency of the type $\{\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
-By the saturation of ${\EuScript U}$, finite concistency suffices.
+By saturation, finite concistency suffices.
 This is clear if we show that the antecedent is closed under conjunction.
 Indeed it is easy to verify that if $\varphi_1,\varphi_2>\varphi$ then $\varphi_1\wedge\varphi_2>\varphi'$ for some $\varphi'>\varphi$.
 In words, the set of approximations of $\varphi$ is a directed set.
@@ -688,14 +687,12 @@ In particular, following follows from Fact~\ref{fact_HImorphisms}.
 
 We denote by \emph{${\EuScript U}=\langle U,R\rangle$\/} some large $\mathds{I}$-saturated structure which we call the \emph{monster model.}
 For convenience we assume that the cardinality of ${\EuScript U}$ is an inaccessible cardinal which we denote by \emph{$\kappa$.}
+Truth is evaluated in ${\EuScript U}$ unless otherwise is specified.
 Below we say \emph{model\/} for $\mathds{I}$-elementary submodel of ${\EuScript U}$.
-We stress once again that for a model ${\EuScript M}$ we (only) have that for every $\varphi\in\mathds{I}(M)$
-
-\ceq{\hfill{\EuScript M}\models\varphi}{\Rightarrow}{{\EuScript U}\models\varphi}
-
+We stress once again that the truth of some $\varphi\in\mathds{I}(M)$ in a model  ${\EuScript M}$ (only) implies the truth of $\varphi$ (in ${\EuScript U}$).
 If also the converse implication holds we say ${\EuScript M}$ a \emph{strong model.}
 By Corollary~\ref{corol_omega_sat} the $\omega$-$\mathds{I}$-saturated models are strong models. 
-We will see that so are Cauchy complete models. 
+Also Cauchy complete models, which we will introduce below, are strong models.  
 
 Let $A\subseteq U$ be a small set throughout this section.
 We define a topology on $U^{|x|}\times R^{|y|}$ which we call the \emph{$\mathds{I}(A)$-topology.}
@@ -717,7 +714,7 @@ There are some subtle differences from the classical setting.
   Let $p(x)\subseteq\mathds{I}(A)$ be a type.
   Then for every  $\varphi(x)\in\mathds{I}(U)$
   \begin{itemize}
-    \item[1.] if $p(x)\rightarrow\neg\varphi(x)$ then $\psi(x)\rightarrow\varphi(x)$ for some $\psi(x)$ conjunction of formulas in $p(x)$;
+    \item[1.] if $p(x)\rightarrow\neg\varphi(x)$ then $\psi(x)\rightarrow\neg\varphi(x)$ for some $\psi(x)$ conjunction of formulas in $p(x)$;
     \item[2.] if $p(x)\rightarrow\varphi(x)$ and $\varphi'>\varphi$ then $\psi(x)\rightarrow\varphi'(x)$ for some conjunction of formulas in $p(x)$.
   \end{itemize} 
 \end{fact}
@@ -924,15 +921,11 @@ We also need an approximation restult for the negation of formulas in $\mathds{I
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Tarski-Vaught test}
+\section{The Tarski-Vaught test and the L\"owenheim-Skolem theorem}
 
 The following proposition is not literally the Tarski-Vaught test because it only applies when the larger structure is the moster model.
-Classically, the main application of the Tarski-Vaught test is in the proof of the downward L\"owenheim-Skolem Theorem.
-Not here, in fact the classical downward L\"owenheim-Skolem Theorem holds in full for all ${\EuScript L}$-structures.
-Therefore the proposition is proved for its own interest.
-For instance, implications (1$\Rightarrow$2) and (1$\Rightarrow$3) are not as evident as in the classical case.
 
-\begin{proposition}
+\begin{proposition}\label{prop_Tarski_Vaught}
   Let $M$ be a subset of $U$.
   Then the following are equivalent
   \begin{itemize}
@@ -995,6 +988,22 @@ For instance, implications (1$\Rightarrow$2) and (1$\Rightarrow$3) are not as ev
   Induction for the connectives $\vee$, $\wedge$, $\existsM $, $\existsR $, and $\forallR $ is straightforward.
 \end{proof}
 
+Classically, the main application of the Tarski-Vaught test is in the proof of the downward L\"owenheim-Skolem Theorem.
+Note that here the classical downward L\"owenheim-Skolem Theorem holds in full for all ${\EuScript L}$-structures.
+In particular every $A\subseteq U$ is contained in a model of cardinality $|{\EuScript L}(A)|$.
+However, in same cases we can do better than that.
+
+The \emph{weight\/} of ${\EuScript L}$, which we denote by \emph{${\rm wgt}\big({\EuScript L}\big)$\/} is the minimal cardinality of a set of formulas $\mathds{H}'$ such that for every $\varphi,\varphi''\in\mathds{H}$ such that $\varphi''>\varphi$ there is a $\varphi'\in\mathds{H}'$ such that  $\varphi''>\varphi'>\varphi$.
+It is not difficult to see that when $R$ is the real unit interval and ${\EuScript L}$ contains at modt countably many symbols of sort ${\sf M}^n\to{\sf R}$ then ${\rm wgt}\big({\EuScript L}\big)=\omega$.
+
+\begin{proposition}
+  Let $A\subseteq U$.
+  Then  $A$ is contained in a model of cardinality at most ${\rm wgt}\big({\EuScript L}\big)+|A|$.  
+\end{proposition}
+
+\begin{proof}
+  As in the classical L\"owenheim-Skolem Theorem, using (2) of Proposition~\ref{prop_Tarski_Vaught}.
+\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -1308,21 +1317,43 @@ Therefore the notion of convergent sequence makes perfectly sense in $U$.
 \end{bibdiv}
 
 
-\end{document}
 \vskip20ex
 %%%%%%%%%%%%%%
 \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
 Garbage after this point
 
 
-Let $t(x,y)$ and $C$ be a term of sort ${\sf M}^{|x|+|z|}\to {\sf R}$, respectively a compact neighborhood of $\Delta$.
-For $\gamma,\xi\in{\rm Aut}({\EuScript U})$ and $a$ a finite tuple of elements of $M$ we write $\gamma\sim_{a,t,C}\xi$ for $\gamma a\sim_{a,t,C} \xi a$.
+Let $t(x,y)$ and $D$ be a term of sort ${\sf M}^{|x|+|z|}\to {\sf R}$, respectively a compact neighborhood of the diagonal.
+For $\gamma,\xi\in{\rm Aut}({\EuScript U})$ and $a$ a finite tuple of elements of $M$ we write $\gamma\sim_{a,t,C}\xi$ for $\gamma a\sim_{a,t,D} \xi a$.
 This defines a system of entourages on ${\rm Aut}({\EuScript U})$.
 
-By ${\rm Aut}({\EuScript U}/\{M\})$ we denote the set of automorphisms of ${\EuScript U}$ that fix $M$ setwise.
-When ${\rm Aut}({\EuScript U}/\{M\})$ is dense in ${\rm Aut}({\EuScript U})$ with respect to the topology above, we say that ${\EuScript M}$ is \emph{approximatively $\omega$-homogeneous.}
+By ${\rm Aut}({\EuScript U}/\{\!M\!\})$ we denote the set of automorphisms of ${\EuScript U}$ that fix $M$ setwise.
+When ${\rm Aut}({\EuScript U}/\{\!M\!\})$ is dense in ${\rm Aut}({\EuScript U})$ with respect to the topology above, we say that ${\EuScript M}$ is \emph{approximatively $\omega$-homogeneous.}
 Note that this is the classical notion of homogeneity only with the discrete topology replaced by the ${\sf R}$-topology.
 
+We write $\mathds{I}_\forall$ for the set of $\mathds{I}$-formulas where the quantifier $\existsM$ do not occur.
+Let $T_0$ be an $\mathds{I}_\forall$-theory with countable models ($L_{\sf M}$ is countable).
+Let ${\EuScript C}$ be a category whose objects, which we call ${\EuScript C}$-models, are countable models of $T_0$.
+For ease of speaking we identify these models with the domain of their sort ${\sf M}$.
+The morphisms of ${\EuScript C}$, which we call  ${\EuScript C}$-morphisms, are finite maps between ${\EuScript C}$-models.
+
+\begin{itemize} 
+  \item[c1.] the identity map ${\rm id}_A:M\to M$ is a ${\EuScript C}$-morphism, for any $A\subseteq M$;
+  \item[c2.]  ${\EuScript C}$-morphisms are partial $\mathds{I}$-embeddings;
+  \item[c3.]  the inverse of a ${\EuScript C}$-morphism is a  ${\EuScript C}$-morphism;
+  \item[c3.] if $M$ is a ${\EuScript C}$-model and $f:M\to N$ and  $\mathds{I}$-elementary map, then $N$ is a ${\EuScript C}$-model and $f$ is a  ${\EuScript C}$-morphism.
+\end{itemize}
+
+We write $M\le N$ if the identity map ${\rm id}_M:M\to N$ is a ${\EuScript C}$-morphism.
+We also assume that ${\EuScript C}$ is connected (c4) and that it has the amalgamation property (c5).
+
+\begin{itemize} 
+  \item[c4.] the empty map between two ${\EuScript C}$-models is a ${\EuScript C}$-morphism;
+  \item[c5.] for every ${\EuScript C}$-morphism $k:M\to N$ and every $b\in M$ there is a ${\EuScript C}$-model $N\ge M$ and a ${\EuScript C}$-morphism $h:M\to N'$ that exiends $k$ and is defined on $b$.
+\end{itemize}
+
+
+\end{document}
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
