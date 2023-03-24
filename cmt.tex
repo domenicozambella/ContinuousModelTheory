@@ -49,7 +49,7 @@
 \renewenvironment{itemize}
   {\begin{list}{$\cdot$}{%
   \setlength{\parskip}{0mm}
-  \setlength{\topsep}{.2\baselineskip}
+  \setlength{\topsep}{.4\baselineskip}
   \setlength{\rightmargin}{0mm}
   \setlength{\listparindent}{0mm}
   \setlength{\itemindent}{0mm}
@@ -170,7 +170,7 @@ Different people have attemped different paths.
 \end{itemize}
 
 We elaborate on the ideas of Henson and Iovino and generalize them to a larger class of structures.
-We restrict the notions of elementarity and saturation.
+We also restrict the notions of elementarity and saturation.
 But we use a class of formulas $\mathds{I}$ which is larger than $\mathds{H}$.
 Though $\mathds{I}$ has approximatively the same expressive power as $\mathds{H}$ (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}), it is evident (cf.\@ Example~\ref{ex_Rvlogic}) that $\mathds{I}$ is more convinent to use.
 
@@ -185,22 +185,21 @@ We also borrow intuitions and results from nonstandard analisys to an extent tha
 \section{A class of structures}\label{uno}
 
 
-Let \emph{$I$\/} be some fixed first-order structure which is endowed with a Hausdorff compact topology (in particular, a normal topology).
+Let \emph{$I$\/} be some fixed first-order structure which is endowed with a Hausdorff compact\footnote{This seems to exclude the motivation example mentioned above. For this example and many other similar we have to replace $\mathds{R}$ with $\mathds{R}\cup\{\pm\infty\}$.} topology (in particular, a normal topology).
 The language \emph{$L_{\sf I}$\/} contains relation symbols for the compact subsets $C\subseteq I^n$ and a function symbol for each continuous functions $f:I^n\to I$.
 In particular, there is a constant for each element of $I$.
 According to the context, $C$ and $f$ denote either the symbols of $L_{\sf I}$ or their interpretation in the stucture $I$.
-The most common examples of structures $I$ are the unit interval $[0,1]$, with the usual topology, and its homeomophic copy $\mathds{R}^+\cup\{0,\infty\}$.
-% Our choice is a compromise to avoid eccessive complications.
-% It would be interesting to drop the restriction on the sort of the function symbols.
+The most common examples of structures $I$ are the unit interval $[0,1]$, with the usual topology, and its homeomophic copies $\mathds{R}^+\cup\{\infty\}$ and $\mathds{R}\cup\{\pm\infty\}$.
 
+We also fix a first-order language \emph{$L_{\sf H}$\/} which we call the language of the \emph{home sort.}
 
 \begin{definition}\label{def_0}
-  Let \emph{$L_{\sf H}$\/} be a one-sorted (first-order) language.
-  By \emph{model\/} we mean an ${\EuScript L}$-structure of the form ${\EuScript M}=\langle  M,I\rangle$, where $M$ ranges over $L_{\sf H}$-structures, while $I$ is the structure fixed above.
-  We use \emph{${\sf H}$,} for \emph{home,} and \emph{${\sf I}$\/} to denote the two sorts of ${\EuScript L}$.
-  % The two sorts are denoted by ${\sf H}$ and ${\sf I}$.
-  The language \emph{${\EuScript L}$\/} is an expansion of both $L_{\sf H}$ and $L_{\sf I}$.
+  Let ${\EuScript L}$ be a two sorted language that expands both $L_{\sf H}$ and $L_{\sf I}$.
+  By \emph{model\/} we mean a two-sorted ${\EuScript L}$-structure of the form $\langle  M,I\rangle$, where $M$ ranges over all $L_{\sf H}$-structures, while $I$ is the structure fixed above.
+  We write \emph{${\sf H}$} and \emph{${\sf I}$\/} to denote the two sorts of ${\EuScript L}$.
   The new symbols allowed in ${\EuScript L}$ are function symbols of sort ${\sf H}^n\to {\sf I}$.
+
+  Models are denoted by the domain of their home sort.
 \end{definition}
 
 % In some examples we need to replace the sort ${\sf H}$ with many sorts ${\sf H}_1\dots,{\sf H}_k$.
@@ -219,24 +218,24 @@ The symbols $\mathds{I}$ and $\mathds{H}$ defined below denote only sets of ${\E
 \begin{definition}\label{def_LL}
   Formulas in \emph{$\mathds{I}$\/} are defined inductively from two sorts of \emph{$\mathds{I}$-atomic\/} formulas
   \begin{itemize}
-  \item[i.] formulas of the form $t(x;y)\in C$, where $C\subseteq I^n$ is compact (in the product topology) and $t(x,y)$ is a $n$-tuple of terms of sort ${\sf H}^{|x|}\times {\sf I}^{|y|}\to {\sf I}$; 
+  \item[i.] formulas of the form $t(x\,;\eta)\in C$, where $C\subseteq I^n$ is compact and $t(x\,;\eta)$ is a tuple of terms of sort ${\sf H}^{|x|}\times {\sf I}^{|\eta|}\to {\sf I}$; 
   \item[ii.] all formulas in $L_{\sf H}$.
   \end{itemize}
-  We require that $\mathds{I}$ is closed under the Boolean connectives $\wedge$, $\vee$; the quantifiers $\forallH$, $\existsH $ of sort ${\sf H}$; and the quantifiers of sort ${\sf I}$ which are denoted by $\forallI $, $\existsI$.
+  We require that $\mathds{I}$ is closed under the Boolean connectives $\wedge$, $\vee$; the quantifiers $\forallH$, $\existsH $ of sort ${\sf H}$; and the quantifiers $\forallI $, $\existsI$ of sort ${\sf I}$.
 
-  We write \emph{$\mathds{H}$ \/} for the set of formulas in $\mathds{I}$ with quantifiers only of sort $\mathds{H}$ (i.e.\@ without quantifiers of sort ${\sf I}$).
+  We write \emph{$\mathds{H}$ \/} for the set of formulas in $\mathds{I}$ with only quantifiers of sort ${\sf H}$ (i.e.\@ without quantifiers of sort ${\sf I}$).
 \end{definition}
 
 % \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
 Formulas in $\mathds{H}$ are a generalization of the positive bounded formulas of Henson and Iovino.
 Here we also introduce the larger class $\mathds{I}$ because it offers some advantages. 
 For instance, it is easy to see (cf.\@ Example~\ref{ex_Rvlogic} for a hint) that $\mathds{I}$ has at least the same expressive power as real valued logic (in fact, it is way more expressive%
-\footnote{This unsubstatited claim should be interpreted as a concjecture.
+\footnote{This unsubstantited claim should be interpreted as a concjecture.
 A painstaking technical comparison with real valued logic is not in the scope of this indroductory exploratory paper.}).
 Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}) that the formulas in $\mathds{I}$ can be approximated by formulas in $\mathds{H}$.
 
 \begin{example}\label{ex_Rvlogic}
-  Let $I=[0,1]$, the unit interval in $\mathds{I}$.
+  Let $I=[0,1]$, the unit interval in $\mathds{R}$.
   Let $t(x)$ be a term of sort ${\sf H}^{|x|}\to {\sf I}$.
   Then there is a formula in $\mathds{I}$ that says $\sup_{x} t(x)=\tau$.
   Indeed, consider the formula
@@ -252,7 +251,7 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
 We conclude this introduction with a question.
 Is it possible extend the theory exposed below to a larger ${\EuScript L}$?
 E.g.\@ can we allow in ${\EuScript L}$ function symbols of sort ${\sf H}^n\times {\sf I}^m\to {\sf I}$ with both $n$ and $m$ positive?
-These would have natural interpretations, e.g.\@ when $M$ is a group acting on a compact set $I$.
+These would have natural interpretations, e.g.\@ a group acting on a compact set $I$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -262,22 +261,23 @@ These would have natural interpretations, e.g.\@ when $M$ is a group acting on a
 \section{The standard part}\label{standard_part}
 
 In this section we recall the notion of the sandard part of an element of the elementary extension of a compact Hausdorff topological space.
-Our goal is to prove Lemma~\ref{lem_st} which in turn is required for the proof of the compactness theorem.
-The reader that is willing to accept the Compactness Theorem without proof may skip this section, see Theorem~\ref{thm_compattezza}.
+Our goal is to prove Lemma~\ref{lem_st} which in turn is required for the proof of the $\mathds{I}$-Compactness Theorem.
+The reader that is willing to accept the $\mathds{I}$-Compactness Theorem without proof may skip this section, see Theorem~\ref{thm_compattezza}.
 
 
 Let $I\preceq{}^*\!I$.
-For each $\beta\in I$ we define the type
+Let $\eta$ be a free variable of sort ${\sf I}$.
+For each $\beta\in I$, we define the type
 
-\ceq{\hfill{\rm m}_\beta(x)}{=}{\{x\in D\ :\  D \textrm{ compact neighborhood of }\beta\}.}
+\ceq{\hfill{\rm m}_\beta(\eta)}{=}{\{\eta\in D\ :\  D \textrm{ compact neighborhood of }\beta\}.}
 
-The set of the realizations of ${\rm m}_\beta(x)$ in ${}^*\!I$ is known to nonstandard analysts as the monad of $\beta$. 
+The set of the realizations of ${\rm m}_\beta(\eta)$ in ${}^*\!I$ is known to nonstandard analysts as the monad of $\beta$. 
 % We write \emph{$\alpha\approx\alpha'$\/} if $\alpha\approx\beta\approx\alpha'$ for some $\beta\in I$.
 % From the following fact it follows that $\,\approx\,$ is an equivalence relation on ${}^*\!I$.
 The following fact is well-known.
 
 \begin{fact}\label{fact_uniqueness_st}
-  For every $\alpha\in{}^*\!I$ there is a unique $\beta\in I$ such that $\alpha\models{\rm m}_\beta(x)$.
+  For every $\alpha\in{}^*\!I$ there is a unique $\beta\in I$ such that ${}^*\!I\models{\rm m}_\beta(\alpha)$.
 \end{fact}
 
 \begin{proof}
@@ -289,7 +289,7 @@ The following fact is well-known.
   The uniqueness of $\beta$ follows from normality.
 \end{proof}
 
-We denote by \emph{${\rm st}(\alpha)$\/} the unique $\beta\in I$ such that $\alpha\models{\rm m}_\beta(x)$.
+We denote by \emph{${\rm st}(\alpha)$\/} the unique $\beta\in I$ such that ${}^*\!I\models{\rm m}_\beta(\alpha)$.
 We write \emph{$\alpha\approx\alpha'$\/} if ${\rm st}(\alpha)={\rm st}(\alpha')$.
 
 \begin{fact}\label{fact_st1}
@@ -305,7 +305,7 @@ We write \emph{$\alpha\approx\alpha'$\/} if ${\rm st}(\alpha)={\rm st}(\alpha')$
 \end{proof}
 
 \begin{fact}\label{fact_terms_st}
-  For every $\alpha\in({}^*\! I)^{|x|}$ and every function symbol $f$ of sort ${\sf I}^{|x|}\to{\sf I}$
+  For every $\alpha\in({}^*\! I)^{|\alpha|}$ and every function symbol $f$ of sort ${\sf I}^{|\alpha|}\to{\sf I}$
 
   \ceq{\hfill{}^*\!I}{\models}{{\rm st}\big(f(\alpha)\big)=f\big({\rm st}(\alpha)\big).}
 \end{fact}
@@ -319,55 +319,66 @@ We write \emph{$\alpha\approx\alpha'$\/} if ${\rm st}(\alpha)={\rm st}(\alpha')$
   Therefore ${}^*\!I\models \alpha\in f^{-1}[D]$ and, as $I\preceq{}^*\!I$ we obtain ${}^*\!I\models f(\alpha)\in D$.
 \end{proof}
 
-Let ${}^*{\!\EuScript M}=\langle M,{}^*\!I\rangle$ be an ${\EuScript L}$-structure such that $I\preceq{}^*\!I$.
-The \emph{standard part of ${}^*{\!\EuScript M}$\/} is the model ${\EuScript M}=\langle M,I\rangle$ that interprets the symbols $f$ of sort ${\sf H}^n\to {\sf I}$ as the functions
+Let $\langle M,{}^*\!I\rangle$ be an ${\EuScript L}$-structure such that $I\preceq{}^*\!I$.
+The \emph{standard part of $\langle M,{}^*\!I\rangle$\/} is the model $\langle M,I\rangle$ that interprets the symbols $f$ of sort ${\sf H}^n\to {\sf I}$ as the functions
 
-\ceq{\hfill f^{\EuScript M}(a)}{=}{{\rm st}\big(f^{{}^*\!\EuScript M}(a)\big)}\hfill for all $a\in M^n$.
+\ceq{\hfill f^M(a)}{=}{{\rm st}\big({}^*\!f(a)\big)}\hfill for all $a\in M^n$,
 
+where ${}^*\!f$ is the interpretation of $f$ in  $\langle M,{}^*\!I\rangle$.
 Symbols in $L_{\sf H}$ maintain the same interpretation.
 
-\begin{fact}\label{fact_st2}
-  Let ${}^*{\!\EuScript M}$ and ${\EuScript M}$ be as above.
-  Let $t(x\,;y)$ be a term of sort ${\sf H}^{|x|}\times{\sf I}^{|y|}\to {\sf I}$.
-  Then for every $a\in M^{|x|}$ and $\alpha\in({}^*\!I)^{|y|}$
+\begin{fact}\label{fact_st2} 
+  With the notation as above.
+  Let $t(x\,;\eta)$ be a term of sort ${\sf H}^{|x|}\times{\sf I}^{|\eta|}\to {\sf I}$.
+  Then for every $a\in M^{|x|}$ and $\alpha\in({}^*\!I)^{|\eta|}$
 
-  \ceq{\hfill t^{\EuScript M}\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big(t^{{}^*{\!\EuScript M}}(a\,;\alpha)\big)}
+  \ceq{\hfill t^M\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big({}^*t(a\,;\alpha)\big)}
 \end{fact}
 \begin{proof}
   When a $t$ is function symbol of sort  ${\sf H}^{|x|}\to {\sf I}$, the claim holds by definition.
-  When $t$ is a function symbol of sort ${\sf I}^{|y|}\to {\sf I}$, the claim follows from Fact~\ref{fact_terms_st}.
+  When $t$ is a function symbol of sort ${\sf I}^{|\eta|}\to {\sf I}$, the claim follows from Fact~\ref{fact_terms_st}.
   Now, assume inductively that 
 
-  \ceq{\hfill t_i^{\EuScript M}\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big(t_i^{{}^*{\!\EuScript M}}(a\,;\alpha)\big)}
+  \ceq{\hfill t_i^M\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big({}^*t_i(a\,;\alpha)\big)}
 
-  holds for the terms $t_1(x\,;y),\dots,t_n(x\,;y)$ and let $t=f(t_1,\dots,t_n)$ for some function $f$ of sort ${\sf I}^n\to {\sf I}$.
+  holds for the terms $t_1(x\,;\eta),\dots,t_n(x\,;\eta)$ and let $t=f(t_1,\dots,t_n)$ for some function $f$ of sort ${\sf I}^n\to {\sf I}$.
   Then the claim follows immediately from the induction hypothesis and Fact~\ref{fact_terms_st}.
 \end{proof}
 
 % Symbols in $L_{\sf I}$ have the interpretation they have in models.
 
 \begin{lemma}\label{lem_st}
-  Let ${}^*{\!\EuScript M}$ and ${\EuScript M}$ be as above.
-  Then for every $\varphi(x\,;y)\in\mathds{I}$, \  $a\in M^{|x|}$ and $\alpha\in({}^*\!I)^{|y|}$ 
+  With the notation as above.
+  For every $\varphi(x\,;\eta)\in\mathds{I}$, \  $a\in M^{|x|}$ and $\alpha\in({}^*\!I)^{|\eta|}$ 
   
-  \ceq{\hfill{}^*{\!\EuScript M}\models\varphi(a\,;\alpha)}
+  \ceq{\hfill\langle M,{}^*\!I\rangle\models\varphi(a\,;\alpha)}
   {\Rightarrow}
-  {{\EuScript M}\models\varphi\big(a\,;{\rm st}(\alpha)\big)}
+  {M\models\varphi\big(a\,;{\rm st}(\alpha)\big)}
 \end{lemma}
 
 \begin{proof}
-  Suppose $\varphi(x\,;y)$ is $\mathds{I}$-atomic.
-  If $\varphi(x\,;y)$ is a formula of $L_{\sf H}$ the claim is trivial. 
-  Otherwise $\varphi(x\,;y)$ has the form $t(x\,;y)\in C$.
-  Assume that the tuple $t(x\,;y)$ consists of a single term.
+  Suppose $\varphi(x\,;\eta)$ is $\mathds{I}$-atomic.
+  If $\varphi(x\,;\eta)$ is a formula of $L_{\sf H}$ the claim is trivial. 
+  Otherwise $\varphi(x\,;\eta)$ has the form $t(x\,;\eta)\in C$.
+  Assume that the tuple $t(x\,;\eta)$ consists of a single term.
   The general case follows easily from this special case. 
-  Assume that ${}^*{\!\EuScript M}\models t(a\,;\alpha)\in C$.
-  Then ${\rm st}\big(t^{{}^*{\!\EuScript M}}(a\,;\alpha\big)\in C$ by Fact~\ref{fact_st1}.
-  Therefore $t^{{\EuScript M}}(a\,;{\rm st}(\alpha)\in C$ follows from Fact~\ref{fact_st2}.
+  Assume that $\langle M,{}^*\!I\rangle\models t(a\,;\alpha)\in C$.
+  Then ${\rm st}\big({}^*t(a\,;\alpha)\big)\in C$ by Fact~\ref{fact_st1}.
+  Therefore $t^M\big(a\,;{\rm st}(\alpha)\big)\in C$ follows from Fact~\ref{fact_st2}.
   This proves the lemma for $\mathds{I}$-atomic formulas.
   Induction is immediate. 
 \end{proof}
 
+\begin{corollary}\label{corol_Isaturation}
+  Let $M$ be a model and let $p(\eta)\subseteq\mathds{I}(M)$ be a type that is finitely consistent in $M$, where $\eta$ is a tuple of variables of sort ${\sf I}$.
+  Then $p(\eta)$ is realized in $M$.
+\end{corollary}
+
+\begin{proof}
+  By the classical Compactess Theorem, the type $p(\eta)$ is realized in some ${\EuScript L}$-structure $\langle M,{}^*\!I\rangle$ by
+  some $\alpha\in ({}^*\!I)^{|\eta|}$.
+  Therefore, by the lemma above $M\models p\big({\rm st}(\alpha)\big)$.
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -425,17 +436,18 @@ in particular  \emph{$\{\varphi(x)\}'$} = $\big\{\varphi'(x)\ :\ \varphi'>\varph
 
 \def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
-Let ${\EuScript M}=\langle M,I\rangle$ and ${\EuScript N}=\langle N,I\rangle$ be two models.
+Let $M$ and $N$ be two models.
 We say that a partial map $f:M\to N$ is \emph{$\mathds{I}$-elementary\/} if for every $\varphi(x)\in\mathds{I}$ and every $a\in({\rm dom }f)^{|x|}$
 
-\ceq{1.\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(fa).}
+\ceq{1.\hfill M\models\varphi(a)}{\Rightarrow}{N\models\varphi(fa).}
 
 An $\mathds{I}$-elementary map that is total is called an \emph{$\mathds{I}$-elementary embedding.} 
-% When the map ${\rm id}_M:M\hookrightarrow N$ is an $\mathds{I}$-embedding, that is, if for every  $\varphi(x)\in\mathds{I}$ and every $a\in M^{|x|}$
+When the map ${\rm id}_M:M\rightarrow N$ is an $\mathds{I}$-elementary embedding, 
+% that is, if for every  $\varphi(x)\in\mathds{I}$ and every $a\in M^{|x|}$
 %
-% \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{{\EuScript N}\models\varphi(a)},
+% \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{N\models\varphi(a)},
 %
-We write \emph{${\EuScript M}\preceq^\mathds{I}{\EuScript N}$\/} and say that ${\EuScript M}$ is an \emph{$\mathds{I}$-elementary submodel\/} of ${\EuScript N}$. 
+we write \emph{$M\preceq^\mathds{I}N$\/} and say that $M$ is an \emph{$\mathds{I}$-elementary submodel\/} of $N$. 
 
 The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel is obtained replacing $\mathds{I}$ by $\mathds{H}$.
 
@@ -450,19 +462,19 @@ These morphisms are invertible, cf.\@ Fact~\ref{fact_HImorphisms}.
 
 We say that the map $f:M\to N$ is \emph{approximately $\mathds{I}$-elementary\/} if for every formula $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$
 
-\ceq{\hfill{\EuScript M}\models\big\{\varphi(a)\big\}'}{\Rightarrow}{{\EuScript N}\models\big\{\varphi(fa)\big\}'.}
+\ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
 
 We define \emph{approximately $\mathds{H}$-elementary\/} maps in the same manner.
 We leave to the reader to verify (using Lemma~\ref{lem_interpolation}) that $\mathds{I}$-elementarity implies its approximated version, similarly for $\mathds{H}$-elementarity.
 We will see (Proposition~\ref{prop_approx}) that with a slight amount of saturation also the converse holds.
 Finally, under full saturation, all differences disappear as all these morphims becomes ${\EuScript L}$-elementarity maps (Corollary~\ref{corol_Lcomplete}).
 
-However, the following holds in general.
+The following holds in general.
 
 \begin{fact}\label{fact_HImorphisms}
   If $f:M\to N$ is approximately $\mathds{I}$-elementary then
 
-  \ceq{\hfill{\EuScript M}\models\big\{\varphi(a)\big\}'}{\Leftrightarrow}{{\EuScript N}\models\big\{\varphi(fa)\big\}'.}
+  \ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Leftrightarrow}{N\models\big\{\varphi(fa)\big\}'.}
 
   for every $\varphi(x)\in\mathds{I}$, and every $a\in({\rm dom }f)^{|x|}$.
   The same holds for approximately $\mathds{H}$-elementary maps.
@@ -471,21 +483,22 @@ However, the following holds in general.
 \begin{proof}
   Only implication $\Leftarrow$ requires a proof.
   Assume the r.h.s.\@ of the equivalence.
-  Fix $\varphi'>\varphi$ and prove ${\EuScript M}\models\varphi'(a)$.
+  Fix $\varphi'>\varphi$ and prove $M\models\varphi'(a)$.
   Let  $\varphi'>\varphi''>\varphi$.
   By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi''$ such that $\varphi''\rightarrow\neg\tilde{\varphi}\rightarrow\varphi'$.
-  Then ${\EuScript N}\models\neg\tilde{\varphi}(fa)$ and therefore  ${\EuScript M}\models\neg\tilde{\varphi}(a)$.
-  Then ${\EuScript M}\models\varphi'(a)$.
+  Then $N\models\neg\tilde{\varphi}(fa)$ and therefore  $M\models\neg\tilde{\varphi}(a)$.
+  Then $M\models\varphi'(a)$.
 \end{proof}
 
 % \begin{comment}
-Finally, we introduce the morphisms that corrisponds to the classical partial isomorphisms.
-We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if implication (1) holds for all $\mathds{I}$-atomic formulas $\varphi(x)$ 
+Finally, we introduce the morphisms that corrisponds to the classical partial embeddings.
+We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if implication (1) holds for all $\mathds{I}$-atomic formulas $\varphi(x)$.
+Note that this is the same as requireing that (1) holds for all formulas without quantifiers of sort ${\sf H}$.
 
 \begin{fact}
   If $f:M\to N$ is a partial $\mathds{I}$-embedding then 
 
-  \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(fa)}
+  \ceq{\hfill M\models\varphi(a)}{\Leftrightarrow}{N\models\varphi(fa)}
 
   for every $a\in({\rm dom }f)^{|x|}$ and every $\mathds{I}$-formulas $\varphi(x)$ without quantifiers of sort ${\sf H}$.
 \end{fact}
@@ -493,9 +506,9 @@ We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if implicati
 \begin{proof}
   The equivalence is trivial for formulas in $L_{\sf H}$ so we only consider $\mathds{I}$-atomic formulas as in (i) of Definion~\ref{def_0}.
   Implication $\Rightarrow$ holds by definition. 
-  Vice versa, if ${\EuScript M}\models t(a)\notin C$ then, by normality,  ${\EuScript M}\models t(a)\in\tilde{C}$ for some compact $\tilde C$ disjoint of $C$.
-  By the definition of $\mathds{I}$-embedding, ${\EuScript N}\models t(a)\in\tilde{C}$.
-  Hence ${\EuScript N}\models t(a)\notin C$.
+  Vice versa, if $M\models t(a)\notin C$ then, by normality,  $M\models t(a)\in\tilde{C}$ for some compact $\tilde C$ disjoint of $C$.
+  By the definition of $\mathds{I}$-embedding, $N\models t(a)\in\tilde{C}$.
+  Hence $N\models t(a)\notin C$.
   Induction is immediate.
 \end{proof}
 
@@ -507,38 +520,38 @@ We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if implicati
 \section{Compactness}
 
 It is convenient to distinguish between consistency with respect to models and consistency with respect to ${\EuScript L}$-structures.
-We say that a theory $T$ is \emph{${\EuScript L}$-consistent\/} when ${\EuScript M}\models T$ for some ${\EuScript L}$-structure ${\EuScript M}$.
-We say that $T$ is \emph{consistent\/} when ${\EuScript M}$  is required to be a model.
+We say that a theory $T$ is \emph{${\EuScript L}$-consistent\/} when $\langle M,{}^*\!I\rangle\models T$ for some ${\EuScript L}$-structure.
+We say that $T$ is \emph{consistent\/} when $M\models T$  is for some model $M$.
 
-\begin{theorem}[Compactness Theorem]\label{thm_compattezza}
+\begin{theorem}[\boldmath$\mathds{I}$-Compactness Theorem]\label{thm_compattezza}
   Let $T\subseteq\mathds{I}$ be finitely consistent.
   Then $T$ is consistent.
 \end{theorem}
 
 \begin{proof}
   Suppose $T$ is finitely consistent (or finitely ${\EuScript L}$-consistent, for that matter).
-  By the classical Compactness Theorem ${}^*{\!\EuScript M}\models T$ for some ${\EuScript L}$-structure ${}^*{\!\EuScript M}=\langle M,{}^*\!I\rangle$.
-  Let ${\EuScript M}=\langle M,I\rangle$ be the standard part of ${}^*{\!\EuScript M}$ as defined in Section~\ref{standard_part}.
-  Then ${\EuScript N}\models T$ by Lemma~\ref{lem_st}.
+  By the classical Compactness Theorem, there is an ${\EuScript L}$-structure $\langle M,{}^*\!I\rangle\models T$.
+  Let $\langle M,I\rangle$ be its standard part as defined in Section~\ref{standard_part}.
+  Then $M\models T$ by Lemma~\ref{lem_st}.
 \end{proof}
 
 % \begin{corollary}\label{prop_tipi_compattezza}
-%   Let $p(x\,;y)\subseteq\mathds{I}(M)$ be finitely consistent in ${\EuScript M}$, a model.
-%   Then ${\EuScript N}\models\existsH x\,\exists^I y\,p(x\,;y)$ for some model ${\EuScript N}$ such that ${\EuScript M}\preceq^\mathds{I}{\EuScript N}$.
+%   Let $p(x\,;y)\subseteq\mathds{I}(M)$ be finitely consistent in $M$, a model.
+%   Then $N\models\existsH x\,\exists^I y\,p(x\,;y)$ for some model $N$ such that $M\preceq^\mathds{I}N$.
 % \end{corollary}
 
 % \noindent\llap{\dangersign\kern2ex}%
 
 
 % \begin{definition}
-%   We say that ${\EuScript M}$ is \emph{$\mathds{I}$-saturated\/} if for every $p(x)$ as in 1 and 2 below, ${\EuScript M}\models\existsH x\, p(a)$.
+%   We say that $M$ is \emph{$\mathds{I}$-saturated\/} if for every $p(x)$ as in 1 and 2 below, $M\models\existsH x\, p(a)$.
 %   \begin{itemize}
 %     \item[1.] $p(x)\subseteq\mathds{I}(A)$ for some $A\subseteq  M$ of cardinality $<|M|$ and $|x|=1$;
-%     \item[2.] $p(x)$ is finitely satisfied in ${\EuScript M}$.
+%     \item[2.] $p(x)$ is finitely satisfied in $M$.
 %   \end{itemize}
 % \end{definition}
-A model ${\EuScript N}$ is \emph{$\lambda$-$\mathds{I}$-saturated\/} if it realizes all types $p(x\,;y)\subseteq\mathds{I}(N)$ with fewer than $\lambda$ parameters that are finitely consistent in ${\EuScript N}$.
-When $\lambda=|{\EuScript N}|$ we simply say  \emph{$\mathds{I}$-saturated.}
+A model $N$ is \emph{$\lambda$-$\mathds{I}$-saturated\/} if it realizes all types $p(x)\subseteq\mathds{I}(N)$ with fewer than $\lambda$ parameters that are finitely consistent in $N$.
+When $\lambda=|N|$ we simply say  \emph{$\mathds{I}$-saturated.}
 The existence of $\mathds{I}$-saturated models is obtained from the classical case just as for Theorem~\ref{thm_compattezza}.
 
 \begin{theorem}
@@ -548,20 +561,20 @@ The existence of $\mathds{I}$-saturated models is obtained from the classical ca
 % Homogeneity follows from saturation by the usual back-and-forth contruction.
 
 % \begin{proposition}(Homogeneity)
-%   Let ${\EuScript N}$ be saturated and of cardinality larger than $|\mathds{I}|$.
-%   Then for every $ab\in M^\alpha$, where $\alpha<|N|$, such that $a\equiv b$, there is an $\mathds{I}$-automorphism of ${\EuScript N}$ that maps $a$ to $b$.
+%   Let $N$ be saturated and of cardinality larger than $|\mathds{I}|$.
+%   Then for every $ab\in M^\alpha$, where $\alpha<|N|$, such that $a\equiv b$, there is an $\mathds{I}$-automorphism of $N$ that maps $a$ to $b$.
 % \end{proposition}
 
 The following proposition shows that a slight amount of saturation tames the $\mathds{I}$-formulas.
 
 
 \begin{proposition}\label{prop_approx}
-  Let ${\EuScript N}$ be an $\omega$-$\mathds{I}$-saturated model.
+  Let $N$ be an $\omega$-$\mathds{I}$-saturated model.
   Then 
   
-  \ceq{\hfill\big\{\varphi(x\,;y)\big\}'}{\leftrightarrow}{\varphi(x\,;y)}
+  \ceq{\hfill\big\{\varphi(x)\big\}'}{\leftrightarrow}{\varphi(x)}
   
-  holds in ${\EuScript N}$ for every formula $\varphi(x\,;y)\in\mathds{I}(N)$.
+  holds in $N$ for every formula $\varphi(x)\in\mathds{I}(N)$.
 \end{proposition}
 
 \begin{proof}
@@ -592,37 +605,38 @@ The following proposition shows that a slight amount of saturation tames the $\m
   % {\bigwedge_{\varphi'>\varphi}\varphi'(x)}
 %
   We consider case of the existential quantifiers of sort ${\sf H}$.
-  The case of existential quantifiers of sort ${\sf I}$ is identical.
   Assume inductively
   
-  \ceq{\textrm{ih.}\hfill\{\varphi(x,z\,;y)\}'}
+  \ceq{\textrm{ih.}\hfill\{\varphi(x,z)\}'}
   {\rightarrow}
-  {\varphi(x,z\,;y)}
+  {\varphi(x,z)}
 
   We need to prove
 
-  \ceq{\hfill\{\existsH z\,\varphi(x,z\,;y)\}}
+  \ceq{\hfill\{\existsH z\,\varphi(x,z)\}}
   {\rightarrow}
-  {\existsH z\,\varphi(x,z\,;y)}
+  {\existsH z\,\varphi(x,z)}
 
   From (ih) we have
 
-  \ceq{\hfill\existsH z\,\{\varphi(x,z\,;y)\}}
+  \ceq{\hfill\existsH z\,\{\varphi(x,z)\}}
   {\rightarrow}
-  {\existsH z\,\varphi(x,z\,;y)}
+  {\existsH z\,\varphi(x,z)}
 
   Therefore it suffices to prove
 
-  \ceq{\hfill\{\existsH z\,\varphi(x,z\,;y)\}'}
+  \ceq{\hfill\{\existsH z\,\varphi(x,z)\}'}
   {\rightarrow}
-  {\existsH z\,\{\varphi(x,z\,;y)\}'}
+  {\existsH z\,\{\varphi(x,z)\}'}
 
-Replace $x,y$ with some parameters, say $a,\alpha$ and assume the antecedent, that is, the truth of the theory $\{\existsH z\,\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
-We need to prove the consistency of the type $\{\varphi'(a,z\,;\alpha):\varphi'>\varphi\}$.
+Replace $x$ with some parameters, say $a$ and assume the antecedent, that is, the theory $\{\existsH z\,\varphi'(a,z):\varphi'>\varphi\}$ is true in $N$.
+We need to prove the consistency of the type $\{\varphi'(a,z):\varphi'>\varphi\}$.
 By saturation, finite concistency suffices.
 This is clear if we show that the antecedent is closed under conjunction.
 Indeed it is easy to verify that if $\varphi_1,\varphi_2>\varphi$ then $\varphi_1\wedge\varphi_2>\varphi'$ for some $\varphi'>\varphi$.
 In words, the set of approximations of $\varphi$ is a directed set.
+
+For existential quantifiers of sort ${\sf I}$ we argue similarly by applying Corollary~\ref{corol_Isaturation}.
 %
 % \noindent\llap{\textcolor{red}{\Large\danger}\kern1ex}\ignorespaces
 % Consider the existential quantifiers of sort $I$
@@ -640,33 +654,38 @@ In words, the set of approximations of $\varphi$ is a directed set.
 %
 \end{proof}
 
+\begin{remark}
+  If we restrict to formulas without quantifiers of sort ${\sf H}$, the proposition above holds in every model.
+  This is clear from the proof.
+\end{remark}
+
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 \begin{remark}\label{remk_p'p}
-  The  proposition above will be frequently used in this form.
+  The proposition above will be frequently used in this form.
   If evaluated in an $\omega$-$\mathds{I}$-saturated model, $p'(x)$ is equivalent to $p(x)$.
 \end{remark}
 
-A consequence of the proposition above is that between $\omega$-$\mathds{I}$-saturated models the approximated morphisms defined in Section~\ref{morphisms} coincide with their unapproximated version.
+A consequence of Proposition~\ref{prop_approx} is that between $\omega$-$\mathds{I}$-saturated models the approximated morphisms defined in Section~\ref{morphisms} coincide with their unapproximated version.
 In particular, the following follows from Fact~\ref{fact_HImorphisms}.
 
 \begin{corollary}\label{corol_omega_sat}
-  Let ${\EuScript M}$ be a model that is $\omega$-$\mathds{I}$-saturated for some $\lambda\ge|{\EuScript L}|$.
+  Let $M$ be an $\omega$-$\mathds{I}$-saturated model.
   Let $f:M\to N$ be an $\mathds{I}$-elementary map.
   Then
 
-  \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(fa)}
+  \ceq{\hfill M\models\varphi(a)}{\Leftrightarrow}{N\models\varphi(fa)}
 
-  for every $\mathds{I}$-atomic formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$.
-\end{corollary}
+  for every $\mathds{I}$-formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$.
+\end{corollary}  
 
 
 % \begin{fact}\label{fact_saturation_invertible}
-%   Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda\ge|{\EuScript L}|$.
+%   Let $M$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda\ge|{\EuScript L}|$.
 %   Let $f:M\to N$ be an $\mathds{I}$-elementary map.
 %   Then
 
-%   \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(fa)}
+%   \ceq{\hfillM\models\varphi(a)}{\Leftrightarrow}{{\EuScript N}\models\varphi(fa)}
 
 %   for every $\mathds{I}$-atomic formula $\varphi(x)$ and every $a\in({\rm dom }f)^{|x|}$
 % \end{fact}
@@ -675,8 +694,8 @@ In particular, the following follows from Fact~\ref{fact_HImorphisms}.
 %   Assume ${\EuScript N}\models\varphi(fa)$.
 %   It sufficies to prove the fact for $f$ of finite cardinality.
 %   By the downward L\"owenheim-Skolem Theorem, there is a model ${\EuScript N_0}\preceq^{\EuScript L}{\EuScript N}$ of cardinality $|{\EuScript L}|$ containing $f(a)$.
-%   By saturation there is a model ${\EuScript M_0}\preceq^\mathds{I}{\EuScript M}$ that is isomorphic to ${\EuScript N_0}$ over $f$.
-%   By isomorphism ${\EuScript M_0}\models\varphi(a)$ and therefore ${\EuScript M}\models\varphi(a)$
+%   By saturation there is a model ${\EuScript M_0}\preceq^\mathds{I}M$ that is isomorphic to ${\EuScript N_0}$ over $f$.
+%   By isomorphism ${\EuScript M_0}\models\varphi(a)$ and therefore $M\models\varphi(a)$
 % \end{proof}
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -686,23 +705,23 @@ In particular, the following follows from Fact~\ref{fact_HImorphisms}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The monster model}\label{monster}
 
-We denote by \emph{${\EuScript U}=\langle U,I\rangle$\/} some large $\mathds{I}$-saturated structure which we call the \emph{monster model.}
-For convenience we assume that the cardinality of ${\EuScript U}$ is an inaccessible cardinal which we denote by \emph{$\kappa$.}
+We denote by \emph{${\EuScript U}$\/} some large $\mathds{I}$-saturated model which we call the \emph{monster model.}
+For convenience we assume that the cardinality of ${\EuScript U}$ is an inaccessible cardinal. 
 Truth is evaluated in ${\EuScript U}$ unless otherwise is specified.
 Below we say \emph{model\/} for $\mathds{I}$-elementary submodel of ${\EuScript U}$.
-We stress once again that the truth of some $\varphi\in\mathds{I}(M)$ in a model  ${\EuScript M}$ (only) implies the truth of $\varphi$ (in ${\EuScript U}$).
-If also the converse implication holds we say ${\EuScript M}$ a \emph{strong model.}
-By Corollary~\ref{corol_omega_sat} the $\omega$-$\mathds{I}$-saturated models are strong models. 
-Also Cauchy complete models, which we will introduce below, are strong models.  
+We stress once again that the truth of some $\varphi\in\mathds{I}(M)$ in a model $M$ (only) implies the truth of $\varphi$ (in ${\EuScript U}$).
+If also the converse implication holds we say $M$ a \emph{strong model.}
+By Corollary~\ref{corol_omega_sat}, $\omega$-$\mathds{I}$-saturated models are strong models. 
+Also Cauchy complete models, which we introduce below, are strong models.  
 
-Let $A\subseteq U$ be a small set throughout this section.
-We define a topology on $U^{|x|}\times I^{|y|}$ which we call the \emph{$\mathds{I}(A)$-topology.}
-The closed sets of this topology are the sets defined by the types $p(x\,;y)\subseteq\mathds{I}(A)$.
-This is a compact topology by the $\mathds{I}$-compactness Theorem~\ref{thm_compattezza}.
+Let $A\subseteq{\EuScript U}$ be a small set throughout this section.
+We define a topology on ${\EuScript U}^{|x|}$ which we call the \emph{$\mathds{I}(A)$-topology.}
+The closed sets of this topology are the sets defined by the types $p(x)\subseteq\mathds{I}(A)$.
+This is a compact topology by the $\mathds{I}$-Compactness Theorem~\ref{thm_compattezza}.
 The following fact demostrate how $\mathds{I}$-compactness applies in this context.
 There are some subtle differences from the classical setting.
 % \begin{lemma}
-%   For every $\varphi(x\,;y)\in\mathds{I}(A)$ the set $\varphi(U\,;I)$ is a compact subset of $U^{|x|}\times I^{|y|}$.
+%   For every $\varphi(x\,;y)\in\mathds{I}(A)$ the set $\varphi(U\,;I)$ is a compact subset of ${\EuScript U}^{|x|}\times I^{|y|}$.
 % \end{lemma}
 
 % \begin{proof}
@@ -787,15 +806,15 @@ There are some subtle differences from the classical setting.
 % The following are immediate consequences of the proposition above and Lemma~\ref{lem_interpolation}.
 
 % \begin{corollary}\label{corol_Hcomplete1}
-%   For every $a\in U^{|x|}$ and $\varphi(x)\in\mathds{H}(U)$, if $\neg\varphi(a)$ then $\tilde\varphi(a)$ for some $\tilde\varphi\perp\varphi$.\hfill\qedsymbol
+%   For every $a\in {\EuScript U}^{|x|}$ and $\varphi(x)\in\mathds{H}(U)$, if $\neg\varphi(a)$ then $\tilde\varphi(a)$ for some $\tilde\varphi\perp\varphi$.\hfill\qedsymbol
 % \end{corollary}
 
 
-When $A\subseteq U$, we write \emph{$S_\mathds{I}(A)$\/} for the set of types 
+When $A\subseteq{\EuScript U}$, we write \emph{$S_\mathds{I}(A)$\/} for the set of types 
 
 \ceq{\hfill\mathds{I}\mbox{-tp}(a/A)}{=}{\big\{\varphi(x)\ :\ \varphi(x)\in\mathds{I}(A)\textrm{ such that }\varphi(a)\big\}}
 
-as $a$ ranges over the tuples of elements of $U$.
+as $a$ ranges over the tuples of elements of ${\EuScript U}$.
 We write  \emph{$S_{\mathds{I},x}(A)$\/} when the tuple of variables $x$ is fixed.
 The same notation applies also with $\mathds{H}$ for $\mathds{I}$.
 
@@ -840,16 +859,16 @@ The same notation applies also with $\mathds{H}$ for $\mathds{I}$.
 We show that the quantifiers $\forallI $ and $\existsI $ can be eliminated up to some approximation.
 
 \begin{proposition}
-  The monster model (or any saturated model, for that matter) is $\mathds{H}$-homogeneous, that is, every $\mathds{H}$-elementary map $f:U\to U$ of cardinality $<\kappa$ extends to an automorphism.
+  The monster model (or any saturated model, for that matter) is $\mathds{H}$-homogeneous, that is, every $\mathds{H}$-elementary map $f:{\EuScript U}\to{\EuScript U}$ of cardinality $<|{\EuScript  U}|$ extends to an automorphism.
 \end{proposition}
 
 \begin{proof}
-  By Proposition~\ref{prop_Hcomplete2}, the inverse of an $\mathds{H}$-elementary map $f:U\to U$ is $\mathds{H}$-elementary.
+  By Proposition~\ref{prop_Hcomplete2}, the inverse of an $\mathds{H}$-elementary map $f:{\EuScript U}\to{\EuScript U}$ is $\mathds{H}$-elementary.
   Then the usual proof by back-and-forth applies.
 \end{proof}
 
 As promised, we strengthen Proposition~\ref{prop_Hcomplete2}.
-Let $A\subseteq U$ be a small set throughout this section.
+Let $A\subseteq{\EuScript U}$ be a small set throughout this section.
 
 \begin{corollary}\label{corol_Lcomplete}
   Let $p(x)\in S_\mathds{H}(A)$.
@@ -860,10 +879,11 @@ Let $A\subseteq U$ be a small set throughout this section.
 
 \begin{proof}
   If $b\models p(x)=\mathds{H}\mbox{-tp}(a/A)$ then there is an $\mathds{H}$-elementary map $f\supseteq{\rm id}_A$ such that $fa=b$.
-  As $f$ exends to an automorphism and every automorphism is ${\EuScript L}$-elementary, the corollary follows.
+  Then $f$ exends to an automorphism.
+  As every automorphism is ${\EuScript L}$-elementary, the corollary follows.
 \end{proof}
 
-For $a,b\in U^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the same ${\EuScript L}$-formulas over $A$, bearing in mind that formulas in $\mathds{H}(A)$ or $\mathds{I}(A)$ suffices to test the equivalence.
+For $a,b\in {\EuScript U}^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the same ${\EuScript L}$-formulas over $A$, bearing in mind that formulas in $\mathds{H}(A)$ or $\mathds{I}(A)$, or their apploximations, suffice to test the equivalence.
 
 In the classical setting, from an equivalence between types one derives an  equivalence between formulas.
 Without negation, this is not true.
@@ -910,7 +930,7 @@ We also need an approximation restult for the negation of formulas in $\mathds{I
 % \end{proposition}
 
 \begin{proof}
-  Let $a\in U^{|x|}$ be such that $\neg\varphi(a)$.
+  Let $a\in {\EuScript U}^{|x|}$ be such that $\neg\varphi(a)$.
   Let $p(x)=\mathds{H}\mbox{-tp}(a/A)$.
   By Corollary~\ref{corol_Lcomplete}, $p'(x)\rightarrow\neg\varphi(x)$. 
   By compactness  $\psi'(x)\rightarrow\neg\varphi(x)$ for some $\psi'>\psi\in p(x)$. 
@@ -927,10 +947,10 @@ We also need an approximation restult for the negation of formulas in $\mathds{I
 The following proposition is not literally the Tarski-Vaught test because it only applies when the larger structure is the moster model.
 
 \begin{proposition}\label{prop_Tarski_Vaught}
-  Let $M$ be a subset of $U$.
+  Let $M$ be a subset of ${\EuScript U}$.
   Then the following are equivalent
   \begin{itemize}
-    \item[1.] $M$ is the domain of a model ${\EuScript M}=\langle M,I\rangle$;
+    \item[1.] $M$ is a model;
     \item[2.] for every formula $\varphi(x)\in\mathds{H}(M)$
     
     \noindent\kern-\leftmargin
@@ -948,8 +968,8 @@ The following proposition is not literally the Tarski-Vaught test because it onl
 \begin{proof}
   (1$\Rightarrow$2) Assume $\existsH x\,\varphi(x)$ and let $\varphi'>\varphi$ be given.
   By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi$ such that  $\varphi(x)\rightarrow\neg\tilde{\varphi}(x)\rightarrow\varphi'(x)$.
-  Then $\neg\forallH x\,\tilde{\varphi}(x)$ hence, by (1), ${\EuScript M}\models\neg\forallH x\,\varphi(x)$.
-  Then ${\EuScript M}\models\neg\tilde{\varphi}(a)$ for some $a\in M$. Hence ${\EuScript M}\models\varphi'(a)$ and $\varphi'(a)$ follows from (1).
+  Then $\neg\forallH x\,\tilde{\varphi}(x)$ hence, by (1), $M\models\neg\forallH x\,\varphi(x)$.
+  Then $M\models\neg\tilde{\varphi}(a)$ for some $a\in M$. Hence $M\models\varphi'(a)$ and $\varphi'(a)$ follows from (1).
 
   (2$\Rightarrow$3)
   Assume (2) and let $\varphi(x)\in\mathds{I}(M)$ be such that $\existsH x\,\neg\varphi(x)$.
@@ -958,16 +978,16 @@ The following proposition is not literally the Tarski-Vaught test because it onl
 
   (3$\Rightarrow$1)
   Assume (3).
-  By the classical Tarski-Vaught test $M\preceq U$.
-  Let ${\EuScript M}=\langle M,I\rangle$ be the unique  ${\EuScript L}$-structure that is a substructure of ${\EuScript U}$.
-  Then  $\varphi(a)\ \Leftrightarrow\ {\EuScript M}\models\varphi(a)$ holds for every $\mathds{I}$-atomic formula $\varphi(x)$ and for every $a\in M^{|x|}$.
+  By the classical Tarski-Vaught test $M\preceq_{\sf H}{\EuScript U}$.
+  Then $M$ is the domain of an ${\EuScript L}$-substructure of ${\EuScript U}$.
+  Then  $\varphi(a)\ \Leftrightarrow\ M\models\varphi(a)$ holds for every $\mathds{I}$-atomic formula $\varphi(x)$ and for every $a\in M^{|x|}$.
   Now, assume inductively
   
-  \ceq{\hfill{\EuScript M}\models\varphi(a,b)}{\Rightarrow}{\varphi(a,b).}
+  \ceq{\hfill M\models\varphi(a,b)}{\Rightarrow}{\varphi(a,b).}
 
   Using (3) and the induction hypothesis we prove by contrapposition that
 
-  \ceq{\hfill{\EuScript M}\models\forallH y\,\varphi(a,y)}{\Rightarrow}{\forallH y\,\varphi(a,y)}.
+  \ceq{\hfill M\models\forallH y\,\varphi(a,y)}{\Rightarrow}{\forallH y\,\varphi(a,y)}.
 
   Indeed,
 
@@ -980,11 +1000,11 @@ The following proposition is not literally the Tarski-Vaught test because it onl
 
   \ceq{}
   {\Rightarrow}
-  {{\EuScript M}\models\neg\varphi(a,b)}\hfill for some $b\in M^{|y|}$\kern30ex
+  {M\models\neg\varphi(a,b)}\hfill for some $b\in M^{|y|}$\kern30ex
 
   \ceq{}
   {\Rightarrow}
-  {{\EuScript M}\not\models\forallH y\,\varphi(a,y).}
+  {M\not\models\forallH y\,\varphi(a,y).}
 
   Induction for the connectives $\vee$, $\wedge$, $\existsH $, $\existsI $, and $\forallI $ is straightforward.
 \end{proof}
@@ -992,28 +1012,35 @@ The following proposition is not literally the Tarski-Vaught test because it onl
 Classically, the main application of the Tarski-Vaught test is in the proof of the downward L\"owenheim-Skolem Theorem.
 Note that here the classical downward L\"owenheim-Skolem Theorem holds in full for all ${\EuScript L}$-structures.
 In particular every $A\subseteq U$ is contained in a model of cardinality $|{\EuScript L}(A)|$.
-However, in same cases we can do better than that.
+In this form the L\"owenheim-Skolem Theorem is not very informative.
+In fact, the cardinality of ${\EuScript L}$ is eccessively large because of the aboundance of symbols in $L_{\sf I}$.
+In Section~\ref{separability} we prove a version L\"owenheim-Skolem Theorem that is more appropriate in our context.
 
-The \emph{weight\/} of ${\EuScript L}$, which we denote by \emph{${\rm wgt}\big({\EuScript L}\big)$\/} is the minimal cardinality of a set of formulas $\mathds{H}'$ such that for every $\varphi''>\varphi\in\mathds{H}$ there is a $\varphi'\in\mathds{H}'$ such that  $\varphi''>\varphi'>\varphi$.
-It is not difficult to see that when $I$ is the real unit interval and ${\EuScript L}$ contains at most countably many symbols of sort ${\sf H}^n\to{\sf I}$ then ${\rm wgt}\big({\EuScript L}\big)=\omega$.
+% The \emph{weight\/} of ${\EuScript L}$, which we denote by \emph{${\rm wgt}\big({\EuScript L}\big)$\/} is the minimal cardinality of a set of formulas $\mathds{H}'$ such that for every $\varphi''>\varphi\in\mathds{H}$ there is a $\varphi'\in\mathds{H}'$ such that $\varphi''>\varphi'>\varphi$.
+% If this minimal cardinality is $\omega$, we say that ${\EuScript L}$ is sparable. 
+% It is not difficult to see that when $I$ is the real unit interval and ${\EuScript L}$ contains at most countably many symbols of sort ${\sf H}^n\to{\sf I}$ then ${\EuScript L}$ is separable.
 
-\begin{proposition}
-  Let $A\subseteq U$.
-  Then  $A$ is contained in a model of cardinality at most ${\rm wgt}\big({\EuScript L}\big)+|A|$.  
-\end{proposition}
+% \begin{proposition}
+%   Let $A\subseteq U$.
+%   Then  $A$ is contained in a model of cardinality at most ${\rm wgt}\big({\EuScript L}\big)+|A|$.  
+% \end{proposition}
 
-\begin{proof}
-  As in the classical L\"owenheim-Skolem Theorem, using (2) of Proposition~\ref{prop_Tarski_Vaught}.
-\end{proof}
+% \begin{proof}
+%   As in the classical L\"owenheim-Skolem Theorem, using (2) of Proposition~\ref{prop_Tarski_Vaught}.
+% \end{proof}
 
 
-\begin{proposition}
-  The following are equivalent
-  \begin{itemize}
-    \item[1.] ${\EuScript L}$ is separable;
-    \item[2.] there is an ${\EuScript L}$-structure $\langle M_0,R_0\rangle\preceq{\EuScript U}$ with $|M_0|=|R_0|=\omega$.
-  \end{itemize}  
-\end{proposition}
+% \begin{proposition}
+%   The following are equivalent
+%   \begin{itemize}
+%     \item[1.] ${\EuScript L}$ is separable;
+%     \item[2.] there is an ${\EuScript L}$-structure $\langle M_0,R_0\rangle\preceq{\EuScript U}$ with $|M_0|=|R_0|=\omega$.
+%   \end{itemize}  
+% \end{proposition}
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -1023,24 +1050,14 @@ It is not difficult to see that when $I$ is the real unit interval and ${\EuScri
 \section{Cauchy complete models}
 
 
-For $t(x,z)$ a term of sort ${\sf H}^{|x|+|z|}\to {\sf I}$ and $D\subseteq I^2$ we define the formula
-
-\ceq{\hfill\emph{$x\sim_{t,D}y$}}{=}{\forallH z\ \langle t(x,z),t(y,z)\rangle\in D}
-
-If $t(x,z)=t_1(x,z),\dots,t_n(x,z)$ is a tuple of terms $x\sim_{t,D}y$ denotes the conjunction of the formulas $x\sim_{t_i,D}y$.
-As $D$ ranges over the compact neighborhoods of the diagonal $\Delta\subseteq I^2$ and $t(x,z)$ ranges over the finite tuples parameter-free terms, the formulas $x\sim_{t,D}y$ define a system of entougages on $U^{|x|}$.
-We refer to the topology associated as the \emph{${\sf I}$-topology.}
-It is not difficult to verify that the ${\sf I}$-topology on $U^{|x|}$ coincides with the product of the ${\sf I}$-topology on $U$.
-We define two equivalent types
-
-\ceq{\hfill\emph{$x\sim_{\sf I}\!y$}}{=}{\Big\{x\sim_{t,\Delta}y\ :\ t(x,z)\textrm{ parameter-free term}\Big\}.}
+For $t(x,z)$ a term of sort ${\sf H}^{|x|+|z|}\to {\sf I}$ we define the formula
 
 
-\ceq{\hfill\emph{$x\sim'_{\sf I}\!y$}}{=}{\Big\{x\sim_{t,D}y\ :\ t(x,z)\textrm{ parameter-free term, } D\textrm{ compact neigborhood of }\Delta\Big\}.}
+\ceq{\hfill\emph{$x\sim_ty$}}{=}{\forallH z\ \ t(x,z)=t(y,z).}
 
-Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf I}y$ if and only if $x_i\sim_{\sf I}y_i$ for every $i<\lambda$.
+We also define the type 
 
-
+\ceq{\hfill\emph{$x\sim_{\sf I}\!y$}}{=}{\Big\{x\sim_ty\ :\ t(x,z)\textrm{ as above}\Big\}.}
 
 % We define the following equivalence relation on $U$
 
@@ -1049,50 +1066,66 @@ Again, it is easy to verify that if $|x|=|y|=\lambda$ then $x\sim_{\sf I}y$ if a
 % When two tuples of the same length $\bar a=\langle a_i:i<\lambda\rangle$ and $\bar b=\langle b_i:i<\lambda\rangle$ are such that $a_i\sim_{\sf I}\!b_i$ for every $i<\lambda$ we write \emph{$\bar a\sim_{\sf I}\bar b$.}
 
 
-% \begin{fact} For $\bar a,\bar b\in U^{|x|}$
+\begin{fact}\label{fact_productUniformity}
+  For any $a=\langle a_i:i<\lambda\rangle$ and $b=\langle b_i:i<\lambda\rangle$ 
   
-%   \ceq{\hfill\bar a\sim_{\sf I}\bar b}{\Leftrightarrow}{\forallH y\ \big[t(\bar a,y)=t(\bar b,y)\big]}\hfill for every term $t(x,y)$ of sort ${\sf H}^{|x|+|y|}\to {\sf I}$.
-% \end{fact}
+  \ceq{\hfill a\sim_{\sf I} b}{\Leftrightarrow}{a_i\sim_{\sf I} b_i}\quad for every $i<\lambda$.
+\end{fact}
 
-% \begin{proof}
-%   By induction on $\lambda=|x|$ we prove that $t(\bar a,y)=t(\bar b,y)$ holds (universal quantification over the free variables is understood) for every term $t(x,y)$.
-%   Assume inductively that
+\begin{proof}
+  Only implication $\Leftarrow$ requires a proof.
+  Assume $a_i\sim_{\sf I} b_i$ for every $i$.
+  Let $|a|=|b|=\lambda$ and assume inductively that
   
-%   \ceq{\hfill t(\bar a,z,y)}{=}{t(\bar b,z,y)}
+  \ceq{\hfill t(a,y,z)}{=}{t(b,y,z)}
 
-%   holds for every term $t(\bar x,z,y)$.   
-%   In particular for any $a_\lambda$
+  holds for every term $t(x,y,z)$, with $|x|=\lambda$ (universal quantification over the free variables is understood throughout the proof).  
+  In particular for any $a_\lambda$
 
-%   \ceq{1.\hfill t(\bar a,a_\lambda,y)}{=}{t(\bar b,a_\lambda,y).}
+  \ceq{1.\hfill t(a,a_\lambda,z)}{=}{t(b,a_\lambda,z).}
 
-%   If $a_\lambda\sim_{\sf I}\!b_\lambda$ then
+  As $a_\lambda\sim_{\sf I}\!b_\lambda$ then
 
-%   \ceq{\hfill t(\bar x,a_\lambda,y)}{=}{t(\bar x,b_\lambda,y)}
+  \ceq{\hfill t(x,a_\lambda,z)}{=}{t(x,b_\lambda,z)}
 
-%   and in particular 
+  and in particular 
 
-%   \ceq{2.\hfill t(\bar b,a_\lambda,y)}{=}{t(\bar b,b_\lambda,y).}
+  \ceq{2.\hfill t(b,a_\lambda,z)}{=}{t(b,b_\lambda,z).}
 
-%   From (1) and (2) we obtain
+  From (1) and (2) we obtain
 
-%   \ceq{\hfill t(\bar a,a_\lambda,y)}{=}{t(\bar b,b_\lambda,y).}
+  \ceq{\hfill t(a,a_\lambda,z)}{=}{t(b,b_\lambda,z).}
 
-%   For limit ordinals induction is trivial.
-% \end{proof}
+  For limit ordinals induction is trivial.
+\end{proof}
 
-We say that $p(x)\subseteq\mathds{I}(U)$ is \emph{${\sf I}$-invariant\/} if $x\sim_{\sf I}\!y\rightarrow[p(x)\leftrightarrow p(y)]$.
+Note that the approximation of the formula $x\sim_t\!y$ has the form
+
+\ceq{\hfill\emph{$x\sim_{t,D}y$}}{=}{\forallH z\ \langle t(x,z),t(y,z)\rangle\in D}
+
+for some compact neighborhood $D$ of $\Delta$, the diagonal of $I^2$.
+Hence we define
+
+\ceq{\hfill\emph{$x\sim'_{\sf I}\!y$}}{=}{\Big\{x\sim_{t,D}y\ :\ t(x,z)\textrm{ parameter-free term, } D\textrm{ compact neigborhood of }\Delta\Big\}.}
+
+If $t(x,z)=t_1(x,z),\dots,t_n(x,z)$ is a tuple of terms $x\sim_{t,D}y$ denotes the conjunction of the formulas $x\sim_{t_i,D}y$.
+As $D$ ranges over the compact neighborhoods of $\Delta$ and $t(x,z)$ ranges over the finite tuples parameter-free terms, the formulas $x\sim_{t,D}y$ define a system of entougages on ${\EuScript U}^{|x|}$.
+We refer to the topology associated as the \emph{${\sf I}$-topology.}
+By an argument similar to what used in the proof of Fact~\ref{fact_productUniformity} one verifies that the ${\sf I}$-topology on ${\EuScript U}^{|x|}$ coincides with the product of the ${\sf I}$-topology on ${\EuScript U}$.
+
+We say that $p(x)\subseteq\mathds{I}({\EuScript U})$ is \emph{${\sf I}$-invariant\/} if $x\sim_{\sf I}\!y\rightarrow[p(x)\leftrightarrow p(y)]$.
 % It is immediate that $\mathds{I}$-formulas constructed without using (ii) of Definition~\ref{def_LL} are ${\sf I}$-invariant.
 We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent and $p(x)\wedge p(y)\rightarrow x\sim_{\sf I}\!y$.
 
 We say that a type $q(x)$ is finitely satisfiable in $M$ if every conjunction of formulas in $q(x)$ has a solution in $M$.
-This definition is classical, but note that when $q(x)$ is over $M$ we can only infer that $q'(x)$ is finitely satisfiable.
+This definition is classical, but note that classically every type over $M$ is finitely saisfiable in $M$. 
+Not here, as we can only infer that $q'(x)$ is finitely satisfiable.
 
 \begin{lemma}
-  Let  ${\EuScript M}$ be a model. 
-  Then the following are equivalent
+  Then the following are equivalent for every model $M$
   \begin{itemize}
     \item[1.]  $p(x)\subseteq\mathds{I}(M)$ is an ${\sf I}$-invariant Cauchy type;
-    \item[2.] $p(x)\leftrightarrow a\sim_{\sf I}\!x$ for some/any $a\models p(x)$.
+    \item[2.] $p(x)\leftrightarrow a\sim_{\sf I}\!x$ for some/any $a\models p(x)$;
     \item[3.] $a\sim'_{\sf I}\!x$ is finitely satisfiable in $M$ for some/any $a\models p(x)$.
   \end{itemize}
 \end{lemma}
@@ -1111,18 +1144,67 @@ This definition is classical, but note that when $q(x)$ is over $M$ we can only 
   Then, by the uniqueness of the limit, the type $p(x)$ cointaining the formulas $x\sim_{t,D}a_{t,D}$ is as required by the lemma.
 \end{proof}
 
-Let ${\EuScript M}$ be a model.
-We say that ${\EuScript M}$ is \emph{Cauchy complete\/} if every ${\sf I}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in ${\EuScript M}$.
+We say that $M$ is \emph{Cauchy complete\/} if every ${\sf I}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in $M$.
 % We say that ${\EuScript M}$ is \emph{existentially closed (e.c.)\/} if every consistent conjunction of $\mathds{I}$-atomic formulas is satsfied in ${\EuScript M}$.
 Note that if $p(x)$ is Cauchy type then any consistent type $q(x)$ containing $p(x)$ is also Cauchy.
 In particular the type $p(x)\ \cup\ \mathds{I}\mbox{-Th}({\EuScript U}/M)$ is Cauchy.
 The following trivial consequence is worth to be noted
 
 \begin{remark}
-  Cauchy complete models are strong models. I.e., ${\EuScript M}\models\varphi$ for every true $\varphi\in\mathds{I}(M)$.
+  Cauchy complete models are strong models. I.e., $M\models\varphi$ for every true $\varphi\in\mathds{I}(M)$.
 \end{remark}
 
+
+We say that the set $B$ is a \emph{Cauchy closure\/} of $A$ if 
+\begin{itemize}
+  \item[1.] every ${\sf I}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in $B$
+  \item[2.] $\mathds{I}\mbox{-tp}(b/A)$ is Cauchy for every $b\in B$.
+\end{itemize}
+
+\begin{proposition}\label{prop_Cauchyclosure}
+  Assume $L_{\sf H}$ is a functional language.
+  Let $M$ be model.
+  Then any Cauchy closure of $M$ is a model.
+\end{proposition}
+
+\begin{proof}(messy/wrong/incomplete)
+  We need a few easy observations.
+  Let $a\sim_{\sf I}a'$ be finite tuples.
+  Let $\langle a\rangle$ be the $L_{\sf H}$ substructure of $U$ generated by $a$.
+  Then for every $b\in U\smallsetminus\langle a\rangle$ there is a $b'\in U\smallsetminus\langle a'\rangle$ such that $a,b\sim_{\sf I}a',b'$.
+  In fact, $\sim_{\sf I}$-classes are infinite, hence they ave the cardinality of $U$.
+  Therefore, by back-and-forth, $a\equiv a'$.
+  We also have that for every formula $\varphi(x,z)$ and $b\in U\smallsetminus\big(\langle a\rangle\cup\big)$ 
+
+  \ceq{}{~}{\forallH x\notin{\rm rng}(a,a')\big[\varphi(x,a)\leftrightarrow\varphi(x,a')\big].}
+
+  Let $N$ be a Cauchy closure of $M$.
+  We verify that $N$ satisfies (2) of Proposition~\ref{prop_Tarski_Vaught}.
+  Let $\varphi(x,z)\in\mathds{H}$ and $a\in N^{|z|}$ be be such that $\existsH x\ \varphi(x,a)$.
+  We can assume that $a$ is a tuple of distinct elements.
+  By the observations above
   
+  \ceq{\hfill a\sim_{\sf I}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi(x,a)\leftrightarrow\varphi(x,z)\big]}
+
+  By compactness,
+
+  \ceq{\hfill a\sim_{t,D}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi'(x,a)\leftrightarrow\varphi'(x,z)\big]}
+
+  Every finite injective map $k:U\to U$ that preserves $\sim_{\sf I}$-classes is ${\EuScript L}$-elementary.
+  By preserving $\sim_{\sf I}$-classes we mean that $a\sim_{\sf I}ka$ for every $a\in{\rm dom}(k)$.
+  To prove the fact, pick any $b\in U\smallsetminus{\rm dom}(k)$ and note that, as $\sim_{\sf I}$-classes are infinite. there is a $c\in U\smallsetminus{\rm rng}(k)$ such that $k\cup\{\langle b,c\rangle$ preserves $\sim_{\sf I}$.
+  The fact follows from the claim by back-and-forth.
+
+  
+  \ceq{\hfill a\sim_{\sf I}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi(x,a)\leftrightarrow\varphi(x,z)\big]}
+
+  By compactness,
+
+  \ceq{\hfill a\sim_{t,D}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi'(x,a)\leftrightarrow\varphi'(x,z)\big]}
+\end{proof}
+
+
+
 % \begin{proposition}
 %   \noindent\llap{\textcolor{red}{\Large\questionsign}\kern18ex}\ignorespaces
 %   Let ${\EuScript M}$ be an e.c.C.c\@ model.
@@ -1163,6 +1245,16 @@ The following trivial consequence is worth to be noted
   Then $b\sim_{\sf I}\!a$ and, by invariance, $b\models p(x)$.
 \end{proof}
 
+
+% Let $|x|=1$.
+% It is easy to prove by induction on $\varphi(x,z)\in\mathds{H}$ that if $\varphi(b,a)$ then either $b\in\range a$ or $b\sim_{\sf I}x\to\varphi(x,a)$.
+
+% The proposition is proved by applying Theorem~\ref{prop_Tarski-Vaught}.Assume $\existsH x\ \varphi(x,a)$ and let $b\in U$ be such that $\varphi(b,a)$. 
+% By the claim above either 
+
+
+% and compactness, there is a formula $\psi(x)\in\mathds{I}(M)$ such that  $\psi(x)\to\varphi'(x,a)$.
+% As 
 
 \begin{comment}
 The pr ${\EuScript M}$oof of the following proposition uses the same compactness argument used for Proposition~\ref{prop_LHapprox1}.
@@ -1214,16 +1306,16 @@ Let $M,d$ is a metric space.
 Let $L_{\sf H}$ contain symbols only for continuous functions $M^n\to M$.
 The language ${\EuScript L}$ has also a symbol $d$ for a function of sort ${\sf H}^2\to {\sf I}$.
 Let $I$ be $\mathds{R}^+\cup\{0,\infty\}$, with the topology that makes it homeomorphic to the unit interval.
-Let ${\EuScript M}=\langle M,I\rangle$ be the structure that interprets the symbols of the language as natural.
+Let $\langle M,I\rangle$ be the structure that interprets the symbols of the language as natural.
 
-Let ${\EuScript U}$ be a monster model, ${\EuScript M}\preceq^\mathds{I}{\EuScript U}$.
-Clearly, $d$ does not define a metric on $U$ as there are pairs of elements at infinite distance.
-However, when restricted to a ball of finite radius, $d$ defines a pseudometric on  $U$.
-Therefore the notion of convergent sequence makes perfectly sense in $U$.
+Let ${\EuScript U}$ be a monster model that is  an $\mathds{I}$ elementary extension of $M$.
+Clearly, $d$ does not define a metric on ${\EuScript U}$ as there are pairs of elements at infinite distance.
+However, when restricted to a ball of finite radius, $d$ defines a pseudometric on  ${\EuScript U}$.
+Therefore the notion of convergent sequence makes perfectly sense in ${\EuScript U}$.
 
 \begin{fact}
   Let $ {\EuScript U}$ be as above.
-  Then for every model ${\EuScript N}=\langle N,I\rangle$ the following are equivalent for every $a\in U$
+  Then for every model $N$ the following are equivalent for every $a\in{\EuScript U}$
   \begin{itemize}
     \item[1.] $p(x)=\mathds{I}\mbox{-tp}(a/N)$ is a Cauchy type;
     \item[2.] there is a sequence $\langle a_i: i\in\omega\rangle$ of elements of $N$ that converges to $a$.
@@ -1247,6 +1339,7 @@ Therefore the notion of convergent sequence makes perfectly sense in $U$.
   By $\mathds{I}$-elementarity there is an $a_i\in N$ such that $\varphi'(a_i)$.
   As $d(a,a_i)<2^{-i}$ for all $i$, the sequence $\langle a_i: i\in\omega\rangle$ converges to $a$.
 \end{proof}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1333,6 +1426,70 @@ Therefore the notion of convergent sequence makes perfectly sense in $U$.
 \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
 Garbage after this point
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{}
+
+
+
+
+% Proposition~\ref{prop_Cauchyclosure} provides a sufficient condition 
+% for the Cauchy closure of a model to be a model.
+% We need the following notion.
+% We say that ${\EuScript U}$ is \emph{decomposable\/} if for every two tuples $a,b$ of elements of $U$ 
+
+% \ceq{\hfill a\equiv_{\sf H}b\ \textrm{ and }a\sim_{\sf I}b}{\Rightarrow}{a\equiv b}
+
+% Incidentally, $L_{\sf H}$-free formulas are ${\sf I}$-invariant, independently of ${\EuScript U}$.
+
+% We do not know of any simple caracterisation of decomposable models.
+% The following proposition provides some examples.
+
+% \begin{proposition}
+%   If the $L_{\sf H}$-theory of $U$ is $\omega$-categorical and strongly minimal then ${\EuScript U}$ is decomposable.
+% \end{proposition}
+
+% \begin{proof}
+%   Let $k:U\to U$ is a finite map that preserves $\equiv_{\sf H}$  and $\sim_{\sf I}$.
+%   Let $b\in U$.
+%   We claim that there is a $c\in U$ such that $k\cup\{\langle b,c\rangle$ also preserves  $\equiv_{\sf H}$  and $\sim_{\sf I}$.
+%   The proposition follows from the claim by back-and-forth.
+%   Let $a$ enumerate ${\rm dom}(k)$.
+%   Suppose first that $b\notin{\rm acl}(a)$.
+%   There are infinitely many witnesses of $b\sim_{\sf I}x$ then, by strong minimality, we can pick one $c\notin{\rm acl}(ka)$.
+%   Then $k\cup\{\langle b,c\rangle$ is as required.
+% \end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\section{Separability}\label{separability}
+
+We say that ${\EuScript L}$ is \emph{separable\/} if there is a countable  ${\EuScript L}_0\subseteq{\EuScript L}$ such that for every $\varphi'>\varphi\in{\EuScript L}$ there is a $\varphi''\in {\EuScript L}_0$ such that  $\varphi'>\varphi''>\varphi$.
+
+
+\begin{proposition}
+  Assume that $L_{\sf H}$ is countable, $I$ is second countable, and there are at most countably many symbols of sort ${\sf H}^n\to{\sf I}$.
+  Then ${\EuScript L}$ is separable.
+\end{proposition}
+\begin{proof}
+  Assume 
+\end{proof}
+
+
+
+
+\hrulefill
 
 Let $t(x,y)$ and $D$ be a term of sort ${\sf H}^{|x|+|z|}\to {\sf I}$, respectively a compact neighborhood of the diagonal.
 For $\gamma,\xi\in{\rm Aut}({\EuScript U})$ and $a$ a finite tuple of elements of $M$ we write $\gamma\sim_{a,t,C}\xi$ for $\gamma a\sim_{a,t,D} \xi a$.
@@ -1996,7 +2153,7 @@ Below we say \emph{model\/} for $\mathds{I}$-elementariy substructure of ${\EuSc
 \def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 Let ${\EuScript M}$ be a model.
-Let $a\in U^{|x|}$.
+Let $a\in {\EuScript U}^{|x|}$.
 We say that ${\EuScript M}$ \emph{defines $a$ in the limit\/} if 
 
 \ceq{\hfill p_{\restriction M}(x)}{\rightarrow}{p(x):={\rm tp}_\mathds{I}(a/U)}
@@ -2057,7 +2214,7 @@ The following proposition is easy to prove.
 
 
 % Let ${\EuScript M}$ be a substructure of ${\EuScript U}$.
-% Let $a\in U^{|x|}$.
+% Let $a\in {\EuScript U}^{|x|}$.
 % We say that ${\EuScript M}$ \emph{defines $a$ in the limit\/} if there is a formula $\varphi(x)\in\mathds{I}(M)$ and some infinite sets $B_1,\dots,B_n\subseteq M$ such that
 
 % \ceq{\hfill\big\{\varphi(x)\big\}\ \cup\ p_{\restriction C}(x)}{\rightarrow}{p(x):={\rm tp}_\mathds{I}(a/U)}
@@ -2215,7 +2372,7 @@ Recall that $\kappa$,  the cardinality of ${\EuScript U}$, is an inaccessible ca
 
         % Let $\varphi(x)$ be an atomic formula.
         % This has form $\|t(x)\|$ for some $t(x)\in L_{\rm trm}$.  
-        % Note that $\sup\{\|t(a)\|: a\in U^{|x|}\}$ does not depend on $ M$.
+        % Note that $\sup\{\|t(a)\|: a\in {\EuScript U}^{|x|}\}$ does not depend on $ M$.
         % Therefore we can set it to be $n_{\varphi(x)}$
 
 \end{itemize}
@@ -2275,8 +2432,8 @@ We write \emph{${\EuScript M}\models \existsH x\ p(x)\le0$} if ${\EuScript M}\mo
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 From this section on, we assume the existence of unboundedly many inaccessible cardinals as this simplifies the exposition.
-We prove directly the existence of saturated extension (monster models), skipping the proof of the Compactness Theorem as this is not required in the following.
-(The Compactness Theorem could be proved along the same lines.)
+We prove directly the existence of $\mathds{I}$-saturated extension (monster models), skipping the proof of the $\mathds{I}$-Compactness Theorem as it is not required in the following.
+However this could be proved along the same lines.
 
 Let $p(x)\subseteq L( M)$.
 We say that $p(x)\le 0$ is \emph{finitely satisfied in ${\EuScript M}$\/} if for every disjunction of formulas in $p(x)$, say $\psi(x)$, there is an $a\in  M^{|x|}$ such that ${\EuScript M}\models\psi(a)\le0$.
