@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{comment}
-\usepackage{amsrefs}
+\usepackage[alphabetic]{amsrefs}
 \usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{datetime2} 
@@ -166,7 +166,7 @@ Different people have attemped different paths.
   The work of Henson and Iovino is focussed on Banach spaces and has hardly been applied to broader contexts. See~\cite{HI} for a survey.
   \item[3.] Real valued logicians take the most radical approach.
   They abandon classical true/false valued logic in favour of a logic valued in the interval $[0,1]$.
-  Unfortunately, this adds notational burden and restricts the class of structures that can be considered. See~\cite{K} for a survey. 
+  Unfortunately, this adds notational burden and restricts the class of structures that can be considered. See~\cite{K} or~\cite{H} for a survey. 
 \end{itemize}
 
 We elaborate on the ideas of Henson and Iovino and generalize them to a larger class of structures.
@@ -189,7 +189,7 @@ Let \emph{$I$\/} be some fixed first-order structure which is endowed with a Hau
 The language \emph{$L_{\sf I}$\/} contains relation symbols for the compact subsets $C\subseteq I^n$ and a function symbol for each continuous functions $f:I^n\to I$.
 In particular, there is a constant for each element of $I$.
 According to the context, $C$ and $f$ denote either the symbols of $L_{\sf I}$ or their interpretation in the stucture $I$.
-The most common examples of structures $I$ are the unit interval $[0,1]$, with the usual topology, and its homeomophic copies $\mathds{R}^+\cup\{\infty\}$ and $\mathds{R}\cup\{\pm\infty\}$.
+The most common examples of structures $I$ are the unit interval $[0,1]$, with the usual topology, and its homeomophic copies $\mathds{R}^+\cup\{0,\infty\}$ and $\mathds{R}\cup\{\pm\infty\}$.
 
 We also fix a first-order language \emph{$L_{\sf H}$\/} which we call the language of the \emph{home sort.}
 
@@ -453,7 +453,7 @@ The definitions of \emph{$\mathds{H}$-elementary\/} map/embedding/submodel is ob
 
 As $\mathds{I}$ and $\mathds{H}$-elementary maps are in particular $L_{\sf H}$-elementary, they are injective.
 However, their inverse need not be $\mathds{I}$, respectively $\mathds{H}$-elementary.
-In other words the converse implication in (1) may not hold.
+In other words, the converse of the implication in (1) may not hold.
 We have choosen to work with the classical notion of satisfaction at the cost of this asymmetric notion of elementarity.
 This contrast with the approach of Henson and Iovino.
 They introduce the notion of \textit{approximated satisfaction.} 
@@ -492,8 +492,8 @@ The following holds in general.
 
 % \begin{comment}
 Finally, we introduce the morphisms that corrisponds to the classical partial embeddings.
-We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if implication (1) holds for all $\mathds{I}$-atomic formulas $\varphi(x)$.
-Note that this is the same as requireing that (1) holds for all formulas without quantifiers of sort ${\sf H}$.
+We say that $f:M\to N$ is a \emph{partial $\mathds{I}$-embedding\/} if the implication in (1) holds for all $\mathds{I}$-atomic formulas $\varphi(x)$.
+Note that this is the same as requiring that (1) holds for all formulas without quantifiers of sort ${\sf H}$.
 
 \begin{fact}
   If $f:M\to N$ is a partial $\mathds{I}$-embedding then 
@@ -740,8 +740,7 @@ There are some subtle differences from the classical setting.
 \end{fact}
 
 \begin{proof}
-  Claim (1) is immediate by saturation.
-  Claim (2) follows from the first by Lemma~\ref{lem_interpolation}.
+  (1) is immediate by saturation;  (2) follows from (1) by Lemma~\ref{lem_interpolation}.
 \end{proof}
 
 
@@ -883,7 +882,7 @@ Let $A\subseteq{\EuScript U}$ be a small set throughout this section.
   As every automorphism is ${\EuScript L}$-elementary, the corollary follows.
 \end{proof}
 
-For $a,b\in {\EuScript U}^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the same ${\EuScript L}$-formulas over $A$, bearing in mind that formulas in $\mathds{H}(A)$ or $\mathds{I}(A)$, or their apploximations, suffice to test the equivalence.
+For $a,b\in {\EuScript U}^{|x|}$ we write \emph{$a\equiv_Ab$\/} if $a$ and $b$ satisfy the same ${\EuScript L}$-formulas over $A$, bearing in mind that formulas in $\mathds{H}(A)$ or $\mathds{I}(A)$, or their approximations, suffice to test the equivalence.
 
 In the classical setting, from an equivalence between types one derives an  equivalence between formulas.
 Without negation, this is not true.
@@ -937,6 +936,8 @@ We also need an approximation restult for the negation of formulas in $\mathds{I
 \end{proof}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1014,7 +1015,17 @@ Note that here the classical downward L\"owenheim-Skolem Theorem holds in full f
 In particular every $A\subseteq U$ is contained in a model of cardinality $|{\EuScript L}(A)|$.
 In this form the L\"owenheim-Skolem Theorem is not very informative.
 In fact, the cardinality of ${\EuScript L}$ is eccessively large because of the aboundance of symbols in $L_{\sf I}$.
-In Section~\ref{separability} we prove a version L\"owenheim-Skolem Theorem that is more appropriate in our context.
+
+% Assume $I$ is second countable.
+% Fix a countable base of closed sets with nonempty interior.
+% Let $Q\subseteq I$ be countable dense subset. 
+% Given
+
+% \begin{fact}
+%   Then there is a countable set   countable language $L_{\sf Q}\subseteq L_{\sf I}$ such that 
+% \end{fact}
+
+In Section~\ref{separability} we will prove a version L\"owenheim-Skolem Theorem that is more appropriate to our context.
 
 % The \emph{weight\/} of ${\EuScript L}$, which we denote by \emph{${\rm wgt}\big({\EuScript L}\big)$\/} is the minimal cardinality of a set of formulas $\mathds{H}'$ such that for every $\varphi''>\varphi\in\mathds{H}$ there is a $\varphi'\in\mathds{H}'$ such that $\varphi''>\varphi'>\varphi$.
 % If this minimal cardinality is $\omega$, we say that ${\EuScript L}$ is sparable. 
@@ -1072,36 +1083,38 @@ We also define the type
   \ceq{\hfill a\sim_{\sf I} b}{\Leftrightarrow}{a_i\sim_{\sf I} b_i}\quad for every $i<\lambda$.
 \end{fact}
 
-\begin{proof}
+\begin{proof} 
+  \def\ceq#1#2#3{\parbox[t]{30ex}{$\displaystyle #1$}\parbox{4ex}{\hfil $#2$}{$\displaystyle #3$}}
+  %
   Only implication $\Leftarrow$ requires a proof.
   Assume $a_i\sim_{\sf I} b_i$ for every $i$.
   Let $|a|=|b|=\lambda$ and assume inductively that
   
-  \ceq{\hfill t(a,y,z)}{=}{t(b,y,z)}
+  \ceq{\hfill\forallH y,z\ \ \ t(a,y,z)}{=}{t(b,y,z)}
 
   holds for every term $t(x,y,z)$, with $|x|=\lambda$ (universal quantification over the free variables is understood throughout the proof).  
   In particular for any $a_\lambda$
 
-  \ceq{1.\hfill t(a,a_\lambda,z)}{=}{t(b,a_\lambda,z).}
+  \ceq{1.\hfill\forallH z\ \ \  t(a,a_\lambda,z)}{=}{t(b,a_\lambda,z).}
 
   As $a_\lambda\sim_{\sf I}\!b_\lambda$ then
 
-  \ceq{\hfill t(x,a_\lambda,z)}{=}{t(x,b_\lambda,z)}
+  \ceq{\hfill\forallH x,z\ \ \   t(x,a_\lambda,z)}{=}{t(x,b_\lambda,z)}
 
   and in particular 
 
-  \ceq{2.\hfill t(b,a_\lambda,z)}{=}{t(b,b_\lambda,z).}
+  \ceq{2.\hfill\forallH z\ \ \ t(b,a_\lambda,z)}{=}{t(b,b_\lambda,z).}
 
   From (1) and (2) we obtain
 
-  \ceq{\hfill t(a,a_\lambda,z)}{=}{t(b,b_\lambda,z).}
+  \ceq{\hfill\forallH z\ \ \ t(a,a_\lambda,z)}{=}{t(b,b_\lambda,z).}
 
   For limit ordinals induction is trivial.
 \end{proof}
 
-Note that the approximation of the formula $x\sim_t\!y$ has the form
+Note that the approximations of the formula $x\sim_t\!y$ have the form
 
-\ceq{\hfill\emph{$x\sim_{t,D}y$}}{=}{\forallH z\ \langle t(x,z),t(y,z)\rangle\in D}
+\ceq{\hfill\emph{$x\sim_{t,D}y$}}{=}{\forallH z\ \ \langle t(x,z),t(y,z)\rangle\in D}
 
 for some compact neighborhood $D$ of $\Delta$, the diagonal of $I^2$.
 Hence we define
@@ -1117,12 +1130,12 @@ We say that $p(x)\subseteq\mathds{I}({\EuScript U})$ is \emph{${\sf I}$-invarian
 % It is immediate that $\mathds{I}$-formulas constructed without using (ii) of Definition~\ref{def_LL} are ${\sf I}$-invariant.
 We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent and $p(x)\wedge p(y)\rightarrow x\sim_{\sf I}\!y$.
 
-We say that a type $q(x)$ is finitely satisfiable in $M$ if every conjunction of formulas in $q(x)$ has a solution in $M$.
+We say that a type $q(x)$ is \emph{finitely satisfiable\/} in $M$ if every conjunction of formulas in $q(x)$ has a solution in $M$.
 This definition is classical, but note that classically every type over $M$ is finitely saisfiable in $M$. 
 Not here, as we can only infer that $q'(x)$ is finitely satisfiable.
 
-\begin{lemma}
-  Then the following are equivalent for every model $M$
+\begin{lemma}\label{lem_Cauchyequiv}
+  The following are equivalent for every model $M$
   \begin{itemize}
     \item[1.]  $p(x)\subseteq\mathds{I}(M)$ is an ${\sf I}$-invariant Cauchy type;
     \item[2.] $p(x)\leftrightarrow a\sim_{\sf I}\!x$ for some/any $a\models p(x)$;
@@ -1157,7 +1170,7 @@ The following trivial consequence is worth to be noted
 
 We say that the set $B$ is a \emph{Cauchy closure\/} of $A$ if 
 \begin{itemize}
-  \item[1.] every ${\sf I}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(M)$ is realized in $B$
+  \item[1.] every ${\sf I}$-invariant Cauchy type $p(x)\subseteq\mathds{I}(A)$ is realized in $B$
   \item[2.] $\mathds{I}\mbox{-tp}(b/A)$ is Cauchy for every $b\in B$.
 \end{itemize}
 
@@ -1167,40 +1180,41 @@ We say that the set $B$ is a \emph{Cauchy closure\/} of $A$ if
   Then any Cauchy closure of $M$ is a model.
 \end{proposition}
 
-\begin{proof}(messy/wrong/incomplete)
-  We need a few easy observations.
-  Let $a\sim_{\sf I}a'$ be finite tuples.
-  Let $\langle a\rangle$ be the $L_{\sf H}$ substructure of $U$ generated by $a$.
-  Then for every $b\in U\smallsetminus\langle a\rangle$ there is a $b'\in U\smallsetminus\langle a'\rangle$ such that $a,b\sim_{\sf I}a',b'$.
-  In fact, $\sim_{\sf I}$-classes are infinite, hence they ave the cardinality of $U$.
-  Therefore, by back-and-forth, $a\equiv a'$.
-  We also have that for every formula $\varphi(x,z)$ and $b\in U\smallsetminus\big(\langle a\rangle\cup\big)$ 
+\begin{proof} ???
+  % (messy/wrong/incomplete)
+  % We need a few easy observations.
+  % Let $a\sim_{\sf I}a'$ be finite tuples.
+  % Let $\langle a\rangle$ be the $L_{\sf H}$ substructure of $U$ generated by $a$.
+  % Then for every $b\in U\smallsetminus\langle a\rangle$ there is a $b'\in U\smallsetminus\langle a'\rangle$ such that $a,b\sim_{\sf I}a',b'$.
+  % In fact, $\sim_{\sf I}$-classes are infinite, hence they ave the cardinality of $U$.
+  % Therefore, by back-and-forth, $a\equiv a'$.
+  % We also have that for every formula $\varphi(x,z)$ and $b\in U\smallsetminus\big(\langle a\rangle\cup\big)$ 
 
-  \ceq{}{~}{\forallH x\notin{\rm rng}(a,a')\big[\varphi(x,a)\leftrightarrow\varphi(x,a')\big].}
+  % \ceq{}{~}{\forallH x\notin{\rm rng}(a,a')\big[\varphi(x,a)\leftrightarrow\varphi(x,a')\big].}
 
-  Let $N$ be a Cauchy closure of $M$.
-  We verify that $N$ satisfies (2) of Proposition~\ref{prop_Tarski_Vaught}.
-  Let $\varphi(x,z)\in\mathds{H}$ and $a\in N^{|z|}$ be be such that $\existsH x\ \varphi(x,a)$.
-  We can assume that $a$ is a tuple of distinct elements.
-  By the observations above
+  % Let $N$ be a Cauchy closure of $M$.
+  % We verify that $N$ satisfies (2) of Proposition~\ref{prop_Tarski_Vaught}.
+  % Let $\varphi(x,z)\in\mathds{H}$ and $a\in N^{|z|}$ be be such that $\existsH x\ \varphi(x,a)$.
+  % We can assume that $a$ is a tuple of distinct elements.
+  % By the observations above
   
-  \ceq{\hfill a\sim_{\sf I}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi(x,a)\leftrightarrow\varphi(x,z)\big]}
+  % \ceq{\hfill a\sim_{\sf I}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi(x,a)\leftrightarrow\varphi(x,z)\big]}
 
-  By compactness,
+  % By compactness,
 
-  \ceq{\hfill a\sim_{t,D}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi'(x,a)\leftrightarrow\varphi'(x,z)\big]}
+  % \ceq{\hfill a\sim_{t,D}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi'(x,a)\leftrightarrow\varphi'(x,z)\big]}
 
-  Every finite injective map $k:U\to U$ that preserves $\sim_{\sf I}$-classes is ${\EuScript L}$-elementary.
-  By preserving $\sim_{\sf I}$-classes we mean that $a\sim_{\sf I}ka$ for every $a\in{\rm dom}(k)$.
-  To prove the fact, pick any $b\in U\smallsetminus{\rm dom}(k)$ and note that, as $\sim_{\sf I}$-classes are infinite. there is a $c\in U\smallsetminus{\rm rng}(k)$ such that $k\cup\{\langle b,c\rangle$ preserves $\sim_{\sf I}$.
-  The fact follows from the claim by back-and-forth.
+  % Every finite injective map $k:U\to U$ that preserves $\sim_{\sf I}$-classes is ${\EuScript L}$-elementary.
+  % By preserving $\sim_{\sf I}$-classes we mean that $a\sim_{\sf I}ka$ for every $a\in{\rm dom}(k)$.
+  % To prove the fact, pick any $b\in U\smallsetminus{\rm dom}(k)$ and note that, as $\sim_{\sf I}$-classes are infinite. there is a $c\in U\smallsetminus{\rm rng}(k)$ such that $k\cup\{\langle b,c\rangle$ preserves $\sim_{\sf I}$.
+  % The fact follows from the claim by back-and-forth.
 
   
-  \ceq{\hfill a\sim_{\sf I}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi(x,a)\leftrightarrow\varphi(x,z)\big]}
+  % \ceq{\hfill a\sim_{\sf I}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi(x,a)\leftrightarrow\varphi(x,z)\big]}
 
-  By compactness,
+  % By compactness,
 
-  \ceq{\hfill a\sim_{t,D}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi'(x,a)\leftrightarrow\varphi'(x,z)\big]}
+  % \ceq{\hfill a\sim_{t,D}z}{\rightarrow}{\forallH x\notin{\rm rng}(a,z)\big[\varphi'(x,a)\leftrightarrow\varphi'(x,z)\big]}
 \end{proof}
 
 
@@ -1232,16 +1246,17 @@ We say that the set $B$ is a \emph{Cauchy closure\/} of $A$ if
 
 
 \begin{fact}
-  Let ${\EuScript M}$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda>|{\EuScript L}|$.
-  Then ${\EuScript M}$ is Cauchy complete.
+  Let $M$ be a model that is $\lambda$-$\mathds{I}$-saturated for some $\lambda>|{\EuScript L}|$.
+  Then $M$ is Cauchy complete.
 \end{fact}
 
 \begin{proof}  
   Let $p(x)\subseteq\mathds{I}(M)$ be an ${\sf I}$-invariant Cauchy type.
   Pick any $a\models p(x)$.
+  By Lemma~\ref{lem_Cauchyequiv}, $p(x)\leftrightarrow \sim_{\sf I}\!x$.
   For every formula $\varphi(x)$ in the type $a\sim_{\sf I}\!x$ and every $\varphi'>\varphi$ pick some $\psi(x)\in p$ such that $\psi(x)\rightarrow\varphi'(x)$.
-  There are at most $|{\EuScript L}|$ such formulas $\psi(x)$.
-  By saturation they have a common solution $b$ in $M$.
+  There are $|{\EuScript L}|$ many formulas in $a\sim_{\sf I}\!x$.
+  Then by saturation the formulas $\psi(x)$ we picked above have a common solution $b$ in $M$.
   Then $b\sim_{\sf I}\!a$ and, by invariance, $b\models p(x)$.
 \end{proof}
 
@@ -1389,14 +1404,27 @@ Therefore the notion of convergent sequence makes perfectly sense in ${\EuScript
 \begin{bibdiv}
 \begin{biblist}[]\normalsize
 
+
+\bib{H}{arXiv}{
+  label={H},
+  author = {Hart, Bradd},
+  title = {An Introduction To Continuous Model Theory},
+  eprint={2303.03969},
+  doi = {10.48550/arXiv.2303.03969},
+  url = {https://arxiv.org/abs/},
+  publisher = {arXiv},
+  date = {2023},
+}
+
 \bib{HI}{article}{
-   author={Henson, C. Ward},
-   author={Iovino, Jos\'{e}},
-   title={Ultraproducts in analysis},
-   conference={
-      title={Analysis and logic},
-      address={Mons},
-      date={1997},
+  label={HI},
+  author={Henson, C. Ward},
+  author={Iovino, Jos\'{e}},
+  title={Ultraproducts in analysis},
+  conference={
+    title={Analysis and logic},
+    address={Mons},
+    date={1997},
    },
    book={
       series={London Math. Soc. Lecture Note Ser.},
@@ -1409,6 +1437,7 @@ Therefore the notion of convergent sequence makes perfectly sense in ${\EuScript
 }
 
 \bib{K}{arXiv}{
+  label={K},
   author = {Keisler, H. Jerome},
   title = {Model Theory for Real-valued Structures},
   eprint={2005.11851},
@@ -1475,15 +1504,15 @@ Garbage after this point
 %%%%%%%%%%%%%%%%%%%%%
 \section{Separability}\label{separability}
 
-We say that ${\EuScript L}$ is \emph{separable\/} if there is a countable  ${\EuScript L}_0\subseteq{\EuScript L}$ such that for every $\varphi'>\varphi\in{\EuScript L}$ there is a $\varphi''\in {\EuScript L}_0$ such that  $\varphi'>\varphi''>\varphi$.
+We say that ${\EuScript U}$ is \emph{separable\/} if there is a countable  ${\EuScript L}_0\subseteq{\EuScript L}$ such that for every $\varphi'>\varphi\in{\EuScript L}$ there is a $\varphi_0\in {\EuScript L}_0$ such that  $\varphi\rightarrow\varphi_0\rightarrow\varphi'$.
 
 
 \begin{proposition}
-  Assume that $L_{\sf H}$ is countable, $I$ is second countable, and there are at most countably many symbols of sort ${\sf H}^n\to{\sf I}$.
+  Assume that $I$ is second countable, $L_{\sf H}$ is countable, and there are at most countably many symbols of sort ${\sf H}^n\to{\sf I}$.
   Then ${\EuScript L}$ is separable.
 \end{proposition}
 \begin{proof}
-  Assume 
+  ???
 \end{proof}
 
 
