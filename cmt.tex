@@ -19,7 +19,9 @@
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usepackage[mathcal]{euscript}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+% \def\EuScript#1{\mathscr#1}
 % \usepackage{fourier-orns}
 % \usepackage{palatino}
 \usepackage{mathpazo} % add possibly `sc` and `osf` options
@@ -167,7 +169,7 @@ Different people have attemped different paths.
   \item[1.] Nonstandard analysts happily embrace norms that take values in some ${}^*\mathds{R}\succeq\mathds{R}$.
   These normed spaces are nonstandard, but there are tricks to transfer results from nonstandard to standard normed spaces and vice versa.
   Model theorists, when confronted with similar problems, have used similar approaches (in more generality and with different notation). See~\cite{G} for a survey.
-  \item[2.] Henson and Iovino propose to stick to the standard notion of norm but restrict the notion of elementarity and saturation to a smaller class of formulas (which here is denoted by ${\EuScript H}$).
+  \item[2.] Henson and Iovino propose to stick to the standard notion of norm but restrict the notion of elementarity and saturation to a smaller class of formulas.
   They demostrate that most standard tools of model theory apply in their setting. 
   The work of Henson and Iovino is focussed on Banach spaces and has hardly been applied to broader contexts. See~\cite{HI} for a survey.
   \item[3.] Real valued logicians opt for an esoteric approach.
@@ -179,11 +181,8 @@ Different people have attemped different paths.
 \end{itemize}
 
 We elaborate on the ideas of Henson and Iovino and generalize them to a larger class of structures.
-Following Henson and Iovino we also restrict the notions of elementarity and saturation.
-But we use a class of formulas ${\EuScript I}$ which is larger than ${\EuScript H}$.
-Though ${\EuScript I}$ has approximatively the same expressive power as ${\EuScript H}$ (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}), it is evident (cf.\@ Example~\ref{ex_Rvlogic}) that ${\EuScript I}$ is more convinent to use.
-
-We also borrow intuitions and results from nonstandard analisys to an extent that we could claim the title: nonstandard analysis for the standard logician.
+We also restrict the notions of elementarity and saturation but we use a larger class of formulas.
+We also borrow intuitions and results from nonstandard analisys to an extent that we could claim the title: \textit{nonstandard analysis for the standard logician}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -206,7 +205,7 @@ We also fix a first-order language \emph{$L_{\sf H}$\/} which we call the langua
   Let ${\EuScript L}$ be a two sorted language that expands both $L_{\sf H}$ and $L_{\sf I}$.
   By \emph{model\/} we mean a two-sorted ${\EuScript L}$-structure of the form $\langle  M,I\rangle$, where $M$ ranges over all $L_{\sf H}$-structures, while $I$ is the structure we fixed above.
   We write \emph{${\sf H}$} and \emph{${\sf I}$\/} to denote the two sorts of ${\EuScript L}$.
-  The new symbols allowed in ${\EuScript L}$ are function symbols of sort ${\sf H}^n\to {\sf I}$.
+  The new symbols allowed in ${\EuScript L}$ are function of sort ${\sf H}^n\to {\sf I}$.
 
   Models are denoted by the domain of their home sort.
 \end{definition}
@@ -225,23 +224,30 @@ Warning: as usual, $L_{\sf I}$, $L_{\sf H}$, and ${\EuScript L}$ denote both fir
 The symbols ${\EuScript I}$ and ${\EuScript H}$ defined below denote only sets of ${\EuScript L}$-formulas.
 
 \begin{definition}\label{def_LL}
-  Formulas in \emph{${\EuScript I}$\/} are defined inductively from two sorts of \emph{${\EuScript I}$-atomic\/} formulas
+  Formulas in \emph{${\EuScript I}$\/} are constructed inductively from two sorts of \emph{${\EuScript I}$-atomic\/} formulas
   \begin{itemize}
   \item[i.] formulas of the form $t(x\,;\eta)\in C$, where $C\subseteq I^n$ is compact and $t(x\,;\eta)$ is a tuple of terms of sort ${\sf H}^{|x|}\times {\sf I}^{|\eta|}\to {\sf I}$; 
   \item[ii.] all formulas in $L_{\sf H}$.
   \end{itemize}
   We require that ${\EuScript I}$ is closed under the Boolean connectives $\wedge$, $\vee$; the quantifiers $\forall\raisebox{1.1ex}{\scaleto{\sf H}{.8ex}\kern-.2ex}$, $\exists\raisebox{1.1ex}{\scaleto{\sf H}{.8ex}\kern-.2ex}$ of sort ${\sf H}$; and the quantifiers $\forall\raisebox{1.1ex}{\scaleto{\sf I}{.8ex}\kern-.2ex}$, $\exists\raisebox{1.1ex}{\scaleto{\sf I}{.8ex}\kern-.2ex}$ of sort ${\sf I}$.
   We will use Latin letters $x,y,z$ for variables of sort ${\sf H}$ and Greek letters $\eta,\varepsilon$ for variables of sort ${\sf I}$.
-  Therefore we can safely drop the superscript from quantifiers that are followed by variables.
+  Therefore we can safely drop the superscript from quantifiers if they are followed by variables.
 
   We write \emph{${\EuScript H}$ \/} for the set of formulas in ${\EuScript I}$ with only quantifiers of sort ${\sf H}$ (i.e.\@ without quantifiers of sort ${\sf I}$).
 \end{definition}
 
 % \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
-Formulas in ${\EuScript H}$ are a generalization of the positive bounded formulas of Henson and Iovino.
-Here we also introduce the larger class ${\EuScript I}$ because it offers some advantages. 
+The class ${\EuScript H}$ is a generalization of the class of positive bounded formulas of Henson and Iovino.
+In fact, it applies to a larger variety of structures.
+But we also enlarge the class of Henson and Iovino as we 
+include all $L_{\sf H}$-formulas. 
+This enlargment comes at a price: the failure of the Perturbation Lemma~\cite[Proposition~5.15]{HI}.
+However, the Perturbation Lemma is partly recovered in Proposition~\ref{prop_perturbation}.
+
+We prove a Compactness Theorem for an even larger class formulas, ${\EuScript I}$.
+This class offers some advantages over ${\EuScript H}$ as it allows quantifiers of sort ${\sf I}$.
 For instance, it is easy to see (cf.\@ Example~\ref{ex_Rvlogic} for a hint) that ${\EuScript I}$ has at least the same expressive power as real valued logic (in fact, it is way more expressive%
-\footnote{This unsubstantited claim should be interpreted as a concjecture.
+\footnote{This unsubstantited claims should be interpreted as concjectures.
 A painstaking technical comparison with real valued logic is not in the scope of this indroductory exploratory paper.}).
 Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}) that the formulas in ${\EuScript I}$ can be approximated by formulas in ${\EuScript H}$.
 
@@ -260,9 +266,154 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
 \end{example}
 
 We conclude this introduction with a question.
-Is it possible extend the theory exposed below to a larger ${\EuScript L}$?
-E.g.\@ can we allow in ${\EuScript L}$ function symbols of sort ${\sf H}^n\times {\sf I}^m\to {\sf I}$ with both $n$ and $m$ positive?
+Is it possible extend the Compactness Theorem~\ref{thm_compattezza} to a larger class of formulas?
+E.g.\@ can we allow in ${\EuScript L}$ (and in ${\EuScript J}$) function symbols of sort ${\sf H}^n\times {\sf I}^m\to {\sf I}$ with both $n$ and $m$ positive?
 These would have natural interpretations, e.g.\@ a group acting on a compact set $I$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Henson-Iovino approximations}\label{ultrapws}
+
+
+For $\varphi,\varphi'\in{\EuScript I}(M)$ (free variables are hidden) we write \emph{$\varphi'>\varphi$\/} if $\varphi'$ is obtained by replacing each atomic formula of the form $t\in C$ occurring in $\varphi$ with $t\in C'$ where $C'$ is some compact neighborhood of $C$.
+If no such atomic formulas occur in $\varphi$, then $\varphi>\varphi$.
+We also have $\varphi>\varphi$ when $\varphi=(t\in C)$ for some clopen set $C$.
+Note that $>$ is a dense (pre)order of ${\EuScript I}(M)$.
+Formulas in (i) of Definition~\ref{def_LL} do not occur under the scope of a negation therefore $\varphi\to\varphi'$ in all ${\EuScript L}$-structures.
+
+We write \emph{$\tilde{\varphi}\perp\varphi$\/} when $\tilde{\varphi}$ is obtained by replacing each atomic formula $t\in C$ occurring in $\varphi$ with $t\in\tilde{C}$ where $\tilde{C}$ is some compact set disjoint from $C$.
+Moreover the ${\EuScript I}$-atomic formulas in $L_{\sf H}$ are replaced with their negation and each connective is replaced with its dual i.e., $\vee, \wedge, \exists,\forall$ are replaced with $\wedge,\vee,\forall,\exists,$ respectively.
+We say that  $\tilde{\varphi}$ is a \emph{strong negation} of $\varphi$.
+It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
+
+\begin{lemma}\label{lem_interpolation}
+  For all  $\varphi\in{\EuScript I}(M)$
+  \begin{itemize}
+    \item[1.]for every $\varphi'>\varphi$ there is a formula $\tilde{\varphi}\perp\varphi$ such that $\varphi\rightarrow\neg \tilde{\varphi}\rightarrow\varphi'$;
+    \item[2.] for every\, $\tilde{\varphi}\perp\varphi$ there is a formula $\varphi'>\varphi$ such that  $\varphi\rightarrow\varphi'\rightarrow\neg \tilde{\varphi}$.
+  \end{itemize}
+\end{lemma}
+
+\begin{proof}
+  If $\varphi\in L$ the claims are obvious.
+  Suppose $\varphi$ is of the form $t\in C$.
+  Let $\varphi'$ be $t\in C'$, for some compact neighborhood of $C$.
+  Let $O$ be an open set such that $C\subseteq O\subseteq C'$.
+  Then $\tilde{\varphi}=(t\in I\smallsetminus O)$ is as required by the lemma.
+  Suppose instead that $\tilde{\varphi}$ is of the form $t\in\tilde{C}$ for some compact $\tilde{C}$ disjoint from $C$.
+  By the normality of $I$, there is  $C'$, a compact neighborhood of $C$ disjoint from $\tilde{C}$.
+  Then  $\varphi'=\big(t\in C'\big)$ is as required.
+  The lemma follows easily by induction.
+\end{proof}
+
+For $p(x)\subseteq{\EuScript I}(A)$, we write 
+
+\ceq{\hfill \emph{$p'(x)$}}{=}{\big\{\varphi'(x)\ :\ \varphi'>\varphi\textrm{ for some }\varphi(x)\in p\big\}}
+
+in particular  \emph{$\{\varphi(x)\}'$} = $\big\{\varphi'(x)\ :\ \varphi'>\varphi\big\}$.
+The following is an interesting fact which we do not know if it holds for arbitrary $I$. 
+
+\begin{proposition}
+  Suppose $I=[0,1]$.
+  Then for every $\varphi(x)\in{\EuScript I}$ there is a formula $\psi(x)\in{\EuScript I}$ such that $\{\varphi(x)\}'\leftrightarrow\psi(x)$ holds in every ${\EuScript L}$-structure. 
+\end{proposition}
+
+\begin{proof}
+  ???
+\end{proof}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Morphisms}\label{morphisms}
+
+\def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
+
+Let $M$ and $N$ be two models.
+We say that a partial map $f:M\to N$ is \emph{${\EuScript I}$-elementary\/} if for every $\varphi(x)\in{\EuScript I}$ and every $a\in({\rm dom }f)^{|x|}$
+
+\ceq{1.\hfill M\models\varphi(a)}{\Rightarrow}{N\models\varphi(fa).}
+
+An ${\EuScript I}$-elementary map that is total is called an \emph{${\EuScript I}$-elementary embedding.} 
+When the map ${\rm id}_M:M\rightarrow N$ is an ${\EuScript I}$-elementary embedding, 
+% that is, if for every  $\varphi(x)\in{\EuScript I}$ and every $a\in M^{|x|}$
+%
+% \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{N\models\varphi(a)},
+%
+we write \emph{$M\preceq^{\EuScript I}N$\/} and say that $M$ is an \emph{${\EuScript I}$-elementary submodel\/} of $N$. 
+
+The definitions of \emph{${\EuScript H}$-elementary\/} map/embedding/submodel is obtained replacing ${\EuScript I}$ by ${\EuScript H}$.
+
+As ${\EuScript I}$ and ${\EuScript H}$-elementary maps are in particular $L_{\sf H}$-elementary, they are injective.
+However, their inverse need not be ${\EuScript I}$, respectively ${\EuScript H}$-elementary.
+In other words, the converse of the implication in (1) may not hold.
+We have choosen to work with the classical notion of satisfaction at the cost of this asymmetric notion of elementarity.
+This contrast with the approach of Henson and Iovino.
+They introduce the notion of \textit{approximated satisfaction.} 
+The approximated ${\EuScript H}$-morphisms we define below are the maps that preserve Henson-Iovino approximated satisfaction.
+These morphisms are invertible, cf.\@ Fact~\ref{fact_HImorphisms}.
+
+We say that the map $f:M\to N$ is \emph{approximately ${\EuScript I}$-elementary\/} if for every formula $\varphi(x)\in{\EuScript I}$, and every $a\in({\rm dom }f)^{|x|}$
+
+\ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
+
+We define \emph{approximately ${\EuScript H}$-elementary\/} maps in the same manner.
+We leave to the reader to verify (using Lemma~\ref{lem_interpolation}) that ${\EuScript I}$-elementarity implies its approximated version, similarly for ${\EuScript H}$-elementarity.
+We will see that with a slight amount of saturation also the converse holds (Proposition~\ref{prop_approx}).
+Finally, under full saturation, all differences disappear as all these morphims becomes ${\EuScript L}$-elementarity maps (Corollary~\ref{corol_Lcomplete}).
+
+The following holds in general.
+
+\begin{fact}\label{fact_HImorphisms}
+  If $f:M\to N$ is approximately ${\EuScript I}$-elementary then
+
+  \ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Leftrightarrow}{N\models\big\{\varphi(fa)\big\}'.}
+
+  for every $\varphi(x)\in{\EuScript I}$, and every $a\in({\rm dom }f)^{|x|}$.
+  The same holds for approximately ${\EuScript H}$-elementary maps.
+\end{fact}
+
+\begin{proof}
+  Only implication $\Leftarrow$ requires a proof.
+  Assume the r.h.s.\@ of the equivalence.
+  Fix $\varphi'>\varphi$ and prove $M\models\varphi'(a)$.
+  Let  $\varphi'>\varphi''>\varphi$.
+  By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi''$ such that $\varphi''\rightarrow\neg\tilde{\varphi}\rightarrow\varphi'$.
+  Then $N\models\neg\tilde{\varphi}(fa)$ and therefore  $M\models\neg\tilde{\varphi}(a)$.
+  Then $M\models\varphi'(a)$.
+\end{proof}
+
+% \begin{comment}
+Finally, we introduce the morphisms that corrisponds to the classical partial embeddings.
+We say that $f:M\to N$ is a \emph{partial ${\EuScript I}$-embedding\/} if the implication in (1) holds for all ${\EuScript I}$-atomic formulas $\varphi(x)$.
+Note that this is the same as requiring that (1) holds for all formulas without quantifiers of sort ${\sf H}$.
+
+\begin{fact}
+  If $f:M\to N$ is a partial ${\EuScript I}$-embedding then 
+
+  \ceq{\hfill M\models\varphi(a)}{\Leftrightarrow}{N\models\varphi(fa)}
+
+  for every $a\in({\rm dom }f)^{|x|}$ and every ${\EuScript I}$-formulas $\varphi(x)$ without quantifiers of sort ${\sf H}$.
+\end{fact}
+
+\begin{proof}
+  The equivalence is trivial for formulas in $L_{\sf H}$ so we only consider ${\EuScript I}$-atomic formulas as in (i) of Definion~\ref{def_0}.
+  Implication $\Rightarrow$ holds by definition. 
+  Vice versa, if $M\models t(a)\notin C$ then, by normality,  $M\models t(a)\in\tilde{C}$ for some compact $\tilde C$ disjoint of $C$.
+  By the definition of ${\EuScript I}$-embedding, $N\models t(a)\in\tilde{C}$.
+  Hence $N\models t(a)\notin C$.
+  Induction is immediate.
+\end{proof}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -271,12 +422,12 @@ These would have natural interpretations, e.g.\@ a group acting on a compact set
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The standard part}\label{standard_part}
 
-In this section we recall the notion of sandard part of an element of the elementary extension of a compact Hausdorff topological space.
-Our goal is to prove Lemma~\ref{lem_st} which in turn is required for the proof of the ${\EuScript I}$-Compactness Theorem.
-The reader that is willing to accept the ${\EuScript I}$-Compactness Theorem without proof may skip this section, see Theorem~\ref{thm_compattezza}.
+In this section we recall the notion of standard part of an element of the elementary extension of a compact Hausdorff topological space.
+Our goal is to prove Lemma~\ref{lem_st} which in turn is required for the proof of the Compactness Theorem for ${\EuScript I}$.
+The reader willing to accept without proof Theorem~\ref{thm_compattezza} (Compactness Theorem for ${\EuScript I}$) may skip this section.
 
-Here, instead of reinventing the wiel (i.e. going back to ultrafilters and ultapowers), we assume the classical compacteneess theorem and built on that.
-Let $I\preceq{}^*\!I$ be a proper extension.
+Here, instead of reinventing the wiel (i.e. going back to ultrafilters and ultapowers), we assume the classical compactness theorem and built on that.
+Let $\langle N, {}^*\!I\rangle$ be an ${\EuScript L}$-structure that extends ${\EuScript L}$-elementarily the model $M$. %$\langle M, I\rangle$.
 Let $\eta$ be a free variable of sort ${\sf I}$.
 For each $\beta\in I$, we define the type
 
@@ -330,12 +481,11 @@ We write \emph{$\alpha\approx\alpha'$\/} if ${\rm st}(\alpha)={\rm st}(\alpha')$
   Therefore ${}^*\!I\models \alpha\in f^{-1}[D]$ and, as $I\preceq{}^*\!I$ we obtain ${}^*\!I\models f(\alpha)\in D$.
 \end{proof}
 
-Let $\langle M,{}^*\!I\rangle$ be an ${\EuScript L}$-structure such that $I\preceq{}^*\!I$.
-The \emph{standard part of $\langle M,{}^*\!I\rangle$\/} is the model $\langle M,I\rangle$ that interprets the symbols $f$ of sort ${\sf H}^n\to {\sf I}$ as the functions
+The \emph{standard part of $\langle N,{}^*\!I\rangle$\/} is the model $\langle N,I\rangle$ that interprets the symbols $f$ of sort ${\sf H}^n\to {\sf I}$ as the functions
 
-\ceq{\hfill f^M(a)}{=}{{\rm st}\big({}^*\!f(a)\big)}\hfill for all $a\in M^n$,
+\ceq{\hfill f^N(a)}{=}{{\rm st}\big({}^*\!f(a)\big)}\hfill for all $a\in N^n$,
 
-where ${}^*\!f$ is the interpretation of $f$ in  $\langle M,{}^*\!I\rangle$.
+where ${}^*\!f$ is the interpretation of $f$ in  $\langle N,{}^*\!I\rangle$.
 Symbols in $L_{\sf H}$ maintain the same interpretation.
 
 \begin{fact}\label{fact_st2} 
@@ -343,14 +493,14 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
   Let $t(x\,;\eta)$ be a term of sort ${\sf H}^{|x|}\times{\sf I}^{|\eta|}\to {\sf I}$.
   Then for every $a\in M^{|x|}$ and $\alpha\in({}^*\!I)^{|\eta|}$
 
-  \ceq{\hfill t^M\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big({}^*t(a\,;\alpha)\big)}
+  \ceq{\hfill t^N\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big({}^*t(a\,;\alpha)\big)}
 \end{fact}
 \begin{proof}
   When a $t$ is function symbol of sort  ${\sf H}^{|x|}\to {\sf I}$, the claim holds by definition.
   When $t$ is a function symbol of sort ${\sf I}^{|\eta|}\to {\sf I}$, the claim follows from Fact~\ref{fact_terms_st}.
   Now, assume inductively that 
 
-  \ceq{\hfill t_i^M\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big({}^*t_i(a\,;\alpha)\big)}
+  \ceq{\hfill t_i^N\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big({}^*t_i(a\,;\alpha)\big)}
 
   holds for the terms $t_1(x\,;\eta),\dots,t_n(x\,;\eta)$ and let $t=f(t_1,\dots,t_n)$ for some function $f$ of sort ${\sf I}^n\to {\sf I}$.
   Then the claim follows immediately from the induction hypothesis and Fact~\ref{fact_terms_st}.
@@ -360,11 +510,11 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
 
 \begin{lemma}\label{lem_st}
   With the notation as above.
-  For every $\varphi(x\,;\eta)\in{\EuScript I}$, \  $a\in M^{|x|}$ and $\alpha\in({}^*\!I)^{|\eta|}$ 
+  For every $\varphi(x\,;\eta)\in{\EuScript I}$, \  $a\in N^{|x|}$ and $\alpha\in({}^*\!I)^{|\eta|}$ 
   
-  \ceq{\hfill\langle M,{}^*\!I\rangle\models\varphi(a\,;\alpha)}
+  \ceq{\hfill\langle N,{}^*\!I\rangle\models\varphi(a\,;\alpha)}
   {\Rightarrow}
-  {M\models\varphi\big(a\,;{\rm st}(\alpha)\big)}
+  {N\models\varphi\big(a\,;{\rm st}(\alpha)\big)}
 \end{lemma}
 
 \begin{proof}
@@ -373,155 +523,23 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
   Otherwise $\varphi(x\,;\eta)$ has the form $t(x\,;\eta)\in C$.
   Assume that the tuple $t(x\,;\eta)$ consists of a single term.
   The general case follows easily from this special case. 
-  Assume that $\langle M,{}^*\!I\rangle\models t(a\,;\alpha)\in C$.
+  Assume that $\langle N,{}^*\!I\rangle\models t(a\,;\alpha)\in C$.
   Then ${\rm st}\big({}^*t(a\,;\alpha)\big)\in C$ by Fact~\ref{fact_st1}.
-  Therefore $t^M\big(a\,;{\rm st}(\alpha)\big)\in C$ follows from Fact~\ref{fact_st2}.
+  Therefore $t^N\big(a\,;{\rm st}(\alpha)\big)\in C$ follows from Fact~\ref{fact_st2}.
   This proves the lemma for ${\EuScript I}$-atomic formulas.
   Induction is immediate. 
 \end{proof}
 
-\begin{corollary}\label{corol_Isaturation}
-  Let $M$ be a model and let $p(\eta)\subseteq{\EuScript I}(M)$ be a type that is finitely consistent in $M$, where $\eta$ is a tuple of variables of sort ${\sf I}$.
-  Then $p(\eta)$ is realized in $M$.
-\end{corollary}
+% \begin{corollary}\label{corol_Isaturation}
+%   Let $M$ be a model and let $p(\eta)\subseteq{\EuScript I}(M)$ be a type that is finitely consistent in $M$, where $\eta$ is a tuple of variables of sort ${\sf I}$.
+%   Then $p(\eta)$ is realized in a model $N$ such that $M\preceq^{\EuScript I}N$.
+% \end{corollary}
 
-\begin{proof}
-  By the classical Compactess Theorem, the type $p(\eta)$ is realized in some ${\EuScript L}$-structure $\langle M,{}^*\!I\rangle$ by
-  some $\alpha\in ({}^*\!I)^{|\eta|}$.
-  Therefore, by the lemma above $M\models p\big({\rm st}(\alpha)\big)$.
-\end{proof}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Henson-Iovino approximations}\label{ultrapws}
-
-
-For $\varphi,\varphi'\in{\EuScript I}(M)$ (free variables are hidden) we write \emph{$\varphi'>\varphi$\/} if $\varphi'$ is obtained by replacing each atomic formula of the form $t\in C$ occurring in $\varphi$ with $t\in C'$ where $C'$ is some compact neighborhood of $C$.
-If no such atomic formulas occur in $\varphi$, then $\varphi>\varphi$.
-We also have $\varphi>\varphi$ when $\varphi=(t\in C)$ for some clopen set $C$.
-Note that $>$ is a dense (pre)order of ${\EuScript I}(M)$.
-Formulas in (i) of Definition~\ref{def_LL} do not occur under the scope of a negation, therefore we always have that $\varphi\to\varphi'$.
-
-We write \emph{$\tilde{\varphi}\perp\varphi$\/} when $\tilde{\varphi}$ is obtained by replacing each atomic formula $t\in C$ occurring in $\varphi$ with $t\in\tilde{C}$ where $\tilde{C}$ is some compact set disjoint from $C$.
-Moreover the ${\EuScript I}$-atomic formulas in $L_{\sf H}$ are replaced with their negation and each connective is replaced with its dual i.e., $\vee, \wedge, \exists,\forall$ are replaced with $\wedge,\vee,\forall,\exists,$ respectively.
-We say that  $\tilde{\varphi}$ is a \emph{strong negation} of $\varphi$.
-It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
-
-\begin{lemma}\label{lem_interpolation}
-  For all  $\varphi\in{\EuScript I}(M)$
-  \begin{itemize}
-    \item[1.]for every $\varphi'>\varphi$ there is a formula $\tilde{\varphi}\perp\varphi$ such that $\varphi\rightarrow\neg \tilde{\varphi}\rightarrow\varphi'$;
-    \item[2.] for every\, $\tilde{\varphi}\perp\varphi$ there is a formula $\varphi'>\varphi$ such that  $\varphi\rightarrow\varphi'\rightarrow\neg \tilde{\varphi}$.
-  \end{itemize}
-\end{lemma}
-
-\begin{proof}
-  If $\varphi\in L$ the claims are obvious.
-  Suppose $\varphi$ is of the form $t\in C$.
-  Let $\varphi'$ be $t\in C'$, for some compact neighborhood of $C$.
-  Let $O$ be an open set such that $C\subseteq O\subseteq C'$.
-  Then $\tilde{\varphi}=(t\in I\smallsetminus O)$ is as required by the lemma.
-  Suppose instead that $\tilde{\varphi}$ is of the form $t\in\tilde{C}$ for some compact $\tilde{C}$ disjoint from $C$.
-  By the normality of $I$, there is  $C'$, a compact neighborhood of $C$ disjoint from $\tilde{C}$.
-  Then  $\varphi'=\big(t\in C'\big)$ is as required.
-  The lemma follows easily by induction.
-\end{proof}
-
-For $p(x)\subseteq{\EuScript I}(A)$, we write 
-
-\ceq{\hfill \emph{$p'(x)$}}{=}{\big\{\varphi'(x)\ :\ \varphi'>\varphi\textrm{ for some }\varphi(x)\in p\big\}}
-
-in particular  \emph{$\{\varphi(x)\}'$} = $\big\{\varphi'(x)\ :\ \varphi'>\varphi\big\}.$
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Morphisms}\label{morphisms}
-
-\def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
-
-Let $M$ and $N$ be two models.
-We say that a partial map $f:M\to N$ is \emph{${\EuScript I}$-elementary\/} if for every $\varphi(x)\in{\EuScript I}$ and every $a\in({\rm dom }f)^{|x|}$
-
-\ceq{1.\hfill M\models\varphi(a)}{\Rightarrow}{N\models\varphi(fa).}
-
-An ${\EuScript I}$-elementary map that is total is called an \emph{${\EuScript I}$-elementary embedding.} 
-When the map ${\rm id}_M:M\rightarrow N$ is an ${\EuScript I}$-elementary embedding, 
-% that is, if for every  $\varphi(x)\in{\EuScript I}$ and every $a\in M^{|x|}$
-%
-% \ceq{\hfill{\EuScript M}\models\varphi(a)}{\Rightarrow}{N\models\varphi(a)},
-%
-we write \emph{$M\preceq^{\EuScript I}N$\/} and say that $M$ is an \emph{${\EuScript I}$-elementary submodel\/} of $N$. 
-
-The definitions of \emph{${\EuScript H}$-elementary\/} map/embedding/submodel is obtained replacing ${\EuScript I}$ by ${\EuScript H}$.
-
-As ${\EuScript I}$ and ${\EuScript H}$-elementary maps are in particular $L_{\sf H}$-elementary, they are injective.
-However, their inverse need not be ${\EuScript I}$, respectively ${\EuScript H}$-elementary.
-In other words, the converse of the implication in (1) may not hold.
-We have choosen to work with the classical notion of satisfaction at the cost of this asymmetric notion of elementarity.
-This contrast with the approach of Henson and Iovino.
-They introduce the notion of \textit{approximated satisfaction.} 
-The approximated ${\EuScript H}$-morphisms we define below are the maps that preserve Henson-Iovino approximated satisfaction.
-These morphisms are invertible, cf.\@ Fact~\ref{fact_HImorphisms}.
-
-We say that the map $f:M\to N$ is \emph{approximately ${\EuScript I}$-elementary\/} if for every formula $\varphi(x)\in{\EuScript I}$, and every $a\in({\rm dom }f)^{|x|}$
-
-\ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
-
-We define \emph{approximately ${\EuScript H}$-elementary\/} maps in the same manner.
-We leave to the reader to verify (using Lemma~\ref{lem_interpolation}) that ${\EuScript I}$-elementarity implies its approximated version, similarly for ${\EuScript H}$-elementarity.
-We will see (Proposition~\ref{prop_approx}) that with a slight amount of saturation also the converse holds.
-Finally, under full saturation, all differences disappear as all these morphims becomes ${\EuScript L}$-elementarity maps (Corollary~\ref{corol_Lcomplete}).
-
-The following holds in general.
-
-\begin{fact}\label{fact_HImorphisms}
-  If $f:M\to N$ is approximately ${\EuScript I}$-elementary then
-
-  \ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Leftrightarrow}{N\models\big\{\varphi(fa)\big\}'.}
-
-  for every $\varphi(x)\in{\EuScript I}$, and every $a\in({\rm dom }f)^{|x|}$.
-  The same holds for approximately ${\EuScript H}$-elementary maps.
-\end{fact}
-
-\begin{proof}
-  Only implication $\Leftarrow$ requires a proof.
-  Assume the r.h.s.\@ of the equivalence.
-  Fix $\varphi'>\varphi$ and prove $M\models\varphi'(a)$.
-  Let  $\varphi'>\varphi''>\varphi$.
-  By Lemma~\ref{lem_interpolation} there is some $\tilde{\varphi}\perp\varphi''$ such that $\varphi''\rightarrow\neg\tilde{\varphi}\rightarrow\varphi'$.
-  Then $N\models\neg\tilde{\varphi}(fa)$ and therefore  $M\models\neg\tilde{\varphi}(a)$.
-  Then $M\models\varphi'(a)$.
-\end{proof}
-
-% \begin{comment}
-Finally, we introduce the morphisms that corrisponds to the classical partial embeddings.
-We say that $f:M\to N$ is a \emph{partial ${\EuScript I}$-embedding\/} if the implication in (1) holds for all ${\EuScript I}$-atomic formulas $\varphi(x)$.
-Note that this is the same as requiring that (1) holds for all formulas without quantifiers of sort ${\sf H}$.
-
-\begin{fact}
-  If $f:M\to N$ is a partial ${\EuScript I}$-embedding then 
-
-  \ceq{\hfill M\models\varphi(a)}{\Leftrightarrow}{N\models\varphi(fa)}
-
-  for every $a\in({\rm dom }f)^{|x|}$ and every ${\EuScript I}$-formulas $\varphi(x)$ without quantifiers of sort ${\sf H}$.
-\end{fact}
-
-\begin{proof}
-  The equivalence is trivial for formulas in $L_{\sf H}$ so we only consider ${\EuScript I}$-atomic formulas as in (i) of Definion~\ref{def_0}.
-  Implication $\Rightarrow$ holds by definition. 
-  Vice versa, if $M\models t(a)\notin C$ then, by normality,  $M\models t(a)\in\tilde{C}$ for some compact $\tilde C$ disjoint of $C$.
-  By the definition of ${\EuScript I}$-embedding, $N\models t(a)\in\tilde{C}$.
-  Hence $N\models t(a)\notin C$.
-  Induction is immediate.
-\end{proof}
+% \begin{proof}
+%   By the classical Compactess Theorem, the type $p(\eta)$ is realized in some ${\EuScript L}$-structure $\langle N,{}^*\!I\rangle$ by
+%   some $\alpha\in ({}^*\!I)^{|\eta|}$.
+%   Therefore, by the lemma above $N\models p\big({\rm st}(\alpha)\big)$.
+% \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -534,7 +552,7 @@ It is convenient to distinguish between consistency with respect to models and c
 We say that a theory $T$ is \emph{${\EuScript L}$-consistent\/} when $\langle M,{}^*\!I\rangle\models T$ for some ${\EuScript L}$-structure.
 We say that $T$ is \emph{consistent\/} when $M\models T$  is for some model $M$.
 
-\begin{theorem}[\boldmath${\EuScript I}$-Compactness Theorem]\label{thm_compattezza}
+\begin{theorem}[Compactness Theorem for \boldmath${\EuScript I}$]\label{thm_compattezza}
   Let $T\subseteq{\EuScript I}$ be finitely consistent.
   Then $T$ is consistent.
 \end{theorem}
@@ -561,7 +579,7 @@ We say that $T$ is \emph{consistent\/} when $M\models T$  is for some model $M$.
 %     \item[2.] $p(x)$ is finitely satisfied in $M$.
 %   \end{itemize}
 % \end{definition}
-A model $N$ is \emph{$\lambda$-${\EuScript I}$-saturated\/} if it realizes all types $p(x)\subseteq{\EuScript I}(N)$ with fewer than $\lambda$ parameters that are finitely consistent in $N$.
+A model $N$ is \emph{$\lambda$-${\EuScript I}$-saturated\/} if it realizes all types $p(x\,;\eta)\subseteq{\EuScript I}(N)$ with fewer than $\lambda$ parameters that are finitely consistent in $N$.
 When $\lambda=|N|$ we simply say  \emph{${\EuScript I}$-saturated.}
 The existence of ${\EuScript I}$-saturated models is obtained from the classical case just as for Theorem~\ref{thm_compattezza}.
 
@@ -647,7 +665,7 @@ This is clear if we show that the antecedent is closed under conjunction.
 Indeed it is easy to verify that if $\varphi_1,\varphi_2>\varphi$ then $\varphi_1\wedge\varphi_2>\varphi'$ for some $\varphi'>\varphi$.
 In words, the set of approximations of $\varphi$ is a directed set.
 
-For existential quantifiers of sort ${\sf I}$ we argue similarly by applying Corollary~\ref{corol_Isaturation}.
+For existential quantifiers of sort ${\sf I}$ we argue similarly.% by applying Corollary~\ref{corol_Isaturation}.
 %
 % \noindent\llap{\textcolor{red}{\Large\danger}\kern1ex}\ignorespaces
 % Consider the existential quantifiers of sort $I$
@@ -665,9 +683,9 @@ For existential quantifiers of sort ${\sf I}$ we argue similarly by applying Cor
 %
 \end{proof}
 
-\begin{remark}
-  If we restrict to formulas without quantifiers of sort ${\sf H}$, the proposition above holds in every model (this is clear from the proof).
-\end{remark}
+% \begin{remark}
+%   If we restrict to formulas without quantifiers of sort ${\sf H}$, the proposition above holds in every model (this is clear from the proof).
+% \end{remark}
 
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
@@ -728,7 +746,7 @@ However, models agree on the approximated truth, see Fact~\ref{fact_HImorphisms}
 Let $A\subseteq{\EuScript U}$ be a small set throughout this section.
 We define a topology on ${\EuScript U}^{|x|}$ which we call the \emph{${\EuScript I}(A)$-topology.}
 The closed sets of this topology are the sets defined by the types $p(x)\subseteq{\EuScript I}(A)$.
-This is a compact topology by the ${\EuScript I}$-Compactness Theorem~\ref{thm_compattezza}.
+This is a compact topology by the Compactness Theorem for ${\EuScript I}$~\ref{thm_compattezza}.
 The following fact demostrate how ${\EuScript I}$-compactness applies in this context.
 There are some subtle differences from the classical setting.
 % \begin{lemma}
@@ -743,7 +761,7 @@ There are some subtle differences from the classical setting.
 
 \begin{fact}\label{fact_compactness_imp}
   Let $p(x)\subseteq{\EuScript I}(A)$ be a type.
-  Then for every  $\varphi(x)\in{\EuScript I}(U)$
+  Then for every  $\varphi(x)\in{\EuScript I}({\EuScript U})$
   \begin{itemize}
     \item[1.] if $p(x)\rightarrow\neg\varphi(x)$ then $\psi(x)\rightarrow\neg\varphi(x)$ for some $\psi(x)$ conjunction of formulas in $p(x)$;
     \item[2.] if $p(x)\rightarrow\varphi(x)$ and $\varphi'>\varphi$ then $\psi(x)\rightarrow\varphi'(x)$ for some conjunction of formulas in $p(x)$.
@@ -1018,7 +1036,7 @@ The following proposition is not literally the Tarski-Vaught test because it onl
   {\Rightarrow}
   {M\not\models\forallH y\,\varphi(a,y).}
 
-  Induction for the connectives $\vee$, $\wedge$, $\existsH $, $\existsI $, and $\forallI $ is straightforward.
+  Induction for the connectives $\vee$, $\wedge$, $\exists\raisebox{1.1ex}{\scaleto{\sf H}{.8ex}\kern-.2ex}$, $\exists\raisebox{1.1ex}{\scaleto{\sf I}{.8ex}\kern-.2ex}$, and $\forall\raisebox{1.1ex}{\scaleto{\sf I}{.8ex}\kern-.2ex}$ is straightforward.
 \end{proof}
 
 Classically, the main application of the Tarski-Vaught test is in the proof of the downward L\"owenheim-Skolem Theorem.
@@ -1090,7 +1108,7 @@ The following proposition provides the examples that motivate the definition of 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%
-\section{Cauchy complete models}
+\section{Cauchy complete models}\label{Cauchy}
 
 
 For $t(x,z)$ a term of sort ${\sf H}^{|x|+|z|}\to {\sf I}$ we define the formula
@@ -1161,6 +1179,20 @@ Though not nedded in the sequel, it is worth mentioning that the ${\sf I}$-topol
 This can be verified by an argument similar to what used in the proof of Fact~\ref{fact_productUniformity}.
 
 We say that $p(x)\subseteq{\EuScript I}({\EuScript U})$ is \emph{${\sf I}$-invariant\/} if $x\sim_{\sf I}\!y\rightarrow[p(x)\leftrightarrow p(y)]$.
+It is easy to see that all formulas constructed without the use of (ii) of Definion~\ref{def_LL} are ${\sf I}$-invariant.
+The following proposition is an immediate consequence of compactness.
+It corresponds to the Perturbation Lemma~\cite[Proposition~5.15]{HI}.
+
+\begin{proposition}\label{prop_perturbation}
+  The following are equivalent for every $\varphi(x)\in{\EuScript I}({\EuScript U})$ 
+  \begin{itemize}
+    \item[1.] $\varphi(x)$ is ${\sf I}$-invariant;
+    \item[2.] for every $\varphi'>\varphi$ there are a tuple of therm $t$ and a compact neighborhood of $\Delta$ such that
+
+    \ceq{\hfill x\sim_{t,D}\!y\ \wedge\ \varphi(x)}{\rightarrow}{\varphi'(y).}
+  \end{itemize}
+\end{proposition}
+
 % It is immediate that ${\EuScript I}$-formulas constructed without using (ii) of Definition~\ref{def_LL} are ${\sf I}$-invariant.
 We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent and $p(x)\wedge p(y)\rightarrow x\sim_{\sf I}\!y$.
 
@@ -1216,7 +1248,7 @@ The following trivial consequence of this fact that is worth noticing
   Then $b\sim_{\sf I}\!a$ and, by invariance, $b\models p(x)$.
 \end{proof}
 
-Clearly, when ${\EuScript U}$ is separable we can improve the proposition above by taking $\lambda=\omega_1$.
+It is clear from the proof that when ${\EuScript L}$ is separable it suffices to require $\lambda>\omega$.
 
 \begin{comment}
   
@@ -2502,7 +2534,7 @@ We write \emph{${\EuScript M}\models \existsH x\ p(x)\le0$} if ${\EuScript M}\mo
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 From this section on, we assume the existence of unboundedly many inaccessible cardinals as this simplifies the exposition.
-We prove directly the existence of ${\EuScript I}$-saturated extension (monster models), skipping the proof of the ${\EuScript I}$-Compactness Theorem as it is not required in the following.
+We prove directly the existence of ${\EuScript I}$-saturated extension (monster models), skipping the proof of the Compactness Theorem for ${\EuScript I}$ as it is not required in the following.
 However this could be proved along the same lines.
 
 Let $p(x)\subseteq L( M)$.
