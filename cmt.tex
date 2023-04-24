@@ -167,23 +167,22 @@ These two requests are blatantly incompatible, something has to give.
 Different people have attemped different paths.
 \begin{itemize}
   \item[1.] Nonstandard analysts happily embrace norms that take values in some ${}^*\mathds{R}\succeq\mathds{R}$.
-  These normed spaces are nonstandard, but there are tricks to transfer results from nonstandard to standard normed spaces and vice versa.
-  Model theorists, when confronted with similar problems, have used similar approaches (in more generality and with different notation). See~\cite{G} for a survey.
+  These normed spaces are nonstandard, but there are tricks to transfer results from nonstandard to standard normed spaces and vice versa. See~\cite{G} for a survey.
+  Model theorists, when confronted with similar problems, have used similar approaches (in more generality and with different notation).
   \item[2.] Henson and Iovino propose to stick to the standard notion of norm but restrict the notion of elementarity and saturation to a smaller class of formulas.
   They demostrate that most standard tools of model theory apply in their setting. 
   The work of Henson and Iovino is focussed on Banach spaces and has hardly been applied to broader contexts. See~\cite{HI} for a survey.
   \item[3.] Real valued logicians opt for an esoteric approach.
   They abandon classical true/false valued logic in favour of a logic valued in the interval $[0,1]$.
   See~\cite{K} or~\cite{H} for a survey.
-  Arguably, this esoteric flavor is what has helped the approach to its popularity. 
+  Arguably, this esoteric flavor helped the approach with some popularity. 
   Unfortunately, this approach adds notational burden and unnatural restrictions.
-  Our down-to-classical-logic approach ia an alternative.
+  Our down-to-classical-logic approach is an alternative.
 \end{itemize}
 
 We elaborate on the ideas of Henson and Iovino and generalize them to a larger class of structures.
-We also restrict the notions of elementarity and saturation but we use a larger class of formulas.
+Following Henson and Iovino we restrict the notions of elementarity and saturation though we use a larger class of formulas.
 We also borrow intuitions and results from nonstandard analisys to an extent that we could claim the title: \textit{nonstandard analysis for the standard logician}.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,7 +190,6 @@ We also borrow intuitions and results from nonstandard analisys to an extent tha
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A class of structures}\label{uno}
-
 
 Let \emph{$I$\/} be some fixed first-order structure which is endowed with a Hausdorff compact\footnote{The requirement of compactness seems to exclude the motivational example mentioned above. To include this and others similar examples we have to replace $\mathds{R}$ with $\mathds{R}\cup\{\pm\infty\}$.} topology (in particular, a normal topology).
 The language \emph{$L_{\sf I}$\/} contains relation symbols for the compact subsets $C\subseteq I^n$ and a function symbol for each continuous functions $f:I^n\to I$.
@@ -237,18 +235,17 @@ The symbols ${\EuScript I}$ and ${\EuScript H}$ defined below denote only sets o
 \end{definition}
 
 % \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
-The class ${\EuScript H}$ is a generalization of the class of positive bounded formulas of Henson and Iovino.
-In fact, it applies to a larger variety of structures.
-But we also enlarge the class of Henson and Iovino as we 
-include all $L_{\sf H}$-formulas. 
+Formulas in ${\EuScript H}$ generlize the positive bounded formulas of Henson and Iovino to a larger class of structures.
+But ${\EuScript H}$ also enlarges the class of Henson and Iovino as it comprises all $L_{\sf H}$-formulas.
 This enlargment comes at a price: the failure of the Perturbation Lemma~\cite[Proposition~5.15]{HI}.
-However, the Perturbation Lemma is partly recovered in Proposition~\ref{prop_perturbation}.
+However, we will recover part of Perturbation Lemma in Proposition~\ref{prop_perturbation}.
 
-We prove a Compactness Theorem for an even larger class formulas, ${\EuScript I}$.
-This class offers some advantages over ${\EuScript H}$ as it allows quantifiers of sort ${\sf I}$.
-For instance, it is easy to see (cf.\@ Example~\ref{ex_Rvlogic} for a hint) that ${\EuScript I}$ has at least the same expressive power as real valued logic (in fact, it is way more expressive%
-\footnote{This unsubstantited claims should be interpreted as concjectures.
-A painstaking technical comparison with real valued logic is not in the scope of this indroductory exploratory paper.}).
+In Section~\ref{compactness} we prove the Compactness Theorem for ${\EuScript I}$.
+This class expands ${\EuScript H}$ by allowing quantifiers of sort ${\sf I}$.
+The extra expressivity is convenient and comes almost for free.
+For instance, it is easy to see (cf.\@ Example~\ref{ex_Rvlogic} for a hint) that ${\EuScript I}$ has at least the same expressive power as real valued logic%
+\footnote{This unsubstantited claim should be interpreted as concjecture.
+A painstaking technical comparison with real valued logic is not in the scope of this indroductory exploratory paper.}.
 Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~\ref{prop_LHapprox2}) that the formulas in ${\EuScript I}$ can be approximated by formulas in ${\EuScript H}$.
 
 \begin{example}\label{ex_Rvlogic}
@@ -264,6 +261,16 @@ Somewhat surprisingly, we will see (cf.\@ Propositions~\ref{prop_LHapprox1} and~
 
   \ceq{\hfill\forallH x\ \big[t(x)\le\tau\big]}{\wedge}{\forallI \varepsilon>0\ \existsH x\ \big[\tau\le t(x)+ \varepsilon\big].}
 \end{example}
+
+The following example is inspired by~\cite{HPP}.
+
+\begin{example}\label{ex_HPP}
+  Let ${\EuScript U}$ be a monster model of signature $L_{\sf H}$.
+  Let $A\subseteq{\EuScript U}$ have small cardinality.
+  Let ${\EuScript L}$ contain, besides $L_{\sf H}$ and $L_{\sf I}$, symbols for the functions $f:{\EuScript U}^n\to{\sf I}$ that are continuous in the following sense: the inverse image of every compact $C\subseteq I$ is $L_{\sf H}$-type-definable over $A$.
+  It is easy to verify that the model $\langle{\EuScript U}, I\rangle$ is ${\EuScript I}$-saturated, see definition in Section~\ref{compactness}.
+\end{example}
+
 
 We conclude this introduction with a question.
 Is it possible extend the Compactness Theorem~\ref{thm_compattezza} to a larger class of formulas?
@@ -318,7 +325,7 @@ The following is an interesting fact which we do not know if it holds for arbitr
 
 \begin{proposition}
   Suppose $I=[0,1]$.
-  Then for every $\varphi(x)\in{\EuScript I}$ there is a formula $\psi(x)\in{\EuScript I}$ such that $\{\varphi(x)\}'\leftrightarrow\psi(x)$ holds in every ${\EuScript L}$-structure. 
+  Then for every $\varphi(x)\in{\EuScript I}$ there is a formula $\psi(x)\in{\EuScript I}$ such that $\{\varphi(x)\}'\leftrightarrow\psi(x)$ holds in every model. 
 \end{proposition}
 
 \begin{proof}
@@ -366,7 +373,7 @@ We say that the map $f:M\to N$ is \emph{approximately ${\EuScript I}$-elementary
 \ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
 
 We define \emph{approximately ${\EuScript H}$-elementary\/} maps in the same manner.
-We leave to the reader to verify (using Lemma~\ref{lem_interpolation}) that ${\EuScript I}$-elementarity implies its approximated version, similarly for ${\EuScript H}$-elementarity.
+It is clear that ${\EuScript I}$-elementarity implies its approximated version, similarly for ${\EuScript H}$-elementarity.
 We will see that with a slight amount of saturation also the converse holds (Proposition~\ref{prop_approx}).
 Finally, under full saturation, all differences disappear as all these morphims becomes ${\EuScript L}$-elementarity maps (Corollary~\ref{corol_Lcomplete}).
 
@@ -422,11 +429,14 @@ Note that this is the same as requiring that (1) holds for all formulas without 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The standard part}\label{standard_part}
 
-In this section we recall the notion of standard part of an element of the elementary extension of a compact Hausdorff topological space.
-Our goal is to prove Lemma~\ref{lem_st} which in turn is required for the proof of the Compactness Theorem for ${\EuScript I}$.
-The reader willing to accept without proof Theorem~\ref{thm_compattezza} (Compactness Theorem for ${\EuScript I}$) may skip this section.
+Our goal is to prove the Compactness Theorem for ${\EuScript J}$.
+To bypass lengthy applications of ultrafilters, ultrapowers, and ultralimits, % -- as it would be like reinventing the wiel.
+we assume the Classical Compactness Theorem and built on that.
 
-Here, instead of reinventing the wiel (i.e. going back to ultrafilters and ultapowers), we assume the classical compactness theorem and built on that.
+In this section we recall the notion of standard part of an element of the elementary extension of a compact Hausdorff topological space.
+Our goal is to prove Lemma~\ref{lem_st} which in turn is required for the proof of the Compactness Theorem for ${\EuScript I}$ (Theorem~\ref{thm_compattezza}).
+The reader willing to accept it without proof may skip this section.
+
 Let $\langle N, {}^*\!I\rangle$ be an ${\EuScript L}$-structure that extends ${\EuScript L}$-elementarily the model $M$. %$\langle M, I\rangle$.
 Let $\eta$ be a free variable of sort ${\sf I}$.
 For each $\beta\in I$, we define the type
@@ -491,7 +501,7 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
 \begin{fact}\label{fact_st2} 
   With the notation as above.
   Let $t(x\,;\eta)$ be a term of sort ${\sf H}^{|x|}\times{\sf I}^{|\eta|}\to {\sf I}$.
-  Then for every $a\in M^{|x|}$ and $\alpha\in({}^*\!I)^{|\eta|}$
+  Then for every $a\in M^{|x|}$ and $\alpha\in({}^*\!I)^{|\eta|}$\vskip-.7\baselineskip
 
   \ceq{\hfill t^N\big(a\,;{\rm st}(\alpha)\big)}{=}{{\rm st}\big({}^*t(a\,;\alpha)\big)}
 \end{fact}
@@ -546,7 +556,7 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Compactness}
+\section{Compactness}\label{compactness}
 
 It is convenient to distinguish between consistency with respect to models and consistency with respect to ${\EuScript L}$-structures.
 We say that a theory $T$ is \emph{${\EuScript L}$-consistent\/} when $\langle M,{}^*\!I\rangle\models T$ for some ${\EuScript L}$-structure.
@@ -642,13 +652,13 @@ The following proposition shows that a slight amount of saturation tames the ${\
 
   We need to prove
 
-  \ceq{\hfill\{\existsH z\,\varphi(x,z)\}}
+  \ceq{\hfill\{\existsH z\,\varphi(x,z)\}'}
   {\rightarrow}
   {\existsH z\,\varphi(x,z)}
 
   From (ih) we have
 
-  \ceq{\hfill\existsH z\,\{\varphi(x,z)\}}
+  \ceq{\hfill\existsH z\,\{\varphi(x,z)\}'}
   {\rightarrow}
   {\existsH z\,\varphi(x,z)}
 
@@ -740,13 +750,13 @@ We stress once again that the truth of some $\varphi\in{\EuScript I}(M)$ in a mo
 If also the converse implication holds we say $M$ a \emph{strong model.}
 By Corollary~\ref{corol_omega_sat}, strong models are those that realize the equivalence in Proposition~\ref{prop_approx}.
 Hence $\omega$-${\EuScript I}$-saturated models are strong models.
-Also Cauchy complete models, which we introduce below, are strong models.
-However, models agree on the approximated truth, see Fact~\ref{fact_HImorphisms}.
+% Also Cauchy complete models, which we introduce below, are strong models.
+However, all models agree on the approximated truth, see Fact~\ref{fact_HImorphisms}.
 
 Let $A\subseteq{\EuScript U}$ be a small set throughout this section.
 We define a topology on ${\EuScript U}^{|x|}$ which we call the \emph{${\EuScript I}(A)$-topology.}
 The closed sets of this topology are the sets defined by the types $p(x)\subseteq{\EuScript I}(A)$.
-This is a compact topology by the Compactness Theorem for ${\EuScript I}$~\ref{thm_compattezza}.
+This is a compact topology by the Compactness Theorem for ${\EuScript I}$.
 The following fact demostrate how ${\EuScript I}$-compactness applies in this context.
 There are some subtle differences from the classical setting.
 % \begin{lemma}
@@ -1498,6 +1508,22 @@ As all functions have been required to be uniformly continuous, it is immediate 
   url = {https://arxiv.org/abs/},
   publisher = {arXiv},
   date = {2023},
+}
+
+\bib{HPP}{article}{
+   label={HPP},
+   author={Hrushovski, Ehud},
+   author={Peterzil, Ya'acov},
+   author={Pillay, Anand},
+   title={Groups, measures, and the NIP},
+   journal={J. Amer. Math. Soc.},
+   volume={21},
+   date={2008},
+   number={2},
+   pages={563--596},
+  %  issn={0894-0347},
+  %  review={\MR{2373360}},
+  %  doi={10.1090/S0894-0347-07-00558-9},
 }
 
 \bib{HI}{article}{
