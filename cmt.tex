@@ -216,7 +216,7 @@ We also fix a first-order language \emph{$L_{\sf H}$\/} which we call the langua
 The notion of model will be (inessentially) restricted once the monster model is introduced in Section~\ref{monster}.
 
 Clearly, saturated ${\EuScript L}$-structures exist but, with the exception of trivial cases (when $I$ is finite), they are not models in the sense of Definion~\ref{def_0}.
-As a remedy, below we carve out a set of formulas $L_{\sf H}\subseteq{\EuScript I}\subseteq {\EuScript L}$, such that every model has an ${\EuScript I}$-elementary, ${\EuScript I}$-saturated extension that is also a model.
+As a remedy, below we carve out a set of formulas ${\EuScript I}$, such that $L_{\sf H}\subseteq{\EuScript I}\subseteq {\EuScript L}$ and every model has an ${\EuScript I}$-elementary, ${\EuScript I}$-saturated extension that is also a model.
 
 Warning: as usual, $L_{\sf I}$, $L_{\sf H}$, and ${\EuScript L}$ denote both first-order languages and the corresponding set of formulas.
 The symbols ${\EuScript I}$ and ${\EuScript H}$ defined below denote only sets of ${\EuScript L}$-formulas.
@@ -321,6 +321,10 @@ For $p(x)\subseteq{\EuScript I}(A)$, we write
 
 in particular  \emph{$\{\varphi(x)\}'$} = $\big\{\varphi'(x)\ :\ \varphi'>\varphi\big\}$.
 The following is an interesting fact which we do not know if it holds for arbitrary $I$. 
+
+At face value the following fact may sound stronger then it is in reality.
+In fact, though we prove a form of compactness for ${\EuScript J}$-formulas, this may be only applied as in Fact~\ref{fact_compactness_imp}.
+Hence there is no way to conclude that $\{\varphi(x)\}'$ is finite.
 
 \begin{proposition}
   Suppose $I=[0,1]$.
