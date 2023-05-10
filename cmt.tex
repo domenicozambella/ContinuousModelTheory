@@ -72,9 +72,9 @@
   postheadspace=1em,
   mdframed={
   outerlinewidth=1pt,
-  linecolor=gray!25,
+  linecolor=gray!20,
   roundcorner = 1ex,    
-  backgroundcolor=gray!15, 
+  backgroundcolor=gray!10, 
   innerleftmargin=1ex,
   leftmargin=-1ex,
   innerrightmargin=1ex,
@@ -215,7 +215,7 @@ We also fix a first-order language \emph{$L_{\sf H}$\/} which we call the langua
 
 The notion of model will be (inessentially) restricted once the monster model is introduced in Section~\ref{monster}.
 
-Clearly, saturated ${\EuScript L}$-structures exist but, with the exception of trivial cases (i.e.\@ when $I$ is finite), they are not models in the sense of Definion~\ref{def_0}.
+Clearly, saturated ${\EuScript L}$-structures exist but, with the exception of trivial cases (when $I$ is finite), they are not models in the sense of Definion~\ref{def_0}.
 As a remedy, below we carve out a set of formulas $L_{\sf H}\subseteq{\EuScript I}\subseteq {\EuScript L}$, such that every model has an ${\EuScript I}$-elementary, ${\EuScript I}$-saturated extension that is also a model.
 
 Warning: as usual, $L_{\sf I}$, $L_{\sf H}$, and ${\EuScript L}$ denote both first-order languages and the corresponding set of formulas.
@@ -266,8 +266,7 @@ The following example is inspired by~\cite{HPP}.
 
 \begin{example}\label{ex_HPP}
   Let ${\EuScript U}$ be a monster model of signature $L_{\sf H}$.
-  Let $A\subseteq{\EuScript U}$ have small cardinality.
-  Let ${\EuScript L}$ contain, besides $L_{\sf H}$ and $L_{\sf I}$, symbols for the functions $f:{\EuScript U}^n\to{\sf I}$ that are continuous in the following sense: the inverse image of every compact $C\subseteq I$ is $L_{\sf H}$-type-definable over $A$.
+  Let ${\EuScript L}$ contain, besides $L_{\sf H}$ and $L_{\sf I}$, symbols for the functions $f:{\EuScript U}^n\to{\sf I}$ that are continuous in the following sense: the inverse image of every compact $C\subseteq I$ is $L_{\sf H}$-type-definable over every $M\preceq{\EuScript U}$.
   It is easy to verify that the model $\langle{\EuScript U}, I\rangle$ is ${\EuScript I}$-saturated, see definition in Section~\ref{compactness}.
 \end{example}
 
@@ -400,8 +399,8 @@ The following holds in general.
 
 % \begin{comment}
 Finally, we introduce the morphisms that corrisponds to the classical partial embeddings.
-We say that $f:M\to N$ is a \emph{partial ${\EuScript I}$-embedding\/} if the implication in (1) holds for all ${\EuScript I}$-atomic formulas $\varphi(x)$.
-Note that this is the same as requiring that (1) holds for all formulas without quantifiers of sort ${\sf H}$.
+We say that the map $f:M\to N$ is a \emph{partial ${\EuScript I}$-embedding\/} if the implication in (1) holds for all ${\EuScript I}$-atomic formulas $\varphi(x)$.
+Note that this is the same as requiring that (1) holds for all formulas without quantifiers of sort ${\sf H}$ (unless they occour in $L_{\sf H}$ formulas).
 
 \begin{fact}
   If $f:M\to N$ is a partial ${\EuScript I}$-embedding then 
@@ -700,7 +699,7 @@ For existential quantifiers of sort ${\sf I}$ we argue similarly.% by applying C
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 \begin{remark}\label{remk_p'p}
-  The proposition above will be frequently used in this form: if evaluated in an $\omega$-${\EuScript I}$-saturated model, $p'(x)$ is equivalent to $p(x)$.
+  The proposition above is frequently used in this form: when evaluated in a $\omega$-${\EuScript I}$-saturated model, $p'(x)$ is equivalent to $p(x)$.
 \end{remark}
 
 A consequence of Proposition~\ref{prop_approx} is that between $\omega$-${\EuScript I}$-saturated models the approximated morphisms defined in Section~\ref{morphisms} coincide with their unapproximated version.
@@ -748,10 +747,8 @@ Truth is evaluated in ${\EuScript U}$ unless otherwise is specified.
 Below we say \emph{model\/} for ${\EuScript I}$-elementary submodel of ${\EuScript U}$.
 We stress once again that the truth of some $\varphi\in{\EuScript I}(M)$ in a model $M$ implies the truth of $\varphi$ (in ${\EuScript U}$) but not vice versa.
 If also the converse implication holds we say $M$ a \emph{strong model.}
-By Corollary~\ref{corol_omega_sat}, strong models are those that realize the equivalence in Proposition~\ref{prop_approx}.
-Hence $\omega$-${\EuScript I}$-saturated models are strong models.
-% Also Cauchy complete models, which we introduce below, are strong models.
 However, all models agree on the approximated truth, see Fact~\ref{fact_HImorphisms}.
+Hence strong models are those that realize the equivalence in Proposition~\ref{prop_approx}, e.g.\@ $\omega$-${\EuScript I}$-saturated models are strong models.
 
 Let $A\subseteq{\EuScript U}$ be a small set throughout this section.
 We define a topology on ${\EuScript U}^{|x|}$ which we call the \emph{${\EuScript I}(A)$-topology.}
@@ -894,7 +891,7 @@ The same notation applies also with ${\EuScript H}$ for ${\EuScript I}$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Approximate elimination of quantifiers of sort \textsf{I}}
 
-We show that the quantifiers $\forallI $ and $\existsI $ can be eliminated up to some approximation.
+We show that the quantifiers $\forall\raisebox{1.1ex}{\scaleto{\sf I}{.8ex}\kern-.2ex}$ and $\exists\raisebox{1.1ex}{\scaleto{\sf I}{.8ex}\kern-.2ex}$ can be eliminated up to some approximation.
 
 \begin{proposition}
   The monster model (or any saturated model, for that matter) is ${\EuScript H}$-homogeneous, that is, every ${\EuScript H}$-elementary map $f:{\EuScript U}\to{\EuScript U}$ of cardinality $<|{\EuScript  U}|$ extends to an automorphism.
@@ -1051,7 +1048,7 @@ The following proposition is not literally the Tarski-Vaught test because it onl
 
 Classically, the main application of the Tarski-Vaught test is in the proof of the downward L\"owenheim-Skolem Theorem.
 Note that here the classical downward L\"owenheim-Skolem Theorem holds in full for all ${\EuScript L}$-structures.
-In particular every $A\subseteq U$ is contained in a model of cardinality $|{\EuScript L}(A)|$.
+In particular every $A\subseteq{\EuScript U}$ is contained in a model of cardinality $|{\EuScript L}(A)|$.
 In this form the L\"owenheim-Skolem Theorem is not very informative.
 In fact, the cardinality of ${\EuScript L}$ is eccessively large because of the aboundance of symbols in $L_{\sf I}$.
 
@@ -1207,8 +1204,7 @@ It corresponds to the Perturbation Lemma~\cite[Proposition~5.15]{HI}.
 We say that $p(x)$ is a \emph{Cauchy type\/} if it is consistent and $p(x)\wedge p(y)\rightarrow x\sim_{\sf I}\!y$.
 
 We say that a type $q(x)$ is \emph{finitely satisfiable\/} in $M$ if every conjunction of formulas in $q(x)$ has a solution in $M$.
-This definition is classical, but note that classically every type over $M$ is finitely saisfiable in $M$. 
-Not here, as we can only infer that $q'(x)$ is finitely satisfiable.
+This definition is classical but note that, though classically every type over $M$ is finitely saisfiable in $M$, here we can only infer that $q'(x)$ is finitely satisfiable.
 
 \begin{lemma}\label{lem_Cauchyequiv}
   The following are equivalent for every model $M$
@@ -1230,18 +1226,19 @@ Not here, as we can only infer that $q'(x)$ is finitely satisfiable.
 
   (3$\Rightarrow$1)  
   Let $a_{t,D}\in M$ be a realization of $a\sim_{t,D}x$ as $D$ ranges over the compact neighborhoods of the diagonal and $t(x,z)$ over the finite tuples parameter-free terms.
-  Then, by the uniqueness of the limit, the type $p(x)$ cointaining the formulas $x\sim_{t,D}a_{t,D}$ is as required by the lemma.
+  Then, by the uniqueness of the limit (up to $\sim_I$-equivalence), the type $p(x)$ cointaining the formulas $x\sim_{t,D}a_{t,D}$ is as required by the lemma.
 \end{proof}
 
-We say that $M$ is \emph{Cauchy complete\/} if every ${\sf I}$-invariant Cauchy type $p(x)\subseteq{\EuScript I}(M)$ is realized in $M$.
-% We say that ${\EuScript M}$ is \emph{existentially closed (e.c.)\/} if every consistent conjunction of ${\EuScript I}$-atomic formulas is satsfied in ${\EuScript M}$.
-Note that if $p(x)$ is Cauchy type then any consistent type $q(x)$ containing $p(x)$ is also Cauchy.
-In particular the type $p(x)\ \cup\ {\EuScript I}\mbox{-Th}({\EuScript U}/M)$ is Cauchy.
-The following trivial consequence of this fact that is worth noticing
+We say that a set $A\subseteq{\EuScript U}$ is \emph{Cauchy complete\/} if every ${\sf I}$-invariant Cauchy type $p(x)\subseteq{\EuScript I}(A)$ is realized by some $c\in A^{|x|}$.
+% % We say that ${\EuScript M}$ is \emph{existentially closed (e.c.)\/} if every consistent conjunction of ${\EuScript I}$-atomic formulas is satsfied in ${\EuScript M}$.
+% Note that if $p(x)$ is Cauchy type then any consistent type $q(x)$ containing $p(x)$ is also Cauchy.
+% In particular the type $p(x)\ \cup\ {\EuScript I}\mbox{-Th}({\EuScript U}/M)$ is Cauchy.
+% The following trivial consequence of this fact that is worth noticing
 
-\begin{remark}
-  Cauchy complete models are strong models. I.e., $M\models\varphi$ for every true $\varphi\in{\EuScript I}(M)$.
-\end{remark}
+% \begin{remark}
+%   Cauchy complete models are strong models.
+%   I.e., $M\models\varphi$ for every true $\varphi\in{\EuScript I}(M)$.
+% \end{remark}
 
 \begin{fact}
   Let $M$ be a model that is $\lambda$-${\EuScript I}$-saturated for some $\lambda>|{\EuScript L}|$.
