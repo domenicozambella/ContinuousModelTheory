@@ -22,30 +22,31 @@
 \usepackage{mathrsfs}
 \usepackage{euscript}
 % \def\EuScript#1{\mathscr#1}
-% \usepackage{fourier-orns}
+\usepackage{fourier}
 % \usepackage{palatino}
-\usepackage{mathpazo} % add possibly `sc` and `osf` options
+% \usepackage{mathpazo} % add possibly `sc` and `osf` options
 %\usepackage{eulervm}
 %\usepackage{bbm}
 %\usepackage{latexsym}
 % \usepackage{mathrsfs}
-%\usepackage{stmaryrd}
-\usepackage{stix}
+% \usepackage{stmaryrd}
+% \usepackage{stix}
+\def\dotminus{\stackon[.2ex]{$-$}{$.$}}
 \usepackage{dsfont}
 % \newcommand*{\TakeFourierOrnament}[1]{{%
 % \fontencoding{U}\fontfamily{futs}\selectfont\char#1}}
 % \renewcommand*{\danger}{\TakeFourierOrnament{66}}
 \parindent0ex
 \parskip1.2ex
-\makeatletter
-\DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
-\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
-\DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
-\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
-\DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
-\DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
-\DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
-\makeatother
+% \makeatletter
+% \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
+% \DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
+% \DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
+% \DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
+% \DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
+% \DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
+% \DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
+% \makeatother
 
 \newcommand{\mylabel}[1]{{#1}\hfill}
 \renewenvironment{itemize}
@@ -105,13 +106,6 @@
 \renewcommand*{\emph}[1]{%
    \smash{\tikz[baseline]\node[rectangle, fill=teal!25, rounded corners, inner xsep=0.5ex, inner ysep=0.2ex, anchor=base, minimum height = 2.7ex]{\strut #1};}}
 
-\linespread{1.1}
-\author{C. L. C. L. Polymath}
-\begin{document}
-\title{Continuous logic for the classical logician}
-\hfill\texttt{Branch:\ Experiment\_notation\ \DTMnow}\bigskip
-\maketitle
-\raggedbottom
 
 % \def\forallH{\forall\raisebox{1.1ex}{\scaleto{\sf H}{.8ex}\kern-.2ex}}
 % \def\existsH{\exists\raisebox{1.1ex}{\scaleto{\sf H}{.8ex}\kern-.2ex}}
@@ -129,10 +123,40 @@
   \scaleto{\stackon[-.6pt]{\color{red}$\triangle$}{\color{red}\bfseries\small ?}}{#1}%
 }
 
-\newcommand\dangersign[1][2ex]{%
+\newcommand\dangersign[1][2.5ex]{%
   \renewcommand\stacktype{L}%
-  \scaleto{\stackon[-.6pt]{\color{red}$\triangle$}{\color{red}\bfseries\small !}}{#1}%
+  \scaleto{\stackon[.5pt]{\LARGE\color{red}$\triangle$}{\color{red}\bfseries\small !}}{#1}%
 }
+
+%%%%%%% GETCOMMIT
+\newcommand\dotGitHEAD{}
+\newcommand\branch{}
+\newcommand\commit{}
+
+
+\makeatletter\let\myfilehandle\@inputcheck\makeatother
+
+\openin\myfilehandle=.git/HEAD\relax
+
+\begingroup\endlinechar-1
+  \global\read\myfilehandle to \dotGitHEAD
+\endgroup
+\closein\myfilehandle
+
+\newcommand\GetBranch{}
+\def\GetBranch ref: refs/heads/#1\relax{\renewcommand{\branch}{#1}}
+
+\expandafter\GetBranch\dotGitHEAD\relax
+
+\makeatother
+
+\linespread{1.1}
+\author{C. L. C. L. Polymath}
+\begin{document}
+\title{Continuous logic for the classical logician}
+\hfill\texttt{Branch:\ \branch\ \DTMnow}\bigskip
+\maketitle
+\raggedbottom
 
 \begin{abstract}
   Let ${\EuScript L}$ be a first-order two-sorted language.
@@ -273,7 +297,7 @@ The following example is inspired by~\cite{HPP}.
 
 We conclude this introduction with a question.
 Is it possible extend the Compactness Theorem~\ref{thm_compattezza} to a larger class of formulas?
-E.g.\@ can we allow in ${\EuScript L}$ (and in ${\EuScript J}$) function symbols of sort ${\sf H}^n\times {\sf I}^m\to {\sf I}$ with both $n$ and $m$ positive?
+E.g.\@ can we allow in ${\EuScript L}$ (and in ${\EuScript I}$) function symbols of sort ${\sf H}^n\times {\sf I}^m\to {\sf I}$ with both $n$ and $m$ positive?
 These would have natural interpretations, e.g.\@ a group acting on a compact set $I$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -323,7 +347,7 @@ in particular  \emph{$\{\varphi(x)\}'$} = $\big\{\varphi'(x)\ :\ \varphi'>\varph
 The following is an interesting fact which we do not know if it holds for arbitrary $I$. 
 
 At face value the following fact sounds stronger then it is in reality.
-In fact, though we will prove a form of compactness for ${\EuScript J}$-formulas, this is only applicable in Fact~\ref{fact_compactness_imp}.
+In fact, though we will prove a form of compactness for ${\EuScript I}$-formulas, this is only applicable in Fact~\ref{fact_compactness_imp}.
 Hence we may not conclude that $\{\varphi(x)\}'$ is finite.
 
 \begin{proposition}
@@ -365,15 +389,15 @@ The definitions of \emph{${\EuScript H}$-elementary\/} map/embedding/submodel is
 As ${\EuScript I}$ and ${\EuScript H}$-elementary maps are in particular $L_{\sf H}$-elementary, they are injective.
 However, their inverse need not be ${\EuScript I}$, respectively ${\EuScript H}$-elementary.
 In other words, the converse of the implication in (1) may not hold.
-We have choosen to work with the classical notion of satisfaction at the cost of this asymmetric notion of elementarity.
-This contrast with the approach of Henson and Iovino.
+We have chosen to work with the classical notion of satisfaction at the cost of this asymmetric notion of elementarity.
+This differs from the approach of Henson and Iovino.
 They introduce the notion of \textit{approximated satisfaction.} 
 The approximated ${\EuScript H}$-morphisms we define below are the maps that preserve Henson-Iovino approximated satisfaction.
 These morphisms are invertible, cf.\@ Fact~\ref{fact_HImorphisms}.
 
 We say that the map $f:M\to N$ is \emph{approximately ${\EuScript I}$-elementary\/} if for every formula $\varphi(x)\in{\EuScript I}$, and every $a\in({\rm dom }f)^{|x|}$
 
-\ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
+\ceq{\hfill M\models\varphi(a)}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
 
 We define \emph{approximately ${\EuScript H}$-elementary\/} maps in the same manner.
 It is clear that ${\EuScript I}$-elementarity implies its approximated version, similarly for ${\EuScript H}$-elementarity.
@@ -392,7 +416,11 @@ The following holds in general.
 \end{fact}
 
 \begin{proof}
-  Only implication $\Leftarrow$ requires a proof.
+  $\Rightarrow$ \ Fix $\varphi'>\varphi$ and assume $M\models\varphi'(a)$.
+  Let  $\varphi'>\varphi''>\varphi$.
+  By the definition of approximate elementarity, $M\models\varphi''(fa)$ and $M\models\varphi'(fa)$ follows.
+  
+  $\Leftarrow$  \ 
   Assume the r.h.s.\@ of the equivalence.
   Fix $\varphi'>\varphi$ and prove $M\models\varphi'(a)$.
   Let  $\varphi'>\varphi''>\varphi$.
@@ -432,7 +460,7 @@ Note that this is the same as requiring that (1) holds for all formulas without 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The standard part}\label{standard_part}
 
-Our goal is to prove the Compactness Theorem for ${\EuScript J}$.
+Our goal is to prove the Compactness Theorem for ${\EuScript I}$.
 To bypass lengthy applications of ultrafilters, ultrapowers, and ultralimits, % -- as it would be like reinventing the wiel.
 we assume the Classical Compactness Theorem and built on that.
 
@@ -1471,6 +1499,9 @@ As all functions have been required to be uniformly continuous, it is immediate 
 % There is a natural embedding of $G$ into ${\rm Aut}({\EuScript M})$.
 % Let $\gamma\in{\rm Aut}({\EuScript M})$ we claim that for every $a_1,\dots,a_n$ and every there is a $g\in G$ such that $\tau_{t,C}(\gamma(a),ga)$
 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
@@ -1563,8 +1594,94 @@ As all functions have been required to be uniformly continuous, it is immediate 
 
 \vskip20ex
 %%%%%%%%%%%%%%
-\noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
+\noindent\llap{\dangersign}\kern1ex\ignorespaces
 Garbage after this point
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite randomizations}
+
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox[t]{6ex}{$\displaystyle\hfil #2$}{$\displaystyle #3$}}
+
+Let ${\EuScript U}$ be a saturated model of signature $L$.
+Let $\Omega$ be a finite set.
+We now define models of the form $\langle{\EuScript U}^\Omega, I\rangle$, where $I$ is the real interval $[0,1]$.
+
+The language $L_{\sf H}$ is contains only a constant symbol for each element $b\in{\EuScript U}$ which is interpreted in ${\EuScript U}^\Omega$ as the function with constant value $b$.
+The language ${\EuScript L}$ contains additional functions of sort ${\sf H}^{|x|}\to{\sf I}$, one for each formula $\varphi(x)\in L$.
+These are denoted by $\Pr\big(\varphi(\hat x)\big)$. 
+Note that elements and variables of sort ${\sf H}$ are decorated with a circonflexe accent to distinguish them from the elements/variables that live in ${\EuScript U}$.
+
+The interpretation of $\Pr\big(\varphi(\hat x)\big)$ is given by defining
+
+\ceq{\hfill\Pr\big(\varphi(\hat a)\big)}
+{=}
+{\frac{\#\llbracket\varphi(\hat a)\rrbracket}{\#\Omega},}
+
+where by $\#$ we denote finite cardinaity and 
+
+\ceq{\hfill\llbracket\varphi(\hat a)\rrbracket}{=}{\big\{i\in\Omega\ :\ {\EuScript U}\models\varphi(\hat ai)\big\}.}
+
+
+Let 
+
+\ceq{\hfill T}
+{=}
+{\Big\{\varphi\in{\EuScript L}\ :\ \langle{\EuScript U}^\Omega, I\rangle\models\varphi\textrm{ for every finite set }\Omega\Big\}}
+
+
+
+Throughout this section $\langle\Omega,{\EuScript B},\Pr\rangle$ is some fixed an atomless probability space. 
+The structure $M$ has as domain the set of random variables with values in $I=[0,1]$ and finite range.
+Its signature $L_{\sf H}$ coincides with $L_{\sf I}$ that is, it contains all uniformly continuous functions $I^n\to I$.
+The ${\EuScript L}$-structure $\langle M,I\rangle$ contains symbols of arity ${\sf H}^{n+1}\times{\sf I}^n\to{\sf I}$ for the maps  
+${\rm E}(\,x\mathbin|z=\eta\,)$, where $|z|=|\eta|=n$ and ${\rm E(\,\mbox-\mathbin|\mbox-\,)}$ denotes the conditional expectation.
+
+Let $T$ 
+
+We say that ${\EuScript U}$ eliminates quantifiers if every $\varphi(x)\in{\EuScript H}$ is equivalent to a formula in ${\EuScript I}$ without quantifier of sort ${\sf H}$.
+
+\begin{proposition}
+  
+\end{proposition}
+
+
+The set $R$ contains the random variables $X:\Omega\to M$ with finite range (the dependence of $R$ from $M$ will not be displayed in the notation).
+The 3-sorted signature ${\EuScript L}$ contains $L_{\sf H}$, $L_{\sf I}$ and for every partitioned formula $\varphi(x\,;z)\in L_{\sf H}$ a function symbol of sort ${\sf R}^{|x|}\times{\sf H}^{|z|}\to I$ which is denoted by $\Pr\varphi(X\,;z)$ and interpreted as the function
+
+\ceq{\hfill X,z}{\mapsto}{\Pr X^{-1}\big[\varphi(M\,;z)\big]}.
+
+The \emph{pseudofinite randomization\/} of $T$ is the theory 
+
+\ceq{\hfill T^R}{=}{\big\{\varphi\in{\EuScript I}\ :\ \langle M,R,I\rangle\models\varphi\textrm{ for all }M\models T\big\}}
+
+\ceq{\hfill\forall x\varphi(x\,;z)}
+{\rightarrow }
+{\Pr\varphi(X\,;z)=1}
+
+\ceq{\hfill \Pr\varphi(X\,;z)}
+{\ge}
+{0}
+
+\ceq{\hfill\forall x\neg[\varphi(x\,;z)\wedge\psi(x\,;z)]}
+{\rightarrow}
+{\Pr[\varphi(X\,;z)\vee\psi(X\,;z)]=\Pr\varphi(X\,;z)+\Pr\psi(X\,;z)}
+
+
+\ceq{\hfill\exists Y\, \Pr\varphi(X,Y\,;z)}
+{=}
+{\Pr\exists y\,\varphi(X\,;y,z)}
+
+
+We say that ${\EuScript U}$ eliminates quantifiers if every $\varphi(x)\in{\EuScript H}$ is equivalent to a formula in ${\EuScript I}$ without quantifier of sort ${\sf H}$.
+
 
 
 
