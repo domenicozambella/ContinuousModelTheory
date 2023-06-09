@@ -19,7 +19,6 @@
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usepackage{mathrsfs}
 \usepackage{euscript}
 % \def\EuScript#1{\mathscr#1}
 \usepackage{fourier}
@@ -123,9 +122,9 @@
   \scaleto{\stackon[-.6pt]{\color{red}$\triangle$}{\color{red}\bfseries\small ?}}{#1}%
 }
 
-\newcommand\dangersign[1][2.5ex]{%
+\newcommand\dangersign[1][3.5ex]{%
   \renewcommand\stacktype{L}%
-  \scaleto{\stackon[.5pt]{\LARGE\color{red}$\triangle$}{\color{red}\bfseries\small !}}{#1}%
+  \scaleto{\stackon[1.9pt]{\Huge\color{red}$\triangle$}{\color{red}\bfseries\small !}}{#1}%
 }
 
 %%%%%%% GETCOMMIT
@@ -192,7 +191,7 @@ Different people have attemped different paths.
 \begin{itemize}
   \item[1.] Nonstandard analysts happily embrace norms that take values in some ${}^*\mathds{R}\succeq\mathds{R}$.
   These normed spaces are nonstandard, but there are tricks to transfer results from nonstandard to standard normed spaces and vice versa. See~\cite{G} for a survey.
-  Model theorists, when confronted with similar problems, have used similar approaches (in more generality and with different notation).
+  Model theorists, when confronted with similar problems, have used similar approaches (in greater generality and with different notation).
   \item[2.] Henson and Iovino propose to stick to the standard notion of norm but restrict the notion of elementarity and saturation to a smaller class of formulas.
   They demostrate that most standard tools of model theory apply in their setting. 
   The work of Henson and Iovino is focussed on Banach spaces and has hardly been applied to broader contexts. See~\cite{HI} for a survey.
@@ -261,7 +260,7 @@ The symbols ${\EuScript I}$ and ${\EuScript H}$ defined below denote only sets o
 % \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
 Formulas in ${\EuScript H}$ generlize the positive bounded formulas of Henson and Iovino to a larger class of structures.
 But ${\EuScript H}$ also enlarges the class of Henson and Iovino as it comprises all $L_{\sf H}$-formulas.
-This enlargment comes at a price: the failure of the Perturbation Lemma~\cite[Proposition~5.15]{HI}.
+This enlargment comes at a price: the failure of the Perturbation Lemma~\cite{HI}*{Proposition~5.15}.
 However, we will recover part of Perturbation Lemma in Proposition~\ref{prop_perturbation}.
 
 In Section~\ref{compactness} we prove the Compactness Theorem for ${\EuScript I}$.
@@ -348,11 +347,15 @@ The following is an interesting fact which we do not know if it holds for arbitr
 
 At face value the following fact sounds stronger then it is in reality.
 In fact, though we will prove a form of compactness for ${\EuScript I}$-formulas, this is only applicable in Fact~\ref{fact_compactness_imp}.
-Hence we may not conclude that $\{\varphi(x)\}'$ is finite.
+Hence we may not conclude that $\{\varphi(x)\}'$ is equivalent to some finite subset.
 
 \begin{proposition}
   Suppose $I=[0,1]$.
-  Then for every $\varphi(x)\in{\EuScript I}$ there is a formula $\psi(x)\in{\EuScript I}$ such that $\{\varphi(x)\}'\leftrightarrow\psi(x)$ holds in every model. 
+  Then for every $\varphi(x)\in{\EuScript I}$ there is a formula $\psi(x)\in{\EuScript I}$ such that 
+  
+  \ceq{\hfill}{\psi(x)\leftrightarrow}{\{\varphi(x)\}'}
+  
+  holds in every model. 
 \end{proposition}
 
 \begin{proof}
@@ -399,7 +402,7 @@ We say that the map $f:M\to N$ is \emph{approximately ${\EuScript I}$-elementary
 
 \ceq{\hfill M\models\varphi(a)}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
 
-We define \emph{approximately ${\EuScript H}$-elementary\/} maps in the same manner.
+We define \emph{approximate ${\EuScript H}$-elementary\/} maps in the same manner.
 It is clear that ${\EuScript I}$-elementarity implies its approximated version, similarly for ${\EuScript H}$-elementarity.
 We will see that with a slight amount of saturation also the converse holds (Proposition~\ref{prop_approx}).
 Finally, under full saturation, all differences disappear as all these morphims becomes ${\EuScript L}$-elementarity maps (Corollary~\ref{corol_Lcomplete}).
@@ -407,12 +410,12 @@ Finally, under full saturation, all differences disappear as all these morphims 
 The following holds in general.
 
 \begin{fact}\label{fact_HImorphisms}
-  If $f:M\to N$ is approximately ${\EuScript I}$-elementary then
+  If $f:M\to N$ is approximate ${\EuScript I}$-elementary then
 
   \ceq{\hfill M\models\big\{\varphi(a)\big\}'}{\Leftrightarrow}{N\models\big\{\varphi(fa)\big\}'.}
 
   for every $\varphi(x)\in{\EuScript I}$, and every $a\in({\rm dom }f)^{|x|}$.
-  The same holds for approximately ${\EuScript H}$-elementary maps.
+  The same holds for approximate ${\EuScript H}$-elementary maps.
 \end{fact}
 
 \begin{proof}
@@ -642,9 +645,9 @@ The following proposition shows that a slight amount of saturation tames the ${\
   Let $N$ be an $\omega$-${\EuScript I}$-saturated model.
   Then 
   
-  \ceq{\hfill\big\{\varphi(x)\big\}'}{\leftrightarrow}{\varphi(x)}
+  \ceq{\hfill\big\{\varphi(x\,;\eta)\big\}'}{\leftrightarrow}{\varphi(x\,;\eta)}
   
-  holds in $N$ for every formula $\varphi(x)\in{\EuScript I}(N)$.
+  holds in $N$ for every formula $\varphi(x,;\alpha)\in{\EuScript I}(N)$.
 \end{proposition}
 
 \begin{proof}
@@ -677,30 +680,30 @@ The following proposition shows that a slight amount of saturation tames the ${\
   We consider case of the existential quantifiers of sort ${\sf H}$.
   Assume inductively
   
-  \ceq{\textrm{ih.}\hfill\{\varphi(x,z)\}'}
+  \ceq{\textrm{ih.}\hfill\{\varphi(x,z\,;\eta)\}'}
   {\rightarrow}
-  {\varphi(x,z)}
+  {\varphi(x,z\,;\eta)}
 
   We need to prove
 
-  \ceq{\hfill\{\existsH z\,\varphi(x,z)\}'}
+  \ceq{\hfill\{\existsH z\,\varphi(x,z\,;\eta)\}'}
   {\rightarrow}
-  {\existsH z\,\varphi(x,z)}
+  {\existsH z\,\varphi(x,z\,;\eta)}
 
   From (ih) we have
 
-  \ceq{\hfill\existsH z\,\{\varphi(x,z)\}'}
+  \ceq{\hfill\existsH z\,\{\varphi(x,z\,;\eta)\}'}
   {\rightarrow}
-  {\existsH z\,\varphi(x,z)}
+  {\existsH z\,\varphi(x,z\,;\eta)}
 
   Therefore it suffices to prove
 
-  \ceq{\hfill\{\existsH z\,\varphi(x,z)\}'}
+  \ceq{\hfill\{\existsH z\,\varphi(x,z\,;\eta)\}'}
   {\rightarrow}
-  {\existsH z\,\{\varphi(x,z)\}'}
+  {\existsH z\,\{\varphi(x,z\,;\eta)\}'}
 
-Replace $x$ with some parameters, say $a$ and assume the antecedent, that is, the theory $\{\existsH z\,\varphi'(a,z):\varphi'>\varphi\}$ is true in $N$.
-We need to prove the consistency of the type $\{\varphi'(a,z):\varphi'>\varphi\}$.
+Replace the variables $x\,;\eta$ with parameters, say $a\,;\alpha$ and assume that the theory $\{\existsH z\,\varphi'(a,z,;\alpha):\varphi'>\varphi\}$ is true in $N$.
+We need to prove the consistency of the type $\{\varphi'(a,z,;\alpha):\varphi'>\varphi\}$.
 By saturation, finite concistency suffices.
 This is clear if we show that the antecedent is closed under conjunction.
 Indeed it is easy to verify that if $\varphi_1,\varphi_2>\varphi$ then $\varphi_1\wedge\varphi_2>\varphi'$ for some $\varphi'>\varphi$.
@@ -730,8 +733,8 @@ For existential quantifiers of sort ${\sf I}$ we argue similarly.% by applying C
 
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
-\begin{remark}\label{remk_p'p}
-  The proposition above is frequently used in this form: when evaluated in a $\omega$-${\EuScript I}$-saturated model, $p'(x)$ is equivalent to $p(x)$.
+\begin{remark}\label{remk_approx_EH_free}
+  The proposition above holds without assuming saturation when $\varphi(x,\;\eta)$ does not contains existential quantifiers of sort ${\sf H}$.
 \end{remark}
 
 A consequence of Proposition~\ref{prop_approx} is that between $\omega$-${\EuScript I}$-saturated models the approximated morphisms defined in Section~\ref{morphisms} coincide with their unapproximated version.
@@ -963,11 +966,11 @@ Next proposition show that formulas in ${\EuScript I}(A)$ are approximated by fo
 \end{proposition}
 
 \begin{proof}
-  By Corollary~\ref{corol_Lcomplete} and Remark~\ref{remk_p'p}
+  By Corollary~\ref{corol_Lcomplete} and Proposition~\ref{prop_approx}
 
   \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{p'(x)\rightarrow\neg\varphi(x)}p'(x)}
 
-  where $p(x)$ ranges over $S_{{\EuScript H},x}(A)$.
+  where $p(x)$ ranges over $S_{\EuScript H}(A)$.
   By Fact~\ref{fact_compactness_imp} and Lemma~\ref{lem_interpolation}
 
   \ceq{\hfill\neg\varphi(x)}{\rightarrow}{\bigvee_{\neg\tilde{\psi}(x)\rightarrow\neg\varphi(x)}\neg\tilde{\psi}(x),}
@@ -1103,7 +1106,7 @@ We say that ${\EuScript L}$ is \emph{separable\/} if there is a countable  ${\Eu
 % \end{fact}
 
 We have defined separability as a property of ${\EuScript L}$.
-Arguably, it could have been introduced as a property of the theory of ${\EuScript U}$.
+Arguably, it could have been introduced as a property of (the theory of) ${\EuScript U}$.
 The following proposition provides the examples that motivate the definition of separability (in these examples the property depends soley on ${\EuScript L}$).
 
 \begin{proposition}
@@ -1606,9 +1609,20 @@ Garbage after this point
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
+\section{Approximate elimination of quantifiers}
+
+We say that ${\EuScript U}$ has approximate elimination of quantifiers (of sort ${\sf H}$) if for every $\varphi(x)\in{\EuScript I}$ and every $\varphi'>\varphi$ there is a formula $\psi(x)\in{\EuScript I}$ without quantifiers of sort ${\sf H}$ such that $\varphi(x)\rightarrow\psi(x)\rightarrow\varphi'(x)$.
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
 \section{Pseudofinite randomizations}
 
-\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox[t]{6ex}{$\displaystyle\hfil #2$}{$\displaystyle #3$}}
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox[t]{6ex}{$\displaystyle\hfil #2$}{$\displaystyle #3$}}
 
 Let ${\EuScript U}$ be a saturated model of signature $L$.
 Let $\Omega$ be a finite set.
@@ -1625,16 +1639,19 @@ The interpretation of $\Pr\big(\varphi(\hat x)\big)$ is given by defining
 {=}
 {\frac{\#\llbracket\varphi(\hat a)\rrbracket}{\#\Omega},}
 
-where by $\#$ we denote finite cardinaity and 
+where by $\#$ we denote finite cardinality and we write
 
 \ceq{\hfill\llbracket\varphi(\hat a)\rrbracket}{=}{\big\{i\in\Omega\ :\ {\EuScript U}\models\varphi(\hat ai)\big\}.}
 
-
 Let 
 
-\ceq{\hfill T}
+\ceq{\hfill T^{\rm pfr}}
 {=}
-{\Big\{\varphi\in{\EuScript L}\ :\ \langle{\EuScript U}^\Omega, I\rangle\models\varphi\textrm{ for every finite set }\Omega\Big\}}
+{\Big\{\varphi\in{\EuScript I}\ :\ \langle{\EuScript U}^\Omega, I\rangle\models\varphi\textrm{ for all sufficiently large finite set }\Omega\Big\}}
+
+Let $k:M\to N$ an approximate ${\EuScript I}$-elementary map between to $|k|^+$-${\EuScript I}$-saturated models of $T^{\rm pfr}$.
+Then for every $b\in M$ there is a $c\in N$ such that $k\cup\{\langle b,c\rangle\}:M\to N$ is an approximate ${\EuScript I}$-elementary map.
+
 
 
 
