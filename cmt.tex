@@ -327,7 +327,7 @@ It is clear that $\tilde{\varphi}\rightarrow\neg\varphi$.
 \end{lemma}
 
 \begin{proof}
-  If $\varphi\in L$ the claims are obvious.
+  If $\varphi\in L_{\sf H}$ the claims are obvious.
   Suppose $\varphi$ is of the form $t\in C$.
   Let $\varphi'$ be $t\in C'$, for some compact neighborhood of $C$.
   Let $O$ be an open set such that $C\subseteq O\subseteq C'$.
@@ -353,7 +353,7 @@ Hence we may not conclude that $\{\varphi(x)\}'$ is equivalent to some finite su
   Suppose $I=[0,1]$.
   Then for every $\varphi(x)\in{\EuScript I}$ there is a formula $\psi(x)\in{\EuScript I}$ such that 
   
-  \ceq{\hfill}{\psi(x)\leftrightarrow}{\{\varphi(x)\}'}
+  \ceq{\hfill\psi(x)}{\leftrightarrow}{\{\varphi(x)\}'}
   
   holds in every model. 
 \end{proposition}
@@ -394,16 +394,16 @@ However, their inverse need not be ${\EuScript I}$, respectively ${\EuScript H}$
 In other words, the converse of the implication in (1) may not hold.
 We have chosen to work with the classical notion of satisfaction at the cost of this asymmetric notion of elementarity.
 This differs from the approach of Henson and Iovino.
-They introduce the notion of \textit{approximated satisfaction.} 
-The approximated ${\EuScript H}$-morphisms we define below are the maps that preserve Henson-Iovino approximated satisfaction.
+They introduce the notion of \textit{approximate satisfaction.} 
+The approximate ${\EuScript H}$-morphisms we define below are the maps that preserve Henson-Iovino approximate satisfaction.
 These morphisms are invertible, cf.\@ Fact~\ref{fact_HImorphisms}.
 
-We say that the map $f:M\to N$ is \emph{approximately ${\EuScript I}$-elementary\/} if for every formula $\varphi(x)\in{\EuScript I}$, and every $a\in({\rm dom }f)^{|x|}$
+We say that the map $f:M\to N$ is an \emph{approximate ${\EuScript I}$-elementary\/} if for every formula $\varphi(x)\in{\EuScript I}$, and every $a\in({\rm dom }f)^{|x|}$
 
 \ceq{\hfill M\models\varphi(a)}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
 
 We define \emph{approximate ${\EuScript H}$-elementary\/} maps in the same manner.
-It is clear that ${\EuScript I}$-elementarity implies its approximated version, similarly for ${\EuScript H}$-elementarity.
+It is clear that ${\EuScript I}$-elementarity implies its approximate variant, similarly for ${\EuScript H}$-elementarity.
 We will see that with a slight amount of saturation also the converse holds (Proposition~\ref{prop_approx}).
 Finally, under full saturation, all differences disappear as all these morphims becomes ${\EuScript L}$-elementarity maps (Corollary~\ref{corol_Lcomplete}).
 
@@ -737,7 +737,16 @@ For existential quantifiers of sort ${\sf I}$ we argue similarly.% by applying C
   The proposition above holds without assuming saturation when $\varphi(x,\;\eta)$ does not contains existential quantifiers of sort ${\sf H}$.
 \end{remark}
 
-A consequence of Proposition~\ref{prop_approx} is that between $\omega$-${\EuScript I}$-saturated models the approximated morphisms defined in Section~\ref{morphisms} coincide with their unapproximated version.
+\begin{proof}
+  Let $\varphi(x,\;\eta)$ be as above.
+  Suppose $\{\varphi(a\,;\eta)\}'$, where $a\in M^{|x|}$, is finitely consistent in $M$.
+  Let $\langle ^*M,^*I\rangle$ be a ${\EuScript L}$-saturted ${\EuScript L}$-saturated superstructure of $\langle M,I\rangle$.
+  Then $\langle ^*M,^*I\rangle\models\varphi(a\,;\alpha)$ for some $\alpha\in ^*I$.
+  By Lemma~\ref{lem_st}, $^*M\models\varphi(a\,;{\rm st}(a))$.
+  Now observe that the truth of formulas without quantifiers of sort ${\sf H}$ is preserved in substructures.
+\end{proof}
+
+A consequence of Proposition~\ref{prop_approx} is that between $\omega$-${\EuScript I}$-saturated models the approximate morphisms defined in Section~\ref{morphisms} coincide with their unapproximate version.
 In particular, the following follows from Fact~\ref{fact_HImorphisms}.
 
 \begin{corollary}\label{corol_omega_sat}
@@ -1628,7 +1637,7 @@ Let ${\EuScript U}$ be a saturated model of signature $L$.
 Let $\Omega$ be a finite set.
 We now define models of the form $\langle{\EuScript U}^\Omega, I\rangle$, where $I$ is the real interval $[0,1]$.
 
-The language $L_{\sf H}$ is contains only a constant symbol for each element $b\in{\EuScript U}$ which is interpreted in ${\EuScript U}^\Omega$ as the function with constant value $b$.
+The language $L_{\sf H}$ is empty.
 The language ${\EuScript L}$ contains additional functions of sort ${\sf H}^{|x|}\to{\sf I}$, one for each formula $\varphi(x)\in L$.
 These are denoted by $\Pr\big(\varphi(\hat x)\big)$. 
 Note that elements and variables of sort ${\sf H}$ are decorated with a circonflexe accent to distinguish them from the elements/variables that live in ${\EuScript U}$.
@@ -1649,11 +1658,104 @@ Let
 {=}
 {\Big\{\varphi\in{\EuScript I}\ :\ \langle{\EuScript U}^\Omega, I\rangle\models\varphi\textrm{ for all sufficiently large finite set }\Omega\Big\}}
 
-Let $k:M\to N$ an approximate ${\EuScript I}$-elementary map between to $|k|^+$-${\EuScript I}$-saturated models of $T^{\rm pfr}$.
-Then for every $b\in M$ there is a $c\in N$ such that $k\cup\{\langle b,c\rangle\}:M\to N$ is an approximate ${\EuScript I}$-elementary map.
+Let $k:M\to N$ be a finite partial ${\EuScript I}$-embedding between $\omega$-${\EuScript I}$-saturated models of $T^{\rm pfr}$.
+Then for every $\hat b\in M$ there is a $\hat c\in N$ such that $k\cup\{\langle\hat b,\hat c\rangle\}:M\to N$ is an ${\EuScript I}$-partial embedding.
+
+Let $\hat a$ be en enumeration of ${\rm dom} k$.
+Let $p(\hat x,\hat z)$ be the ${\EuScript I}$-atomic type of $\hat b,\hat a$.
+It suffices to show that $p'(\hat x,k\hat a)$ is finitely consistent in $N$. 
+
+Let $t\big(\Pr\varphi_0(\hat x,\hat a),\dots,\Pr\varphi_{n-1}(\hat x,\hat a)\big)\in C$ be a formula in $p(\hat x,\hat a)$.
+
+For $s\in2^n$ let 
+
+
+\ceq{\hfill\alpha_s}{=}{\Pr\bigg(\bigwedge_{i<n}\neg^{s_i}\varphi_i(\hat b,\hat a)\bigg).}
+
+Then the following inequality holds in $M$
+
+\ceq{\hfill\alpha_s}{\le}{\Pr\bigg(\exists x\,\bigwedge_{i<n}\neg^{s_i}\varphi_i(x,\hat a)\bigg)}
+
+Therefore the same holds in $N$, with $k\hat a$ for $\hat a$.
+We claim that from this inequality it follows that 
+
+\ceq{\hfill\alpha_s}{=_\varepsilon}{\exists\hat x\ \Pr\bigg(\bigwedge_{i<n}\neg^{s_i}\varphi_i(\hat x,\hat a)\bigg).}
+
+Reason in ${\EuScript U}^\Omega$ for some $\Omega$ of cardinality larger that $1/\varepsilon$.
+Suppose $\hat a\in{\EuScript U}^\Omega$ and let $B_s$ be such that
+
+\ceq{\hfill B_s}{\subseteq}{\bigg\llbracket\exists x\,\bigwedge_{i<n}\neg^{s_i}\varphi_i(x,\hat a)\bigg\rrbracket.}
+
+and $\Pr B_s=\alpha_s$.
 
 
 
+
+DefineIt follows that 
+
+\ceq{1.\hfill\alpha_i}{=}{\Pr\big(\varphi_i(\hat b,\hat a)\big)}
+
+\ceq{2.\hfill\beta_i}{=}{\Pr\big(\exists x\,\varphi_i(x,\hat a)\big)}
+
+\ceq{3.\hfill\gamma_i}{=}{\Pr\big(\exists x\neg\varphi_i(x,\hat a)\big)}
+
+Clearly $1-\gamma_i\le\alpha_i\le\beta_i$.
+Note that (2) and (3) hold in $N$ with $k\hat a$ for $\hat a$.
+We claim that from this it follows that 
+
+\ceq{\hfill N}{\models}{\exists \hat x\bigwedge\alpha_i\approx_\varepsilon\Pr\big(\varphi_i(\hat b,\hat a)\big)}
+
+We show that this holds in all models of the form $\langle{\EuScript U}^\Omega, I\rangle$ when $\Omega$ is large enough.
+Assume for the moment that all $\beta_i$ and $\gamma _i$ are positive.
+Let $\epsilon=\min\{\beta_i,\gamma_i:i=1,\dots,n\}$.
+We can find disjoint events of mass $\varepsilon/2n$ such that 
+
+
+Without loss of generality a conjunction of formulas is $p'(\hat x,k\hat a)$ has the form 
+
+\ceq{\hfill\varphi(\hat x,\hat z)}{\wedge}{\bigwedge_{i=1}^n t_i\big(\Pr\varphi_1(\hat x,\hat a),\dots,\Pr\varphi_m(\hat x,\hat a)\big)\in C'}
+
+For $1\le j\le m$, let $\alpha_j=\Pr\varphi_j(\hat b,\hat a)$.
+
+Let $h$ be a sufficiently large integer such that for every intehers $0\le h_1,\dots,h_m\le h$ and every real numbers $0\le\beta_1,\dots,\beta_m\le 1$ such that $|\beta_j-h_j|\le1/h$,
+
+\ceq{\hfill t_i(\beta_1,\dots,\beta_m)\in C'_i}{\leftrightarrow}{t_i(h_i/h,\dots,h_m/h)\in C_i} 
+
+
+such that 
+
+$t_i(\beta_1,\dots,\beta_m)\in C'_i$ for all $\beta_j$ within $\varepsilon$ from $\alpha_j$. 
+
+Note that $\alpha_j\le\Pr\big(\exists x\, \varphi_j(x,\hat a)\big)$ holds in $M$.
+Then $\alpha_j\le\Pr\big(\exists x \varphi_j(x,k\hat a)\big)$ holds in $N$.
+
+
+Formulas in $p(\hat x,\hat a)$ in are either in $L_{\sf H}$ of have the form $t(\Pr\varphi_1(x,a),\dots,\Pr\varphi_n(x,a))\in C$ for some term of sort ${\sf I}^n\to{\sf I}$.
+Let $\alpha_i=\Pr\varphi_i(b,a)$.
+Let $C'$ be a compact neigborhood of $C$.
+Pick $\varepsilon>0$ such that $t(\beta_1,\dots,\beta_n)\in C'$ for all $\beta_i\approx_\varepsilon\alpha_i$. 
+
+
+The claim follows easily if we prove that for every 
+
+Without Let $t(x\,;\eta)$ be a term of sort ${\sf H}^{|x|}\times{\sf I}^{|\eta|}\to{\sf I}$.
+Let $C\subseteq I$ be a compact sets and every $a\in({\rm dom} k^{|x|}$ and $\alpha\in{\sf I}^{|\eta|}$ be such that $M\models t(a\,;\alpha)\in C$
+
+
+\begin{fact}
+  Let $\Omega$ be a non atomic probability space.
+  Let $A_i$, for $i=1,\dots,n$, be events that cover $\Omega$.
+  Assume $\Pr A_i\ge p_i$ for some $p_1,\dots,p_n$ such that $\sum_{i=1}^np_i=1$.
+  Then there a partition of $\Omega$ by events $B_i\subseteq A_i$ such that $\Pr B_i= p_i$.
+\end{fact}
+
+\begin{proof}
+  Let $C_n=A_n\smallsetminus A$ and $C=A\smallsetminus A_n$.
+  Note that $\Pr C_n\le1-\Pr A\le 1-\sum_{i=1}^{n-1}p_i=p_n$.
+  Then $\Pr C\le 1-p_n$.
+  Then, $\Pr(A_1\cap A_2)=1-$ are a partition 
+
+\end{proof}
 
 Throughout this section $\langle\Omega,{\EuScript B},\Pr\rangle$ is some fixed an atomless probability space. 
 The structure $M$ has as domain the set of random variables with values in $I=[0,1]$ and finite range.
