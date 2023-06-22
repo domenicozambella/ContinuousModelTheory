@@ -574,6 +574,27 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
   Induction is immediate. 
 \end{proof}
 
+\begin{corollary}\label{corol_st}
+  Let $M$ be an arbitrary model.
+  Let $p(\eta)\subseteq{\EuScript I}(M)$ be a type that does not contain formulas with existential quantifiers of sort ${\sf H}$.
+  Then, if $p(\eta)$ is finitely consistent in $M$, it is realized in $M$.
+ \end{corollary}
+ 
+ The corollary has also a direct proof.
+ This goes through the observation that the formulas in $p(\eta)$ define compact subsets of $I$.
+
+ \begin{proof}
+  Let $\langle ^*\!M,^*\!I\rangle$ be a ${\EuScript L}$-elementary saturated superstructure of $\langle M,I\rangle$.
+  Then $\langle ^*\!M,^*\!I\rangle\models p(\alpha)$ for some $\alpha\in ^*\!I$.
+  By the lemma above, $^*\!M\models p({\rm st}(a))$.
+  Now observe that the truth of formulas without  existential quantifiers of sort ${\sf H}$ is preserved by substructures.
+ \end{proof}
+ 
+ The exclusion of existential quantifiers of sort ${\sf H}$ is necessary.
+ For a counterexample take $M=I=[0,1]$.
+ The language ${\EuScript L}$ contains the identity map $\iota:M\to I$.
+ The type $p(\eta)$ contains the formulas $\exists x\,(x>0\wedge\iota(x)+\eta\in[0,1/n]$ for all positive integers $n$.
+
 % \begin{corollary}\label{corol_Isaturation}
 %   Let $M$ be a model and let $p(\eta)\subseteq{\EuScript I}(M)$ be a type that is finitely consistent in $M$, where $\eta$ is a tuple of variables of sort ${\sf I}$.
 %   Then $p(\eta)$ is realized in a model $N$ such that $M\preceq^{\EuScript I}N$.
@@ -734,17 +755,8 @@ For existential quantifiers of sort ${\sf I}$ we argue similarly.% by applying C
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 \begin{remark}\label{remk_approx_EH_free}
-  The proposition above holds without assuming saturation when $\varphi(x,\;\eta)$ does not contains existential quantifiers of sort ${\sf H}$.
+  By Corollary~\ref{corol_st}, when $\varphi(x,\;\eta)$ does not contains existential quantifiers of sort ${\sf H}$, the proposition above does not require the assumption of saturation.
 \end{remark}
-
-\begin{proof}
-  Let $\varphi(x,\;\eta)$ be as above.
-  Suppose $\{\varphi(a\,;\eta)\}'$, where $a\in M^{|x|}$, is finitely consistent in $M$.
-  Let $\langle ^*M,^*I\rangle$ be a ${\EuScript L}$-elementary saturated superstructure of $\langle M,I\rangle$.
-  Then $\langle ^*M,^*I\rangle\models\varphi(a\,;\alpha)$ for some $\alpha\in ^*I$.
-  By Lemma~\ref{lem_st}, $^*M\models\varphi(a\,;{\rm st}(a))$.
-  Now observe that the truth of formulas without  existential quantifiers of sort ${\sf H}$ is preserved by substructures.
-\end{proof}
 
 A consequence of Proposition~\ref{prop_approx} is that between $\omega$-${\EuScript I}$-saturated models the approximate morphisms defined in Section~\ref{morphisms} coincide with their unapproximate version.
 In particular, the following follows from Fact~\ref{fact_HImorphisms}.
@@ -1631,44 +1643,80 @@ We say that ${\EuScript U}$ has approximate elimination of quantifiers (of sort 
 %%%%%%%%%%%%%%%%%%%%%
 \section{Pseudofinite randomizations}
 
-\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox[t]{6ex}{$\displaystyle\hfil #2$}{$\displaystyle #3$}}
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\parbox[t]{6ex}{$\displaystyle\hfil #2$}{$\displaystyle #3$}}
 
-Let ${\EuScript U}$ be a saturated model of signature $L$.
+Let $T$ be a complete first-order theory of signature $L$ with an infinite model.
+Let ${\EuScript U}$ be a model of $T$.
 Let $\Omega$ be a finite set.
-We now define models of the form $\langle{\EuScript U}^\Omega, I\rangle$, where $I$ is the real interval $[0,1]$.
+We denote by ${\EuScript U}^\Omega$ the set of functions $\Omega\to{\EuScript U}$.
+The elements of ${\EuScript U}^\Omega$ are denoted by letters decorated with a circonflexe accent $\hat a,\hat b,$ etc.
+The value of $\hat a$ at $\omega\in\Omega$ is denoted by $a_\omega$.
+We now define models of the form $\langle{\EuScript U}^\Omega, I\rangle$, where $I$ is the real interval $[0,1]$ with the usual topology.
 
 The language $L_{\sf H}$ is empty.
-The language ${\EuScript L}$ contains additional functions of sort ${\sf H}^{|x|}\to{\sf I}$, one for each formula $\varphi(x)\in L$.
+The language ${\EuScript L}$ contains functions of sort ${\sf H}^{|x|}\to{\sf I}$, one for each formula $\varphi(x)\in L$.
 These are denoted by $\Pr\big(\varphi(\hat x)\big)$. 
-Note that elements and variables of sort ${\sf H}$ are decorated with a circonflexe accent to distinguish them from the elements/variables that live in ${\EuScript U}$.
+Variables of sort ${\sf H}$ are decorated with a circonflexe accent.
 
-The interpretation of $\Pr\big(\varphi(\hat x)\big)$ is given by defining
+The interpretation of $\Pr\big(\varphi(\hat x)\big)$ is obtained by defining
 
 \ceq{\hfill\Pr\big(\varphi(\hat a)\big)}
 {=}
 {\frac{\#\llbracket\varphi(\hat a)\rrbracket}{\#\Omega},}
 
-where by $\#$ we denote finite cardinality and we write
+where by $\#$ denotes the finite cardinality, and
 
-\ceq{\hfill\llbracket\varphi(\hat a)\rrbracket}{=}{\big\{i\in\Omega\ :\ {\EuScript U}\models\varphi(\hat ai)\big\}.}
+\ceq{\hfill\llbracket\varphi(\hat a)\rrbracket}{=}{\big\{\omega\in\Omega\ :\ {\EuScript U}\models\varphi(\omega)\big\}.}
 
-Let 
+The pseudofinite randomization of $T$ is the ${\EuScript I}$-theory
 
 \ceq{\hfill T^{\rm pfr}}
 {=}
 {\Big\{\varphi\in{\EuScript I}\ :\ \langle{\EuScript U}^\Omega, I\rangle\models\varphi\textrm{ for all sufficiently large finite set }\Omega\Big\}}
 
-Let $k:M\to N$ be a finite partial ${\EuScript I}$-embedding between $\omega$-${\EuScript I}$-saturated models of $T^{\rm pfr}$.
-Then for every $\hat b\in M$ there is a $\hat c\in N$ such that $k\cup\{\langle\hat b,\hat c\rangle\}:M\to N$ is an ${\EuScript I}$-partial embedding.
+We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
 
-Let $\hat a$ be en enumeration of ${\rm dom} k$.
-Let $p(\hat x,\hat z)$ be the ${\EuScript I}$-atomic type of $\hat b,\hat a$.
-It suffices to show that $p'(\hat x,k\hat a)$ is finitely consistent in $N$. 
+\begin{theorem}
+  Let $k:M\to N$ be a finite partial ${\EuScript I}$-embedding between $\omega$-${\EuScript I}$-saturated models of $T^{\rm pfr}$.
+  Then for every $\hat b\in M$ and there is a $\hat c\in N$ such that $k\cup\{\langle\hat b,\hat c\rangle\}:M\to N$ is an ${\EuScript I}$-partial embedding.
+\end{theorem}
+
+\begin{proof}
+  Let $k:M\to N$ be as above.
+  Let $\hat a$ be an enumeration of ${\rm dom} k$.
+  Let $p(\hat x,\hat z)$ be the ${\EuScript I}$-atomic type of $\hat b,\hat a$.
+  It suffices to show that $p'(\hat x,k\hat a)$ is finitely consistent in $N$. 
+\end{proof}
+
 
 Let $t\big(\Pr\varphi_0(\hat x,\hat a),\dots,\Pr\varphi_{n-1}(\hat x,\hat a)\big)\in C$ be a formula in $p(\hat x,\hat a)$.
+We assume that for every $\omega\in\Omega$ the formulas $\varphi_0(x,a_\omega),\dots,\varphi_{n-1}(x,a_\omega)$ are pairwise inconsistent and that their disjunction is a tautology.
+Below will show that we can always reduce to this case.
+
+Let $\alpha_i\in I$ be such that
+
+\ceq{\hfill M}{\models}{\alpha_i = \Pr\big(\exists x\,\varphi_i(x,\hat a)\big).}
+
+By the assumption on $k:M\to N$
+
+\ceq{1.\hfill N}{\models}{\alpha_i = \Pr\big(\exists x\,\varphi_i(x,k\hat a)\big)}
+
+Let $\varepsilon>0$ be such that $t(\beta_1,\dots,\beta_n)\in C'$ for every $\beta_1,\dots,\beta_n$ that are at distance $\le\varepsilon$ from $\alpha_1,\dots,\alpha_n$.
+
+We now prove that the following holds modulo $T^{\rm pfr}$ 
+
+\ceq{\hfill\bigwedge_{i=1}^n\eta_i=\Pr\exists x\,\varphi_i(x,\hat z)}
+{\rightarrow}
+{\exists\hat x\bigwedge_{i=1}^n\eta_i=\Pr\varphi_i(\hat x,\hat z)}
+
+It suffices to prove that (2) holds in ${\EuScript U}^\Omega$ whenever $\#\Omega>1/\varepsilon$.
+
+
+
+
+
 
 For $s\in2^n$ let 
-
 
 \ceq{\hfill\alpha_s}{=}{\Pr\bigg(\bigwedge_{i<n}\neg^{s_i}\varphi_i(\hat b,\hat a)\bigg).}
 
@@ -1694,8 +1742,6 @@ and $\Pr B_s=\alpha_s$.
 DefineIt follows that 
 
 \ceq{1.\hfill\alpha_i}{=}{\Pr\big(\varphi_i(\hat b,\hat a)\big)}
-
-\ceq{2.\hfill\beta_i}{=}{\Pr\big(\exists x\,\varphi_i(x,\hat a)\big)}
 
 \ceq{3.\hfill\gamma_i}{=}{\Pr\big(\exists x\neg\varphi_i(x,\hat a)\big)}
 
