@@ -586,7 +586,7 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
  \begin{proof}
   Let $\langle ^*\!M,^*\!I\rangle$ be a ${\EuScript L}$-elementary saturated superstructure of $\langle M,I\rangle$.
   Then $\langle ^*\!M,^*\!I\rangle\models p(\alpha)$ for some $\alpha\in ^*\!I$.
-  By the lemma above, $^*\!M\models p({\rm st}(a))$.
+  By the lemma above, $^*\!M\models p({\rm st}(\alpha))$.
   Now observe that the truth of formulas without  existential quantifiers of sort ${\sf H}$ is preserved by substructures.
  \end{proof}
  
@@ -756,6 +756,7 @@ For existential quantifiers of sort ${\sf I}$ we argue similarly.% by applying C
 
 \begin{remark}\label{remk_approx_EH_free}
   By Corollary~\ref{corol_st}, when $\varphi(x,\;\eta)$ does not contains existential quantifiers of sort ${\sf H}$, the proposition above does not require the assumption of saturation.
+  In general, some saturation is necessary: consider the model presented after Corollary~\ref{corol_st} and the formula $\exists x\,(x>0\wedge\iota(x)\in\{0\})$. 
 \end{remark}
 
 A consequence of Proposition~\ref{prop_approx} is that between $\omega$-${\EuScript I}$-saturated models the approximate morphisms defined in Section~\ref{morphisms} coincide with their unapproximate version.
