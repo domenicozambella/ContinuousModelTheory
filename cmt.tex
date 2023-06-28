@@ -1721,8 +1721,8 @@ We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
   Let $p(\hat x,\hat z)$ be the ${\EuScript I}$-atomic type of $\hat b,\hat a$ in $M$.
   It suffices to show that $p(\hat x,k\hat a)$ is finitely consistent in $N$.
 
-  We may assume that the formulas in $p(\hat x,\hat z)$ have the form $\Pr\varphi(\hat x,\hat z)=\gamma$ for some $\gamma\in I$.
-  Pick a finite set of these formulas, say $\Pr\varphi_i(\hat x,\hat z)=\gamma_i$, for $i<n$.
+  We may assume that the formulas in $p(\hat x,\hat z)$ have the form $\gamma=\Pr\varphi(\hat x,\hat z)$ for some $\gamma\in I$.
+  Pick a finite set of these formulas, say $\gamma_i=\Pr\varphi_i(\hat x,\hat z)$, for $i<n$.
   By the saturation of $N$, it suffices to prove that for every $\varepsilon$ there is a $\hat c\in N$ such that
   
   \ceq{\hfill\gamma_i}{=_\varepsilon}{\Pr\varphi_i(\hat c,k\hat a)}
@@ -1754,7 +1754,7 @@ We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
 
   \ceq{4.\hfill 1}{=}{\Pr\bigg(\exists x\,\varphi_i(x,\hat z)\ \Big|\ \xi_J(\hat z)\bigg)}
 
-  Now we prove that the implication (2) \& (4)$\Rightarrow$(1) holds in ${\EuScript U}^\Omega$ when $\Omega$ large enough (larger than $n/\varepsilon$ suffices).
+  Now we prove that the implication (2) \& (4) $\Rightarrow$ (1) holds in ${\EuScript U}^\Omega$ when $\Omega$ large enough (larger than $n/\varepsilon$ suffices).
   Strictly speaking, this implication is not a ${\EuScript J}$-formula, but the reader can easily verify that a suitable approximation of (2) and (4) suffices. 
   
   Let $\hat a'\in{\EuScript U}^\Omega$ saisfy (2) and (4) for every $i\in J\subseteq n$. 
@@ -1762,9 +1762,10 @@ We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
   
   \ceq{\hfill{\EuScript U}^\Omega}{\models}{\beta_{i,J}=_\varepsilon\Pr\bigg(\varphi_i(\hat c',\hat a')\ \Big|\ \xi_J(\hat a')\bigg).}
   
-  We may define $\hat c'$ separately in each $\llbracket\xi_J(\hat a')\rrbracket$.
+  We may define $\hat c'$ separately in each event $\llbracket\xi_J(\hat a')\rrbracket$.
   Partition $\llbracket\xi_J(\hat a')\rrbracket$ into events $E_i\subseteq\Omega$, for $i\in J$, such that $\# E_i/\#\Omega=_\varepsilon\beta_{i,J}$.
   Then define $c'_\omega$ for $\omega\in E_i$ to be any witness of $\exists x\,\varphi_i(x,a_\omega)$.
+  By (4), we can always find such a witness.
   
   Finally, from elementary probability theory (the theorem of total probability)
 
