@@ -258,7 +258,7 @@ The symbols ${\EuScript I}$ and ${\EuScript H}$ defined below denote only sets o
 \end{definition}
 
 % \noindent\llap{\textcolor{red}{\Large\dangersign}\kern1ex}\ignorespaces
-Formulas in ${\EuScript H}$ generlize the positive bounded formulas of Henson and Iovino to a larger class of structures.
+Formulas in ${\EuScript H}$ generalize the positive bounded formulas of Henson and Iovino to a larger class of structures.
 But ${\EuScript H}$ also enlarges the class of Henson and Iovino as it comprises all $L_{\sf H}$-formulas.
 This enlargment comes at a price: the failure of the Perturbation Lemma~\cite{HI}*{Proposition~5.15}.
 However, we will recover part of Perturbation Lemma in Proposition~\ref{prop_perturbation}.
@@ -293,9 +293,26 @@ The following example is inspired by~\cite{HPP}.
   It is easy to verify that the model $\langle{\EuScript U}, I\rangle$ is ${\EuScript I}$-saturated, see definition in Section~\ref{compactness}.
 \end{example}
 
+We mentioned normed spaces as a motivating example.
+Essentially, functional analysis and model theory are only interested in the unit ball of normed spaces.
+To formalize the unit ball of a normed space as a model (where $I$ is the unit interval) is straightforward but pretty ugly.
+Alternatively one can view a normed space as a many-sorted structure: a sort for each ball of radius $n\in\mathds{Z}^+$, but this is also a bloated formalism.
+
+A neater formalization is possible if one accepts that some ${\EuScript I}$-elementary extension of a normed space could contain vectors of infinite norm hence not be themselves normed spaces.
+These infinities are harmless if one is only interested in the unit ball.
+In fact, inside any ball of finite radius these nonstandard normed spaces are completely standard.
+
+\begin{example}\label{ex_normed_spaces}
+Let $I=\mathds{R}\cup\{\pm\infty\}$.
+Let $L_{\sf H}$ be the language of real (or complex) vector spaces.
+The language ${\EuScript L}$ contains a function symbol $\|\mbox{-}\|$ of sort ${\sf H}\to {\sf I}$.
+Normed space are models with the natural interpretation of the language.
+It is easy to verify that the unit ball of every model is a the unit ball of a normed space.
+Note that the same remains true if we add to the language any continuous (a.k.a.\@ bounded) operator or functional.
+\end{example}
 
 We conclude this introduction with a question.
-Is it possible extend the Compactness Theorem~\ref{thm_compattezza} to a larger class of formulas?
+Is it possible to extend the Compactness Theorem~\ref{thm_compattezza} to a larger class of formulas?
 E.g.\@ can we allow in ${\EuScript L}$ (and in ${\EuScript I}$) function symbols of sort ${\sf H}^n\times {\sf I}^m\to {\sf I}$ with both $n$ and $m$ positive?
 These would have natural interpretations, e.g.\@ a group acting on a compact set $I$.
 
@@ -402,7 +419,7 @@ We say that the map $f:M\to N$ is an \emph{approximate ${\EuScript I}$-elementar
 
 \ceq{\hfill M\models\varphi(a)}{\Rightarrow}{N\models\big\{\varphi(fa)\big\}'.}
 
-We define \emph{approximate ${\EuScript H}$-elementary\/} maps in the same manner.
+We define \emph{approximate ${\EuScript H}$-elementary\/} maps in the same manner (from Proposition~\ref{prop_LHapprox1} it follows that the two notions coincide).
 It is clear that ${\EuScript I}$-elementarity implies its approximate variant, similarly for ${\EuScript H}$-elementarity.
 We will see that with a slight amount of saturation also the converse holds (Proposition~\ref{prop_approx}).
 Finally, under full saturation, all differences disappear as all these morphims becomes ${\EuScript L}$-elementarity maps (Corollary~\ref{corol_Lcomplete}).
@@ -421,7 +438,7 @@ The following holds in general.
 \begin{proof}
   $\Rightarrow$ \ Fix $\varphi'>\varphi$ and assume $M\models\varphi'(a)$.
   Let  $\varphi'>\varphi''>\varphi$.
-  By the definition of approximate elementarity, $M\models\varphi''(fa)$ and $M\models\varphi'(fa)$ follows.
+  By the definition of approximate elementarity, $N\models\varphi''(fa)$ and $N\models\varphi'(fa)$ follows.
   
   $\Leftarrow$  \ 
   Assume the r.h.s.\@ of the equivalence.
@@ -437,7 +454,7 @@ Finally, we introduce the morphisms that corrisponds to the classical partial em
 We say that the map $f:M\to N$ is a \emph{partial ${\EuScript I}$-embedding\/} if the implication in (1) holds for all ${\EuScript I}$-atomic formulas $\varphi(x)$.
 Note that this is the same as requiring that (1) holds for all formulas without quantifiers of sort ${\sf H}$ (unless they occour in $L_{\sf H}$ formulas).
 
-\begin{fact}
+\begin{fact}\label{fact_partial_emb}
   If $f:M\to N$ is a partial ${\EuScript I}$-embedding then 
 
   \ceq{\hfill M\models\varphi(a)}{\Leftrightarrow}{N\models\varphi(fa)}
@@ -496,7 +513,7 @@ The following fact is well-known.
 \end{proof}
 
 We denote by \emph{${\rm st}(\alpha)$\/} the unique $\beta\in I$ such that ${}^*\!I\models{\rm m}_\beta(\alpha)$.
-We write \emph{$\alpha\approx\alpha'$\/} if ${\rm st}(\alpha)={\rm st}(\alpha')$.
+% We write \emph{$\alpha\approx\alpha'$\/} if ${\rm st}(\alpha)={\rm st}(\alpha')$.
 
 \begin{fact}\label{fact_st1}
   For every $\alpha\in{}^*\! I$ and every compact $C\subseteq I$
@@ -576,7 +593,7 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
 
 \begin{corollary}\label{corol_st}
   Let $M$ be an arbitrary model.
-  Let $p(\eta)\subseteq{\EuScript I}(M)$ be a type that does not contain formulas with existential quantifiers of sort ${\sf H}$.
+  Let $p(\eta)\subseteq{\EuScript I}(M)$ be a type that does not contain existential quantifiers of sort ${\sf H}$.
   Then, if $p(\eta)$ is finitely consistent in $M$, it is realized in $M$.
  \end{corollary}
  
@@ -592,8 +609,8 @@ Symbols in $L_{\sf H}$ maintain the same interpretation.
  
  The exclusion of existential quantifiers of sort ${\sf H}$ is necessary.
  For a counterexample take $M=I=[0,1]$.
- The language ${\EuScript L}$ contains the identity map $\iota:M\to I$.
- The type $p(\eta)$ contains the formulas $\exists x\,(x>0\wedge\iota(x)+\eta\in[0,1/n]$ for all positive integers $n$.
+ Assume that ${\EuScript L}$ contains a function symbol for the identity map $\iota:M\to I$.
+ Let $p(\eta)$ contain the formulas $\exists x\,(x>0\wedge\iota(x)+\eta\in[0,1/n]$ for all positive integers $n$.
 
 % \begin{corollary}\label{corol_Isaturation}
 %   Let $M$ be a model and let $p(\eta)\subseteq{\EuScript I}(M)$ be a type that is finitely consistent in $M$, where $\eta$ is a tuple of variables of sort ${\sf I}$.
@@ -755,11 +772,11 @@ For existential quantifiers of sort ${\sf I}$ we argue similarly.% by applying C
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\parbox{5ex}{\hfil $#2$}{$\displaystyle #3$}}
 
 \begin{remark}\label{remk_approx_EH_free}
-  By Corollary~\ref{corol_st}, when $\varphi(x,\;\eta)$ does not contains existential quantifiers of sort ${\sf H}$, the proposition above does not require the assumption of saturation.
+  By Corollary~\ref{corol_st}, when $\varphi(x\,;\eta)$ does not contains existential quantifiers of sort ${\sf H}$, the proposition above does not require the assumption of saturation.
   In general, some saturation is necessary: consider the model presented after Corollary~\ref{corol_st} and the formula $\exists x\,(x>0\wedge\iota(x)\in\{0\})$. 
 \end{remark}
 
-A consequence of Proposition~\ref{prop_approx} is that between $\omega$-${\EuScript I}$-saturated models the approximate morphisms defined in Section~\ref{morphisms} coincide with their unapproximate version.
+A consequence of Proposition~\ref{prop_approx} is that the approximate morphisms defined in Section~\ref{morphisms} coincide with their unapproximate version when the codomain is a $\omega$-${\EuScript I}$-saturated model.
 In particular, the following follows from Fact~\ref{fact_HImorphisms}.
 
 \begin{corollary}\label{corol_omega_sat}
@@ -1617,11 +1634,14 @@ As all functions have been required to be uniformly continuous, it is immediate 
 \end{bibdiv}
 
 
-\vskip20ex
-%%%%%%%%%%%%%%
-\noindent\llap{\dangersign}\kern1ex\ignorespaces
-Garbage after this point
+\vskip5ex
 
+\hfil\dangersign[8ex]
+%%%%%%%%%%%%%%
+%\noindent\llap{\dangersign}\kern1ex\ignorespaces
+
+\hfil Danger after this point
+\vskip10ex
 
 
 %%%%%%%%%%%%%%%%%%%%%
@@ -1633,7 +1653,22 @@ Garbage after this point
 %%%%%%%%%%%%%%%%%%%%%
 \section{Approximate elimination of quantifiers}
 
-We say that ${\EuScript U}$ has approximate elimination of quantifiers (of sort ${\sf H}$) if for every $\varphi(x)\in{\EuScript I}$ and every $\varphi'>\varphi$ there is a formula $\psi(x)\in{\EuScript I}$ without quantifiers of sort ${\sf H}$ such that $\varphi(x)\rightarrow\psi(x)\rightarrow\varphi'(x)$.
+Let $T$ be a ${\EuScript I}$-theory.
+
+We say that $T$ has (approximate) elimination of quantifiers (of sort ${\sf H}$) if for every $\varphi(x)\in{\EuScript I}$ and every $\varphi'>\varphi$ there is a formula $\psi(x)\in{\EuScript I}$ without quantifiers of sort ${\sf H}$ such that $\varphi(x)\rightarrow\psi(x)\rightarrow\varphi'(x)$ holds modulo $T$.
+
+The following fact is routinely proved by back-and-forth.
+
+\begin{fact}\label{fact_backandforth}
+  The following are equivalent
+  \begin{itemize}
+    \item[1.] $T$ has elimination of quantifiers;
+    \item[2.] every finite partial ${\EuScript I}$-embedding $k:M\to N$ beween models of $T$ is an approximate ${\EuScript I}$-elemenrary map;
+    \item[3.]  for every finite partial ${\EuScript I}$-embedding $k:M\to N$ between $\omega$-${\EuScript I}$-saturated models of $T$, and for every $b\in M$ there is a $c\in N$ such that $k\cup\{\langle b,c\rangle\}:M\to N$ is also a partial ${\EuScript I}$-embedding.
+  \end{itemize}
+\end{fact}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
@@ -1656,10 +1691,9 @@ We now define models of the form $\langle{\EuScript U}^\Omega, I\rangle$, where 
 
 The language $L_{\sf H}$ is empty.
 The language ${\EuScript L}$ contains functions of sort ${\sf H}^{|x|}\to{\sf I}$, one for each formula $\varphi(x)\in L$.
-These are denoted by $\Pr\big(\varphi(\hat x)\big)$. 
+These are denoted by $\Pr\varphi(\hat x)$. 
 Variables of sort ${\sf H}$ are decorated with a circonflexe accent.
-
-The interpretation of $\Pr\big(\varphi(\hat x)\big)$ is obtained by defining
+The interpretation of $\Pr\varphi(\hat x)$ is 
 
 \ceq{\hfill\Pr\big(\varphi(\hat a)\big)}
 {=}
@@ -1677,186 +1711,81 @@ The pseudofinite randomization of $T$ is the ${\EuScript I}$-theory
 
 We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
 
-\begin{theorem}
+\begin{lemma}
   Let $k:M\to N$ be a finite partial ${\EuScript I}$-embedding between $\omega$-${\EuScript I}$-saturated models of $T^{\rm pfr}$.
   Then for every $\hat b\in M$ and there is a $\hat c\in N$ such that $k\cup\{\langle\hat b,\hat c\rangle\}:M\to N$ is an ${\EuScript I}$-partial embedding.
-\end{theorem}
+\end{lemma}
 
 \begin{proof}
-  Let $k:M\to N$ be as above.
   Let $\hat a$ be an enumeration of ${\rm dom} k$.
-  Let $p(\hat x,\hat z)$ be the ${\EuScript I}$-atomic type of $\hat b,\hat a$.
-  It suffices to show that $p'(\hat x,k\hat a)$ is finitely consistent in $N$. 
-\end{proof}
+  Let $p(\hat x,\hat z)$ be the ${\EuScript I}$-atomic type of $\hat b,\hat a$ in $M$.
+  It suffices to show that $p(\hat x,k\hat a)$ is finitely consistent in $N$.
 
-
-Let $t\big(\Pr\varphi_0(\hat x,\hat a),\dots,\Pr\varphi_{n-1}(\hat x,\hat a)\big)\in C$ be a formula in $p(\hat x,\hat a)$.
-We assume that for every $\omega\in\Omega$ the formulas $\varphi_0(x,a_\omega),\dots,\varphi_{n-1}(x,a_\omega)$ are pairwise inconsistent and that their disjunction is a tautology.
-Below will show that we can always reduce to this case.
-
-Let $\alpha_i\in I$ be such that
-
-\ceq{\hfill M}{\models}{\alpha_i = \Pr\big(\exists x\,\varphi_i(x,\hat a)\big).}
-
-By the assumption on $k:M\to N$
-
-\ceq{1.\hfill N}{\models}{\alpha_i = \Pr\big(\exists x\,\varphi_i(x,k\hat a)\big)}
-
-Let $\varepsilon>0$ be such that $t(\beta_1,\dots,\beta_n)\in C'$ for every $\beta_1,\dots,\beta_n$ that are at distance $\le\varepsilon$ from $\alpha_1,\dots,\alpha_n$.
-
-We now prove that the following holds modulo $T^{\rm pfr}$ 
-
-\ceq{\hfill\bigwedge_{i=1}^n\eta_i=\Pr\exists x\,\varphi_i(x,\hat z)}
-{\rightarrow}
-{\exists\hat x\bigwedge_{i=1}^n\eta_i=\Pr\varphi_i(\hat x,\hat z)}
-
-It suffices to prove that (2) holds in ${\EuScript U}^\Omega$ whenever $\#\Omega>1/\varepsilon$.
-
-
-
-
-
-
-For $s\in2^n$ let 
-
-\ceq{\hfill\alpha_s}{=}{\Pr\bigg(\bigwedge_{i<n}\neg^{s_i}\varphi_i(\hat b,\hat a)\bigg).}
-
-Then the following inequality holds in $M$
-
-\ceq{\hfill\alpha_s}{\le}{\Pr\bigg(\exists x\,\bigwedge_{i<n}\neg^{s_i}\varphi_i(x,\hat a)\bigg)}
-
-Therefore the same holds in $N$, with $k\hat a$ for $\hat a$.
-We claim that from this inequality it follows that 
-
-\ceq{\hfill\alpha_s}{=_\varepsilon}{\exists\hat x\ \Pr\bigg(\bigwedge_{i<n}\neg^{s_i}\varphi_i(\hat x,\hat a)\bigg).}
-
-Reason in ${\EuScript U}^\Omega$ for some $\Omega$ of cardinality larger that $1/\varepsilon$.
-Suppose $\hat a\in{\EuScript U}^\Omega$ and let $B_s$ be such that
-
-\ceq{\hfill B_s}{\subseteq}{\bigg\llbracket\exists x\,\bigwedge_{i<n}\neg^{s_i}\varphi_i(x,\hat a)\bigg\rrbracket.}
-
-and $\Pr B_s=\alpha_s$.
-
-
-
-
-DefineIt follows that 
-
-\ceq{1.\hfill\alpha_i}{=}{\Pr\big(\varphi_i(\hat b,\hat a)\big)}
-
-\ceq{3.\hfill\gamma_i}{=}{\Pr\big(\exists x\neg\varphi_i(x,\hat a)\big)}
-
-Clearly $1-\gamma_i\le\alpha_i\le\beta_i$.
-Note that (2) and (3) hold in $N$ with $k\hat a$ for $\hat a$.
-We claim that from this it follows that 
-
-\ceq{\hfill N}{\models}{\exists \hat x\bigwedge\alpha_i\approx_\varepsilon\Pr\big(\varphi_i(\hat b,\hat a)\big)}
-
-We show that this holds in all models of the form $\langle{\EuScript U}^\Omega, I\rangle$ when $\Omega$ is large enough.
-Assume for the moment that all $\beta_i$ and $\gamma _i$ are positive.
-Let $\epsilon=\min\{\beta_i,\gamma_i:i=1,\dots,n\}$.
-We can find disjoint events of mass $\varepsilon/2n$ such that 
-
-
-Without loss of generality a conjunction of formulas is $p'(\hat x,k\hat a)$ has the form 
-
-\ceq{\hfill\varphi(\hat x,\hat z)}{\wedge}{\bigwedge_{i=1}^n t_i\big(\Pr\varphi_1(\hat x,\hat a),\dots,\Pr\varphi_m(\hat x,\hat a)\big)\in C'}
-
-For $1\le j\le m$, let $\alpha_j=\Pr\varphi_j(\hat b,\hat a)$.
-
-Let $h$ be a sufficiently large integer such that for every intehers $0\le h_1,\dots,h_m\le h$ and every real numbers $0\le\beta_1,\dots,\beta_m\le 1$ such that $|\beta_j-h_j|\le1/h$,
-
-\ceq{\hfill t_i(\beta_1,\dots,\beta_m)\in C'_i}{\leftrightarrow}{t_i(h_i/h,\dots,h_m/h)\in C_i} 
-
-
-such that 
-
-$t_i(\beta_1,\dots,\beta_m)\in C'_i$ for all $\beta_j$ within $\varepsilon$ from $\alpha_j$. 
-
-Note that $\alpha_j\le\Pr\big(\exists x\, \varphi_j(x,\hat a)\big)$ holds in $M$.
-Then $\alpha_j\le\Pr\big(\exists x \varphi_j(x,k\hat a)\big)$ holds in $N$.
-
-
-Formulas in $p(\hat x,\hat a)$ in are either in $L_{\sf H}$ of have the form $t(\Pr\varphi_1(x,a),\dots,\Pr\varphi_n(x,a))\in C$ for some term of sort ${\sf I}^n\to{\sf I}$.
-Let $\alpha_i=\Pr\varphi_i(b,a)$.
-Let $C'$ be a compact neigborhood of $C$.
-Pick $\varepsilon>0$ such that $t(\beta_1,\dots,\beta_n)\in C'$ for all $\beta_i\approx_\varepsilon\alpha_i$. 
-
-
-The claim follows easily if we prove that for every 
-
-Without Let $t(x\,;\eta)$ be a term of sort ${\sf H}^{|x|}\times{\sf I}^{|\eta|}\to{\sf I}$.
-Let $C\subseteq I$ be a compact sets and every $a\in({\rm dom} k^{|x|}$ and $\alpha\in{\sf I}^{|\eta|}$ be such that $M\models t(a\,;\alpha)\in C$
-
-
-\begin{fact}
-  Let $\Omega$ be a non atomic probability space.
-  Let $A_i$, for $i=1,\dots,n$, be events that cover $\Omega$.
-  Assume $\Pr A_i\ge p_i$ for some $p_1,\dots,p_n$ such that $\sum_{i=1}^np_i=1$.
-  Then there a partition of $\Omega$ by events $B_i\subseteq A_i$ such that $\Pr B_i= p_i$.
-\end{fact}
-
-\begin{proof}
-  Let $C_n=A_n\smallsetminus A$ and $C=A\smallsetminus A_n$.
-  Note that $\Pr C_n\le1-\Pr A\le 1-\sum_{i=1}^{n-1}p_i=p_n$.
-  Then $\Pr C\le 1-p_n$.
-  Then, $\Pr(A_1\cap A_2)=1-$ are a partition 
-
-\end{proof}
-
-Throughout this section $\langle\Omega,{\EuScript B},\Pr\rangle$ is some fixed an atomless probability space. 
-The structure $M$ has as domain the set of random variables with values in $I=[0,1]$ and finite range.
-Its signature $L_{\sf H}$ coincides with $L_{\sf I}$ that is, it contains all uniformly continuous functions $I^n\to I$.
-The ${\EuScript L}$-structure $\langle M,I\rangle$ contains symbols of arity ${\sf H}^{n+1}\times{\sf I}^n\to{\sf I}$ for the maps  
-${\rm E}(\,x\mathbin|z=\eta\,)$, where $|z|=|\eta|=n$ and ${\rm E(\,\mbox-\mathbin|\mbox-\,)}$ denotes the conditional expectation.
-
-Let $T$ 
-
-We say that ${\EuScript U}$ eliminates quantifiers if every $\varphi(x)\in{\EuScript H}$ is equivalent to a formula in ${\EuScript I}$ without quantifier of sort ${\sf H}$.
-
-\begin{proposition}
+  We may assume that the formulas in $p(\hat x,\hat z)$ have the form $\Pr\varphi(\hat x,\hat z)=\gamma$ for some $\gamma\in I$.
+  Pick a finite set of these formulas, say $\Pr\varphi_i(\hat x,\hat z)=\gamma_i$, for $i<n$.
+  By the saturation of $N$, it suffices to prove that for every $\varepsilon$ there is a $\hat c\in N$ such that
   
-\end{proposition}
+  \ceq{\hfill\gamma_i}{=_\varepsilon}{\Pr\varphi_i(\hat c,k\hat a)}
+  
+  is true in $N$ for all $i<n$.
+
+  Some preliminary work is required.
+  For each $J\subseteq n$ define the following $L$-formulas
+
+  \ceq{\hfill \psi_J(z)}{=}{\bigwedge_{i\in J}\exists x\;\varphi_i(x,z)}
+
+  and
+  
+  \ceq{\hfill \xi_J(z)}{=}{\psi_J(z)\ \wedge\ \bigwedge_{J'\supset J}\neg\psi_{J'}(z).}
+
+  The consistent formulas among the $\xi_J(z)$ define a partition of ${\EuScript U}^{|z|}$.
+  For $J\subseteq n$ let $\alpha_J\in I$ be such that $p(\hat x,\hat z)$ contains the formula
+  
+  \ceq{2.\hfill\alpha_J}{=}{\Pr\big(\xi_J(\hat z)\big)}
+  
+  When $\alpha_J$ is positive, for some $\beta_{i,J}\in I$, the type $p(\hat x,\hat z)$ contains the formulas
+
+  \ceq{3.\hfill \beta_{i,J}}{=}{\Pr\bigg(\varphi_i(\hat x,\hat z)\ \Big|\ \xi_J(\hat z)\bigg).}
+
+  As the $\varphi_i(x,z)$ define a partition, the $\beta_{i,J}$ add up to $1$ for any fixed $J$ for which they are defined (i.e.\@ such that $\alpha_J\neq0$).
+  Note that $\beta_{i,J}=0$ for $i\notin J$.
+
+  It is plain that for $i\in J$ the following is a consequence of $p(\hat x,\hat z)$
+
+  \ceq{4.\hfill 1}{=}{\Pr\bigg(\exists x\,\varphi_i(x,\hat z)\ \Big|\ \xi_J(\hat z)\bigg)}
+
+  Now we prove that the implication (2) \& (4)$\Rightarrow$(1) holds in ${\EuScript U}^\Omega$ when $\Omega$ large enough (larger than $n/\varepsilon$ suffices).
+  Strictly speaking, this implication is not a ${\EuScript J}$-formula, but the reader can easily verify that a suitable approximation of (2) and (4) suffices. 
+  
+  Let $\hat a'\in{\EuScript U}^\Omega$ saisfy (2) and (4) for every $i\in J\subseteq n$. 
+  We define $\hat c'\in{\EuScript U}^\Omega$ such that 
+  
+  \ceq{\hfill{\EuScript U}^\Omega}{\models}{\beta_{i,J}=_\varepsilon\Pr\bigg(\varphi_i(\hat c',\hat a')\ \Big|\ \xi_J(\hat a')\bigg).}
+  
+  We may define $\hat c'$ separately in each $\llbracket\xi_J(\hat a')\rrbracket$.
+  Partition $\llbracket\xi_J(\hat a')\rrbracket$ into events $E_i\subseteq\Omega$, for $i\in J$, such that $\# E_i/\#\Omega=_\varepsilon\beta_{i,J}$.
+  Then define $c'_\omega$ for $\omega\in E_i$ to be any witness of $\exists x\,\varphi_i(x,a_\omega)$.
+  
+  Finally, from elementary probability theory (the theorem of total probability)
+
+  \ceq{\hfill{\EuScript U}^\Omega}{\models}{\gamma_i=_\varepsilon\Pr\big(\varphi_i(\hat c',\hat a')\big).}
+
+  As $k\hat a$ satisfy (2) and (4), we conclude that some $\hat c\in N$ satisfy (1).
+\end{proof}
+
+Now, from Fact~\ref{fact_backandforth} we obtain that $T^{\rm pfr}$ has elimination of quantifiers.
+Completeness follows.
+
+\begin{corollary}
+  The theory  $T^{\rm pfr}$ is compete and has elimination of quantifiers.
+\end{corollary}
 
 
-The set $R$ contains the random variables $X:\Omega\to M$ with finite range (the dependence of $R$ from $M$ will not be displayed in the notation).
-The 3-sorted signature ${\EuScript L}$ contains $L_{\sf H}$, $L_{\sf I}$ and for every partitioned formula $\varphi(x\,;z)\in L_{\sf H}$ a function symbol of sort ${\sf R}^{|x|}\times{\sf H}^{|z|}\to I$ which is denoted by $\Pr\varphi(X\,;z)$ and interpreted as the function
 
-\ceq{\hfill X,z}{\mapsto}{\Pr X^{-1}\big[\varphi(M\,;z)\big]}.
-
-The \emph{pseudofinite randomization\/} of $T$ is the theory 
-
-\ceq{\hfill T^R}{=}{\big\{\varphi\in{\EuScript I}\ :\ \langle M,R,I\rangle\models\varphi\textrm{ for all }M\models T\big\}}
-
-\ceq{\hfill\forall x\varphi(x\,;z)}
-{\rightarrow }
-{\Pr\varphi(X\,;z)=1}
-
-\ceq{\hfill \Pr\varphi(X\,;z)}
-{\ge}
-{0}
-
-\ceq{\hfill\forall x\neg[\varphi(x\,;z)\wedge\psi(x\,;z)]}
-{\rightarrow}
-{\Pr[\varphi(X\,;z)\vee\psi(X\,;z)]=\Pr\varphi(X\,;z)+\Pr\psi(X\,;z)}
-
-
-\ceq{\hfill\exists Y\, \Pr\varphi(X,Y\,;z)}
-{=}
-{\Pr\exists y\,\varphi(X\,;y,z)}
-
-
-We say that ${\EuScript U}$ eliminates quantifiers if every $\varphi(x)\in{\EuScript H}$ is equivalent to a formula in ${\EuScript I}$ without quantifier of sort ${\sf H}$.
+\end{document}
 
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%
-\section{}
 
 
 
@@ -1932,8 +1861,6 @@ We also assume that ${\EuScript C}$ is connected (c4) and that it has the amalga
   \item[c5.] for every ${\EuScript C}$-morphism $k:M\to N$ and every $b\in M$ there is a ${\EuScript C}$-model $N\ge M$ and a ${\EuScript C}$-morphism $h:M\to N'$ that exiends $k$ and is defined on $b$.
 \end{itemize}
 
-
-\end{document}
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
