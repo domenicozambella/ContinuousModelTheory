@@ -1693,7 +1693,7 @@ The language $L_{\sf H}$ is empty.
 The language ${\EuScript L}$ contains functions of sort ${\sf H}^{|x|}\to{\sf I}$, one for each formula $\varphi(x)\in L$.
 These are denoted by $\Pr\varphi(\hat x)$. 
 Variables of sort ${\sf H}$ are decorated with a circonflexe accent.
-The interpretation of $\Pr\varphi(\hat x)$ is 
+The interpretation of the function symbol $\Pr\varphi(\hat x)$ is 
 
 \ceq{\hfill\Pr\big(\varphi(\hat a)\big)}
 {=}
@@ -1701,7 +1701,7 @@ The interpretation of $\Pr\varphi(\hat x)$ is
 
 where by $\#$ denotes the finite cardinality, and
 
-\ceq{\hfill\llbracket\varphi(\hat a)\rrbracket}{=}{\big\{\omega\in\Omega\ :\ {\EuScript U}\models\varphi(\omega)\big\}.}
+\ceq{\hfill\llbracket\varphi(\hat a)\rrbracket}{=}{\big\{\omega\in\Omega\ :\ {\EuScript U}\models\varphi(a_\omega)\big\}.}
 
 The pseudofinite randomization of $T$ is the ${\EuScript I}$-theory
 
@@ -1709,7 +1709,7 @@ The pseudofinite randomization of $T$ is the ${\EuScript I}$-theory
 {=}
 {\Big\{\varphi\in{\EuScript I}\ :\ \langle{\EuScript U}^\Omega, I\rangle\models\varphi\textrm{ for all sufficiently large finite set }\Omega\Big\}}
 
-We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
+In this section we prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
 
 \begin{lemma}
   Let $k:M\to N$ be a finite partial ${\EuScript I}$-embedding between $\omega$-${\EuScript I}$-saturated models of $T^{\rm pfr}$.
@@ -1723,12 +1723,11 @@ We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
 
   We may assume that the formulas in $p(\hat x,\hat z)$ have the form $\gamma=\Pr\varphi(\hat x,\hat z)$ for some $\gamma\in I$.
   Pick a finite set of these formulas, say $\gamma_i=\Pr\varphi_i(\hat x,\hat z)$, for $i<n$.
-  By the saturation of $N$, it suffices to prove that for every $\varepsilon$ there is a $\hat c\in N$ such that
+  By the saturation of $N$, it suffices to prove that for every $\varepsilon>0$ there is a $\hat c\in N$ such that
   
   \ceq{\hfill\gamma_i}{=_\varepsilon}{\Pr\varphi_i(\hat c,k\hat a)}
   
   is true in $N$ for all $i<n$.
-
   Some preliminary work is required.
   For each $J\subseteq n$ define the following $L$-formulas
 
@@ -1738,26 +1737,26 @@ We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
   
   \ceq{\hfill \xi_J(z)}{=}{\psi_J(z)\ \wedge\ \bigwedge_{J'\supset J}\neg\psi_{J'}(z).}
 
-  The consistent formulas among the $\xi_J(z)$ define a partition of ${\EuScript U}^{|z|}$.
+  The set of formulas $\xi_J(z)$ that are consistent define a partition of ${\EuScript U}^{|z|}$.
   For $J\subseteq n$ let $\alpha_J\in I$ be such that $p(\hat x,\hat z)$ contains the formula
   
   \ceq{2.\hfill\alpha_J}{=}{\Pr\big(\xi_J(\hat z)\big)}
   
-  When $\alpha_J$ is positive, for some $\beta_{i,J}\in I$, the type $p(\hat x,\hat z)$ contains the formulas
+  When $\alpha_J$ is positive, for some $\beta_{i,J}\in I$ the type $p(\hat x,\hat z)$ contains the formulas
 
   \ceq{3.\hfill \beta_{i,J}}{=}{\Pr\bigg(\varphi_i(\hat x,\hat z)\ \Big|\ \xi_J(\hat z)\bigg).}
 
-  As the $\varphi_i(x,z)$ define a partition, the $\beta_{i,J}$ add up to $1$ for any fixed $J$ for which they are defined (i.e.\@ such that $\alpha_J\neq0$).
+  As the formulas $\varphi_i(x,z)$ define a partition, the $\beta_{i,J}$ add up to $1$ for any fixed $J$ for which they are defined (i.e.\@ such that $\alpha_J\neq0$).
   Note that $\beta_{i,J}=0$ for $i\notin J$.
 
   It is plain that for $i\in J$ the following is a consequence of $p(\hat x,\hat z)$
 
   \ceq{4.\hfill 1}{=}{\Pr\bigg(\exists x\,\varphi_i(x,\hat z)\ \Big|\ \xi_J(\hat z)\bigg)}
 
-  Now we prove that the implication (2) \& (4) $\Rightarrow$ (1) holds in ${\EuScript U}^\Omega$ when $\Omega$ large enough (larger than $n/\varepsilon$ suffices).
+  Now we prove that (2) \& (4) $\Rightarrow$ (1) holds in ${\EuScript U}^\Omega$ when $\Omega$ large enough (larger than $n/\varepsilon$ suffices).
   Strictly speaking, this implication is not a ${\EuScript J}$-formula, but the reader can easily verify that a suitable approximation of (2) and (4) suffices. 
   
-  Let $\hat a'\in{\EuScript U}^\Omega$ saisfy (2) and (4) for every $i\in J\subseteq n$. 
+  Let $\hat a'\in{\EuScript U}^\Omega$ satisfy (2) and (4) for every $i\in J\subseteq n$. 
   We define $\hat c'\in{\EuScript U}^\Omega$ such that 
   
   \ceq{\hfill{\EuScript U}^\Omega}{\models}{\beta_{i,J}=_\varepsilon\Pr\bigg(\varphi_i(\hat c',\hat a')\ \Big|\ \xi_J(\hat a')\bigg).}
@@ -1767,7 +1766,7 @@ We prove that $T^{\rm pfr}$ is a compete theory with elimination of quantifiers.
   Then define $c'_\omega$ for $\omega\in E_i$ to be any witness of $\exists x\,\varphi_i(x,a_\omega)$.
   By (4), we can always find such a witness.
   
-  Finally, from elementary probability theory (the theorem of total probability)
+  Finally, by elementary probability theory (the theorem of total probability), we deduce
 
   \ceq{\hfill{\EuScript U}^\Omega}{\models}{\gamma_i=_\varepsilon\Pr\big(\varphi_i(\hat c',\hat a')\big).}
 
